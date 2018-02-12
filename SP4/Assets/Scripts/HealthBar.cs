@@ -7,13 +7,13 @@ public class HealthBar : MonoBehaviour {
 
     private float fillAmount;
 
+    [SerializeField]
     private Player player;
 
     private Image image;
 
     // Use this for initialization
     void Start () {
-        player = GameObject.Find("Player").GetComponent< Player >();
         image = GetComponent<Image>();
 	}
 	
