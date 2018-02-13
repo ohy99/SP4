@@ -12,7 +12,7 @@ public class Player : MonoBehaviour {
     void Start() {
         score = PlayerPrefs.GetInt("Score", 0);
         health = PlayerPrefs.GetInt("Health", 10);
-        maxHealth = PlayerPrefs.GetInt("MaxHealth", 100);
+        maxHealth = PlayerPrefs.GetInt("Max Health", 100);
     }
 
     // Update is called once per frame
@@ -23,15 +23,19 @@ public class Player : MonoBehaviour {
             Save();
         }
 
-        if (Input.GetKeyDown(KeyCode.Equals))
+        if (Debug.isDebugBuild)
         {
-            health++;
+            if (Input.GetKey(KeyCode.Equals))
+            {
+                health++;
+            }
+
+            if (Input.GetKey(KeyCode.Minus))
+            {
+                health--;
+            }
         }
 
-            if (Input.GetKeyDown(KeyCode.Minus))
-        {
-            health--;
-        }
     }
 
     void Save()
@@ -39,7 +43,6 @@ public class Player : MonoBehaviour {
         PlayerPrefs.SetInt("Score", score);
         PlayerPrefs.SetInt("Max Health", maxHealth);
         PlayerPrefs.Save();
-
     }
 
     public int GetHealth()

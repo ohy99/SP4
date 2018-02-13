@@ -46,5 +46,4 @@ public class PlayerMovement : MonoBehaviour {
             transform.position += transform.right * moveSpeed * Time.deltaTime;
         }
     }
-
 }
