@@ -44,5 +44,4 @@ public class PlayerMovement : MonoBehaviour {
 
         //transform.up = dir;
     }
-
 }
