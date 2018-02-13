@@ -13,8 +13,8 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start() {
         score = PlayerPrefs.GetInt("Score", 0);
-        health = PlayerPrefs.GetFloat("Health", 10);
         maxHealth = PlayerPrefs.GetFloat("Max Health", 100);
+        health = maxHealth;
 
         //Starts with no exp when entered game
         exp = 0;
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (health < 0)
+        if (health <= 0)
         {
             Save();
         }
@@ -61,6 +61,11 @@ public class Player : MonoBehaviour {
     public float GetMaxHealth()
     {
         return maxHealth;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
     }
 
     public void IncExp(int exp)
