@@ -5,16 +5,16 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     private int score;
-    private int health;
-    private int maxHealth;
+    private float health;
+    private float maxHealth;
     private int exp;
     private int maxExp;
 
     // Use this for initialization
     void Start() {
         score = PlayerPrefs.GetInt("Score", 0);
-        health = PlayerPrefs.GetInt("Health", 10);
-        maxHealth = PlayerPrefs.GetInt("Max Health", 100);
+        health = PlayerPrefs.GetFloat("Health", 10);
+        maxHealth = PlayerPrefs.GetFloat("Max Health", 100);
 
         //Starts with no exp when entered game
         exp = 0;
@@ -40,6 +40,8 @@ public class Player : MonoBehaviour {
             {
                 health--;
             }
+
+            health = Mathf.Clamp(health, 0, maxHealth);
         }
 
     }
@@ -47,16 +49,16 @@ public class Player : MonoBehaviour {
     void Save()
     {
         PlayerPrefs.SetInt("Score", score);
-        PlayerPrefs.SetInt("Max Health", maxHealth);
+        PlayerPrefs.SetFloat("Max Health", maxHealth);
         PlayerPrefs.Save();
     }
 
-    public int GetHealth()
+    public float GetHealth()
     {
         return health;
     }
 
-    public int GetMaxHealth()
+    public float GetMaxHealth()
     {
         return maxHealth;
     }
