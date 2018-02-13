@@ -125,6 +125,7 @@ public class ShootPlayerState : FSMState
 {
     const float rotateSpeed = 0.5f;
     float elapsedTime;
+    float shootDelay = 1.5f;
 
     public ShootPlayerState()
     {
@@ -133,24 +134,24 @@ public class ShootPlayerState : FSMState
 
     public override void OnEnter()
     {
-        elapsedTime = 0.0f;
+        elapsedTime = shootDelay;
     }
 
     public override void Act(GameObject player, GameObject npc)
     {
 
-        elapsedTime -= Time.deltaTime;
+        elapsedTime += Time.deltaTime;
 
         Vector3 moveDir = player.transform.position - npc.transform.position;
 
         Vector2 moveUp = new Vector2(moveDir.x, moveDir.y);
 
-        if (elapsedTime <= 0.0f)
+        if (elapsedTime >= shootDelay)
         {
             GameObject go = npc.transform.GetChild(0).gameObject;
             Debug.Log(go);
             go.GetComponent<WeaponBase>().Discharge(go.transform.GetChild(0).position, go.transform.GetChild(0).rotation);
-            elapsedTime = 1.5f;
+            elapsedTime = 0.0f;
         }
 
         npc.transform.up = Vector2.Lerp(npc.transform.up, moveUp, rotateSpeed * Time.deltaTime);

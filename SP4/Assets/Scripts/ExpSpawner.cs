@@ -24,7 +24,7 @@ public class ExpSpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         elapsedTime += Time.deltaTime;
-        if (elapsedTime >= spawnDelay)
+        if (elapsedTime >= spawnDelay && numOfActiveExp < maxSpawns)
         {
             Vector3 pos = new Vector3(Random.Range(-map.transform.localScale.x * 0.5f, map.transform.localScale.x * 0.5f),
             Random.Range(-map.transform.localScale.y * 0.5f, map.transform.localScale.y * 0.5f), 0 );

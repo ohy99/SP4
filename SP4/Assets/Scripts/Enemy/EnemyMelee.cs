@@ -130,6 +130,9 @@ public class ChasePlayerState : FSMState
 public class AttackPlayerState : FSMState
 {
     const float rotateSpeed = 0.5f;
+    private float damageValue = 10.0f;
+
+    float attackDelay = 1.0f;
     float elapsedTime;
 
     public AttackPlayerState()
@@ -145,12 +148,12 @@ public class AttackPlayerState : FSMState
     public override void Act(GameObject player, GameObject npc)
     {
 
-        elapsedTime -= Time.deltaTime;
+        elapsedTime += Time.deltaTime;
 
-        if (elapsedTime <= 0.0f)
+        if (elapsedTime >= attackDelay)
         {
-            player.GetComponent<Player>().TakeDamage(10.0f);
-            elapsedTime = 1.0f;
+            player.SendMessage("TakeDamage", damageValue);
+            elapsedTime = 0.0f;
         }
 
         Vector3 moveDir = player.transform.position - npc.transform.position;

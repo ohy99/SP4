@@ -40,10 +40,9 @@ public class Player : MonoBehaviour {
             {
                 health--;
             }
-
-            health = Mathf.Clamp(health, 0, maxHealth);
         }
 
+        health = Mathf.Clamp(health, 0, maxHealth);
     }
 
     void Save()
@@ -66,6 +65,11 @@ public class Player : MonoBehaviour {
     public void TakeDamage(float damage)
     {
         health -= damage;
+    }
+
+    public void AddHealth(float health)
+    {
+        this.health += health;
     }
 
     public void IncExp(int exp)
