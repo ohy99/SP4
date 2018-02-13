@@ -7,19 +7,18 @@ public class HealthBar : MonoBehaviour {
 
     private float fillAmount;
 
-    private Player player;
+    public Player player;
 
     private Image image;
 
     // Use this for initialization
     void Start () {
-        player = GameObject.Find("Player").GetComponent< Player >();
         image = GetComponent<Image>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        fillAmount = (float)player.GetHealth() / (float)player.GetMaxHealth() ;
+        fillAmount = player.GetHealth() / (float)player.GetMaxHealth();
 
         image.fillAmount = fillAmount;
 	}
