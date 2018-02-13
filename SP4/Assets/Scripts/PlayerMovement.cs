@@ -17,21 +17,24 @@ public class PlayerMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        Vector3 forward = new Vector3(0, 1, 0);
+        Vector3 right = new Vector3(1, 0, 0);
+
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position += transform.up * moveSpeed * Time.deltaTime;
+            transform.position += forward * moveSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position -= transform.right * moveSpeed * Time.deltaTime;
+            transform.position -= right * moveSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position -= transform.up * moveSpeed * Time.deltaTime;
+            transform.position -= forward * moveSpeed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += transform.right * moveSpeed * Time.deltaTime;
+            transform.position += right * moveSpeed * Time.deltaTime;
         }
 
         Vector3 mousePos = Input.mousePosition;
