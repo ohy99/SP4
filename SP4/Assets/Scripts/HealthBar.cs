@@ -7,8 +7,7 @@ public class HealthBar : MonoBehaviour {
 
     private float fillAmount;
 
-    [SerializeField]
-    private Player player;
+    public Player player;
 
     private Image image;
 
@@ -19,7 +18,7 @@ public class HealthBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        fillAmount = (float)player.GetHealth() / (float)player.GetMaxHealth() ;
+        fillAmount = player.GetHealth() / (float)player.GetMaxHealth();
 
         image.fillAmount = fillAmount;
 	}

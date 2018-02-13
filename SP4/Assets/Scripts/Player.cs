@@ -23,15 +23,19 @@ public class Player : MonoBehaviour {
             Save();
         }
 
-        if (Input.GetKey(KeyCode.Equals))
+        if (Debug.isDebugBuild)
         {
-            health++;
-        }
+            if (Input.GetKey(KeyCode.Equals))
+            {
+                health++;
+            }
 
             if (Input.GetKey(KeyCode.Minus))
-        {
-            health--;
+            {
+                health--;
+            }
         }
+
     }
 
     void Save()
