@@ -7,12 +7,18 @@ public class Player : MonoBehaviour {
     private int score;
     private int health;
     private int maxHealth;
+    private int exp;
+    private int maxExp;
 
     // Use this for initialization
     void Start() {
         score = PlayerPrefs.GetInt("Score", 0);
         health = PlayerPrefs.GetInt("Health", 10);
         maxHealth = PlayerPrefs.GetInt("Max Health", 100);
+
+        //Starts with no exp when entered game
+        exp = 0;
+        maxExp = 100;
     }
 
     // Update is called once per frame
@@ -54,4 +60,12 @@ public class Player : MonoBehaviour {
     {
         return maxHealth;
     }
+
+    public void IncExp(int exp)
+    {
+        this.exp += exp;
+        Debug.Log("exp: " + this.exp);
+    }
+    public int GetExp() { return exp; }
+    public int GetMaxExp() { return maxExp; }
 }
