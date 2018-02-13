@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShoot : MonoBehaviour {
+public class PlayerShoot : MonoBehaviour
+{
+    private GameObject bullet;
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+    {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	void Update ()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(bullet, transform.position, transform.rotation);
+        }
+    }
 }
