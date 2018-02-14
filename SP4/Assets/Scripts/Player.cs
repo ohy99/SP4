@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
+    private int initialScore;
     private int score;
     private float health;
     private float maxHealth;
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start() {
         score = PlayerPrefs.GetInt("Score", 0);
+        initialScore = score;
         health = PlayerPrefs.GetFloat("Health", 10);
         maxHealth = PlayerPrefs.GetFloat("Max Health", 100);
 
@@ -24,7 +26,7 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (health < 0)
+        if (health <= 0)
         {
             Save();
         }
@@ -50,6 +52,7 @@ public class Player : MonoBehaviour {
     {
         PlayerPrefs.SetInt("Score", score);
         PlayerPrefs.SetFloat("Max Health", maxHealth);
+        PlayerPrefs.SetInt("Money", Mathf.Max(0,score - initialScore));
         PlayerPrefs.Save();
     }
 
@@ -70,4 +73,5 @@ public class Player : MonoBehaviour {
     }
     public int GetExp() { return exp; }
     public int GetMaxExp() { return maxExp; }
+    public bool IsDead() { return health <= 0; }
 }
