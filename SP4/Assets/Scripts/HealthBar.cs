@@ -18,7 +18,7 @@ public class HealthBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        fillAmount = player.GetHealth() / player.GetMaxHealth();
+        fillAmount = Mathf.Lerp(fillAmount, player.GetHealth() / player.GetMaxHealth(), 10.0f  * Time.deltaTime);
 
         image.fillAmount = fillAmount;
 	}
