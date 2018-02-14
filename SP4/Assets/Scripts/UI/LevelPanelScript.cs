@@ -19,7 +19,6 @@ public class LevelPanelScript : MonoBehaviour
     void Update()
     {
         text.text = "Current Level : " + player.GetComponent<Player>().GetCurrentLevel() + "\nAvailable Skill points :" + player.GetComponent<Player>().GetSkillPoint() + "\nHealth : " + player.GetComponent<Player>().GetMaxHealth() + "\nSpeed : " + player.GetComponent<PlayerMovement>().moveSpeed;
-        Debug.Log(text.text);
     }
 
     public void IncreaseHealthClicked()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBow : WeaponBase
+public class EnemyBow : RangeWeaponBase
 {
 
     // Use this for initialization

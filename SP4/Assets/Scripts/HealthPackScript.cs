@@ -19,19 +19,23 @@ public class HealthPackScript : MonoBehaviour {
 
     }
 
+    void OnDestroy()
+    {
+        if (spawner != null)
+            spawner.RemoveOne();
+    }
+
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag.Equals("Player"))//if the collided is player OR player(clone)
         {
             col.gameObject.SendMessage("AddHealth", healthValue);
             Destroy(gameObject);
-            if (spawner != null)
-                spawner.RemoveOne();
         }
 
     }
 
-    void SetSpawner(HealthSpawner spawner)
+    public void SetSpawner(HealthSpawner spawner)
     {
         this.spawner = spawner;
     }

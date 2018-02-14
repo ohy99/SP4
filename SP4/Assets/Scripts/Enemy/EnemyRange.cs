@@ -58,6 +58,8 @@ public class RoamingState : FSMState
         const float moveSpeed = 0.5f;
         const float rotateSpeed = 0.5f;
 
+        Vector2 vel = npc.GetComponent<Rigidbody2D>().velocity;
+
         Vector3 moveDir = target - npc.transform.position;
 
         Vector2 moveUp = new Vector2(moveDir.x, moveDir.y);
@@ -68,12 +70,14 @@ public class RoamingState : FSMState
         }
         else
         {
-            npc.transform.position += moveDir.normalized * moveSpeed * Time.deltaTime;
+            vel = moveUp.normalized * moveSpeed;
 
             npc.transform.up = Vector2.Lerp(npc.transform.up, moveUp, rotateSpeed * Time.deltaTime);
 
             npc.transform.eulerAngles = new Vector3(0, 0, npc.transform.eulerAngles.z);
         }
+
+        npc.GetComponent<Rigidbody2D>().velocity = vel;
     }
 
     public override void Reason(GameObject player, GameObject npc)
@@ -101,11 +105,13 @@ public class FollowPlayerState : FSMState
 
         Vector2 moveUp = new Vector2(moveDir.x, moveDir.y);
 
-        npc.transform.position += moveDir.normalized * moveSpeed * Time.deltaTime;
+        Vector2 vel = moveUp.normalized * moveSpeed;
 
         npc.transform.up = Vector2.Lerp(npc.transform.up, moveUp, rotateSpeed * Time.deltaTime);
 
         npc.transform.eulerAngles = new Vector3(0, 0, npc.transform.eulerAngles.z);
+
+        npc.GetComponent<Rigidbody2D>().velocity = vel;
     }
 
     public override void Reason(GameObject player, GameObject npc)
@@ -150,7 +156,7 @@ public class ShootPlayerState : FSMState
         {
             GameObject go = npc.transform.GetChild(0).gameObject;
             Debug.Log(go);
-            go.GetComponent<WeaponBase>().Discharge(go.transform.GetChild(0).position, go.transform.GetChild(0).rotation);
+            go.GetComponent<RangeWeaponBase>().Discharge(go.transform.GetChild(0).position, go.transform.GetChild(0).rotation);
             elapsedTime = 0.0f;
         }
 

@@ -19,7 +19,7 @@ public class EnemyMelee : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void FixedUpdate () {
+    void FixedUpdate() {
         sm.CurrentState.Reason(player, gameObject);
         sm.CurrentState.Act(player, gameObject);
     }
@@ -60,6 +60,8 @@ public class FollowPathState : FSMState
         const float moveSpeed = 0.5f;
         const float rotateSpeed = 0.5f;
 
+        Vector2 vel = npc.GetComponent<Rigidbody2D>().velocity;
+
         Vector3 moveDir = waypoints[currentWayPoint] - npc.transform.position;
 
         Vector2 moveUp = new Vector2(moveDir.x, moveDir.y);
@@ -74,12 +76,14 @@ public class FollowPathState : FSMState
         }
         else
         {
-            npc.transform.position += moveDir.normalized * moveSpeed * Time.deltaTime;
+            vel = moveUp.normalized * moveSpeed;
 
             npc.transform.up = Vector2.Lerp(npc.transform.up, moveUp, rotateSpeed * Time.deltaTime);
 
             npc.transform.eulerAngles = new Vector3(0, 0, npc.transform.eulerAngles.z);
         }
+
+        npc.GetComponent<Rigidbody2D>().velocity = vel;
     }
 
     public override void Reason(GameObject player, GameObject npc)
@@ -107,11 +111,13 @@ public class ChasePlayerState : FSMState
 
         Vector2 moveUp = new Vector2(moveDir.x, moveDir.y);
 
-        npc.transform.position += moveDir.normalized * moveSpeed * Time.deltaTime;
+        Vector2 vel = moveUp.normalized * moveSpeed;
 
         npc.transform.up = Vector2.Lerp(npc.transform.up, moveUp, rotateSpeed * Time.deltaTime);
 
         npc.transform.eulerAngles = new Vector3(0, 0, npc.transform.eulerAngles.z);
+
+        npc.GetComponent<Rigidbody2D>().velocity = vel;
     }
 
     public override void Reason(GameObject player, GameObject npc)
