@@ -32,7 +32,7 @@ public class ExpSpawner : MonoBehaviour {
             temp.GetComponent<ExpObjScript>().SetSpawner(this);
             ++numOfActiveExp;
             elapsedTime = 0.0f;
-            Debug.Log(numOfActiveExp);
+            //Debug.Log(numOfActiveExp);
         }
 	}
 

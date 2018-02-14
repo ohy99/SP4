@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+        Reset();
 	}
 
     // Update is called once per frame
@@ -48,5 +48,11 @@ public class PlayerMovement : MonoBehaviour {
         //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         //transform.Rotate(new Vector3(0,0, angle) * Time.deltaTime * rotateSpeed);
+    }
+
+    public void Reset()
+    {
+        transform.position = new Vector3(0, 0, 0);
+        transform.up = new Vector3(0, 1, 0);
     }
 }

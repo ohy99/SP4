@@ -26,4 +26,16 @@ public class Projectile : MonoBehaviour {
     {
         // Debug.Log(collision.gameObject.name);
     }
+
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        //Debug.Log(coll.gameObject.name);
+        if (!coll.gameObject.CompareTag(this.gameObject.tag))
+        {
+            //Enters when the tags are different
+
+            //TODO: DO DAMAGE
+            Destroy(gameObject);
+        }
+    }
 }

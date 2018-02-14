@@ -16,6 +16,8 @@ public enum DIRECTION
 
 public class RoomGenerator : Singleton<RoomGenerator> {
 
+    const bool DEBUG_ROOMGEN = false;
+
     [SerializeField]
     GameObject defaultRoom;
     [SerializeField]
@@ -60,11 +62,14 @@ public class RoomGenerator : Singleton<RoomGenerator> {
 
 	// Use this for initialization
 	void Start () {
+        
+        biggestX = biggestY = smallestY = smallestX = 0;
         numOfOpenedDoors = 0;
         generatedBossRoom = false;
         roomList = new List<GameObject>();
         roomMap = new Dictionary<int, Dictionary<int, GameObject>>();
         currID = 0;
+
 
         //spawn at 0,0, so generate one at 0,0
         GameObject room = Instantiate(defaultRoom, new Vector3(0, 0, zOffset), Quaternion.identity);
@@ -91,6 +96,22 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         roomScript.Set(currID, 0, 0, boolArray[DIRECTION.LEFT], boolArray[DIRECTION.RIGHT], boolArray[DIRECTION.UP], boolArray[DIRECTION.DOWN]);
         StoreRoom(currID, 0, 0, room);
     }
+
+    public void ReStart()
+    {
+        Debug.Log("Restarting RoomGenerator");
+        if (roomList.Count > 0)
+        {
+            foreach (GameObject go in roomList)
+                Destroy(go);
+            foreach (KeyValuePair<int, Dictionary<int, GameObject>> pair in roomMap)
+                pair.Value.Clear();
+            roomMap.Clear();
+            roomList.Clear();
+        }
+
+        Start();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -103,6 +124,7 @@ public class RoomGenerator : Singleton<RoomGenerator> {
 
     public void GenerateRoom(int currRoomID, DIRECTION side)
     {
+        if (DEBUG_ROOMGEN)
         Debug.Log("Generating Room for " + side + " at " + currRoomID + "  roomListSize: " + roomList.Count);
         GameObject currentRoom = roomList[currRoomID];
         Vector3 currPos = currentRoom.transform.position;
@@ -141,8 +163,9 @@ public class RoomGenerator : Singleton<RoomGenerator> {
             }
             else
             {
-                //lock this door
-                Debug.Log("MustLock activated");
+                if (DEBUG_ROOMGEN)
+                    //lock this door
+                    Debug.Log("MustLock activated");
             }
         }
 
@@ -274,7 +297,8 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         }
         catch(ArgumentException e)
         {
-            Debug.Log("What? Room alr stored?! Are you sure this is intended?");
+            if (DEBUG_ROOMGEN)
+                Debug.Log("What? Room alr stored?! Are you sure this is intended?");
         }
     }
 
