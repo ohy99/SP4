@@ -10,6 +10,8 @@ public class Player : MonoBehaviour {
     private float maxHealth;
     private int exp;
     private int maxExp;
+    private int skillPoints;
+    private int currentLevel;
 
     // Use this for initialization
     void Start() {
@@ -17,10 +19,13 @@ public class Player : MonoBehaviour {
         initialScore = score;
         health = PlayerPrefs.GetFloat("Health", 10);
         maxHealth = PlayerPrefs.GetFloat("Max Health", 100);
+        health = maxHealth;
 
         //Starts with no exp when entered game
         exp = 0;
         maxExp = 100;
+        skillPoints = 0;
+        currentLevel = 1;
     }
 
     // Update is called once per frame
@@ -42,10 +47,9 @@ public class Player : MonoBehaviour {
             {
                 health--;
             }
-
-            health = Mathf.Clamp(health, 0, maxHealth);
         }
 
+        health = Mathf.Clamp(health, 0, maxHealth);
     }
 
     void Save()
@@ -66,10 +70,55 @@ public class Player : MonoBehaviour {
         return maxHealth;
     }
 
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+    }
+
+    public void AddHealth(float health)
+    {
+        this.health += health;
+    }
+
+    public void IncreaseMaxHealth(float increment)
+    {
+        this.maxHealth += increment;
+        this.health += increment;
+    }
+
+    public void IncreaseSpeed()
+    {
+        this.GetComponent<PlayerMovement>().moveSpeed += 5.0f;
+    }
+
+    public int GetSkillPoint()
+    {
+        return skillPoints;
+    }
+
+    public void DecreaseSkillPoint()
+    {
+        skillPoints -= 1;
+    }
+
+    public int GetCurrentLevel()
+    {
+        return currentLevel;
+    }
+
     public void IncExp(int exp)
     {
         this.exp += exp;
         Debug.Log("exp: " + this.exp);
+
+        if (this.exp >= this.maxExp)
+        {
+            this.exp -= this.maxExp;
+            currentLevel += 1;
+            skillPoints += 1;
+            maxExp += 20;
+            Debug.Log("exp: " + this.exp);
+        }
     }
     public int GetExp() { return exp; }
     public int GetMaxExp() { return maxExp; }

@@ -7,6 +7,7 @@ public enum Transition
     NullTransition = 0,
     SawPlayer,
     LostPlayer,
+    NearPlayer,
 }
 
 public enum StateID
@@ -14,6 +15,7 @@ public enum StateID
     NullStateID = 0,
     ChasePlayer,
     FollowPath,
+    AttackPlayer,
 }
 
 public abstract class FSMState {

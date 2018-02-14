@@ -1,12 +1,11 @@
 fileFormatVersion: 2
-guid: 1a40b035f3e48f246a4674f5994f78ce
-timeCreated: 1518503115
+guid: 9ce2312f6d0dc8b40a1aab80f7b5d003
+timeCreated: 1518502376
 licenseType: Pro
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - projectile: {fileID: 1859548745114154, guid: 68e227eb8a1f064419576d2e367187eb,
-      type: 2}
+  - player: {fileID: 1579116673381398, guid: 53f777aed76e1f84f97fabd60cf575f3, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

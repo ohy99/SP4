@@ -10,7 +10,7 @@ public class ExpObjScript : MonoBehaviour {
     ExpSpawner spawner;
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 	// Update is called once per frame
@@ -30,7 +30,7 @@ public class ExpObjScript : MonoBehaviour {
 
     }
 
-    void SetSpawner(ExpSpawner spawner)
+    public void SetSpawner(ExpSpawner spawner)
     {
         this.spawner = spawner;
     }
