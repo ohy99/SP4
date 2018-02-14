@@ -59,7 +59,7 @@ public class ItemManager : Singleton<ItemManager>
         foreach(var obj in loadedObj)
         {
             go = (obj as GameObject);
-            items[go.name] = go;
+            items[go.name] = Instantiate(go);
             itemNames.Add(go.name);
             Debug.Log("itemName: " + go.name);
         }

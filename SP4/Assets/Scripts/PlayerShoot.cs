@@ -9,21 +9,30 @@ public class PlayerShoot : MonoBehaviour
     private GameObject go;
     private Inventory playerGear;
 
+    private int itemIndex = 0;
+
     // Use this for initialization
     void Start ()
     {
         playerGear = new Inventory();
 
         playerGear.Init();
-        go = Instantiate(playerGear.GetItem("Crossbow"));
+        go = playerGear.GetItem("Crossbow");
+        //go = Instantiate(playerGear.GetItem("Crossbow"));
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if(Input.GetKey(KeyCode.Tab))
+        if(Input.GetKeyUp(KeyCode.Tab))
         {
+            ++itemIndex;
+            if (itemIndex >= playerGear.GetItemNameList().Count)
+                itemIndex = 0;
 
+            string itemName = playerGear.GetItemName(itemIndex);
+            Debug.Log("ItemChange" + itemIndex + " - " + itemName);
+            go = playerGear.GetItem(itemName);
         }
 
         if (Input.GetMouseButtonDown(0))

@@ -5,18 +5,20 @@ using UnityEngine;
 public class Inventory
 {
     private Dictionary<string, GameObject> myItems = new Dictionary<string, GameObject>();
-   
-    //public List<GameObject> myItems;
+    private List<string> itemNameList = new List<string>();
 
     // Use this for initialization
     public void Init ()
     {
         Debug.Log("INVETORY START");
+
         AddWeapon(ItemManager.Instance.items["Crossbow"], "Crossbow");
+        itemNameList.Add("Crossbow");
         AddWeapon(ItemManager.Instance.items["Sword"], "Sword");
+        itemNameList.Add("Sword");
     }
 
-    public void AddWeapon(GameObject _item,string itemName)
+    public void AddWeapon(GameObject _item, string itemName)
     {
         Debug.Log("added");
         if (!myItems.ContainsKey(itemName))
@@ -39,5 +41,18 @@ public class Inventory
         }
 
         return myItems[itemName];
+    }
+
+    public string GetItemName(int index)
+    {
+        if (index >= itemNameList.Count || index < 0)
+            return "";
+
+        return itemNameList[index];
+    }
+
+    public List<string> GetItemNameList()
+    {
+        return itemNameList;
     }
 }
