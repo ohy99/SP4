@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
     private float maxHealth;
     private int exp;
     private int maxExp;
+    private int currency;
 
     // Use this for initialization
     void Start() {

@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    //public GameObject weapon;
-    public GameObject go;
+    GameObject go;
+    Inventory playerGear;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
-        go.GetComponent<WeaponBase>().Start();
-        Debug.Log("init");
-        //pWeapon = weapon.AddComponent<WeaponBase>() as WeaponBase;
+        go = Instantiate(ItemManager.Instance.items["Crossbow"]);
     }
 	
 	// Update is called once per frame
@@ -20,12 +18,15 @@ public class PlayerShoot : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            go.GetComponent<WeaponBase>().Discharge(transform.position,transform.rotation);
+            if(go.GetComponent<RangeWeaponBase>())
+                go.GetComponent<RangeWeaponBase>().Discharge(transform.position,transform.rotation);
+            else if (go.GetComponent<MeleeWeaponBase>())
+                go.GetComponent<MeleeWeaponBase>().Attack(transform.position, transform.rotation);
         }
 
         if(Input.GetKey(KeyCode.R))
         {
-            go.GetComponent<WeaponBase>().Reload();
+            go.GetComponent<RangeWeaponBase>().Reload();
         }
     }
 }
