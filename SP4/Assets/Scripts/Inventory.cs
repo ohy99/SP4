@@ -19,7 +19,10 @@ public class Inventory
     public void AddWeapon(GameObject _item,string itemName)
     {
         Debug.Log("added");
-        myItems[itemName] = _item;
+        if (!myItems.ContainsKey(itemName))
+        {
+            myItems[itemName] = _item;
+        }
     }
 
     public void RemoveWeapon(GameObject _item, string itemName)
@@ -29,6 +32,12 @@ public class Inventory
 
     public GameObject GetItem(string itemName)
     {
+        if (!myItems.ContainsKey(itemName))
+        {
+            Debug.Log("Key is not assigned.");
+            return null;
+        }
+
         return myItems[itemName];
     }
 }
