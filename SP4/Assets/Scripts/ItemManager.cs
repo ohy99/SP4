@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemManager : Singleton<ItemManager>
 {
     public Dictionary<string, GameObject> items = new Dictionary<string, GameObject>();
+    public List<string> itemNames = new List<string>();
 
     protected ItemManager()
     {
@@ -23,6 +24,7 @@ public class ItemManager : Singleton<ItemManager>
         {
             go = (obj as GameObject);
             items[go.name] = go;
+            itemNames.Add(go.name);
             Debug.Log("itemName: " + go.name);
         }
 

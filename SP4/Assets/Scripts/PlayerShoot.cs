@@ -6,9 +6,9 @@ public class PlayerShoot : MonoBehaviour
 {
     //[SerializeField]
     //GameObject playerObj;
-
     private GameObject go;
     private Inventory playerGear;
+
     // Use this for initialization
     void Start ()
     {
@@ -21,12 +21,17 @@ public class PlayerShoot : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if(Input.GetKey(KeyCode.Tab))
+        {
+
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             if(go.GetComponent<RangeWeaponBase>())
                 go.GetComponent<RangeWeaponBase>().Discharge(transform.position,transform.rotation);
             else if (go.GetComponent<MeleeWeaponBase>())
-                go.GetComponent<MeleeWeaponBase>().Attack(transform.position, transform.rotation);
+                go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
         }
 
         if(Input.GetKey(KeyCode.R))

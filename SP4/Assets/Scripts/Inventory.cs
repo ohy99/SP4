@@ -5,6 +5,7 @@ using UnityEngine;
 public class Inventory
 {
     private Dictionary<string, GameObject> myItems = new Dictionary<string, GameObject>();
+   
     //public List<GameObject> myItems;
 
     // Use this for initialization
@@ -12,6 +13,7 @@ public class Inventory
     {
         Debug.Log("INVETORY START");
         AddWeapon(ItemManager.Instance.items["Crossbow"], "Crossbow");
+        AddWeapon(ItemManager.Instance.items["Sword"], "Sword");
     }
 
     public void AddWeapon(GameObject _item,string itemName)

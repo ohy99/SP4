@@ -26,7 +26,11 @@ public class Spear : MeleeWeaponBase {
         // Spawn a aabb here if collision occur damage is done
         meleeCollider.SetActive(true);
         Instantiate(meleeCollider, pos, rotation);
-        meleeCollider.transform.localScale = new Vector3(0.5f, range, 1);
+        //meleeCollider.transform.localScale = new Vector3(0.5f, 2.5f, 1);
+        //meleeCollider.transform.position = new Vector3(0, meleeCollider.transform.position.y + range, 0);
+        //meleeCollider.GetComponent<BoxCollider2D>().offset = new Vector2(0, range);
+        //meleeCollider.GetComponent<BoxCollider2D>().size = new Vector2(0.5f, 2.5f);
+        //meleeCollider.transform.localScale = new Vector3(0.5f, range, 1);
         isAttack = true;
     }
 }

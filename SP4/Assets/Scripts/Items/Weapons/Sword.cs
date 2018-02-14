@@ -9,9 +9,9 @@ public class Sword : MeleeWeaponBase {
     {
         damage = 10;
         damageOverTime = 0;
-        range = 1.5f;
+        range = 1.0f;
         isAttack = false;
-        meleeCollider.SetActive(false);
+       // meleeCollider.SetActive(false);
     }
 
     // Update is called once per frame
@@ -23,11 +23,15 @@ public class Sword : MeleeWeaponBase {
     // Attack with weapon
     public override void Attack(Vector3 pos, Quaternion rotation)
     {
-        Debug.Log("MeleeAttack");
+        Debug.Log("swordAtck");
         // Spawn a aabb here if collision occur damage is done
-        meleeCollider.SetActive(true);
         Instantiate(meleeCollider, pos, rotation);
-        meleeCollider.transform.localScale = new Vector3(0.5f, range, 1);
+        meleeCollider.SetActive(true);
+ 
+        Debug.Log(pos);
+        //meleeCollider.GetComponent<BoxCollider2D>().offset = new Vector2(0, range);
+        //meleeCollider.GetComponent<BoxCollider2D>().size = new Vector2(1, 1.5f);
+        //meleeCollider.transform.localScale = new Vector3(0.5f, range, 1);
         isAttack = true;
     }
 }
