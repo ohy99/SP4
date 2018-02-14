@@ -29,8 +29,10 @@ public class ExpSpawner : MonoBehaviour {
             Vector3 pos = new Vector3(Random.Range(-map.transform.localScale.x * 0.5f, map.transform.localScale.x * 0.5f),
             Random.Range(-map.transform.localScale.y * 0.5f, map.transform.localScale.y * 0.5f), 0 );
             GameObject temp = Instantiate(expObj, pos, Quaternion.identity);
+            temp.GetComponent<ExpObjScript>().SetSpawner(this);
             ++numOfActiveExp;
             elapsedTime = 0.0f;
+            Debug.Log(numOfActiveExp);
         }
 	}
 
