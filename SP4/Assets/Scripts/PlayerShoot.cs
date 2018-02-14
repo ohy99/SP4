@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    GameObject go;
-    Inventory playerGear;
+    //[SerializeField]
+    //GameObject playerObj;
 
+    private GameObject go;
+    private Inventory playerGear;
     // Use this for initialization
     void Start ()
     {
-        go = Instantiate(ItemManager.Instance.items["Crossbow"]);
+        playerGear = new Inventory();
+
+        playerGear.Init();
+        go = Instantiate(playerGear.GetItem("Crossbow"));
     }
 	
 	// Update is called once per frame

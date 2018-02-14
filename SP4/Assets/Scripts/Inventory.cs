@@ -2,28 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory
 {
-    Dictionary<string, ItemBase> myWeapon;
+    private Dictionary<string, GameObject> myItems = new Dictionary<string, GameObject>();
+    //public List<GameObject> myItems;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    public void Init ()
     {
-	}
-
-    public void AddWeapon(ItemBase _item,string itemName)
-    {
-        if(!myWeapon.TryGetValue(itemName, out _item))
-        {
-            myWeapon[itemName] = _item;
-        }
+        Debug.Log("INVETORY START");
+        AddWeapon(ItemManager.Instance.items["Crossbow"], "Crossbow");
     }
 
-    public void RemoveWeapon(ItemBase _item, string itemName)
+    public void AddWeapon(GameObject _item,string itemName)
     {
-        if (!myWeapon.TryGetValue(itemName, out _item))
-        {
-            myWeapon[itemName] = null;
-        }
+        Debug.Log("added");
+        myItems[itemName] = _item;
+    }
+
+    public void RemoveWeapon(GameObject _item, string itemName)
+    {
+        myItems[itemName] = null;
+    }
+
+    public GameObject GetItem(string itemName)
+    {
+        return myItems[itemName];
     }
 }
