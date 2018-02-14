@@ -16,7 +16,7 @@ public class Exp : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        expBar.value = Mathf.Max(0.04f, Mathf.Min(1.0f, player.GetExp() / (float)player.GetMaxExp()));
+        expBar.value = Mathf.Lerp(expBar.value, (Mathf.Max(0.04f, Mathf.Min(1.0f, player.GetExp() / (float)player.GetMaxExp()))), 10.0f * Time.deltaTime) ;
 	}
     
 }
