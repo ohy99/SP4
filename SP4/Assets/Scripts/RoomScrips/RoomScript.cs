@@ -42,7 +42,7 @@ public class RoomScript : MonoBehaviour {
     }
 
     //sets the roomid, and the grid x, y
-    public void Set(int roomID, int x, int y, bool openLeft, bool openRight, bool openUp, bool openDown, DIRECTION forceOpenSide)
+    public void Set(int roomID, int x, int y, bool openLeft, bool openRight, bool openUp, bool openDown)
     {
         this.roomID = roomID;
         this.gridx = x;
@@ -54,8 +54,6 @@ public class RoomScript : MonoBehaviour {
         rightDoor.ToggleLock(!openRight);
         upDoor.ToggleLock(!openUp);
         downDoor.ToggleLock(!openDown);
-
-        OffTriggerBox(forceOpenSide);
     }
 
     public void OffTriggerBox(DIRECTION side)
@@ -66,6 +64,52 @@ public class RoomScript : MonoBehaviour {
             case DIRECTION.RIGHT: rightDoor.OffTriggerBox(); break;
             case DIRECTION.UP: upDoor.OffTriggerBox(); break;
             case DIRECTION.DOWN: downDoor.OffTriggerBox(); break;
+        }
+    }
+    public void OnTriggerBox(DIRECTION side)
+    {
+        switch (side)
+        {
+            case DIRECTION.LEFT: leftDoor.OnTriggerBox(); break;
+            case DIRECTION.RIGHT: rightDoor.OnTriggerBox(); break;
+            case DIRECTION.UP: upDoor.OnTriggerBox(); break;
+            case DIRECTION.DOWN: downDoor.OnTriggerBox(); break;
+        }
+    }
+
+    public bool GetIsLocked(DIRECTION side)
+    {
+        switch (side)
+        {
+            case DIRECTION.LEFT: return leftDoor.GetIsLocked();
+            case DIRECTION.RIGHT:
+                return rightDoor.GetIsLocked();
+            case DIRECTION.UP:
+                return upDoor.GetIsLocked();
+            case DIRECTION.DOWN:
+                return downDoor.GetIsLocked();
+        }
+        return false;
+    }
+
+    public void UnlockDoor(DIRECTION side)
+    {
+        switch (side)
+        {
+            case DIRECTION.LEFT: leftDoor.ToggleLock(false); break;
+            case DIRECTION.RIGHT: rightDoor.ToggleLock(false); break;
+            case DIRECTION.UP:  upDoor.ToggleLock(false); break;
+            case DIRECTION.DOWN:  downDoor.ToggleLock(false); break;
+        }
+    }
+    public void LockDoor(DIRECTION side)
+    {
+        switch (side)
+        {
+            case DIRECTION.LEFT: leftDoor.ToggleLock(true); break;
+            case DIRECTION.RIGHT: rightDoor.ToggleLock(true); break;
+            case DIRECTION.UP: upDoor.ToggleLock(true); break;
+            case DIRECTION.DOWN: downDoor.ToggleLock(true); break;
         }
     }
 }

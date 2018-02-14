@@ -101,5 +101,16 @@ public class DoorScript : MonoBehaviour {
             doorCollider = gameObject.GetComponent<BoxCollider2D>();
         doorCollider.enabled = false;
     }
+    public void OnTriggerBox()
+    {
+        if (doorCollider == null)
+            doorCollider = gameObject.GetComponent<BoxCollider2D>();
+        doorCollider.enabled = true;
+    }
+
+    public bool GetIsLocked()
+    {
+        return isLocked;
+    }
 
 }
