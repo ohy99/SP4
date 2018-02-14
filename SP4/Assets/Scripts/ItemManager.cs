@@ -1,7 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
+/*
+    private static SomeClass _instance;
+
+    public static SomeClass Instance { get { return _instance; } }
+
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        } else {
+            _instance = this;
+        }
+    }
+ */
+
+
+[InitializeOnLoad]
 public class ItemManager : Singleton<ItemManager>
 {
     public Dictionary<string, GameObject> items = new Dictionary<string, GameObject>();
@@ -13,6 +33,7 @@ public class ItemManager : Singleton<ItemManager>
 
     public void Start()
     {
+        Debug.Log("ItemManagerStart");
         LoadAllItems();
     }
 
@@ -39,5 +60,11 @@ public class ItemManager : Singleton<ItemManager>
         //}
 
     }
-       
+
+    void OnApplicationQuit()
+    {
+        Debug.Log("Application ending after " + Time.time + " seconds");
+        ItemManager.Instance.OnDestroy();
+    }
+
 }
