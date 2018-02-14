@@ -31,6 +31,7 @@ public class HealthSpawner : MonoBehaviour
             Vector3 pos = new Vector3(Random.Range(-map.transform.localScale.x * 0.5f, map.transform.localScale.x * 0.5f),
             Random.Range(-map.transform.localScale.y * 0.5f, map.transform.localScale.y * 0.5f), 0);
             GameObject temp = Instantiate(healthPack, pos, Quaternion.identity);
+            temp.GetComponent<HealthPackScript>().SetSpawner(this);
             ++numOfActiveHealthPacks;
             elapsedTime = 0.0f;
         }
