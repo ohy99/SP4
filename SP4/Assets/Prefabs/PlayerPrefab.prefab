@@ -40,7 +40,6 @@ GameObject:
   - component: {fileID: 114156219956916510}
   - component: {fileID: 61759047490349896}
   - component: {fileID: 50204144931502722}
-  - component: {fileID: 114346530534781398}
   - component: {fileID: 114186798247277784}
   m_Layer: 0
   m_Name: PlayerPrefab
