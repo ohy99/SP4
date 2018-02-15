@@ -49,7 +49,7 @@ public class Player : MonoBehaviour {
                 hpScript.ModifyHp(-1);
             }
         }
-
+        gameObject.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
     }
 
     void Save()
