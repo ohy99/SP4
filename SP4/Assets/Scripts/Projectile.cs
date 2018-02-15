@@ -18,15 +18,6 @@ public class Projectile : MonoBehaviour {
         transform.position += transform.up * projectileSpeed * Time.deltaTime;
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        //  Debug.Log(other.gameObject.name);
-    }
-    void OnCollisionEnter(Collision collision)
-    {
-        // Debug.Log(collision.gameObject.name);
-    }
-
     void OnCollisionEnter2D(Collision2D coll)
     {
         //Debug.Log(coll.gameObject.name);

@@ -37,6 +37,8 @@ public class PlayerShoot : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            //Debug.Log("TotalRounds:" + go)
+     
             if(go.GetComponent<RangeWeaponBase>())
                 go.GetComponent<RangeWeaponBase>().Discharge(transform.position,transform.rotation);
             else if (go.GetComponent<MeleeWeaponBase>())
