@@ -21,6 +21,8 @@ public class RoomGenerator : Singleton<RoomGenerator> {
     [SerializeField]
     GameObject defaultRoom;
     [SerializeField]
+    List<GameObject> randomRooms;
+    [SerializeField]
     GameObject bossRoom;
     //[SerializeField]
     //GameObject room1;
@@ -29,6 +31,8 @@ public class RoomGenerator : Singleton<RoomGenerator> {
     //[SerializeField]
     //GameObject room3;
 
+    [SerializeField]
+    bool GenerateOnStart = true;
     [SerializeField]
     UnityEngine.UI.Text debugText;
     [SerializeField]
@@ -70,7 +74,8 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         roomMap = new Dictionary<int, Dictionary<int, GameObject>>();
         currID = 0;
 
-
+        if (!GenerateOnStart)
+            return;
         //spawn at 0,0, so generate one at 0,0
         GameObject room = Instantiate(defaultRoom, new Vector3(0, 0, zOffset), Quaternion.identity);
         room.transform.localScale.Set(scaleX, scaleY, 1);

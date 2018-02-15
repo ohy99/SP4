@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 79638773}
   - component: {fileID: 79638772}
   - component: {fileID: 79638771}
+  - component: {fileID: 79638777}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -252,6 +253,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &79638777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 79638770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d9ffc74fbbfdd4cac3ebce92de3b4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &115674033
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +568,7 @@ RectTransform:
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 1107507995}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2053,8 +2065,8 @@ RectTransform:
   - {fileID: 1455918358}
   - {fileID: 872339691}
   - {fileID: 1173559090}
-  - {fileID: 1814221687}
   - {fileID: 252988772}
+  - {fileID: 1814221687}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2454,6 +2466,11 @@ Prefab:
       propertyPath: chanceText
       value: 
       objectReference: {fileID: 115674034}
+    - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
+        type: 2}
+      propertyPath: GenerateOnStart
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2f9123e5f6be9f4cb510d58961c8ea6, type: 2}
   m_IsPrefabParent: 0
@@ -2734,6 +2751,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 212648755691009718, guid: a3d7ee7dae3d8d142ae6056f1eb166e3,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a3d7ee7dae3d8d142ae6056f1eb166e3, type: 2}
   m_IsPrefabParent: 0
@@ -2918,7 +2940,7 @@ RectTransform:
   - {fileID: 272923255}
   - {fileID: 2045083354}
   m_Father: {fileID: 1107507995}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
