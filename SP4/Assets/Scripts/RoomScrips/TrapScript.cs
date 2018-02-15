@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TrapScript : MonoBehaviour {
 
-    private float damageValue = 20.0f;
+    private float damageValue = -20.0f;
     private float elapsedTime = 0.0f;
     private float activeTime = 5.0f;
     private float prepTime = 3.0f;
@@ -53,7 +53,7 @@ public class TrapScript : MonoBehaviour {
         if (col.gameObject.tag.Equals("Player") && isActive && !alreadyTriggered)//if the collided is player OR player(clone)
         {
             alreadyTriggered = true;
-            col.gameObject.SendMessage("TakeDamage", damageValue);
+            col.gameObject.SendMessage("ModifyHp", damageValue);
         }
     }
 }

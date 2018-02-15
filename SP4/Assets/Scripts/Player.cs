@@ -6,8 +6,7 @@ public class Player : MonoBehaviour {
 
     private int initialScore;
     private int score;
-    private float health;
-    private float maxHealth;
+    private Health hpScript;
     private int exp;
     private int maxExp;
     private int skillPoints;
@@ -17,9 +16,11 @@ public class Player : MonoBehaviour {
     void Start() {
         score = PlayerPrefs.GetInt("Score", 0);
         initialScore = score;
-        health = PlayerPrefs.GetFloat("Health", 10);
-        maxHealth = PlayerPrefs.GetFloat("Max Health", 100);
-        health = maxHealth;
+        float maxHealth = PlayerPrefs.GetFloat("Max Health", 100);
+
+        hpScript = gameObject.GetComponent<Health>();
+
+        hpScript.SetHp(maxHealth);
 
         //Starts with no exp when entered game
         exp = 0;
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
+        if (hpScript.GetCurrHp() <= 0)
         {
             Save();
         }
@@ -40,50 +41,23 @@ public class Player : MonoBehaviour {
         {
             if (Input.GetKey(KeyCode.Equals))
             {
-                health++;
+                hpScript.ModifyHp(1);
             }
 
             if (Input.GetKey(KeyCode.Minus))
             {
-                health--;
+                hpScript.ModifyHp(-1);
             }
         }
 
-        health = Mathf.Clamp(health, 0, maxHealth);
     }
 
     void Save()
     {
         PlayerPrefs.SetInt("Score", score);
-        PlayerPrefs.SetFloat("Max Health", maxHealth);
+        PlayerPrefs.SetFloat("Max Health", hpScript.GetMaxHp());
         PlayerPrefs.SetInt("Money", Mathf.Max(0,score - initialScore));
         PlayerPrefs.Save();
-    }
-
-    public float GetHealth()
-    {
-        return health;
-    }
-
-    public float GetMaxHealth()
-    {
-        return maxHealth;
-    }
-
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-    }
-
-    public void AddHealth(float health)
-    {
-        this.health += health;
-    }
-
-    public void IncreaseMaxHealth(float increment)
-    {
-        this.maxHealth += increment;
-        this.health += increment;
     }
 
     public void IncreaseSpeed()
@@ -122,5 +96,5 @@ public class Player : MonoBehaviour {
     }
     public int GetExp() { return exp; }
     public int GetMaxExp() { return maxExp; }
-    public bool IsDead() { return health <= 0; }
+    public bool IsDead() { return hpScript.GetCurrHp() <= 0; }
 }

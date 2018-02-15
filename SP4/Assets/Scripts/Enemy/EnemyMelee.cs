@@ -126,7 +126,7 @@ public class ChasePlayerState : FSMState
         {
             npc.GetComponent<EnemyMelee>().SetTransition(Transition.LostPlayer);
         }
-        else if (Vector3.Distance(npc.transform.position, player.transform.position) < 1)
+        else if (Vector3.Distance(npc.transform.position, player.transform.position) < 2)
         {
             npc.GetComponent<EnemyMelee>().SetTransition(Transition.NearPlayer);
         }
@@ -136,7 +136,7 @@ public class ChasePlayerState : FSMState
 public class AttackPlayerState : FSMState
 {
     const float rotateSpeed = 0.5f;
-    private float damageValue = 10.0f;
+    private float damageValue = -10.0f;
 
     float attackDelay = 1.0f;
     float elapsedTime;
@@ -158,7 +158,7 @@ public class AttackPlayerState : FSMState
 
         if (elapsedTime >= attackDelay)
         {
-            player.SendMessage("TakeDamage", damageValue);
+            player.SendMessage("ModifyHp", damageValue);
             elapsedTime = 0.0f;
         }
 
@@ -171,7 +171,7 @@ public class AttackPlayerState : FSMState
 
     public override void Reason(GameObject player, GameObject npc)
     {
-        if (Vector3.Distance(npc.transform.position, player.transform.position) >= 1)
+        if (Vector3.Distance(npc.transform.position, player.transform.position) >= 2)
         {
             npc.GetComponent<EnemyMelee>().SetTransition(Transition.SawPlayer);
         }

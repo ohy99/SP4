@@ -53,5 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultRoom: {fileID: 1865273027175096, guid: a6d127c26212c4946b67ca6cca755a83,
     type: 2}
-  scaleX: 20
-  scaleY: 20
+  bossRoom: {fileID: 1729273878151420, guid: a3d7ee7dae3d8d142ae6056f1eb166e3, type: 2}
+  debugText: {fileID: 0}
+  chanceText: {fileID: 0}
+  estTotalRooms: 10
