@@ -3,31 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-
-/*
- *     private static GameManager _instance;
-
-    public static GameManager Instance
-    {
-        get
-        {
-            if(_instance == null)
-            {
-                _instance = GameObject.FindObjectOfType<GameManager>();
-            }
-
-            return _instance;
-        }
-    }
-
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
- * 
- */
-
-
 [InitializeOnLoad]
 public class ItemManager : Singleton<ItemManager>
 {

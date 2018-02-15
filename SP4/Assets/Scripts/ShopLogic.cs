@@ -16,11 +16,14 @@ public class ShopLogic : MonoBehaviour
         // Load items in
         shopCanvas.SetActive(true);
 
-        GameObject button = (GameObject)Instantiate(buttonPrefab);
-        button.transform.SetParent(panelToAttachButtonsTo.transform);//Setting button parent
-        button.GetComponent<Button>().onClick.AddListener(OnClick);//Setting what button does when clicked
-                                                                   //Next line assumes button has child with text as first gameobject like button created from GameObject->UI->Button
-        button.transform.GetChild(0).GetComponent<Text>().text = "This is button text";//Changing text
+        for (int i = 0; i < 5; ++i)
+        {
+            GameObject button = Instantiate(buttonPrefab);
+            button.transform.SetParent(panelToAttachButtonsTo.transform, false);//Setting button parent
+            button.transform.localScale = new Vector3(1, 1, 1);
+            button.GetComponent<Button>().onClick.AddListener(OnClick);//Setting what button does when clicked
+            button.transform.GetChild(0).GetComponent<Text>().text = "This is button text";//Changing text
+        }
     }
 	void OnClick()
     {
