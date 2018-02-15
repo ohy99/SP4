@@ -12,12 +12,10 @@ public class ItemBase : MonoBehaviour
 
     [SerializeField]
     protected ITEM_TYPE itemType;
-    [SerializeField]
-    int cost;
-    [SerializeField]
-    string itemName;
-    [SerializeField]
-    string itemDescription;
+
+    public int cost;
+    public string itemName;
+    public string itemDescription;
 
 	// Use this for initialization
 	virtual public void Start ()
