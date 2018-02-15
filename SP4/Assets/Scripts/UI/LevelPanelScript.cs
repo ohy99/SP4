@@ -18,14 +18,14 @@ public class LevelPanelScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "Current Level : " + player.GetComponent<Player>().GetCurrentLevel() + "\nAvailable Skill points :" + player.GetComponent<Player>().GetSkillPoint() + "\nHealth : " + player.GetComponent<Player>().GetMaxHealth() + "\nSpeed : " + player.GetComponent<PlayerMovement>().moveSpeed;
+        text.text = "Current Level : " + player.GetComponent<Player>().GetCurrentLevel() + "\nAvailable Skill points :" + player.GetComponent<Player>().GetSkillPoint() + "\nHealth : " + player.GetComponent<Health>().GetMaxHp() + "\nSpeed : " + player.GetComponent<PlayerMovement>().moveSpeed;
     }
 
     public void IncreaseHealthClicked()
     {
         if (player.GetComponent<Player>().GetSkillPoint() > 0)
         {
-            player.SendMessage("IncreaseMaxHealth", 10);
+            player.SendMessage("IncreaseMaxHp", 10);
             player.SendMessage("DecreaseSkillPoint");
         }
     }
