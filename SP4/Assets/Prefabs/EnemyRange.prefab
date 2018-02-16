@@ -55,6 +55,8 @@ GameObject:
   - component: {fileID: 114331898599156592}
   - component: {fileID: 58046616954129664}
   - component: {fileID: 50957052580082324}
+  - component: {fileID: 114394211202377220}
+  - component: {fileID: 114453134787994226}
   m_Layer: 0
   m_Name: EnemyRange
   m_TagString: Enemy
@@ -150,6 +152,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+--- !u!114 &114394211202377220
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1621331323061118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3c7028f08a9a14d9ec7e9edeb01270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114453134787994226
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1621331323061118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80139c8e1920f14fa2874f283c77d72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressBarEmpty: {fileID: 2800000, guid: da69a029e93d4704b8b9d1fbe9143345, type: 3}
+  progressBarFull: {fileID: 2800000, guid: 52be3412328bf91439b3a63ff21c547b, type: 3}
+  cam: {fileID: 0}
 --- !u!114 &114694036707693604
 MonoBehaviour:
   m_ObjectHideFlags: 1
