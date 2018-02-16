@@ -36,10 +36,11 @@ public class EnemyHealthBar : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        pos.x = cam.WorldToScreenPoint(transform.position).x;
-        pos.y = cam.WorldToScreenPoint(transform.position).y;
+        pos = cam.WorldToScreenPoint(transform.position);
 
+        pos.x -= size.x * 0.5f;
+        pos.y = Screen.height - pos.y - size.y * 2.0f;
 
-        barDisplay = Time.time * 0.05f;
+        barDisplay = hpScript.GetCurrHp() / hpScript.GetMaxHp();
     }
 }

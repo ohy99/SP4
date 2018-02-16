@@ -8,12 +8,17 @@ public class EnemyMelee : MonoBehaviour {
     public GameObject player;
     private Vector3[] path;
     private FSMSystem sm;
+    private Health hpScript;
 
     public void SetTransition(Transition t) { sm.PerformTransition(t); }
 
     // Use this for initialization
     void Start () {
         path = new [] { new Vector3(transform.position.x - 3.0f, transform.position.y + 2.5f), new Vector3(transform.position.x - 3.0f, transform.position.y - 2.5f), new Vector3(transform.position.x + 3.0f, transform.position.y - 2.5f), new Vector3(transform.position.x + 3.0f, transform.position.y + 2.5f) };
+
+        hpScript = GetComponent<Health>();
+
+        hpScript.SetHp(10.0f);
 
         MakeFSM();
     }
