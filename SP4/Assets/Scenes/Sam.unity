@@ -271,8 +271,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1320855980}
-        m_MethodName: SetShopActive
-        m_Mode: 6
+        m_MethodName: ShopQuit
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -726,6 +726,12 @@ MonoBehaviour:
   buttonPrefab: {fileID: 1066845629664354, guid: d6c796b83b1dbbb47b026ada93bbf746,
     type: 2}
   panelToAttachButtonsTo: {fileID: 375891668}
+  windowRect0:
+    serializedVersion: 2
+    x: 20
+    y: 20
+    width: 120
+    height: 50
 --- !u!4 &1320855981
 Transform:
   m_ObjectHideFlags: 0
@@ -1177,6 +1183,16 @@ Prefab:
     - target: {fileID: 224509100630239974, guid: 07a96eb0d64094544a0d28342798c513,
         type: 2}
       propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114662730783080166, guid: 07a96eb0d64094544a0d28342798c513,
+        type: 2}
+      propertyPath: m_ChildControlHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114662730783080166, guid: 07a96eb0d64094544a0d28342798c513,
+        type: 2}
+      propertyPath: m_ChildControlWidth
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

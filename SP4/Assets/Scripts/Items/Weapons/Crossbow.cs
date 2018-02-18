@@ -53,4 +53,8 @@ public class Crossbow : RangeWeaponBase
         }
 
     }
+
+    public override void OnClick()
+    {
+    }
 }

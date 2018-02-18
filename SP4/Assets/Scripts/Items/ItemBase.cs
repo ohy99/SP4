@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,13 +28,19 @@ public class ItemBase : MonoBehaviour
     {
 	}
 
+    //get item type
     virtual public ITEM_TYPE ItemType()
     {
         return itemType;
     }
 
+    //set itemtype
     virtual public void SetItemType(ITEM_TYPE _itemType)
     {
         itemType = _itemType;
+    }
+
+    virtual public void OnClick()
+    {
     }
 }

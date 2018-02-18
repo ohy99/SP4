@@ -34,4 +34,9 @@ public class Sword : MeleeWeaponBase {
         //meleeCollider.transform.localScale = new Vector3(0.5f, range, 1);
         isAttack = true;
     }
+
+    public override void OnClick()
+    {
+
+    }
 }

@@ -81,4 +81,8 @@ public class MeleeWeaponBase : ItemBase
     {
         itemType = _itemType;
     }
+
+    public override void OnClick()
+    {
+    }
 }
