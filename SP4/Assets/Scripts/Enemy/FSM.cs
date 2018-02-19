@@ -16,6 +16,9 @@ public enum StateID
     ChasePlayer,
     FollowPath,
     AttackPlayer,
+
+    BossIdle,
+    BossAttack,
 }
 
 public abstract class FSMState {
