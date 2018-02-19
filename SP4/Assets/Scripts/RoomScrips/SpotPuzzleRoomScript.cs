@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PushPuzzleRoomScript : RoomScript {
-    
+public class SpotPuzzleRoomScript : RoomScript
+{
     GameObject player;
 
-    Vector3 ObjectivePos;
-    Vector3 TargetPos;
+    Transform OriginalGroup;
+    Transform ChangedGroup;
+
+    GameObject changedObject;
 
     RoomScript roomScript;
     List<bool> doorList = new List<bool>();
 
     bool puzzleComplete;
 
+    bool wrongSelection;
+
     float elapsedTime;
+    float textTimer;
 
     // Use this for initialization
 
@@ -22,24 +27,43 @@ public class PushPuzzleRoomScript : RoomScript {
     {
         //Random.Range(1, 1);
         //wad = new ArrayList();
-        ObjectivePos.Set(Random.Range((transform.position.x - transform.localScale.x * 0.5f + 2.0f), transform.position.x), Random.Range((transform.position.y - transform.localScale.y * 0.5f + 2.0f), (transform.position.y + transform.localScale.y * 0.5f - 2.0f)), 0);
-        TargetPos.Set(Random.Range((transform.position.x + transform.localScale.x * 0.5f - 2.0f), transform.position.x), Random.Range((transform.position.y - transform.localScale.y * 0.5f + 2.0f), (transform.position.y + transform.localScale.y * 0.5f - 2.0f)), 0);
 
-        transform.GetChild(0).position = ObjectivePos;
-        transform.GetChild(1).position = TargetPos;
+        OriginalGroup = this.transform.GetChild(0);
+        ChangedGroup = this.transform.GetChild(1);
+
+        Debug.Log(OriginalGroup.childCount);
+
+        for(int i =0; i < OriginalGroup.childCount; ++i)
+        {
+            Vector3 newPos = new Vector3(Random.Range(transform.position.x - transform.localScale.x * 0.5f + 2.5f, transform.position.x - 2.5f), Random.Range(transform.position.y - transform.localScale.y * 0.5f + 2.5f, transform.position.y + transform.localScale.y * 0.5f - 2.5f), 1);
+            OriginalGroup.GetChild(i).position = newPos;
+            Debug.Log(newPos);
+            newPos.x += transform.localScale.x * 0.5f;
+            Debug.Log(newPos);
+            ChangedGroup.GetChild(i).position = newPos;
+        }
+
+        changedObject = ChangedGroup.GetChild(Random.Range(0, 4)).gameObject;
+
+        Color newColor = changedObject.GetComponent<SpriteRenderer>().color;
+        newColor.r = Random.Range(0,1);
+        newColor.g = Random.Range(0, 1);
+        newColor.b = Random.Range(0, 1);
+
+        changedObject.GetComponent<SpriteRenderer>().color = newColor;
 
         roomScript = this.GetComponent<RoomScript>();
 
-        doorList.Add(roomScript.GetIsLocked(DIRECTION.LEFT)) ;
+        doorList.Add(roomScript.GetIsLocked(DIRECTION.LEFT));
         doorList.Add(roomScript.GetIsLocked(DIRECTION.RIGHT));
         doorList.Add(roomScript.GetIsLocked(DIRECTION.UP));
         doorList.Add(roomScript.GetIsLocked(DIRECTION.DOWN));
 
-        player = GameObject.FindGameObjectWithTag("Player");
-
         elapsedTime = 0.0f;
 
         puzzleComplete = false;
+
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -65,8 +89,10 @@ public class PushPuzzleRoomScript : RoomScript {
             OnTriggerBox(DIRECTION.RIGHT);
             OnTriggerBox(DIRECTION.UP);
             OnTriggerBox(DIRECTION.DOWN);
-
         }
+
+        if (textTimer < elapsedTime)
+            wrongSelection = false;
 
     }
 
@@ -74,18 +100,30 @@ public class PushPuzzleRoomScript : RoomScript {
     {
         if (elapsedTime < 5.0f)
         {
-            Debug.Log(Screen.width);
             GUIStyle style = new GUIStyle();
             style.fontSize = 15;
-            GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f,0,220.0f,20.0f)  , "Push the red circle to the blue circle", 50, style);
+            GUI.TextField(new Rect(Screen.width * 0.5f - 150.0f, 0, 220.0f, 20.0f), "Spot the difference (Collide into the object to select)", 100, style);
+        }
+
+        if(wrongSelection)
+        {
+            GUIStyle style = new GUIStyle();
+            style.fontSize = 10;
+            GUI.TextField(new Rect(Screen.width * 0.5f - 80.0f, 0, 220.0f, 20.0f), "Wrong Answer", 100, style);
         }
     }
 
-
-    void OnTarget()
+    void OnTarget(GameObject target)
     {
         if (doorList.Count == 0)
             return;
+
+        if (target != changedObject)
+        {
+            wrongSelection = true;
+            textTimer = elapsedTime + 2.0f;
+            return;
+        }
 
         puzzleComplete = true;
 
@@ -108,21 +146,5 @@ public class PushPuzzleRoomScript : RoomScript {
             roomScript.LockDoor(DIRECTION.DOWN);
         else
             roomScript.UnlockDoor(DIRECTION.DOWN);
-    }
-
-    void OffTarget()
-    {
-        puzzleComplete = false;
-
-        roomScript.LockDoor(DIRECTION.LEFT);
-        roomScript.LockDoor(DIRECTION.RIGHT);
-        roomScript.LockDoor(DIRECTION.UP);
-        roomScript.LockDoor(DIRECTION.DOWN);
-    }
-
-    void ResetPuzzle()
-    {
-        transform.GetChild(0).position = ObjectivePos;
-        transform.GetChild(1).position = TargetPos;
     }
 }
