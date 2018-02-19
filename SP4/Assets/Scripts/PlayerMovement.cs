@@ -7,6 +7,10 @@ public class PlayerMovement : MonoBehaviour {
 
     [SerializeField]
     PlayerShoot playerShoot;
+    [SerializeField]
+    Joystick moveJoy;
+    [SerializeField]
+    UnityEngine.UI.Text debugText;
 
     public float moveSpeed = 10;
     public float rotateSpeed = 60;
@@ -15,6 +19,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         KEYBOARD,
         GAMEPAD,
+        MOBILE,
     }
     CONTROLTYPE controlType = CONTROLTYPE.KEYBOARD;
     //JoyScript targetScript;
@@ -27,20 +32,27 @@ public class PlayerMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        switch(controlType)
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            ChangeControlType(CONTROLTYPE.KEYBOARD);
+        else if (!Mathf.Approximately(Input.GetAxis("Horizontal"), 0.0f) || !Mathf.Approximately(Input.GetAxis("Vertical"), 0.0f))
+            ChangeControlType(CONTROLTYPE.GAMEPAD);
+        else if (!Mathf.Approximately(moveJoy.GetXAxis(), 0.0f) || !Mathf.Approximately(moveJoy.GetYAxis(), 0.0f))
+            ChangeControlType(CONTROLTYPE.MOBILE);
+        switch (controlType)
         {
             case CONTROLTYPE.GAMEPAD:
-                if (Input.anyKey)
-                    ChangeControlType(CONTROLTYPE.KEYBOARD);
                 MoveOnGamePad();
                 break;
+            case CONTROLTYPE.MOBILE:
+                MoveOnMobile();
+                break;
             default:
-                if (!Mathf.Approximately(Input.GetAxis("Horizontal"), 0.0f) || !Mathf.Approximately(Input.GetAxis("Vertical"), 0.0f))
-                    ChangeControlType(CONTROLTYPE.GAMEPAD);
                 MoveOnKeyboard();
                 break;
         }
-        
+
+        if (debugText)
+            debugText.text = controlType.ToString();
         //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         //transform.Rotate(new Vector3(0,0, angle) * Time.deltaTime * rotateSpeed);
@@ -122,6 +134,13 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 
+    void MoveOnMobile()
+    {
+        float hValue = moveJoy.GetXAxis();
+        float vValue = moveJoy.GetYAxis();
+        Vector3 moveDir = new Vector3(hValue, vValue, 0);
+        gameObject.transform.position += moveDir * moveSpeed * Time.deltaTime;
+    }
 
     void ChangeControlType(CONTROLTYPE type)
     {

@@ -6,6 +6,8 @@ public class PlayerShoot : MonoBehaviour
 {
     //[SerializeField]
     //GameObject playerObj;
+    [SerializeField]
+    Joystick joyStick;
 
     private GameObject go;
     private Inventory playerGear;
@@ -16,6 +18,7 @@ public class PlayerShoot : MonoBehaviour
     {
         KEYBOARD,
         GAMEPAD,
+        MOBILE,
     }
     CONTROLTYPE controlType = CONTROLTYPE.KEYBOARD;
 
@@ -35,13 +38,17 @@ public class PlayerShoot : MonoBehaviour
         //Debug.Log(controlType);
         switch (controlType)
         {
-            case CONTROLTYPE.KEYBOARD:
-                KeyboardUpdate();
-                break;
             case CONTROLTYPE.GAMEPAD:
                 GamePadUpdate();
                 break;
+            case CONTROLTYPE.MOBILE:
+                MobileUpdate();
+                break;
+            default:
+                KeyboardUpdate();
+                break;
         }
+
     }
 
     void KeyboardUpdate()
@@ -75,7 +82,17 @@ public class PlayerShoot : MonoBehaviour
 
     void GamePadUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Tab))
+        if (Input.GetButtonDown("LB"))
+        {
+            --itemIndex;
+            if (itemIndex < 0)
+                itemIndex = playerGear.GetItemNameList().Count - 1;
+
+            string itemName = playerGear.GetItemName(itemIndex);
+            Debug.Log("ItemChange" + itemIndex + " - " + itemName);
+            go = playerGear.GetItem(itemName);
+        }
+        if (Input.GetButtonDown("RB"))
         {
             ++itemIndex;
             if (itemIndex >= playerGear.GetItemNameList().Count)
@@ -89,7 +106,7 @@ public class PlayerShoot : MonoBehaviour
 
         //Debug.Log("TotalRounds:" + go)
         //Debug.Log(Input.GetAxis("RightHorizontal") + " , " + Input.GetAxis("RightVertical"));
-        
+
         //if (!Mathf.Approximately(Input.GetAxis("RightHorizontal"), 0.0f) || !Mathf.Approximately(Input.GetAxis("RightVertical"), 0.0f))
         if (Input.GetAxis("LTRT") > 0.5)
         {
@@ -107,23 +124,34 @@ public class PlayerShoot : MonoBehaviour
 
         
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetButtonDown("A"))
         {
-            Debug.Log("A Pressed");
+            Debug.Log("Reloading");
             go.GetComponent<RangeWeaponBase>().Reload();
+        }
+    }
+
+    void MobileUpdate()
+    {
+        if (!Mathf.Approximately(joyStick.GetXAxis(), 0.0f) || !Mathf.Approximately(joyStick.GetYAxis(), 0.0f))
+        {
+            float rhValue = joyStick.GetXAxis();
+            float rvValue = joyStick.GetYAxis();
+            Vector3 shootDir = new Vector3(rhValue, rvValue, 0);
+            //gameObject.transform.position += moveDir * moveSpeed * Time.deltaTime;
+            Transform playerTransform = transform.parent.parent; //hacks but fast heh
+            //Debug.Log(playerTransform.gameObject);
+            playerTransform.up = shootDir;
+
+            if (go.GetComponent<RangeWeaponBase>())
+                go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
+            else if (go.GetComponent<MeleeWeaponBase>())
+                go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
         }
     }
 
     public void SetControlType(int type)
     {
-        switch (type)
-        {
-            case 1:
-                controlType = CONTROLTYPE.GAMEPAD;
-                break;
-            default:
-                controlType = CONTROLTYPE.KEYBOARD;
-                break;
-        }
+        controlType = (CONTROLTYPE)type;
     }
 }
