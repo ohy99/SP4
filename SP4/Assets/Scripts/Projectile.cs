@@ -31,6 +31,15 @@ public class Projectile : MonoBehaviour {
                 //hpScript
                 hpScript.ModifyHp(-damage);
                 DamageFeedback.Instance.ShowDamage(damage, coll.gameObject.transform.position + coll.gameObject.transform.lossyScale);
+                switch (coll.gameObject.tag)
+                {
+                    case "Enemy":
+                        ParticleManager.Instance.GenerateParticle(ParticleManager.PARTICLETYPE.HITENEMY, coll.gameObject.transform.position);
+                        break;
+                    case "Player":
+                        ParticleManager.Instance.GenerateParticle(ParticleManager.PARTICLETYPE.HITPLAYER, coll.gameObject.transform.position);
+                        break;
+                }
             }
 
             //TODO: DO DAMAGE
