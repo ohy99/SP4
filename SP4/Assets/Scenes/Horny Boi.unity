@@ -349,13 +349,40 @@ GameObject:
   - component: {fileID: 158653111}
   - component: {fileID: 158653110}
   - component: {fileID: 158653109}
-  m_Layer: 0
+  - component: {fileID: 158653112}
+  - component: {fileID: 158653108}
+  m_Layer: 8
   m_Name: Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!61 &158653108
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 158653107}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: c367984b66065ad49ae6dc9944d18354, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!114 &158653109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,6 +395,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   proj: {fileID: 114358509480451866, guid: 68e227eb8a1f064419576d2e367187eb, type: 2}
+  _projectileLayer: 9
+  flySpd: 5
+  _numOfProj: 10
+  projectileSpd: 3
+  shootInterval: 1
 --- !u!212 &158653110
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -422,6 +454,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &158653112
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 158653107}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &225389936
 Prefab:
   m_ObjectHideFlags: 0
@@ -1589,20 +1641,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 114247735879882932, guid: bd66e0e699c5c8042b2bddadea72b2df,
-        type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 79638770}
-    - target: {fileID: 1121057322748648, guid: bd66e0e699c5c8042b2bddadea72b2df, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114626202025187886, guid: bd66e0e699c5c8042b2bddadea72b2df,
         type: 2}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1061600006}
+    - target: {fileID: 114247735879882932, guid: bd66e0e699c5c8042b2bddadea72b2df,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 79638770}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd66e0e699c5c8042b2bddadea72b2df, type: 2}
   m_IsPrefabParent: 0
@@ -2892,6 +2940,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1895972546414492, guid: a3d7ee7dae3d8d142ae6056f1eb166e3, type: 2}
+      propertyPath: m_Name
+      value: BossText
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a3d7ee7dae3d8d142ae6056f1eb166e3, type: 2}
   m_IsPrefabParent: 0
@@ -3272,20 +3324,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 114331898599156592, guid: 582b5b78d3b76e24c99ee8434de0197f,
-        type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 79638770}
-    - target: {fileID: 1621331323061118, guid: 582b5b78d3b76e24c99ee8434de0197f, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114453134787994226, guid: 582b5b78d3b76e24c99ee8434de0197f,
         type: 2}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1061600006}
+    - target: {fileID: 114331898599156592, guid: 582b5b78d3b76e24c99ee8434de0197f,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 79638770}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 582b5b78d3b76e24c99ee8434de0197f, type: 2}
   m_IsPrefabParent: 0
