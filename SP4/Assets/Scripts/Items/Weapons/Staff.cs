@@ -53,4 +53,8 @@ public class Staff : RangeWeaponBase
         }
 
     }
+
+    public override void OnClick()
+    {
+    }
 }

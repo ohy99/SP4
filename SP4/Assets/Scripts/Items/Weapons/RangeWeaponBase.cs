@@ -60,4 +60,8 @@ public class RangeWeaponBase : ItemBase
     {
         itemType = _itemType;
     }
+
+    public override void OnClick()
+    {
+    }
 }

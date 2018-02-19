@@ -8,11 +8,17 @@ public class EnemyRange : MonoBehaviour
     public GameObject player;
     private FSMSystem sm;
 
+    private Health hpScript;
+
     public void SetTransition(Transition t) { sm.PerformTransition(t); }
 
     // Use this for initialization
     void Start()
     {
+        hpScript = GetComponent<Health>();
+
+        hpScript.SetHp(5.0f);
+
         MakeFSM();
     }
 
