@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[InitializeOnLoad]
+//This line below doesnt work with android :thinking:
+[UnityEditor.InitializeOnLoad]
 public class ItemManager : Singleton<ItemManager>
 {
     public Dictionary<string, GameObject> items = new Dictionary<string, GameObject>();
