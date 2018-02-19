@@ -26,6 +26,11 @@ public class ItemManager : Singleton<ItemManager>
 
         Debug.Log("ItemManagerStart");
         LoadAllItems();
+
+        Inventory temp = new Inventory();
+        temp.AddItem(items["Crossbow"], "Crossbow");
+        InventoryManager.Instance.Init();
+        InventoryManager.Instance.AddInventory("player", temp);
     }
 
     public void LoadAllItems()

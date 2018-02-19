@@ -6,6 +6,7 @@ public class PlayerShoot : MonoBehaviour
 {
     //[SerializeField]
     //GameObject playerObj;
+
     private GameObject go;
     private Inventory playerGear;
 
@@ -21,11 +22,11 @@ public class PlayerShoot : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        playerGear = new Inventory();
+        //playerGear = new Inventory();
+        //playerGear.Init();
 
-        playerGear.Init();
+        playerGear = InventoryManager.Instance.GetInventory("player");
         go = playerGear.GetItem("Crossbow");
-        //go = Instantiate(playerGear.GetItem("Crossbow"));
     }
 	
 	// Update is called once per frame
