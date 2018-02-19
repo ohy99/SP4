@@ -2,45 +2,6 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
-{
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (eventData.pointerDrag == null)
-            return;
-
-        Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
-        if (d != null)
-        {
-            //d.placeHolderParent = this.transform;
-        }
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-
-        if (eventData.pointerDrag == null)
-            return;
-
-        Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
-       // if (d != null && d.placeHolderParent == this.transform)
-       // {
-       //     d.placeHolderParent = d.parentToReturnTo;
-       // }
-    }
-
-    public void OnDrop(PointerEventData eventData)
-    {
-        Debug.Log(eventData.pointerDrag.name + " dropped on " + gameObject.name);
-
-        Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
-        if (d != null) {
-            d.parentToReturnTo = this.transform;
-        }
-    }
-}
-
 //public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 //{
 
@@ -52,7 +13,7 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 //        Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
 //        if (d != null)
 //        {
-//            d.placeHolderParent = this.transform;
+//            //d.placeHolderParent = this.transform;
 //        }
 //    }
 
@@ -63,10 +24,10 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 //            return;
 
 //        Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
-//        if (d != null && d.placeHolderParent == this.transform)
-//        {
-//            d.placeHolderParent = d.parentToReturnTo;
-//        }
+//       // if (d != null && d.placeHolderParent == this.transform)
+//       // {
+//       //     d.placeHolderParent = d.parentToReturnTo;
+//       // }
 //    }
 
 //    public void OnDrop(PointerEventData eventData)
@@ -74,9 +35,48 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 //        Debug.Log(eventData.pointerDrag.name + " dropped on " + gameObject.name);
 
 //        Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
-//        if (d != null)
-//        {
+//        if (d != null) {
 //            d.parentToReturnTo = this.transform;
 //        }
 //    }
 //}
+
+public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+{
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (eventData.pointerDrag == null)
+            return;
+
+        Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
+        if (d != null)
+        {
+            d.placeHolderParent = this.transform;
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+
+        if (eventData.pointerDrag == null)
+            return;
+
+        Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
+        if (d != null && d.placeHolderParent == this.transform)
+        {
+            d.placeHolderParent = d.parentToReturnTo;
+        }
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        Debug.Log(eventData.pointerDrag.name + " dropped on " + gameObject.name);
+
+        Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
+        if (d != null)
+        {
+            d.parentToReturnTo = this.transform;
+        }
+    }
+}
