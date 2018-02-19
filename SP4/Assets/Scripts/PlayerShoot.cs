@@ -71,6 +71,14 @@ public class PlayerShoot : MonoBehaviour
         {
             go.GetComponent<RangeWeaponBase>().Reload();
         }
+
+        //if (Input.GetKey(KeyCode.T))
+        //{
+        //    //GameObject temp = Instantiate(ItemManager.Instance.items["Crossbow"]);
+        //    InventoryManager.Instance.GetInventory("player").AddItem(ItemManager.Instance.items["Crossbow"]
+        //        , "Crossbow02");
+        //    playerGear = InventoryManager.Instance.GetInventory("player");
+        //}
     }
 
     void GamePadUpdate()

@@ -25,6 +25,7 @@ public class Inventory
         Debug.Log("added");
         if (!myItems.ContainsKey(itemName))
         {
+            _item = GameObject.Instantiate(_item) as GameObject;
             myItems[itemName] = _item;
             itemNameList.Add(itemName);
         }

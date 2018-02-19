@@ -55,4 +55,5 @@ MonoBehaviour:
   cost: 200
   itemName: Crossbow
   itemDescription: Its a crossbow
+  sprite: {fileID: 0}
   projectile: {fileID: 1859548745114154, guid: 68e227eb8a1f064419576d2e367187eb, type: 2}

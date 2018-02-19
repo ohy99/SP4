@@ -31,9 +31,7 @@ public class ShopLogic : MonoBehaviour
         isPurchaseable = true;
         windowRect0 = new Rect(Screen.width * 0.5f - 100, Screen.height * 0.5f - 100, 200, 200);
         windowRect1 = new Rect(Screen.width * 0.5f - 100, Screen.height * 0.5f - 100, 200, 200);
-        buttonList = new List<GameObject>();
-       
-        
+        buttonList = new List<GameObject>(); 
 
         for (int i = 0; i < ItemManager.Instance.itemNames.Count; ++i)
         {
