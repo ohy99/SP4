@@ -17,6 +17,7 @@ public class ItemBase : MonoBehaviour
     public int cost;
     public string itemName;
     public string itemDescription;
+    public Sprite sprite;
 
 	// Use this for initialization
 	virtual public void Start ()

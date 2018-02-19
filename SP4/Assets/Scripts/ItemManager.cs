@@ -14,7 +14,7 @@ public class ItemManager : Singleton<ItemManager>
 
     protected ItemManager() 
     {
-
+     
     }
 
     public void Awake()
