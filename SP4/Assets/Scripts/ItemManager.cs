@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[InitializeOnLoad]
+//This line below doesnt work with android :thinking:
+[UnityEditor.InitializeOnLoad]
 public class ItemManager : Singleton<ItemManager>
 {
     public Dictionary<string, GameObject> items = new Dictionary<string, GameObject>();
@@ -25,6 +26,11 @@ public class ItemManager : Singleton<ItemManager>
 
         Debug.Log("ItemManagerStart");
         LoadAllItems();
+
+        Inventory temp = new Inventory();
+        temp.AddItem(items["Crossbow"], "Crossbow");
+        InventoryManager.Instance.Init();
+        InventoryManager.Instance.AddInventory("player", temp);
     }
 
     public void LoadAllItems()

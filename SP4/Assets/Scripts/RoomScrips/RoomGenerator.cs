@@ -76,6 +76,7 @@ public class RoomGenerator : Singleton<RoomGenerator> {
 
         if (!GenerateOnStart)
             return;
+        //Debug.Log("RoomGenerator Start()");
         //spawn at 0,0, so generate one at 0,0
         GameObject room = Instantiate(defaultRoom, new Vector3(0, 0, zOffset), Quaternion.identity);
         room.transform.localScale.Set(scaleX, scaleY, 1);

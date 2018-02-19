@@ -6,25 +6,47 @@ public class PlayerShoot : MonoBehaviour
 {
     //[SerializeField]
     //GameObject playerObj;
+
     private GameObject go;
     private Inventory playerGear;
 
     private int itemIndex = 0;
 
+    enum CONTROLTYPE
+    {
+        KEYBOARD,
+        GAMEPAD,
+    }
+    CONTROLTYPE controlType = CONTROLTYPE.KEYBOARD;
+
     // Use this for initialization
     void Start ()
     {
-        playerGear = new Inventory();
+        //playerGear = new Inventory();
+        //playerGear.Init();
 
-        playerGear.Init();
+        playerGear = InventoryManager.Instance.GetInventory("player");
         go = playerGear.GetItem("Crossbow");
-        //go = Instantiate(playerGear.GetItem("Crossbow"));
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if(Input.GetKeyUp(KeyCode.Tab))
+        //Debug.Log(controlType);
+        switch (controlType)
+        {
+            case CONTROLTYPE.KEYBOARD:
+                KeyboardUpdate();
+                break;
+            case CONTROLTYPE.GAMEPAD:
+                GamePadUpdate();
+                break;
+        }
+    }
+
+    void KeyboardUpdate()
+    {
+        if (Input.GetKeyUp(KeyCode.Tab))
         {
             ++itemIndex;
             if (itemIndex >= playerGear.GetItemNameList().Count)
@@ -38,16 +60,70 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //Debug.Log("TotalRounds:" + go)
-     
-            if(go.GetComponent<RangeWeaponBase>())
-                go.GetComponent<RangeWeaponBase>().Discharge(transform.position,transform.rotation);
+
+            if (go.GetComponent<RangeWeaponBase>())
+                go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
             else if (go.GetComponent<MeleeWeaponBase>())
                 go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
         }
 
-        if(Input.GetKey(KeyCode.R))
+        if (Input.GetKey(KeyCode.R))
         {
             go.GetComponent<RangeWeaponBase>().Reload();
+        }
+    }
+
+    void GamePadUpdate()
+    {
+        if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            ++itemIndex;
+            if (itemIndex >= playerGear.GetItemNameList().Count)
+                itemIndex = 0;
+
+            string itemName = playerGear.GetItemName(itemIndex);
+            Debug.Log("ItemChange" + itemIndex + " - " + itemName);
+            go = playerGear.GetItem(itemName);
+        }
+
+
+        //Debug.Log("TotalRounds:" + go)
+        //Debug.Log(Input.GetAxis("RightHorizontal") + " , " + Input.GetAxis("RightVertical"));
+        
+        //if (!Mathf.Approximately(Input.GetAxis("RightHorizontal"), 0.0f) || !Mathf.Approximately(Input.GetAxis("RightVertical"), 0.0f))
+        if (Input.GetAxis("LTRT") > 0.5)
+        {
+            //float hValue = Input.GetAxis("RightHorizontal");
+            //float vValue = Input.GetAxis("RightVertical");
+            //Vector3 shootDir = new Vector3(hValue, vValue, 0);
+            ////gameObject.transform.position += moveDir * moveSpeed * Time.deltaTime;
+            //go.transform.up = shootDir;
+
+            if (go.GetComponent<RangeWeaponBase>())
+                go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
+            else if (go.GetComponent<MeleeWeaponBase>())
+                go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
+        }
+
+        
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            Debug.Log("A Pressed");
+            go.GetComponent<RangeWeaponBase>().Reload();
+        }
+    }
+
+    public void SetControlType(int type)
+    {
+        switch (type)
+        {
+            case 1:
+                controlType = CONTROLTYPE.GAMEPAD;
+                break;
+            default:
+                controlType = CONTROLTYPE.KEYBOARD;
+                break;
         }
     }
 }

@@ -6,30 +6,34 @@ public class Inventory
 {
     private Dictionary<string, GameObject> myItems = new Dictionary<string, GameObject>();
     private List<string> itemNameList = new List<string>();
+    int currency;
 
     // Use this for initialization
     public void Init ()
     {
         Debug.Log("INVETORY START");
 
-        AddWeapon(ItemManager.Instance.items["Crossbow"], "Crossbow");
-        itemNameList.Add("Crossbow");
-        AddWeapon(ItemManager.Instance.items["Sword"], "Sword");
-        itemNameList.Add("Sword");
+        AddItem(ItemManager.Instance.items["Crossbow"], "Crossbow");
+        //itemNameList.Add("Crossbow");
+        //RemoveItem(ItemManager.Instance.items["Sword"], "Sword");
+        //itemNameList.Add("Sword");
+        currency = 1000;
     }
 
-    public void AddWeapon(GameObject _item, string itemName)
+    public void AddItem(GameObject _item, string itemName)
     {
         Debug.Log("added");
         if (!myItems.ContainsKey(itemName))
         {
             myItems[itemName] = _item;
+            itemNameList.Add(itemName);
         }
     }
 
-    public void RemoveWeapon(GameObject _item, string itemName)
+    public void RemoveItem(GameObject _item, string itemName)
     {
         myItems[itemName] = null;
+        itemNameList.Remove(itemName);
     }
 
     public GameObject GetItem(string itemName)
@@ -54,5 +58,15 @@ public class Inventory
     public List<string> GetItemNameList()
     {
         return itemNameList;
+    }
+
+    public int GetCurrency()
+    {
+        return currency;
+    }
+
+    public void SetCurrency(int _currency)
+    {
+        currency = _currency;
     }
 }

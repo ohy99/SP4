@@ -58,6 +58,7 @@ public class Player : MonoBehaviour {
         PlayerPrefs.SetFloat("Max Health", hpScript.GetMaxHp());
         PlayerPrefs.SetInt("Money", Mathf.Max(0,score - initialScore));
         PlayerPrefs.Save();
+        
     }
 
     public void IncreaseSpeed()
