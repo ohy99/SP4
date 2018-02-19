@@ -28,7 +28,10 @@ public class Crossbow : RangeWeaponBase
         if (magRounds > 0)
         {
             Debug.Log("weaponDischarge");
-            Instantiate(projectile, pos, rotation);
+            GameObject projGO = Instantiate(projectile, pos, rotation);
+            Projectile projScript = projGO.GetComponent<Projectile>();
+            if (projScript)
+                projScript.SetDamage(damage);
             --magRounds;
         }
     }

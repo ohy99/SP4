@@ -2,11 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerMovement : MonoBehaviour {
+
+    [SerializeField]
+    PlayerShoot playerShoot;
 
     public float moveSpeed = 10;
     public float rotateSpeed = 60;
 
+    enum CONTROLTYPE
+    {
+        KEYBOARD,
+        GAMEPAD,
+    }
+    CONTROLTYPE controlType = CONTROLTYPE.KEYBOARD;
     //JoyScript targetScript;
 
     // Use this for initialization
@@ -17,9 +27,35 @@ public class PlayerMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        switch(controlType)
+        {
+            case CONTROLTYPE.GAMEPAD:
+                if (Input.anyKey)
+                    ChangeControlType(CONTROLTYPE.KEYBOARD);
+                MoveOnGamePad();
+                break;
+            default:
+                if (!Mathf.Approximately(Input.GetAxis("Horizontal"), 0.0f) || !Mathf.Approximately(Input.GetAxis("Vertical"), 0.0f))
+                    ChangeControlType(CONTROLTYPE.GAMEPAD);
+                MoveOnKeyboard();
+                break;
+        }
+        
+        //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        //transform.Rotate(new Vector3(0,0, angle) * Time.deltaTime * rotateSpeed);
+    }
+
+    public void Reset()
+    {
+        transform.position = new Vector3(0, 0, 0);
+        transform.up = new Vector3(0, 1, 0);
+    }
+
+    void MoveOnKeyboard()
+    {
         Vector3 forward = new Vector3(0, 1, 0);
         Vector3 right = new Vector3(1, 0, 0);
-
         if (Input.GetKey(KeyCode.W))
         {
             transform.position += forward * moveSpeed * Time.deltaTime;
@@ -44,15 +80,53 @@ public class PlayerMovement : MonoBehaviour {
             mousePos.y - transform.position.y);
 
         transform.up = dir;
-
-        //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        //transform.Rotate(new Vector3(0,0, angle) * Time.deltaTime * rotateSpeed);
     }
 
-    public void Reset()
+    void MoveOnGamePad()
     {
-        transform.position = new Vector3(0, 0, 0);
-        transform.up = new Vector3(0, 1, 0);
+        string[] names = Input.GetJoystickNames();
+        for (int x = 0; x < names.Length; x++)
+        {
+            //Debug.Log(names[x] + " Len: " + names[x].Length);
+            if (names[x].Length == 19)
+            {
+                print("PS4 CONTROLLER IS CONNECTED");
+                //PS4_Controller = 1;
+                //Xbox_One_Controller = 0;
+            }
+            else if (names[x].Length == 33 || names[x].Length == 22)
+            {
+                //XBOX ONE CONTROLLER || XBOX BLUETOOTH GAMEPAD
+                //print("XBOX ONE CONTROLLER IS CONNECTED");
+                //set a controller bool to true
+                //PS4_Controller = 0;
+                //Xbox_One_Controller = 1;
+
+                if (!Mathf.Approximately(Input.GetAxis("RightHorizontal"), 0.0f) || !Mathf.Approximately(Input.GetAxis("RightVertical"), 0.0f))
+                {
+                    float rhValue = Input.GetAxis("RightHorizontal");
+                    float rvValue = Input.GetAxis("RightVertical");
+                    Vector3 shootDir = new Vector3(rhValue, rvValue, 0);
+                    //gameObject.transform.position += moveDir * moveSpeed * Time.deltaTime;
+                    transform.up = shootDir;
+
+                }
+
+                float hValue = Input.GetAxis("Horizontal");
+                float vValue = Input.GetAxis("Vertical");
+                Vector3 moveDir = new Vector3(hValue, vValue, 0);
+                gameObject.transform.position += moveDir * moveSpeed * Time.deltaTime;
+            }
+
+        }
+
+    }
+
+
+    void ChangeControlType(CONTROLTYPE type)
+    {
+        this.controlType = type;
+        if (playerShoot)
+            playerShoot.SetControlType((int)type);
     }
 }
