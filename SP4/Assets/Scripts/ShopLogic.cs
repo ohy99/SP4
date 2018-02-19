@@ -26,7 +26,7 @@ public class ShopLogic : MonoBehaviour
         // Load items in
         confirmationPanel.SetActive(false);
         shopCanvas.SetActive(false);
-        Time.timeScale = 0;
+        Time.timeScale = 1;
         isClicked = false;
         isPurchaseable = true;
         windowRect0 = new Rect(Screen.width * 0.5f - 100, Screen.height * 0.5f - 100, 200, 200);

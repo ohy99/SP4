@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[InitializeOnLoad]
+//[InitializeOnLoad]
 public class InventoryManager : Singleton<InventoryManager>
 {
     private Dictionary<string, Inventory> inventories;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    public void Start ()
     {
-        inventories = new Dictionary<string, Inventory>();
-        //intialise player's inventory
-        inventories["player"] = new Inventory();
-        inventories["player"].Init();
+        //inventories = new Dictionary<string, Inventory>();
+        ////intialise player's inventory
+        //inventories["player"] = new Inventory();
+        //inventories["player"].Init();
         // other stuff enemies,another player inventory
 	}
+
+    public void Init()
+    {
+        inventories = new Dictionary<string, Inventory>();
+    }
 
     public bool AddInventory(string key)
     {
