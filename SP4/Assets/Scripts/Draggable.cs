@@ -104,6 +104,9 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     private GameObject placeHolder = null;
 
+    private int startIndex = 0;
+    private int endIndex = 0;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         placeHolder = new GameObject();
@@ -116,6 +119,8 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         le.flexibleWidth = 0;
         le.flexibleHeight = 0;
 
+        //Debug.Log("OnStartDrag: " + this.transform.GetSiblingIndex());
+        startIndex = this.transform.GetSiblingIndex();
         placeHolder.transform.SetSiblingIndex(this.transform.GetSiblingIndex());
 
         //set parent to orignal (the container)
@@ -138,7 +143,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         int newSiblingIndex = placeHolderParent.childCount;
 
-        Debug.Log("numChild" + placeHolderParent.childCount);
+        //Debug.Log("numChild" + placeHolderParent.childCount);
         for (int i = 0; i < placeHolderParent.childCount; i++)
         {
             if (this.transform.position.y >= placeHolderParent.GetChild(i).position.y
@@ -146,7 +151,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             {
                 newSiblingIndex = i;
 
-                Debug.Log("nsIndex" + newSiblingIndex);
+                //Debug.Log("nsIndex" + newSiblingIndex);
 
                 if (placeHolder.transform.GetSiblingIndex() < newSiblingIndex)
                     newSiblingIndex--;
@@ -156,13 +161,22 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             }
         }
 
+
         placeHolder.transform.SetSiblingIndex(newSiblingIndex);
+
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         this.transform.SetParent(parentToReturnTo);
         this.transform.SetSiblingIndex(placeHolder.transform.GetSiblingIndex());
+
+        endIndex = placeHolder.transform.GetSiblingIndex() - 1;
+        InventoryManager.Instance.GetInventory("player").SwapSlots(startIndex, endIndex);
+
+        //Debug.Log(InventoryManager.Instance.GetInventory("player").slot[endIndex]);
+        //Debug.Log("sibilingIndex: " + placeHolder.transform.GetSiblingIndex()); //minus 1 for actual index
+
         this.GetComponent<CanvasGroup>().blocksRaycasts = true;
         Destroy(placeHolder);
     }
