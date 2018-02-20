@@ -14,3 +14,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/mp_game.unity
     guid: 6ddcc8eb737bfd449a45ca89c0c83296
+  - enabled: 0
+    path: Assets/Scenes/Kevin.unity
+    guid: 449e8196ccdd466458cfa867b9fc7731
