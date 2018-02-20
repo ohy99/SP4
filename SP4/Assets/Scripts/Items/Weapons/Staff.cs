@@ -15,6 +15,7 @@ public class Staff : RangeWeaponBase
 
         maxMagRounds = 5;
         magRounds = 5;
+        fireRate = 0.333f;
     }
 
     // Update is called once per frame
