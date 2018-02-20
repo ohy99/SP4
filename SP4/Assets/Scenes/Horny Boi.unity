@@ -320,6 +320,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerShoot: {fileID: 940923858}
+  moveJoy: {fileID: 32417067}
+  debugText: {fileID: 504266663}
   moveSpeed: 10
   rotateSpeed: 60
 --- !u!61 &79638772
@@ -1998,7 +2000,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &872339691
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2107,7 +2109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b765059986230db43af47c02c4e2d51b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 504266663}
+  joyStick: {fileID: 1101048833}
 --- !u!1 &1029976406
 GameObject:
   m_ObjectHideFlags: 0
