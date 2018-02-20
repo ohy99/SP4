@@ -98,4 +98,5 @@ public class Player : MonoBehaviour {
     public int GetExp() { return exp; }
     public int GetMaxExp() { return maxExp; }
     public bool IsDead() { return hpScript.GetCurrHp() <= 0; }
+    public void AddHealth(float value) { hpScript.ModifyHp(value); }
 }

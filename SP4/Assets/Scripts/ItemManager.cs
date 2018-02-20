@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+//using UnityEditor;
 
 //This line below doesnt work with android :thinking:
-[UnityEditor.InitializeOnLoad]
+//[UnityEditor.InitializeOnLoad]
 public class ItemManager : Singleton<ItemManager>
 {
     public Dictionary<string, GameObject> items = new Dictionary<string, GameObject>();

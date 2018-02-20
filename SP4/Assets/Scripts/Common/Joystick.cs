@@ -45,15 +45,15 @@ public class Joystick : MonoBehaviour {
     }
     public void Dragging()
     {
-
+        Vector3 newPosition = new Vector3(0, 0, 0);
 #if UNITY_EDITOR || UNITY_WINDOWS
         //Vector3 screenPos = UICamera.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 newPosition = new Vector3(Input.mousePosition.x - startPosition.x, 
+        newPosition = new Vector3(Input.mousePosition.x - startPosition.x, 
             Input.mousePosition.y - startPosition.y, 0);
 
 #elif UNITY_ANDROID
         Touch mytouch = Input.GetTouch(0);
-        Vector3 newPosition = new Vector3(mytouch.position.x - startPosition.x, mytouch.position.y - startPosition.y, 0);
+        newPosition = new Vector3(mytouch.position.x - startPosition.x, mytouch.position.y - startPosition.y, 0);
 
 #endif   
        

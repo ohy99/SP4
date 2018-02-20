@@ -64,7 +64,7 @@ public class PlayerShoot : MonoBehaviour
             go = playerGear.GetItem(itemName);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButton("Fire1"))
         {
             //Debug.Log("TotalRounds:" + go)
 
