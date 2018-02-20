@@ -5,13 +5,14 @@ using UnityEngine;
 public class BossRoomScript : RoomScript {
 
     [SerializeField]
-    EnemyBoss boss;
+    GameObject boss;
 	// Use this for initialization
 	void Start () {
 		
 	}
     void Awake() {
-        boss = Instantiate(boss, transform.position, Quaternion.identity);
+        GameObject spawnBoss = Instantiate(boss, transform.position, Quaternion.identity);
+        Global.Instance.boss = spawnBoss;
     }
 	
 	// Update is called once per frame

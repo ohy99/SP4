@@ -44,9 +44,10 @@ public class SpotPuzzleRoomScript : RoomScript
         changedObject = ChangedGroup.GetChild(Random.Range(0, 4)).gameObject;
 
         Color newColor = changedObject.GetComponent<SpriteRenderer>().color;
-        newColor.r = Random.Range(0,1);
-        newColor.g = Random.Range(0, 1);
-        newColor.b = Random.Range(0, 1);
+        newColor.r = Random.Range(0.0f,1.0f);
+        newColor.g = Random.Range(0.0f, 1.0f);
+        newColor.b = Random.Range(0.0f, 1.0f);
+        newColor.a = Random.Range(0.0f, 1.0f);
 
         changedObject.GetComponent<SpriteRenderer>().color = newColor;
 
@@ -106,8 +107,8 @@ public class SpotPuzzleRoomScript : RoomScript
         if(wrongSelection)
         {
             GUIStyle style = new GUIStyle();
-            style.fontSize = 10;
-            GUI.TextField(new Rect(Screen.width * 0.5f - 80.0f, 0, 220.0f, 20.0f), "Wrong Answer", 100, style);
+            style.fontSize = 15;
+            GUI.TextField(new Rect(Screen.width * 0.5f - 60.0f, 10.0f, 220.0f, 20.0f), "Wrong Answer", 100, style);
         }
     }
 

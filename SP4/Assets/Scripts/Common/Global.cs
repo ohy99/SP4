@@ -13,10 +13,18 @@ public class Global : Singleton<Global> {
 
     public Camera cam { get { return _camera; } private set { } }
 
-	// Use this for initialization
-	void Start () {
+    public GameObject boss;
+
+    public bool bossIsDead;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
+    void Awake()
+    {
+        bossIsDead = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {

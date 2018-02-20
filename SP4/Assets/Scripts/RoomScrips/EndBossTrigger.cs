@@ -17,12 +17,19 @@ public class EndBossTrigger : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag.Equals("Player"))
-            MyEventController.Instance.TriggerEndGame(true);
+        {
+            if (Global.Instance.bossIsDead)
+                MyEventController.Instance.TriggerEndGame(true);
+        }
+
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
         if (col.gameObject.tag.Equals("Player"))
-            MyEventController.Instance.TriggerEndGame(false);
+        {
+            if (Global.Instance.bossIsDead)
+                MyEventController.Instance.TriggerEndGame(false);
+        }
     }
 }

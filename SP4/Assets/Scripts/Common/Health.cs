@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Health : MonoBehaviour {
 
+    [SerializeField]
+    bool isInvincible = false;
+
     private float currHp;
     private float maxHp;
 
@@ -30,10 +33,15 @@ public class Health : MonoBehaviour {
     
     public void ModifyHp(float value)
     {
+        if (isInvincible)
+            return;
+
         currHp += value;
 
         if (currHp <= 0)
         {
+            if (gameObject.tag.Equals("EnemyBoss"))
+                Global.Instance.bossIsDead = true;
             if (!gameObject.tag.Equals("Player"))
                 Destroy(gameObject);
         }
