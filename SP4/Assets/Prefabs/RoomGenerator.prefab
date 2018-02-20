@@ -61,4 +61,4 @@ MonoBehaviour:
   GenerateOnStart: 1
   debugText: {fileID: 0}
   chanceText: {fileID: 0}
-  estTotalRooms: 10
+  estTotalRooms: 5

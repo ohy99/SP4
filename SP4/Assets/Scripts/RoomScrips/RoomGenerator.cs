@@ -202,7 +202,10 @@ public class RoomGenerator : Singleton<RoomGenerator> {
                 generatedBossRoom = true;
             }
             else
-                room = Instantiate(defaultRoom, new Vector3(currPos.x + offsetX, currPos.y + offsetY, zOffset), Quaternion.identity);
+            {
+                int randIndex = UnityEngine.Random.Range(0, randomRooms.Count - 1);
+                room = Instantiate(randomRooms[randIndex], new Vector3(currPos.x + offsetX, currPos.y + offsetY, zOffset), Quaternion.identity);
+            }
         }
         else
             room = Instantiate(defaultRoom, new Vector3(currPos.x + offsetX, currPos.y + offsetY, zOffset), Quaternion.identity);
