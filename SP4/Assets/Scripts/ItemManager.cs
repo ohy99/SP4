@@ -54,7 +54,6 @@ public class ItemManager : Singleton<ItemManager>
         //    Debug.Log("itemName: " + go.name);
         //    items["items"].Add(go);
         //}
-
     }
 
 }
