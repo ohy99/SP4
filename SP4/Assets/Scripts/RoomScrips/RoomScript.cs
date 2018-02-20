@@ -16,6 +16,13 @@ public class RoomScript : MonoBehaviour {
     [SerializeField]
     DoorScript downDoor;
 
+    protected class DoorInfo
+    {
+        public bool isLocked;
+        public bool haveTriggerBox;
+        public DIRECTION dir;
+        public DoorInfo(bool islock, bool triggerbox, DIRECTION dir) { this.isLocked = islock; this.haveTriggerBox = triggerbox; this.dir = dir; }
+    }
 
     ArrayList roomList;
     int roomID;
@@ -88,6 +95,20 @@ public class RoomScript : MonoBehaviour {
                 return upDoor.GetIsLocked();
             case DIRECTION.DOWN:
                 return downDoor.GetIsLocked();
+        }
+        return false;
+    }
+    public bool GetHasTriggerBox(DIRECTION side)
+    {
+        switch (side)
+        {
+            case DIRECTION.LEFT: return leftDoor.GetHasTriggerBox();
+            case DIRECTION.RIGHT:
+                return rightDoor.GetHasTriggerBox();
+            case DIRECTION.UP:
+                return upDoor.GetHasTriggerBox();
+            case DIRECTION.DOWN:
+                return downDoor.GetHasTriggerBox();
         }
         return false;
     }
