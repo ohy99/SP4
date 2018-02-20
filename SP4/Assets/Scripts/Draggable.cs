@@ -109,6 +109,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        Debug.Log("BeginDrag");
         placeHolder = new GameObject();
         placeHolder.transform.SetParent(this.transform.parent);
 
@@ -134,6 +135,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     public void OnDrag(PointerEventData eventData)
     {
+        //Debug.Log("onDrag " + eventData.position);
         this.transform.position = eventData.position;
 
         if (placeHolder.transform.parent != placeHolderParent)
@@ -142,16 +144,16 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
 
         int newSiblingIndex = placeHolderParent.childCount;
-
-        //Debug.Log("numChild" + placeHolderParent.childCount);
+        // Debug.Log("numChild" + placeHolderParent.childCount);
         for (int i = 0; i < placeHolderParent.childCount; i++)
         {
+            Debug.Log(placeHolderParent.GetChild(0).position);
             if (this.transform.position.y >= placeHolderParent.GetChild(i).position.y
                 && this.transform.position.x <= placeHolderParent.GetChild(i).position.x)
             {
                 newSiblingIndex = i;
 
-                //Debug.Log("nsIndex" + newSiblingIndex);
+               // Debug.Log("nsIndex" + newSiblingIndex);
 
                 if (placeHolder.transform.GetSiblingIndex() < newSiblingIndex)
                     newSiblingIndex--;
@@ -159,8 +161,9 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
                 break;
             }
-        }
 
+           // Debug.Log("nothing happen");
+        }
 
         placeHolder.transform.SetSiblingIndex(newSiblingIndex);
 
