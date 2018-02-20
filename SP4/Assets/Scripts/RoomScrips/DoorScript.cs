@@ -90,6 +90,7 @@ public class DoorScript : MonoBehaviour {
             return;
         //RoomGenerator.Instance.GenerateRoom(side);
         //Debug.Log("Sending Message Upwards To Generate Room at " + side);
+        Debug.Log("Ok");
         gameObject.SendMessageUpwards("GenerateRoom", side);
         doorCollider.enabled = false;
     }
@@ -112,5 +113,10 @@ public class DoorScript : MonoBehaviour {
     {
         return isLocked;
     }
+    public bool GetHasTriggerBox()
+    {
+        if (doorCollider == null)
+            doorCollider = gameObject.GetComponent<BoxCollider2D>();
+        return doorCollider.enabled; }
 
 }

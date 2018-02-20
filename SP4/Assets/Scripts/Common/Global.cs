@@ -6,8 +6,12 @@ public class Global : Singleton<Global> {
 
     [SerializeField]
     GameObject _player;
+    [SerializeField]
+    Camera _camera;
 
     public GameObject player { get { return _player; } private set { } }
+
+    public Camera cam { get { return _camera; } private set { } }
 
 	// Use this for initialization
 	void Start () {

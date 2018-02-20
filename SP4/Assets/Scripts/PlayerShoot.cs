@@ -8,7 +8,7 @@ public class PlayerShoot : MonoBehaviour
     //GameObject playerObj;
     [SerializeField]
     Joystick joyStick;
-
+    
     private GameObject go;
     private Inventory playerGear;
 
@@ -77,6 +77,14 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetKey(KeyCode.R))
         {
             go.GetComponent<RangeWeaponBase>().Reload();
+        }
+
+        if(Input.GetKeyUp(KeyCode.I))
+        {
+            if(!playerGear.GetIsInventory())
+                playerGear.SetIsInventory(true);
+            else
+                playerGear.SetIsInventory(false);
         }
 
         //if (Input.GetKey(KeyCode.T))

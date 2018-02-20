@@ -156,6 +156,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114626202025187886, guid: bd66e0e699c5c8042b2bddadea72b2df,
+        type: 2}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 219509706}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd66e0e699c5c8042b2bddadea72b2df, type: 2}
   m_IsPrefabParent: 0
@@ -635,7 +640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b765059986230db43af47c02c4e2d51b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joyStick: {fileID: 0}
+  joyStick: {fileID: 982857327}
 --- !u!1 &151236426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1478,6 +1483,7 @@ GameObject:
   - component: {fileID: 494840874}
   - component: {fileID: 494840873}
   - component: {fileID: 494840872}
+  - component: {fileID: 494840876}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1542,6 +1548,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &494840876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 494840871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4017824fcfb323442b05b7775916a1f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  _camera: {fileID: 0}
 --- !u!1 &507619447
 GameObject:
   m_ObjectHideFlags: 0
@@ -2429,6 +2448,7 @@ GameObject:
   - component: {fileID: 1003691902}
   - component: {fileID: 1003691901}
   - component: {fileID: 1003691899}
+  - component: {fileID: 1003691905}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2447,8 +2467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91dbcfd7c288c514380694dc4b8fecb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerShoot: {fileID: 0}
-  moveJoy: {fileID: 0}
+  playerShoot: {fileID: 139664818}
+  moveJoy: {fileID: 259091687}
   debugText: {fileID: 0}
   moveSpeed: 10
   rotateSpeed: 60
@@ -2563,6 +2583,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1003691905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1003691898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3c7028f08a9a14d9ec7e9edeb01270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1011327703
 GameObject:
   m_ObjectHideFlags: 0
@@ -2754,6 +2785,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114453134787994226, guid: 582b5b78d3b76e24c99ee8434de0197f,
+        type: 2}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 219509706}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 582b5b78d3b76e24c99ee8434de0197f, type: 2}
   m_IsPrefabParent: 0
@@ -3439,6 +3475,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
+        type: 2}
+      propertyPath: randomRooms.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4588979276739656, guid: f2f9123e5f6be9f4cb510d58961c8ea6, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3478,15 +3519,15 @@ Prefab:
       objectReference: {fileID: 873600106}
     - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
         type: 2}
-      propertyPath: bossRoom
-      value: 
-      objectReference: {fileID: 1729273878151420, guid: a3d7ee7dae3d8d142ae6056f1eb166e3,
-        type: 2}
-    - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
-        type: 2}
       propertyPath: chanceText
       value: 
       objectReference: {fileID: 1442994044}
+    - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
+        type: 2}
+      propertyPath: randomRooms.Array.data[3]
+      value: 
+      objectReference: {fileID: 1865273027175096, guid: a6d127c26212c4946b67ca6cca755a83,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2f9123e5f6be9f4cb510d58961c8ea6, type: 2}
   m_IsPrefabParent: 0
@@ -3830,7 +3871,7 @@ Prefab:
         type: 2}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1003691900}
+      objectReference: {fileID: 1003691898}
     - target: {fileID: 114262651898104144, guid: 90d640ea995ee27479553b407a03e5b7,
         type: 2}
       propertyPath: m_FillAmount

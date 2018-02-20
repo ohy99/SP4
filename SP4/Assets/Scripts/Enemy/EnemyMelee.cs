@@ -20,6 +20,8 @@ public class EnemyMelee : MonoBehaviour {
 
         hpScript.SetHp(10.0f);
 
+        player = Global.Instance.player;
+
         MakeFSM();
     }
 

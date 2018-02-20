@@ -12,7 +12,9 @@ public class SpotPuzzleRoomScript : RoomScript
     GameObject changedObject;
 
     RoomScript roomScript;
-    List<bool> doorList = new List<bool>();
+
+    //List<bool> doorList = new List<bool>();
+    List<DoorInfo> doorInfoList = new List<DoorInfo>();
 
     bool puzzleComplete;
 
@@ -31,15 +33,11 @@ public class SpotPuzzleRoomScript : RoomScript
         OriginalGroup = this.transform.GetChild(0);
         ChangedGroup = this.transform.GetChild(1);
 
-        Debug.Log(OriginalGroup.childCount);
-
         for(int i =0; i < OriginalGroup.childCount; ++i)
         {
             Vector3 newPos = new Vector3(Random.Range(transform.position.x - transform.localScale.x * 0.5f + 2.5f, transform.position.x - 2.5f), Random.Range(transform.position.y - transform.localScale.y * 0.5f + 2.5f, transform.position.y + transform.localScale.y * 0.5f - 2.5f), 1);
             OriginalGroup.GetChild(i).position = newPos;
-            Debug.Log(newPos);
             newPos.x += transform.localScale.x * 0.5f;
-            Debug.Log(newPos);
             ChangedGroup.GetChild(i).position = newPos;
         }
 
@@ -54,16 +52,21 @@ public class SpotPuzzleRoomScript : RoomScript
 
         roomScript = this.GetComponent<RoomScript>();
 
-        doorList.Add(roomScript.GetIsLocked(DIRECTION.LEFT));
-        doorList.Add(roomScript.GetIsLocked(DIRECTION.RIGHT));
-        doorList.Add(roomScript.GetIsLocked(DIRECTION.UP));
-        doorList.Add(roomScript.GetIsLocked(DIRECTION.DOWN));
+        doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.LEFT), roomScript.GetHasTriggerBox(DIRECTION.LEFT), DIRECTION.LEFT));
+        doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.RIGHT), roomScript.GetHasTriggerBox(DIRECTION.RIGHT), DIRECTION.RIGHT));
+        doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.UP), roomScript.GetHasTriggerBox(DIRECTION.UP), DIRECTION.UP));
+        doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.DOWN), roomScript.GetHasTriggerBox(DIRECTION.DOWN), DIRECTION.DOWN));
+
+        //doorList.Add(roomScript.GetIsLocked(DIRECTION.LEFT));
+        //doorList.Add(roomScript.GetIsLocked(DIRECTION.RIGHT));
+        //doorList.Add(roomScript.GetIsLocked(DIRECTION.UP));
+        //doorList.Add(roomScript.GetIsLocked(DIRECTION.DOWN));
 
         elapsedTime = 0.0f;
 
         puzzleComplete = false;
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = Global.Instance.player;
     }
 
     // Update is called once per frame
@@ -72,11 +75,6 @@ public class SpotPuzzleRoomScript : RoomScript
         elapsedTime += Time.deltaTime;
 
         //Debug.Log(player.transform.position);
-        if (roomScript.GetGridX() != 0 || roomScript.GetGridY() != 0)
-        {
-            Debug.Log(transform.position);
-            Debug.Log(Vector3.Distance(player.transform.position, transform.position));
-        }
 
         if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x * 0.5f - 2.0f && !puzzleComplete)
         {
@@ -115,8 +113,8 @@ public class SpotPuzzleRoomScript : RoomScript
 
     void OnTarget(GameObject target)
     {
-        if (doorList.Count == 0)
-            return;
+        //if (doorList.Count == 0)
+         //   return;
 
         if (target != changedObject)
         {
@@ -127,24 +125,34 @@ public class SpotPuzzleRoomScript : RoomScript
 
         puzzleComplete = true;
 
-        if (doorList[0])
-            roomScript.LockDoor(DIRECTION.LEFT);
-        else
-            roomScript.UnlockDoor(DIRECTION.LEFT);
+        foreach (DoorInfo doorinfo in doorInfoList)
+        {
+            if (!doorinfo.isLocked)
+                roomScript.UnlockDoor(doorinfo.dir);
+            if (!doorinfo.haveTriggerBox)
+                roomScript.OffTriggerBox(doorinfo.dir);
+        }
+        
 
-        if (doorList[1])
-            roomScript.LockDoor(DIRECTION.RIGHT);
-        else
-            roomScript.UnlockDoor(DIRECTION.RIGHT);
 
-        if (doorList[2])
-            roomScript.LockDoor(DIRECTION.UP);
-        else
-            roomScript.UnlockDoor(DIRECTION.UP);
+        //if (doorList[0])
+        //    roomScript.LockDoor(DIRECTION.LEFT);
+        //else
+        //    roomScript.UnlockDoor(DIRECTION.LEFT);
 
-        if (doorList[3])
-            roomScript.LockDoor(DIRECTION.DOWN);
-        else
-            roomScript.UnlockDoor(DIRECTION.DOWN);
+        //if (doorList[1])
+        //    roomScript.LockDoor(DIRECTION.RIGHT);
+        //else
+        //    roomScript.UnlockDoor(DIRECTION.RIGHT);
+
+        //if (doorList[2])
+        //    roomScript.LockDoor(DIRECTION.UP);
+        //else
+        //    roomScript.UnlockDoor(DIRECTION.UP);
+
+        //if (doorList[3])
+        //    roomScript.LockDoor(DIRECTION.DOWN);
+        //else
+        //    roomScript.UnlockDoor(DIRECTION.DOWN);
     }
 }

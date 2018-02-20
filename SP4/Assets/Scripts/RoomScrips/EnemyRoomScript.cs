@@ -2,37 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PushPuzzleRoomScript : RoomScript {
-    
+public class EnemyRoomScript : RoomScript {
+
     GameObject player;
 
-    Vector3 ObjectivePos;
-    Vector3 TargetPos;
-
     RoomScript roomScript;
-    //List<bool> doorList = new List<bool>();
 
     List<DoorInfo> doorInfoList = new List<DoorInfo>();
 
-    bool puzzleComplete;
+    GameObject Spawner;
+
+    //List<bool> doorList = new List<bool>();
 
     float elapsedTime;
 
-    // Use this for initialization
+    bool completedWaves;
 
+    // Use this for initialization
     void Start()
     {
-        //Random.Range(1, 1);
-        //wad = new ArrayList();
-        ObjectivePos.Set(Random.Range((transform.position.x - transform.localScale.x * 0.5f + 2.0f), transform.position.x), Random.Range((transform.position.y - transform.localScale.y * 0.5f + 2.0f), (transform.position.y + transform.localScale.y * 0.5f - 2.0f)), 0);
-        TargetPos.Set(Random.Range((transform.position.x + transform.localScale.x * 0.5f - 2.0f), transform.position.x), Random.Range((transform.position.y - transform.localScale.y * 0.5f + 2.0f), (transform.position.y + transform.localScale.y * 0.5f - 2.0f)), 0);
-
-        transform.GetChild(0).position = ObjectivePos;
-        transform.GetChild(1).position = TargetPos;
-
         roomScript = this.GetComponent<RoomScript>();
 
-        //doorList.Add(roomScript.GetIsLocked(DIRECTION.LEFT)) ;
+        //doorList.Add(roomScript.GetIsLocked(DIRECTION.LEFT));
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.RIGHT));
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.UP));
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.DOWN));
@@ -42,12 +33,14 @@ public class PushPuzzleRoomScript : RoomScript {
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.UP), roomScript.GetHasTriggerBox(DIRECTION.UP), DIRECTION.UP));
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.DOWN), roomScript.GetHasTriggerBox(DIRECTION.DOWN), DIRECTION.DOWN));
 
+        Spawner = transform.GetChild(0).gameObject;
 
         player = Global.Instance.player;
 
-        elapsedTime = 0.0f;
+        Debug.Log(player);
 
-        puzzleComplete = false;
+        elapsedTime = 0.0f;
+        completedWaves = false;
     }
 
     // Update is called once per frame
@@ -55,8 +48,11 @@ public class PushPuzzleRoomScript : RoomScript {
     {
         elapsedTime += Time.deltaTime;
 
-        if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x * 0.5f - 2.0f && !puzzleComplete)
+        if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x * 0.5f - 2.0f && !completedWaves)
         {
+            if (!Spawner.activeSelf)
+                Spawner.SetActive(true);
+
             LockDoor(DIRECTION.LEFT);
             LockDoor(DIRECTION.RIGHT);
             LockDoor(DIRECTION.UP);
@@ -66,7 +62,6 @@ public class PushPuzzleRoomScript : RoomScript {
             OnTriggerBox(DIRECTION.RIGHT);
             OnTriggerBox(DIRECTION.UP);
             OnTriggerBox(DIRECTION.DOWN);
-
         }
 
     }
@@ -78,14 +73,14 @@ public class PushPuzzleRoomScript : RoomScript {
             Debug.Log(Screen.width);
             GUIStyle style = new GUIStyle();
             style.fontSize = 15;
-            GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f,0,220.0f,20.0f)  , "Push the red circle to the blue circle", 50, style);
+            GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, 0, 220.0f, 20.0f), "Survive the wave of enemies", 50, style);
         }
     }
 
 
-    void OnTarget()
+    void UnlockDoor()
     {
-        puzzleComplete = true;
+        completedWaves = true;
 
         foreach (DoorInfo doorInfo in doorInfoList)
         {
@@ -95,21 +90,5 @@ public class PushPuzzleRoomScript : RoomScript {
                 roomScript.OffTriggerBox(doorInfo.dir);
         }
 
-    }
-
-    void OffTarget()
-    {
-        puzzleComplete = false;
-
-        roomScript.LockDoor(DIRECTION.LEFT);
-        roomScript.LockDoor(DIRECTION.RIGHT);
-        roomScript.LockDoor(DIRECTION.UP);
-        roomScript.LockDoor(DIRECTION.DOWN);
-    }
-
-    void ResetPuzzle()
-    {
-        transform.GetChild(0).position = ObjectivePos;
-        transform.GetChild(1).position = TargetPos;
     }
 }
