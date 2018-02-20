@@ -32,22 +32,37 @@ public class PlayerMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-            ChangeControlType(CONTROLTYPE.KEYBOARD);
-        else if (!Mathf.Approximately(Input.GetAxis("Horizontal"), 0.0f) || !Mathf.Approximately(Input.GetAxis("Vertical"), 0.0f))
-            ChangeControlType(CONTROLTYPE.GAMEPAD);
-        else if (!Mathf.Approximately(moveJoy.GetXAxis(), 0.0f) || !Mathf.Approximately(moveJoy.GetYAxis(), 0.0f))
-            ChangeControlType(CONTROLTYPE.MOBILE);
+        //if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        //    ChangeControlType(CONTROLTYPE.KEYBOARD);
+        //else if (!Mathf.Approximately(Input.GetAxis("LeftHorizontal"), 0.0f) || !Mathf.Approximately(Input.GetAxis("LeftVertical"), 0.0f))
+        //    ChangeControlType(CONTROLTYPE.GAMEPAD);
+        //else if (!Mathf.Approximately(moveJoy.GetXAxis(), 0.0f) || !Mathf.Approximately(moveJoy.GetYAxis(), 0.0f))
+        //    ChangeControlType(CONTROLTYPE.MOBILE);
         switch (controlType)
         {
             case CONTROLTYPE.GAMEPAD:
                 MoveOnGamePad();
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+                    ChangeControlType(CONTROLTYPE.KEYBOARD);
+                else if (!Mathf.Approximately(moveJoy.GetXAxis(), 0.0f) || !Mathf.Approximately(moveJoy.GetYAxis(), 0.0f))
+                    ChangeControlType(CONTROLTYPE.MOBILE);
                 break;
             case CONTROLTYPE.MOBILE:
                 MoveOnMobile();
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+                    ChangeControlType(CONTROLTYPE.KEYBOARD);
+                else if (!Mathf.Approximately(Input.GetAxis("LeftHorizontal"), 0.0f) || !Mathf.Approximately(Input.GetAxis("LeftVertical"), 0.0f))
+                    ChangeControlType(CONTROLTYPE.GAMEPAD);
                 break;
             default:
                 MoveOnKeyboard();
+                if (!Mathf.Approximately(Input.GetAxis("LeftHorizontal"), 0.0f) || !Mathf.Approximately(Input.GetAxis("LeftVertical"), 0.0f))
+                {
+                    //Debug.Log("Horizontal " + Input.GetAxis("Horizontal") + " Vertical " + (Input.GetAxis("Vertical")));
+                    ChangeControlType(CONTROLTYPE.GAMEPAD);
+                }
+                else if (!Mathf.Approximately(moveJoy.GetXAxis(), 0.0f) || !Mathf.Approximately(moveJoy.GetYAxis(), 0.0f))
+                    ChangeControlType(CONTROLTYPE.MOBILE);
                 break;
         }
 
@@ -124,8 +139,8 @@ public class PlayerMovement : MonoBehaviour {
 
                 }
 
-                float hValue = Input.GetAxis("Horizontal");
-                float vValue = Input.GetAxis("Vertical");
+                float hValue = Input.GetAxis("LeftHorizontal");
+                float vValue = Input.GetAxis("LeftVertical");
                 Vector3 moveDir = new Vector3(hValue, vValue, 0);
                 gameObject.transform.position += moveDir * moveSpeed * Time.deltaTime;
             }
