@@ -11,7 +11,7 @@ public class Crossbow : RangeWeaponBase
         damage = 10;
         damageOverTime = 0;
 
-        totalRounds = 80;
+        totalRounds = 9999999;
 
         maxMagRounds = 8;
         magRounds = 8;

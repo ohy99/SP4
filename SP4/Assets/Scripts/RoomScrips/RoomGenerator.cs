@@ -73,6 +73,7 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         roomList = new List<GameObject>();
         roomMap = new Dictionary<int, Dictionary<int, GameObject>>();
         currID = 0;
+        Global.Instance.bossIsDead = false;
 
         if (!GenerateOnStart)
             return;

@@ -1635,6 +1635,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1003691898}
   _camera: {fileID: 219509706}
+  boss: {fileID: 0}
+  bossIsDead: 0
 --- !u!1 &507619447
 GameObject:
   m_ObjectHideFlags: 0
@@ -2669,6 +2671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3c7028f08a9a14d9ec7e9edeb01270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInvincible: 1
 --- !u!1 &1011327703
 GameObject:
   m_ObjectHideFlags: 0
@@ -3064,11 +3067,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114648199053042212, guid: a3d7ee7dae3d8d142ae6056f1eb166e3,
-        type: 2}
-      propertyPath: endGamePanel
-      value: 
-      objectReference: {fileID: 1990502731}
     - target: {fileID: 1729273878151420, guid: a3d7ee7dae3d8d142ae6056f1eb166e3, type: 2}
       propertyPath: m_IsActive
       value: 0
@@ -3683,6 +3681,12 @@ Prefab:
     - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
         type: 2}
       propertyPath: randomRooms.Array.data[3]
+      value: 
+      objectReference: {fileID: 1865273027175096, guid: a6d127c26212c4946b67ca6cca755a83,
+        type: 2}
+    - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
+        type: 2}
+      propertyPath: defaultRoom
       value: 
       objectReference: {fileID: 1865273027175096, guid: a6d127c26212c4946b67ca6cca755a83,
         type: 2}

@@ -202,7 +202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4593340049669494}
   - component: {fileID: 212648755691009718}
-  - component: {fileID: 114352768911298880}
+  - component: {fileID: 114658245156230192}
   m_Layer: 0
   m_Name: BossRoom
   m_TagString: Untagged
@@ -1078,21 +1078,6 @@ MonoBehaviour:
   LeftDoor: {fileID: 1569750648761510}
   RightDoor: {fileID: 1926003207250812}
   isLocked: 0
---- !u!114 &114352768911298880
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1729273878151420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ec04902acfa25740a5533e7d9011dcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftDoor: {fileID: 114733670112663106}
-  rightDoor: {fileID: 114822279630509654}
-  upDoor: {fileID: 114772120771049196}
-  downDoor: {fileID: 114340389457421942}
 --- !u!114 &114648199053042212
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1104,6 +1089,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 730bd6b49bf56d54485cc91c3fd6b002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114658245156230192
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1729273878151420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 191aa662467137c45905ca821e36b485, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftDoor: {fileID: 114733670112663106}
+  rightDoor: {fileID: 114822279630509654}
+  upDoor: {fileID: 114772120771049196}
+  downDoor: {fileID: 114340389457421942}
+  boss: {fileID: 1593450052167110, guid: 88ce06bfbfa56094981eff57a68e78db, type: 2}
 --- !u!114 &114733670112663106
 MonoBehaviour:
   m_ObjectHideFlags: 1
