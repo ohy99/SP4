@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 //This line below doesnt work with android :thinking:
 //[UnityEditor.InitializeOnLoad]
 public class ItemManager : Singleton<ItemManager>
