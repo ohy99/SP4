@@ -31,6 +31,12 @@ public class Health : MonoBehaviour {
     public void ModifyHp(float value)
     {
         currHp += value;
+
+        if (currHp <= 0)
+        {
+            if (!gameObject.tag.Equals("Player"))
+                Destroy(gameObject);
+        }
     }
 
     public void IncreaseMaxHp(float increment)

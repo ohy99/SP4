@@ -18,6 +18,8 @@ public class EnemyHealthBar : MonoBehaviour {
     {
         pos = new Vector2(transform.position.x, transform.position.y);
 
+        cam = Global.Instance.cam;
+
         hpScript = GetComponent<Health>();
     }
 

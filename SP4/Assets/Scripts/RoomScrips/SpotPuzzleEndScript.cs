@@ -15,7 +15,6 @@ public class SpotPuzzleEndScript : MonoBehaviour {
 	}
 
     void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log(other.tag);
         if (other.gameObject.CompareTag("Player"))
             SendMessageUpwards("OnTarget", this.gameObject);
     }

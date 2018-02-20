@@ -19,6 +19,8 @@ public class EnemyRange : MonoBehaviour
 
         hpScript.SetHp(5.0f);
 
+        player = Global.Instance.player;
+
         MakeFSM();
     }
 
