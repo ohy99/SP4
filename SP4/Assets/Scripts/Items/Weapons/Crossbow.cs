@@ -15,11 +15,15 @@ public class Crossbow : RangeWeaponBase
 
         maxMagRounds = 8;
         magRounds = 8;
+        timer = 0.0f;
+        fireRate = 0.4f;
     }
 
     // Update is called once per frame
     public override void Update ()
     {
+        //Debug.Log("WEAPON_UPDATE");
+        
 	}
 
     // Fire Weapon 

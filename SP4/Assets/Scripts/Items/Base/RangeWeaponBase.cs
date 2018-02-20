@@ -11,6 +11,8 @@ public class RangeWeaponBase : ItemBase
    
     protected int maxMagRounds;
     protected int magRounds;
+    protected float fireRate;
+    protected float timer;
 
     [SerializeField]
     protected GameObject projectile;
