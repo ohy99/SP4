@@ -75,7 +75,6 @@ public class PushPuzzleRoomScript : RoomScript {
     {
         if (elapsedTime < 5.0f)
         {
-            Debug.Log(Screen.width);
             GUIStyle style = new GUIStyle();
             style.fontSize = 15;
             GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f,0,220.0f,20.0f)  , "Push the red circle to the blue circle", 50, style);
