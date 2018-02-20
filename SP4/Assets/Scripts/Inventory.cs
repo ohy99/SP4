@@ -13,6 +13,8 @@ public class Inventory
     private int currency;
     private bool isInvetory;
 
+    //private const int MAX_INVENTORY_SIZE = 15;
+
     // Use this for initialization
     public void Init ()
     {
@@ -22,10 +24,14 @@ public class Inventory
         for (int i = 0; i < 15; ++i)
             slot[i] = null;
 
+        if(itemNameList.Count > 0)
+        {
+            for(int i = 0; i < itemNameList.Count; ++i)
+                slot[i] = itemNameList[i];
+        }
+
+
         AddItem(ItemManager.Instance.items["Crossbow"], "Crossbow");
-        //itemNameList.Add("Crossbow");
-        //RemoveItem(ItemManager.Instance.items["Sword"], "Sword");
-        //itemNameList.Add("Sword");
 
         isInvetory = false;
         currency = 1000;
@@ -33,7 +39,7 @@ public class Inventory
 
     public void AddItem(GameObject _item, string itemName)
     {
-        Debug.Log("added");
+        Debug.Log("added " + itemName);
         if (!myItems.ContainsKey(itemName))
         {
             _item = GameObject.Instantiate(_item) as GameObject;

@@ -32,12 +32,16 @@ public class InventoryDisplay : MonoBehaviour {
             iconList.Add(_icon);
         }
 
-        string itemName = "";
+
+        Debug.Log("NumberOfItems: " + ItemManager.Instance.items.Count);
+
+        string itemName = null;
         for(int j = 0; j < 15; ++j) //size of inventory(will be chanaged)
         {
             itemName = InventoryManager.Instance.GetInventory("player").slot[j];
             if(itemName != null)
-                iconList[j].transform.GetChild(0).GetComponent<Image>().sprite = ItemManager.Instance.items[itemName].GetComponent<ItemBase>().sprite;
+                iconList[j].transform.GetChild(0).GetComponent<Image>().sprite 
+                    = ItemManager.Instance.items[itemName].GetComponent<ItemBase>().sprite;
         }
 
     }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+//using UnityEditor;
 
 //[InitializeOnLoad]
 public class InventoryManager : Singleton<InventoryManager>
@@ -11,15 +11,18 @@ public class InventoryManager : Singleton<InventoryManager>
     // Use this for initialization
     public void Start ()
     {
+        //DontDestroyOnLoad(gameObject);
+        Debug.Log("InventoryManagerStart");
         //inventories = new Dictionary<string, Inventory>();
         ////intialise player's inventory
         //inventories["player"] = new Inventory();
         //inventories["player"].Init();
         // other stuff enemies,another player inventory
-	}
+    }
 
     public void Init()
     {
+        Debug.Log("InventoryManagerInit");
         inventories = new Dictionary<string, Inventory>();
     }
 
@@ -27,7 +30,8 @@ public class InventoryManager : Singleton<InventoryManager>
     {
         if(!inventories.ContainsKey(key))
         {
-            inventories[key] = new Inventory();
+            //inventories[key] = new Inventory();
+            inventories.Add(key, new Inventory());
             return true;
         }
 
@@ -39,7 +43,8 @@ public class InventoryManager : Singleton<InventoryManager>
     {
         if (!inventories.ContainsKey(key))
         {
-            inventories[key] = _inventory;
+            //inventories[key] = _inventory;
+            inventories.Add(key, _inventory);
             return true;
         }
 
@@ -51,7 +56,8 @@ public class InventoryManager : Singleton<InventoryManager>
     {
         if(inventories.ContainsKey(key))
         {
-            inventories[key] = _inventory;
+            //inventories[key] = _inventory;
+            inventories.Add(key, _inventory);
             return true;
         }
 

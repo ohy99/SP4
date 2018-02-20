@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4360842073828470}
   - component: {fileID: 114071247746020370}
+  - component: {fileID: 114141418840401532}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -58,3 +59,14 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: cff261276923fa748ba4eac89ff1c0fe, type: 3}
   meleeCollider: {fileID: 1255601706598804, guid: f3858ea7ede5bff429bc88ae2c9f3f52,
     type: 2}
+--- !u!114 &114141418840401532
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1821558007984650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61cbcb19bcaf101478042301564affef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

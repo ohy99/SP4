@@ -540,48 +540,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1001 &858275184
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4270685505794934, guid: 37de03c19d649ea4db613b6df7df7d7f, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -2.7306979
-      objectReference: {fileID: 0}
-    - target: {fileID: 4270685505794934, guid: 37de03c19d649ea4db613b6df7df7d7f, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.590703
-      objectReference: {fileID: 0}
-    - target: {fileID: 4270685505794934, guid: 37de03c19d649ea4db613b6df7df7d7f, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4270685505794934, guid: 37de03c19d649ea4db613b6df7df7d7f, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4270685505794934, guid: 37de03c19d649ea4db613b6df7df7d7f, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4270685505794934, guid: 37de03c19d649ea4db613b6df7df7d7f, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4270685505794934, guid: 37de03c19d649ea4db613b6df7df7d7f, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4270685505794934, guid: 37de03c19d649ea4db613b6df7df7d7f, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 37de03c19d649ea4db613b6df7df7d7f, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &964126188
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,7 +1240,7 @@ Prefab:
     - target: {fileID: 224509100630239974, guid: 07a96eb0d64094544a0d28342798c513,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 190.7374
       objectReference: {fileID: 0}
     - target: {fileID: 114849130255062774, guid: 07a96eb0d64094544a0d28342798c513,
         type: 2}

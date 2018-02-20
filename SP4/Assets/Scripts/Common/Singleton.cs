@@ -74,6 +74,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     /// </summary>
     public void OnDestroy()
     {
+        Debug.Log("[Singleton] is at OnDestroy");
         applicationIsQuitting = true;
     }
 }
