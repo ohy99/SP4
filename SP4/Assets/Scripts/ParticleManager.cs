@@ -15,10 +15,8 @@ public class ParticleManager : Singleton<ParticleManager> {
     [SerializeField]
     List<ParticleSystem> psList = new List<ParticleSystem>();
 
-    List<ParticleSystem> activePSList = new List<ParticleSystem>();
-
     //testing
-    float et = 0.0f;
+    //float et = 0.0f;
 
 
 	// Use this for initialization

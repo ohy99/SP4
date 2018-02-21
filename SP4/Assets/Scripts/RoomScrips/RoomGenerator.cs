@@ -102,6 +102,8 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         }
         roomScript.Set(currID, 0, 0, boolArray[DIRECTION.LEFT], boolArray[DIRECTION.RIGHT], boolArray[DIRECTION.UP], boolArray[DIRECTION.DOWN]);
         StoreRoom(currID, 0, 0, room);
+
+        PlayerPrefs.SetInt(PREFTYPE.NUM_OF_ENTERGAME.ToString(), PlayerPrefs.GetInt(PREFTYPE.NUM_OF_ENTERGAME.ToString(), 0) + 1);
     }
 
     public void ReStart()
