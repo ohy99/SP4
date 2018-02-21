@@ -90,7 +90,6 @@ public class DoorScript : MonoBehaviour {
             return;
         //RoomGenerator.Instance.GenerateRoom(side);
         //Debug.Log("Sending Message Upwards To Generate Room at " + side);
-        Debug.Log("Ok");
         gameObject.SendMessageUpwards("GenerateRoom", side);
         doorCollider.enabled = false;
     }

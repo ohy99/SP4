@@ -97,30 +97,39 @@ public class SpotPuzzleRoomScript : RoomScript
 
     void OnGUI()
     {
-        if (elapsedTime < 5.0f)
-        {
-            GUIStyle style = new GUIStyle();
-            style.fontSize = 15;
-            GUI.TextField(new Rect(Screen.width * 0.5f - 150.0f, 0, 220.0f, 20.0f), "Spot the difference (Collide into the object to select)", 100, style);
-        }
+        GUIStyle style = new GUIStyle();
+        style.fontSize = 15;
 
-        if(wrongSelection)
+        float yPos = 0.0f;
+
+        if (!puzzleComplete)
         {
-            GUIStyle style = new GUIStyle();
-            style.fontSize = 15;
-            GUI.TextField(new Rect(Screen.width * 0.5f - 60.0f, 10.0f, 220.0f, 20.0f), "Wrong Answer", 100, style);
+            if (elapsedTime < 5.0f)
+            {
+                GUI.TextField(new Rect(Screen.width * 0.5f - 150.0f, yPos, 220.0f, 20.0f), "Spot the difference (Collide into the object to select)", 100, style);
+                yPos += 10.0f;
+            }
+
+            if (wrongSelection)
+            {
+                GUI.TextField(new Rect(Screen.width * 0.5f - 60.0f, yPos, 220.0f, 20.0f), "Wrong Answer", 100, style);
+            }
         }
     }
 
     void OnTarget(GameObject target)
     {
         //if (doorList.Count == 0)
-         //   return;
+        //   return;
+
+        if (puzzleComplete)
+            return;
 
         if (target != changedObject)
         {
             wrongSelection = true;
             textTimer = elapsedTime + 2.0f;
+            SendMessage("SpawnEnemy");
             return;
         }
 

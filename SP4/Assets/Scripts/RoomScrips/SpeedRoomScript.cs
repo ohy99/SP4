@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PushPuzzleRoomScript : RoomScript {
-    
+public class SpeedRoomScript : RoomScript {
+
     GameObject player;
 
-    Vector3 ObjectivePos;
-    Vector3 TargetPos;
-
     RoomScript roomScript;
-    //List<bool> doorList = new List<bool>();
 
+    //List<bool> doorList = new List<bool>();
     List<DoorInfo> doorInfoList = new List<DoorInfo>();
+
+    SpeedRoomItemSpawner spawnerScript;
+
+    int itemCollected;
 
     bool puzzleComplete;
 
     float elapsedTime;
-    float timer;
+    float textTimer;
 
     // Use this for initialization
 
@@ -25,31 +26,26 @@ public class PushPuzzleRoomScript : RoomScript {
     {
         //Random.Range(1, 1);
         //wad = new ArrayList();
-        ObjectivePos.Set(Random.Range((transform.position.x - transform.localScale.x * 0.5f + 2.0f), transform.position.x), Random.Range((transform.position.y - transform.localScale.y * 0.5f + 2.0f), (transform.position.y + transform.localScale.y * 0.5f - 2.0f)), 0);
-        TargetPos.Set(Random.Range((transform.position.x + transform.localScale.x * 0.5f - 2.0f), transform.position.x), Random.Range((transform.position.y - transform.localScale.y * 0.5f + 2.0f), (transform.position.y + transform.localScale.y * 0.5f - 2.0f)), 0);
-
-        transform.GetChild(0).position = ObjectivePos;
-        transform.GetChild(1).position = TargetPos;
-
         roomScript = this.GetComponent<RoomScript>();
-
-        //doorList.Add(roomScript.GetIsLocked(DIRECTION.LEFT)) ;
-        //doorList.Add(roomScript.GetIsLocked(DIRECTION.RIGHT));
-        //doorList.Add(roomScript.GetIsLocked(DIRECTION.UP));
-        //doorList.Add(roomScript.GetIsLocked(DIRECTION.DOWN));
+        spawnerScript = this.transform.GetChild(0).GetComponent<SpeedRoomItemSpawner>();
 
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.LEFT), roomScript.GetHasTriggerBox(DIRECTION.LEFT), DIRECTION.LEFT));
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.RIGHT), roomScript.GetHasTriggerBox(DIRECTION.RIGHT), DIRECTION.RIGHT));
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.UP), roomScript.GetHasTriggerBox(DIRECTION.UP), DIRECTION.UP));
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.DOWN), roomScript.GetHasTriggerBox(DIRECTION.DOWN), DIRECTION.DOWN));
 
+        //doorList.Add(roomScript.GetIsLocked(DIRECTION.LEFT));
+        //doorList.Add(roomScript.GetIsLocked(DIRECTION.RIGHT));
+        //doorList.Add(roomScript.GetIsLocked(DIRECTION.UP));
+        //doorList.Add(roomScript.GetIsLocked(DIRECTION.DOWN));
+
+        elapsedTime = 0.0f;
+
+        puzzleComplete = false;
 
         player = Global.Instance.player;
 
-        elapsedTime = 0.0f;
-        timer = 5.0f;
-
-        puzzleComplete = false;
+        itemCollected = 0;
     }
 
     // Update is called once per frame
@@ -57,7 +53,7 @@ public class PushPuzzleRoomScript : RoomScript {
     {
         elapsedTime += Time.deltaTime;
 
-        timer -= Time.deltaTime;
+        //Debug.Log(player.transform.position);
 
         if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x * 0.5f - 2.0f && !puzzleComplete)
         {
@@ -70,14 +66,8 @@ public class PushPuzzleRoomScript : RoomScript {
             OnTriggerBox(DIRECTION.RIGHT);
             OnTriggerBox(DIRECTION.UP);
             OnTriggerBox(DIRECTION.DOWN);
-
         }
 
-        if (timer <= 0 && !puzzleComplete)
-        {
-            timer = 5.0f;
-            SendMessage("SpawnEnemy");
-        }
     }
 
     void OnGUI()
@@ -87,20 +77,42 @@ public class PushPuzzleRoomScript : RoomScript {
 
         float yPos = 0.0f;
 
-        if (!puzzleComplete)
+        if (elapsedTime < 5.0f && !spawnerScript.spawnerActive)
         {
-            if (elapsedTime < 5.0)
-            {
-                GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "Push the red circle to the blue circle", 50, style);
-                yPos += 10.0f;
-            }
-            GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "Enemy spawning in " + timer, 50, style);
+            GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "Collect as many coins as possible", 100, style);
+            yPos += 10.0f;
+            GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "Colide into the middle circle to start", 100, style);
+            yPos += 10.0f;
+        }
+
+        if (spawnerScript.spawnerActive && !puzzleComplete)
+        {
+            GUI.TextField(new Rect(Screen.width * 0.5f - 10.0f, yPos, 220.0f, 20.0f), "Item: " + spawnerScript.numOfItemSpawned + "/" + spawnerScript.maxSpawns, 100, style);
+            yPos += 10.0f;
+            GUI.TextField(new Rect(Screen.width * 0.5f - 50.0f, yPos, 220.0f, 20.0f), "You collected: " + itemCollected, 100, style);
+            yPos += 10.0f;
         }
     }
 
-
-    void OnTarget()
+    void AddCollect()
     {
+        itemCollected++;
+    }
+
+    void SpawnEnemies(int maxItem)
+    {
+        StartCoroutine("EnemySpawn", maxItem - itemCollected);
+    }
+
+    IEnumerator EnemySpawn(int numberOfWavesToSpawn)
+    {
+        Debug.Log(numberOfWavesToSpawn);
+        for (int i = 0; i < numberOfWavesToSpawn; ++i)
+        {
+            yield return new WaitForSeconds(3.0f);
+            SendMessage("SpawnEnemy");
+        }
+
         puzzleComplete = true;
 
         foreach (DoorInfo doorInfo in doorInfoList)
@@ -111,11 +123,5 @@ public class PushPuzzleRoomScript : RoomScript {
                 roomScript.OffTriggerBox(doorInfo.dir);
         }
 
-    }
-
-    void ResetPuzzle()
-    {
-        transform.GetChild(0).position = ObjectivePos;
-        transform.GetChild(1).position = TargetPos;
     }
 }

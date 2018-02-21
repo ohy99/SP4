@@ -2447,6 +2447,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1241241329}
   _camera: {fileID: 730765938}
+  boss: {fileID: 0}
+  bossIsDead: 0
 --- !u!114 &1334908458
 MonoBehaviour:
   m_ObjectHideFlags: 0

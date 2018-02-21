@@ -14,13 +14,16 @@ public class EnemySpawner : MonoBehaviour {
 
     float elapsedTime;
     [SerializeField]
-    float spawnDelay = 3.0f;
+    float spawnDelay = 5.0f;
+
+    void Awake()
+    {
+        totalWaves = Random.Range(3, 10);
+    }
 
     // Use this for initialization
     void Start()
     {
-        totalWaves = Random.Range(3, 10);
-        StartCoroutine("SpawnEnemy", spawnDelay);
     }
 
     // Update is called once per frame
@@ -48,7 +51,11 @@ public class EnemySpawner : MonoBehaviour {
             }
         }
 
-        Debug.Log("Sent");
         gameObject.SendMessageUpwards("UnlockDoor");
+    }
+
+    public void StartSpawner()
+    {
+        StartCoroutine("SpawnEnemy", spawnDelay);
     }
 }
