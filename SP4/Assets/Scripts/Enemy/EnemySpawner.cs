@@ -15,7 +15,12 @@ public class EnemySpawner : NetworkBehaviour
 
     float elapsedTime;
     [SerializeField]
-    float spawnDelay = 3.0f;
+    float spawnDelay = 5.0f;
+
+    void Awake()
+    {
+        totalWaves = Random.Range(3, 10);
+    }
 
     // Use this for initialization
     void Start()
@@ -53,7 +58,6 @@ public class EnemySpawner : NetworkBehaviour
             //}
         }
 
-        Debug.Log("Sent");
         gameObject.SendMessageUpwards("UnlockDoor");
     }
 
@@ -63,7 +67,7 @@ public class EnemySpawner : NetworkBehaviour
         {
             Vector3 pos = new Vector3(Random.Range(map.transform.localPosition.x + -map.transform.localScale.x * 0.5f + 2.0f, map.transform.localPosition.x + map.transform.localScale.x * 0.5f - 2.0f),
                Random.Range(map.transform.localPosition.y + -map.transform.localScale.y * 0.5f + 2.0f, map.transform.localPosition.y + map.transform.localScale.y * 0.5f - 2.0f), 0);
-            var enemy =  Instantiate(enemyMelee, pos, Quaternion.identity);
+            var enemy = Instantiate(enemyMelee, pos, Quaternion.identity);
 
             NetworkServer.Spawn(enemy);
         }
@@ -75,7 +79,11 @@ public class EnemySpawner : NetworkBehaviour
 
             NetworkServer.Spawn(enemy);
         }
+    }
 
+    public void StartSpawner()
+    {
+        StartCoroutine("SpawnEnemy", spawnDelay);
     }
 }
 

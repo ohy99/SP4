@@ -485,6 +485,7 @@ GameObject:
   - component: {fileID: 4622595974645614}
   - component: {fileID: 212597024631042436}
   - component: {fileID: 114323777524164042}
+  - component: {fileID: 114522690711128030}
   m_Layer: 0
   m_Name: SpotPuzzleRoom
   m_TagString: Untagged
@@ -1398,6 +1399,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef927ef231ff0b4b9076eacc05a1313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114522690711128030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1864703187797008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc94ef7634789bb4b953548b43d709ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyMelee: {fileID: 1121057322748648, guid: bd66e0e699c5c8042b2bddadea72b2df, type: 2}
+  enemyRange: {fileID: 1621331323061118, guid: 582b5b78d3b76e24c99ee8434de0197f, type: 2}
+  map: {fileID: 1864703187797008}
 --- !u!114 &114528902972931408
 MonoBehaviour:
   m_ObjectHideFlags: 1

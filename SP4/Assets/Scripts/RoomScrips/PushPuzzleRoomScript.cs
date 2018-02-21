@@ -17,6 +17,7 @@ public class PushPuzzleRoomScript : RoomScript {
     bool puzzleComplete;
 
     float elapsedTime;
+    float timer;
 
     // Use this for initialization
 
@@ -46,6 +47,7 @@ public class PushPuzzleRoomScript : RoomScript {
         player = Global.Instance.player;
 
         elapsedTime = 0.0f;
+        timer = 5.0f;
 
         puzzleComplete = false;
     }
@@ -54,6 +56,8 @@ public class PushPuzzleRoomScript : RoomScript {
     void Update()
     {
         elapsedTime += Time.deltaTime;
+
+        timer -= Time.deltaTime;
 
         if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x * 0.5f - 2.0f && !puzzleComplete)
         {
@@ -69,15 +73,28 @@ public class PushPuzzleRoomScript : RoomScript {
 
         }
 
+        if (timer <= 0 && !puzzleComplete)
+        {
+            timer = 5.0f;
+            SendMessage("SpawnEnemy");
+        }
     }
 
     void OnGUI()
     {
-        if (elapsedTime < 5.0f)
+        GUIStyle style = new GUIStyle();
+        style.fontSize = 15;
+
+        float yPos = 0.0f;
+
+        if (!puzzleComplete)
         {
-            GUIStyle style = new GUIStyle();
-            style.fontSize = 15;
-            GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f,0,220.0f,20.0f)  , "Push the red circle to the blue circle", 50, style);
+            if (elapsedTime < 5.0)
+            {
+                GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "Push the red circle to the blue circle", 50, style);
+                yPos += 10.0f;
+            }
+            GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "Enemy spawning in " + timer, 50, style);
         }
     }
 
@@ -94,16 +111,6 @@ public class PushPuzzleRoomScript : RoomScript {
                 roomScript.OffTriggerBox(doorInfo.dir);
         }
 
-    }
-
-    void OffTarget()
-    {
-        puzzleComplete = false;
-
-        roomScript.LockDoor(DIRECTION.LEFT);
-        roomScript.LockDoor(DIRECTION.RIGHT);
-        roomScript.LockDoor(DIRECTION.UP);
-        roomScript.LockDoor(DIRECTION.DOWN);
     }
 
     void ResetPuzzle()

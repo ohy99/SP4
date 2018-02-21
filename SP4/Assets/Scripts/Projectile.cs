@@ -40,6 +40,7 @@ public class Projectile : MonoBehaviour {
                         ParticleManager.Instance.GenerateParticle(ParticleManager.PARTICLETYPE.HITPLAYER, coll.gameObject.transform.position);
                         break;
                 }
+               
             }
 
             //TODO: DO DAMAGE

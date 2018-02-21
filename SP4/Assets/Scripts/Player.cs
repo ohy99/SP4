@@ -12,6 +12,7 @@ public class Player : NetworkBehaviour
     private int maxExp;
     private int skillPoints;
     private int currentLevel;
+    bool onDeadTrigger = false;
 
     public override void OnStartLocalPlayer()
     {
@@ -21,6 +22,7 @@ public class Player : NetworkBehaviour
         Global.Instance.player = gameObject;
         Camera.main.GetComponent<CameraScript>().playerTransform = gameObject.transform;
     }
+
 
     // Use this for initialization
     void Start() {
@@ -46,6 +48,11 @@ public class Player : NetworkBehaviour
     {
         if (hpScript.GetCurrHp() <= 0)
         {
+            if (!onDeadTrigger)
+            {
+                PlayerPrefs.SetInt(PREFTYPE.NUM_OF_DEATHS.ToString(), PlayerPrefs.GetInt(PREFTYPE.NUM_OF_DEATHS.ToString(), 0) + 1);
+                onDeadTrigger = true;
+            }
             Save();
         }
 
@@ -69,6 +76,12 @@ public class Player : NetworkBehaviour
         PlayerPrefs.SetInt("Score", score);
         PlayerPrefs.SetFloat("Max Health", hpScript.GetMaxHp());
         PlayerPrefs.SetInt("Money", Mathf.Max(0,score - initialScore));
+
+        /*
+         * By default Unity writes preferences to disk during OnApplicationQuit(). 
+         * In cases when the game crashes or otherwise prematuraly exits, you might want to write the PlayerPrefs at sensible 'checkpoints' in your game. 
+         * This function will write to disk potentially causing a small hiccup, therefore it is not recommended to call during actual gameplay.
+         */
         PlayerPrefs.Save();
         
     }
