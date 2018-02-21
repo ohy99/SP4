@@ -45,7 +45,6 @@ public class RoomScript : MonoBehaviour {
 
     void GenerateRoom(DIRECTION side)
     {
-        Debug.Log("Ok");
         RoomGenerator.Instance.SetRoomActive(roomID, side);
     }
 
@@ -133,5 +132,18 @@ public class RoomScript : MonoBehaviour {
             case DIRECTION.UP: upDoor.ToggleLock(true); break;
             case DIRECTION.DOWN: downDoor.ToggleLock(true); break;
         }
+    }
+
+    void GenerateTreasureKey(GameObject TreasureKey)
+    {
+        Transform keyParent = RoomGenerator.Instance.GenerateKeyPos(roomID);
+        GameObject temp = Instantiate(TreasureKey, keyParent);
+        Debug.Log(temp);
+        temp.GetComponent<TreasureKey>().SetTreasureRoomID(roomID);
+    }
+
+    public int GetRoomID()
+    {
+        return roomID;
     }
 }

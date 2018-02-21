@@ -110,7 +110,6 @@ public class RoomGenerator : Singleton<RoomGenerator> {
             //check which door open
             for (int i = 0; i < roomList.Count; ++i)
             {
-                Debug.Log(roomList.Count);
                 GameObject daroom = roomList[i];
                 RoomScript daroomscript = daroom.GetComponent<RoomScript>();
 
@@ -162,6 +161,13 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         DIRECTION forceTrueDir = this.GetOppositeDir(side);
         int newGridX = currRoomScript.GetGridX() + (side == DIRECTION.LEFT ? -1 : (side == DIRECTION.RIGHT ? 1 : 0));
         int newGridY = currRoomScript.GetGridY() + (side == DIRECTION.DOWN ? -1 : (side == DIRECTION.UP ? 1 : 0));
+
+        if (roomMap.ContainsKey(newGridY))
+        {
+            if (roomMap[newGridY].ContainsKey(newGridX))
+                return;
+        }
+
         Dictionary<DIRECTION, RANDACTION> boolArray = new Dictionary<DIRECTION, RANDACTION>();//= GetDoorOpenBooleans(forceTrueDir, true);
         int numOfPotentialOpen = 0;
         boolArray[DIRECTION.NONE] = 0;
@@ -443,7 +449,31 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         int newGridX = currRoomScript.GetGridX() + (side == DIRECTION.LEFT ? -1 : (side == DIRECTION.RIGHT ? 1 : 0));
         int newGridY = currRoomScript.GetGridY() + (side == DIRECTION.DOWN ? -1 : (side == DIRECTION.UP ? 1 : 0));
 
-        Debug.Log("Ok");
         roomMap[newGridY][newGridX].SetActive(true);
+    }
+
+    public Transform GenerateKeyPos(int currRoomID)
+    {
+        int gridX = UnityEngine.Random.Range(smallestX, biggestX);
+        int gridY = UnityEngine.Random.Range(smallestY, biggestY);
+
+        while (true)
+        {
+            if (roomMap.ContainsKey(gridY))
+            {
+                if (roomMap[gridY].ContainsKey(gridX))
+                {
+                    if (roomMap[gridY][gridX] != roomList[currRoomID])
+                        break;
+                }
+            }
+
+            gridX = UnityEngine.Random.Range(smallestX, biggestX);
+            gridY = UnityEngine.Random.Range(smallestY, biggestY);
+        }
+
+        Transform parent = roomMap[gridY][gridX].transform;
+
+        return parent;
     }
 }

@@ -58,6 +58,7 @@ MonoBehaviour:
   - {fileID: 1864703187797008, guid: 61809cef4b25d0e49adc0ad57f75bbc9, type: 2}
   - {fileID: 1334630802994978, guid: 7cb511f7601dea445b2a7c8c6db201e8, type: 2}
   - {fileID: 1053355793432642, guid: c00eb33a62dd5f24b9b8cccea7ae673c, type: 2}
+  - {fileID: 1282715517241922, guid: 3bcab8a72dc60a946be2f35bed37f553, type: 2}
   - {fileID: 1865273027175096, guid: a6d127c26212c4946b67ca6cca755a83, type: 2}
   bossRoom: {fileID: 1729273878151420, guid: a3d7ee7dae3d8d142ae6056f1eb166e3, type: 2}
   GenerateOnStart: 1
