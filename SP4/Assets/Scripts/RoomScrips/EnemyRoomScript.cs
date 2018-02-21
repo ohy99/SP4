@@ -37,8 +37,6 @@ public class EnemyRoomScript : RoomScript {
 
         player = Global.Instance.player;
 
-        Debug.Log(player);
-
         elapsedTime = 0.0f;
         completedWaves = false;
     }
@@ -51,7 +49,10 @@ public class EnemyRoomScript : RoomScript {
         if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x * 0.5f - 2.0f && !completedWaves)
         {
             if (!Spawner.activeSelf)
+            {
                 Spawner.SetActive(true);
+                Spawner.SendMessage("StartSpawner");
+            }
 
             LockDoor(DIRECTION.LEFT);
             LockDoor(DIRECTION.RIGHT);
@@ -70,7 +71,6 @@ public class EnemyRoomScript : RoomScript {
     {
         if (elapsedTime < 5.0f)
         {
-            Debug.Log(Screen.width);
             GUIStyle style = new GUIStyle();
             style.fontSize = 15;
             GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, 0, 220.0f, 20.0f), "Survive the wave of enemies", 50, style);
