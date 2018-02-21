@@ -27,6 +27,12 @@ public class EnemyRange : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (player == null)
+        {
+            player = Global.Instance.player; //try find dat player
+            return;
+        }
+
         sm.CurrentState.Reason(player, gameObject);
         sm.CurrentState.Act(player, gameObject);
     }
@@ -163,7 +169,7 @@ public class ShootPlayerState : FSMState
         if (elapsedTime >= shootDelay)
         {
             GameObject go = npc.transform.GetChild(0).gameObject;
-            Debug.Log(go);
+            //Debug.Log(go);
             go.GetComponent<RangeWeaponBase>().Discharge(go.transform.GetChild(0).position, go.transform.GetChild(0).rotation);
             elapsedTime = 0.0f;
         }

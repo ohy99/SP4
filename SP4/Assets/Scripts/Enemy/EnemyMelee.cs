@@ -26,7 +26,11 @@ public class EnemyMelee : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
+        if (player == null)
+            return;
+
         sm.CurrentState.Reason(player, gameObject);
         sm.CurrentState.Act(player, gameObject);
     }

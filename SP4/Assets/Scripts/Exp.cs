@@ -9,14 +9,20 @@ public class Exp : MonoBehaviour {
     Player player;
     Slider expBar;
 
+    private GameObject playerGO;
+
 	// Use this for initialization
 	void Start () {
         expBar = GetComponent<Slider>();
-	}
+        playerGO = Global.Instance.player;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        expBar.value = Mathf.Lerp(expBar.value, (Mathf.Max(0.04f, Mathf.Min(1.0f, player.GetExp() / (float)player.GetMaxExp()))), 10.0f * Time.deltaTime) ;
+        if (player)
+            expBar.value = Mathf.Lerp(expBar.value, (Mathf.Max(0.04f, Mathf.Min(1.0f, player.GetExp() / (float)player.GetMaxExp()))), 10.0f * Time.deltaTime);
+        else //to work with network stuff
+            expBar.value = Mathf.Lerp(expBar.value, (Mathf.Max(0.04f, Mathf.Min(1.0f, playerGO.GetComponent<Player>().GetExp() / (float)playerGO.GetComponent<Player>().GetMaxExp()))), 10.0f * Time.deltaTime);
 	}
     
 }

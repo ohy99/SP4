@@ -27,17 +27,20 @@ public class Crossbow : RangeWeaponBase
 	}
 
     // Fire Weapon 
-    public override void Discharge(Vector3 pos, Quaternion rotation)
+    public override GameObject Discharge(Vector3 pos, Quaternion rotation)
     {
-        if (magRounds > 0)
-        {
-            Debug.Log("weaponDischarge");
+        //if (magRounds > 0)
+        //{
+            //Debug.Log("weaponDischarge");
             GameObject projGO = Instantiate(projectile, pos, rotation);
             Projectile projScript = projGO.GetComponent<Projectile>();
             if (projScript)
                 projScript.SetDamage(damage);
-            --magRounds;
-        }
+            //--magRounds;
+            return projGO;
+        //}
+
+        //return null;
     }
 
     // Reload Weapon

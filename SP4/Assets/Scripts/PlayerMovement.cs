@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : NetworkBehaviour {
 
     [SerializeField]
     PlayerShoot playerShoot;
@@ -32,12 +32,17 @@ public class PlayerMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        // networking stuff
+        if (!isLocalPlayer)
+            return;
+
         //if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         //    ChangeControlType(CONTROLTYPE.KEYBOARD);
         //else if (!Mathf.Approximately(Input.GetAxis("LeftHorizontal"), 0.0f) || !Mathf.Approximately(Input.GetAxis("LeftVertical"), 0.0f))
         //    ChangeControlType(CONTROLTYPE.GAMEPAD);
         //else if (!Mathf.Approximately(moveJoy.GetXAxis(), 0.0f) || !Mathf.Approximately(moveJoy.GetYAxis(), 0.0f))
         //    ChangeControlType(CONTROLTYPE.MOBILE);
+
         switch (controlType)
         {
             case CONTROLTYPE.GAMEPAD:
@@ -61,6 +66,10 @@ public class PlayerMovement : MonoBehaviour {
                     //Debug.Log("Horizontal " + Input.GetAxis("Horizontal") + " Vertical " + (Input.GetAxis("Vertical")));
                     ChangeControlType(CONTROLTYPE.GAMEPAD);
                 }
+
+                if (moveJoy == null)
+                    return;
+
                 else if (!Mathf.Approximately(moveJoy.GetXAxis(), 0.0f) || !Mathf.Approximately(moveJoy.GetYAxis(), 0.0f))
                     ChangeControlType(CONTROLTYPE.MOBILE);
                 break;

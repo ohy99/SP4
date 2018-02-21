@@ -18,10 +18,11 @@ public class EnemyBow : RangeWeaponBase
     }
 
     // Fire Weapon 
-    public override void Discharge(Vector3 pos, Quaternion rotation)
+    public override GameObject Discharge(Vector3 pos, Quaternion rotation)
     {
-        Debug.Log("weaponDischarge");
-        Instantiate(projectile, pos, rotation);
+        //Debug.Log("weaponDischarge");
+        GameObject go =Instantiate(projectile, pos, rotation);
+        return go;
     }
 
 }

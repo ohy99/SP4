@@ -32,9 +32,10 @@ public class RangeWeaponBase : ItemBase
 	}
 
     // Fire Weapon 
-    virtual public void Discharge(Vector3 pos, Quaternion rotation)
+    virtual public GameObject Discharge(Vector3 pos, Quaternion rotation)
     {
         Debug.Log("weaponDischarge");
+        return null;
     }
 
     // Reload Weapon

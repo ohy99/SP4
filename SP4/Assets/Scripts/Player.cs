@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Player : MonoBehaviour {
-
+public class Player : NetworkBehaviour
+{
     private int initialScore;
     private int score;
     private Health hpScript;
@@ -11,6 +12,15 @@ public class Player : MonoBehaviour {
     private int maxExp;
     private int skillPoints;
     private int currentLevel;
+
+    public override void OnStartLocalPlayer()
+    {
+        short id = GetComponent<NetworkIdentity>().playerControllerId;
+        Debug.Log("playerID" + id);
+        GetComponent<SpriteRenderer>().color = Color.green;
+        Global.Instance.player = gameObject;
+        Camera.main.GetComponent<CameraScript>().playerTransform = gameObject.transform;
+    }
 
     // Use this for initialization
     void Start() {
@@ -27,6 +37,8 @@ public class Player : MonoBehaviour {
         maxExp = 100;
         skillPoints = 0;
         currentLevel = 1;
+
+        Global.Instance.player = gameObject;
     }
 
     // Update is called once per frame
