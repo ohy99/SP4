@@ -45,7 +45,8 @@ public class RoomScript : MonoBehaviour {
 
     void GenerateRoom(DIRECTION side)
     {
-        RoomGenerator.Instance.GenerateRoom(roomID, side);
+        Debug.Log("Ok");
+        RoomGenerator.Instance.SetRoomActive(roomID, side);
     }
 
     //sets the roomid, and the grid x, y

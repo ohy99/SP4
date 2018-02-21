@@ -13,7 +13,7 @@ public class SpeedRoomItemSpawner : MonoBehaviour {
     [SerializeField]
     GameObject item;
 
-    float spawnDelay = 5.0f;
+    float spawnDelay = 3.0f;
     public int maxSpawns = 5;
 
     public bool spawnerActive;

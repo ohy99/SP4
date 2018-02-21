@@ -87,14 +87,15 @@ public class PushPuzzleRoomScript : RoomScript {
 
         float yPos = 0.0f;
 
-        if (elapsedTime < 5.0f)
-        {
-            GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "Push the red circle to the blue circle", 50, style);
-            yPos += 10.0f;
-        }
-
         if (!puzzleComplete)
+        {
+            if (elapsedTime < 5.0)
+            {
+                GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "Push the red circle to the blue circle", 50, style);
+                yPos += 10.0f;
+            }
             GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "Enemy spawning in " + timer, 50, style);
+        }
     }
 
 
@@ -110,16 +111,6 @@ public class PushPuzzleRoomScript : RoomScript {
                 roomScript.OffTriggerBox(doorInfo.dir);
         }
 
-    }
-
-    void OffTarget()
-    {
-        puzzleComplete = false;
-
-        roomScript.LockDoor(DIRECTION.LEFT);
-        roomScript.LockDoor(DIRECTION.RIGHT);
-        roomScript.LockDoor(DIRECTION.UP);
-        roomScript.LockDoor(DIRECTION.DOWN);
     }
 
     void ResetPuzzle()

@@ -23,11 +23,4 @@ public class PuzzleEndScript : MonoBehaviour {
             gameObject.SendMessageUpwards("OnTarget");
         }
     }
-    void OnTriggerExit2D(Collider2D Other)
-    {
-        if (Other.tag.Equals("Objective"))
-        {
-            gameObject.SendMessageUpwards("OffTarget");
-        }
-    }
 }

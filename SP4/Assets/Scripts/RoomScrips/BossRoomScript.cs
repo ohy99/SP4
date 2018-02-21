@@ -12,6 +12,7 @@ public class BossRoomScript : RoomScript {
 	}
     void Awake() {
         GameObject spawnBoss = Instantiate(boss, transform.position, Quaternion.identity);
+        spawnBoss.transform.parent = this.transform;
         Global.Instance.boss = spawnBoss;
     }
 	

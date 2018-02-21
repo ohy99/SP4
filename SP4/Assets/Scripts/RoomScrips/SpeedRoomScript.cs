@@ -77,7 +77,7 @@ public class SpeedRoomScript : RoomScript {
 
         float yPos = 0.0f;
 
-        if (elapsedTime < 5.0f)
+        if (elapsedTime < 5.0f && !spawnerScript.spawnerActive)
         {
             GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "Collect as many coins as possible", 100, style);
             yPos += 10.0f;
@@ -87,9 +87,9 @@ public class SpeedRoomScript : RoomScript {
 
         if (spawnerScript.spawnerActive && !puzzleComplete)
         {
-            GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "Item: " + spawnerScript.numOfItemSpawned + "/" + spawnerScript.maxSpawns, 100, style);
+            GUI.TextField(new Rect(Screen.width * 0.5f - 10.0f, yPos, 220.0f, 20.0f), "Item: " + spawnerScript.numOfItemSpawned + "/" + spawnerScript.maxSpawns, 100, style);
             yPos += 10.0f;
-            GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "You collected: " + itemCollected, 100, style);
+            GUI.TextField(new Rect(Screen.width * 0.5f - 50.0f, yPos, 220.0f, 20.0f), "You collected: " + itemCollected, 100, style);
             yPos += 10.0f;
         }
     }

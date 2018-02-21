@@ -40,7 +40,7 @@ public class RoomGenerator : Singleton<RoomGenerator> {
 
     //Array of rooms with ID
     List<GameObject> roomList;
-    int currID;
+    int currID; //aka size of roomList. so roomList.count == currID
     float zOffset = 1;
 
     [SerializeField]
@@ -102,6 +102,28 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         }
         roomScript.Set(currID, 0, 0, boolArray[DIRECTION.LEFT], boolArray[DIRECTION.RIGHT], boolArray[DIRECTION.UP], boolArray[DIRECTION.DOWN]);
         StoreRoom(currID, 0, 0, room);
+
+        while (numOfOpenedDoors > 0)
+        {
+
+            DIRECTION[] dirList = new DIRECTION[4];
+            //check which door open
+            for (int i = 0; i < roomList.Count; ++i)
+            {
+                Debug.Log(roomList.Count);
+                GameObject daroom = roomList[i];
+                RoomScript daroomscript = daroom.GetComponent<RoomScript>();
+
+                for(DIRECTION j = DIRECTION.LEFT; j < DIRECTION.LEFT + 4; ++j)
+                {
+                    if (daroomscript.GetHasTriggerBox(j) && !daroomscript.GetIsLocked(j))
+                    {
+                        //open tat door
+                        GenerateRoom(i, j);
+                    }
+                }
+            }
+        }
     }
 
     public void ReStart()
@@ -215,15 +237,16 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         roomScript.Set(currID, newGridX, newGridY,
             openDoors.Contains(DIRECTION.LEFT), openDoors.Contains(DIRECTION.RIGHT), 
             openDoors.Contains(DIRECTION.UP), openDoors.Contains(DIRECTION.DOWN));
-        foreach (DIRECTION dir in dirToOffTrigger)
-        {
-            roomScript.OffTriggerBox(dir);
-            RoomScript neighbourRS = GetNeighbourRoomScript(newGridX, newGridY, dir);
-            DIRECTION oppoSide = GetOppositeDir(dir);
-            neighbourRS.OffTriggerBox(oppoSide);
-        }
+        //foreach (DIRECTION dir in dirToOffTrigger)
+        //{
+        //    roomScript.OffTriggerBox(dir);
+        //    RoomScript neighbourRS = GetNeighbourRoomScript(newGridX, newGridY, dir);
+        //    DIRECTION oppoSide = GetOppositeDir(dir);
+        //    neighbourRS.OffTriggerBox(oppoSide);
+        //}
         
         StoreRoom(currID, newGridX, newGridY, room);
+        room.SetActive(false);
     }
 
     ////Left, right, up, down. ADDTO : add to the int numOfOpeneddoor
@@ -409,5 +432,18 @@ public class RoomGenerator : Singleton<RoomGenerator> {
             return null;
         RoomScript rs = roomMap[checkY][checkX].GetComponent<RoomScript>();
         return rs;
+    }
+
+    public void SetRoomActive(int currRoomID, DIRECTION side)
+    {
+        GameObject currentRoom = roomList[currRoomID];
+        Vector3 currPos = currentRoom.transform.position;
+        RoomScript currRoomScript = currentRoom.GetComponent<RoomScript>();
+
+        int newGridX = currRoomScript.GetGridX() + (side == DIRECTION.LEFT ? -1 : (side == DIRECTION.RIGHT ? 1 : 0));
+        int newGridY = currRoomScript.GetGridY() + (side == DIRECTION.DOWN ? -1 : (side == DIRECTION.UP ? 1 : 0));
+
+        Debug.Log("Ok");
+        roomMap[newGridY][newGridX].SetActive(true);
     }
 }
