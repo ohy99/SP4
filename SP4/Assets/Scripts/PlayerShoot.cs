@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayerShoot : MonoBehaviour
+public class PlayerShoot : NetworkBehaviour
 {
     //[SerializeField]
     //GameObject playerObj;
@@ -35,6 +36,9 @@ public class PlayerShoot : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if (!isLocalPlayer)
+            return;
+
         //Debug.Log(controlType);
         switch (controlType)
         {
@@ -67,11 +71,11 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             //Debug.Log("TotalRounds:" + go)
-
-            if (go.GetComponent<RangeWeaponBase>())
-                go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
-            else if (go.GetComponent<MeleeWeaponBase>())
-                go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
+            CmdFire();
+            //if (go.GetComponent<RangeWeaponBase>())
+            //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position + transform.up, transform.rotation);
+            //else if (go.GetComponent<MeleeWeaponBase>())
+            //    go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
         }
 
         if (Input.GetKey(KeyCode.R))
@@ -170,4 +174,21 @@ public class PlayerShoot : MonoBehaviour
     {
         controlType = (CONTROLTYPE)type;
     }
+
+
+    [Command]
+    void CmdFire()
+    {
+        GameObject projectile = null;
+        if (go.GetComponent<RangeWeaponBase>())
+            projectile = go.GetComponent<RangeWeaponBase>().Discharge(transform.position + transform.up, transform.rotation);
+        else if (go.GetComponent<MeleeWeaponBase>())
+            go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
+
+        if(projectile)
+            NetworkServer.Spawn(projectile);
+
+        Destroy(projectile, 5.0f);
+    }
+
 }

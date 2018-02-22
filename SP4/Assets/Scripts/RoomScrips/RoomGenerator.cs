@@ -66,7 +66,6 @@ public class RoomGenerator : Singleton<RoomGenerator> {
 
 	// Use this for initialization
 	void Start () {
-        
         biggestX = biggestY = smallestY = smallestX = 0;
         numOfOpenedDoors = 0;
         generatedBossRoom = false;
@@ -232,11 +231,15 @@ public class RoomGenerator : Singleton<RoomGenerator> {
             {
                 room = Instantiate(bossRoom, new Vector3(currPos.x + offsetX, currPos.y + offsetY, zOffset), Quaternion.identity);
                 generatedBossRoom = true;
+
+                //here is network spawn the room for sync
             }
             else
             {
                 int randIndex = UnityEngine.Random.Range(0, randomRooms.Count - 1);
                 room = Instantiate(randomRooms[randIndex], new Vector3(currPos.x + offsetX, currPos.y + offsetY, zOffset), Quaternion.identity);
+
+                //here is network spawn the room for sync
             }
         }
         else
@@ -246,6 +249,20 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         roomScript.Set(currID, newGridX, newGridY,
             openDoors.Contains(DIRECTION.LEFT), openDoors.Contains(DIRECTION.RIGHT), 
             openDoors.Contains(DIRECTION.UP), openDoors.Contains(DIRECTION.DOWN));
+
+
+        //here is network spawn the room for sync
+
+        //foreach (DIRECTION dir in dirToOffTrigger)
+        //{
+        //    roomScript.OffTriggerBox(dir);
+        //    RoomScript neighbourRS = GetNeighbourRoomScript(newGridX, newGridY, dir);
+        //    DIRECTION oppoSide = GetOppositeDir(dir);
+        //    neighbourRS.OffTriggerBox(oppoSide);
+        //}     
+        //StoreRoom(currID, newGridX, newGridY, room);
+
+
         //foreach (DIRECTION dir in dirToOffTrigger)
         //{
         //    roomScript.OffTriggerBox(dir);

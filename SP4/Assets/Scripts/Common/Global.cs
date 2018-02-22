@@ -9,7 +9,7 @@ public class Global : Singleton<Global> {
     [SerializeField]
     Camera _camera;
 
-    public GameObject player { get { return _player; } private set { } }
+    public GameObject player { get { return _player; } set { _player = value; } }
 
     public Camera cam { get { return _camera; } private set { } }
 

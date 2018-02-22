@@ -44,6 +44,9 @@ public class EnemyRoomScript : RoomScript {
     // Update is called once per frame
     void Update()
     {
+        if (player == null)
+            return;
+
         elapsedTime += Time.deltaTime;
 
         if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x * 0.5f - 2.0f && !completedWaves)

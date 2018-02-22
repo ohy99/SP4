@@ -750,6 +750,48 @@ MonoBehaviour:
   icon: {fileID: 1515942906143460, guid: 0c2cc2f64d0b1584eaf2cb1085dbc34a, type: 2}
   parentBackground: {fileID: 2119712958}
   panel: {fileID: 638930822}
+--- !u!1001 &1359592684
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4912041920862956, guid: 918c78a3a64930a46bb0ec21fd6d7009, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912041920862956, guid: 918c78a3a64930a46bb0ec21fd6d7009, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912041920862956, guid: 918c78a3a64930a46bb0ec21fd6d7009, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912041920862956, guid: 918c78a3a64930a46bb0ec21fd6d7009, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912041920862956, guid: 918c78a3a64930a46bb0ec21fd6d7009, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912041920862956, guid: 918c78a3a64930a46bb0ec21fd6d7009, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912041920862956, guid: 918c78a3a64930a46bb0ec21fd6d7009, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4912041920862956, guid: 918c78a3a64930a46bb0ec21fd6d7009, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 918c78a3a64930a46bb0ec21fd6d7009, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1465157316 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1062711654339362, guid: 07a96eb0d64094544a0d28342798c513,
@@ -1171,6 +1213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1730399878}
+  playerTransform: {fileID: 0}
 --- !u!1001 &2009878140
 Prefab:
   m_ObjectHideFlags: 0

@@ -24,14 +24,17 @@ public class Staff : RangeWeaponBase
     }
 
     // Fire Weapon 
-    public override void Discharge(Vector3 pos, Quaternion rotation)
+    public override GameObject Discharge(Vector3 pos, Quaternion rotation)
     {
         if (magRounds > 0)
         {
             Debug.Log("Staff_Attack");
-            Instantiate(projectile, pos, rotation);
+            GameObject go = Instantiate(projectile, pos, rotation);
             --magRounds;
+            return go;
         }
+
+        return null;
     }
 
     // Reload Weapon

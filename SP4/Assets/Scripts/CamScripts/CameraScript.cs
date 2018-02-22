@@ -7,6 +7,8 @@ public class CameraScript : MonoBehaviour {
     [SerializeField]
     GameObject player;
 
+    public Transform playerTransform;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -15,10 +17,17 @@ public class CameraScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (player == null)
-            return;
+        {
+            if (playerTransform == null)
+                return;
 
-        //transform.position.Set(player.transform.position.x, player.transform.position.y, -10);
-        transform.position = player.transform.position + new Vector3(0,0,-10);
-        //Debug.Log(transform.position + ", player:" +player.transform.position.x +"," +player.transform.position.y);
-	}
+            transform.position = playerTransform.position + new Vector3(0, 0, -10);
+        }
+        else
+        {
+            //transform.position.Set(player.transform.position.x, player.transform.position.y, -10);
+            transform.position = player.transform.position + new Vector3(0, 0, -10);
+            //Debug.Log(transform.position + ", player:" +player.transform.position.x +"," +player.transform.position.y);
+        }
+    }
 }

@@ -13,15 +13,24 @@ public class HealthBar : MonoBehaviour {
     private Health hpScript;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         image = GetComponent<Image>();
         hpScript = player.GetComponent<Health>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        fillAmount = Mathf.Lerp(fillAmount, hpScript.GetCurrHp() / hpScript.GetMaxHp(), 10.0f  * Time.deltaTime);
+	void Update ()
+    {
+        if (!player) //to work with network stuff
+        {
+            fillAmount = Mathf.Lerp(fillAmount, Global.Instance.player.GetComponent<Health>().GetCurrHp() / Global.Instance.player.GetComponent<Health>().GetMaxHp(), 10.0f * Time.deltaTime);
+            image.fillAmount = fillAmount;
+            return;
+        }
 
+
+        fillAmount = Mathf.Lerp(fillAmount, hpScript.GetCurrHp() / hpScript.GetMaxHp(), 10.0f  * Time.deltaTime);
         image.fillAmount = fillAmount;
 	}
 }

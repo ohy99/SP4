@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 114276940586715288}
   - component: {fileID: 114526120560271904}
   - component: {fileID: 225429372736350428}
-  - component: {fileID: 114997946134075236}
   m_Layer: 0
   m_Name: IconBackground
   m_TagString: Untagged
@@ -139,19 +138,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114997946134075236
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1515942906143460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f99c8672a14b4cf48b9b0d28a56d9e0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentToReturnTo: {fileID: 0}
-  placeHolderParent: {fileID: 0}
 --- !u!222 &222291302331042402
 CanvasRenderer:
   m_ObjectHideFlags: 1

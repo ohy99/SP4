@@ -27,6 +27,8 @@ GameObject:
   - component: {fileID: 58287697392238420}
   - component: {fileID: 114416666943631042}
   - component: {fileID: 114626202025187886}
+  - component: {fileID: 114921153942655634}
+  - component: {fileID: 114326291315100200}
   m_Layer: 8
   m_Name: EnemyMelee
   m_TagString: Enemy
@@ -124,6 +126,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+--- !u!114 &114326291315100200
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1121057322748648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114416666943631042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -135,6 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3c7028f08a9a14d9ec7e9edeb01270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInvincible: 0
 --- !u!114 &114626202025187886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,6 +173,38 @@ MonoBehaviour:
   progressBarEmpty: {fileID: 2800000, guid: da69a029e93d4704b8b9d1fbe9143345, type: 3}
   progressBarFull: {fileID: 2800000, guid: 52be3412328bf91439b3a63ff21c547b, type: 3}
   cam: {fileID: 0}
+--- !u!114 &114921153942655634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1121057322748648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 189
+    i1: 102
+    i2: 224
+    i3: 230
+    i4: 153
+    i5: 197
+    i6: 200
+    i7: 4
+    i8: 43
+    i9: 43
+    i10: 221
+    i11: 173
+    i12: 234
+    i13: 114
+    i14: 178
+    i15: 223
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!212 &212579397720974594
 SpriteRenderer:
   m_ObjectHideFlags: 1

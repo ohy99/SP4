@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class EnemySpawn : MonoBehaviour {
-
+public class EnemySpawn : NetworkBehaviour
+{
     [SerializeField]
     GameObject enemyMelee;
     [SerializeField]
@@ -11,15 +12,24 @@ public class EnemySpawn : MonoBehaviour {
     [SerializeField]
     GameObject map;
 
+    //float timer = 2.0f;
+
 	// Use this for initialization
 	void Start () {
 
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        //timer += Time.deltaTime;
+        //if(timer >= 2.0f)
+        //{
+        //    SpawnEnemy();
+        //    timer = 0;
+        //}
+
+    }
 
     void SpawnEnemy()
     {
@@ -31,4 +41,13 @@ public class EnemySpawn : MonoBehaviour {
            Random.Range(map.transform.localPosition.y + -map.transform.localScale.y * 0.5f + 2.0f, map.transform.localPosition.y + map.transform.localScale.y * 0.5f - 2.0f), 0);
         Instantiate(enemyRange, pos, Quaternion.identity);
     }
+
+    //[Command]
+    //void SpawnEnemy()
+    //{
+    //    Vector3 position = new Vector3(Random.Range(-5.0f, 5.0f), Random.Range(-5.0f, 5.0f));
+    //    var enemyGo = (GameObject)Instantiate(enemy, position, Quaternion.identity);
+
+    //    NetworkServer.Spawn(enemyGo);
+    //}
 }

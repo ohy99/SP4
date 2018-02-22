@@ -73,6 +73,9 @@ public class SpotPuzzleRoomScript : RoomScript
     // Update is called once per frame
     void Update()
     {
+        if (player == null)
+            return;
+
         elapsedTime += Time.deltaTime;
 
         //Debug.Log(player.transform.position);
