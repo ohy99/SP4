@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Crossbow : RangeWeaponBase
 {
+    public AudioClip shootEffect;
 
-	// Use this for initialization
-	public override void Start ()
+    // Use this for initialization
+    public override void Start ()
     {
         damage = 10;
         damageOverTime = 0;
@@ -23,21 +24,25 @@ public class Crossbow : RangeWeaponBase
     public override void Update ()
     {
         //Debug.Log("WEAPON_UPDATE");
-        
+        timer += Time.deltaTime;
 	}
 
     // Fire Weapon 
     public override GameObject Discharge(Vector3 pos, Quaternion rotation)
     {
-        //Debug.Log("weaponDischarge");
-        GameObject projGO = Instantiate(projectile, pos, rotation);
-        Projectile projScript = projGO.GetComponent<Projectile>();
-        if (projScript)
-            projScript.SetDamage(damage);
-        //--magRounds;
-        return projGO;
+        if (fireRate < timer)
+        {
+            timer = 0.0f;
+            SoundManager.Instance.PlayOneShot(shootEffect);
+            GameObject projGO = Instantiate(projectile, pos, rotation);
+            Projectile projScript = projGO.GetComponent<Projectile>();
+            if (projScript)
+                projScript.SetDamage(damage);
+            //--magRounds;
+            return projGO;
+        }
 
-        //return null;
+        return null;
     }
 
     // Reload Weapon

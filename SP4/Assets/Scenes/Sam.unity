@@ -1213,6 +1213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1730399878}
+  playerTransform: {fileID: 0}
 --- !u!1001 &2009878140
 Prefab:
   m_ObjectHideFlags: 0
@@ -1328,7 +1329,7 @@ Prefab:
     - target: {fileID: 224839989138963870, guid: 1b3c4d858999f5e41b4f6e350bcad068,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -99.957886
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224839989138963870, guid: 1b3c4d858999f5e41b4f6e350bcad068,
         type: 2}
@@ -1338,7 +1339,7 @@ Prefab:
     - target: {fileID: 224839989138963870, guid: 1b3c4d858999f5e41b4f6e350bcad068,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 199.91577
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b3c4d858999f5e41b4f6e350bcad068, type: 2}

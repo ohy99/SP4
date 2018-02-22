@@ -1,12 +1,14 @@
 fileFormatVersion: 2
 guid: 1a40b035f3e48f246a4674f5994f78ce
-timeCreated: 1518503115
+timeCreated: 1519268689
 licenseType: Pro
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
+  - sprite: {instanceID: 0}
   - projectile: {fileID: 1859548745114154, guid: 68e227eb8a1f064419576d2e367187eb,
       type: 2}
+  - shootEffect: {fileID: 8300000, guid: 10c7018e1f3849647b51fca03f052a87, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
