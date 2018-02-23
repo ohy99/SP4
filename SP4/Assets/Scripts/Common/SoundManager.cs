@@ -38,7 +38,6 @@ public class SoundManager : Singleton<SoundManager> {
 
     public void PlayOneShot(AudioClip clip)
     {
-        Debug.Log(clip);
         globalfxSource.PlayOneShot(clip);
     }
 

@@ -47,7 +47,6 @@ public class OptionsPanelScript : MonoBehaviour {
 
     public void ToggleMusic()
     {
-        Debug.Log(musicToggle.isOn);
         SoundManager.Instance.musicSource.mute = !musicToggle.isOn;
     }
 
