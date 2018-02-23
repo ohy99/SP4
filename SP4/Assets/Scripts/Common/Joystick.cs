@@ -9,6 +9,7 @@ public class Joystick : MonoBehaviour {
 
     [SerializeField]
     bool onInUnityEditor = true;
+    int fingerID = -1;
 
     // Use this for initialization
     void Start () {
@@ -50,8 +51,16 @@ public class Joystick : MonoBehaviour {
 
     public void OnDragEnter()
     {
+#if UNITY_EDITOR || UNITY_WINDOWS
         startPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
         //Debug.Log("WAD");
+#elif UNITY_ANDROID
+        Touch[] touches = Input.touches;
+        Touch mytouch = Input.GetTouch(touches.Length - 1);//get the last touch
+        fingerID = mytouch.fingerId;
+
+        startPosition = new Vector3(mytouch.position.x, mytouch.position.y, 0);
+#endif
     }
     public void Dragging()
     {
@@ -63,10 +72,20 @@ public class Joystick : MonoBehaviour {
 
 #elif UNITY_ANDROID
         Touch mytouch = Input.GetTouch(0);
+        Touch[] touches = Input.touches;
+        foreach (Touch t in touches)
+        {
+            if (t.fingerId == fingerID)
+            {
+                mytouch = t;
+                break;
+            }
+        }
+       
         newPosition = new Vector3(mytouch.position.x - startPosition.x, mytouch.position.y - startPosition.y, 0);
 
-#endif   
-       
+#endif
+
         //joyFG.rectTransform.localPosition = newPosition;
         transform.localPosition = newPosition;
         //direction = joyFG.rectTransform.localPosition;
@@ -87,5 +106,6 @@ public class Joystick : MonoBehaviour {
     {
         //joyFG.rectTransform.localPosition = new Vector3(0, 0, 1);
         transform.localPosition = new Vector3(0, 0, 0);
+        fingerID = -1;
     }
 }
