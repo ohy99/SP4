@@ -23,3 +23,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/gameMP.unity
     guid: cb6dfc1870d51df4d81f3a0a62f9d9a3
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 00000000000000000000000000000000

@@ -41,7 +41,10 @@ public class Health : MonoBehaviour {
         if (currHp <= 0)
         {
             if (gameObject.tag.Equals("EnemyBoss"))
+            {
                 Global.Instance.bossIsDead = true;
+                Global.Instance.victory = true;
+            }
             if (!gameObject.tag.Equals("Player"))
             {
                 PlayerPrefs.SetInt(PREFTYPE.NUM_OF_KILLS.ToString(), PlayerPrefs.GetInt(PREFTYPE.NUM_OF_KILLS.ToString(), 0) + 1);

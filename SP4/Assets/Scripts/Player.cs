@@ -23,6 +23,10 @@ public class Player : MonoBehaviour
     //    Camera.main.GetComponent<CameraScript>().playerTransform = gameObject.transform;
     //}
 
+    void Awake()
+    {
+        Global.Instance.player = this.gameObject;
+    }
 
     // Use this for initialization
     void Start() {
@@ -54,6 +58,13 @@ public class Player : MonoBehaviour
                 onDeadTrigger = true;
             }
             Save();
+
+            if (onDeadTrigger)
+            {
+                Debug.Log("Test");
+                Global.Instance.victory = false;
+                LoadScene.Instance.LoadSceneCall("GameOver");
+            }
         }
 
         if (Debug.isDebugBuild)

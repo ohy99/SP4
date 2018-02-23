@@ -9,8 +9,13 @@ public class CameraScript : MonoBehaviour {
 
     public Transform playerTransform;
 
-	// Use this for initialization
-	void Start () {
+    void Awake()
+    {
+        Global.Instance.cam = this.gameObject.GetComponent<Camera>();
+    }
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
