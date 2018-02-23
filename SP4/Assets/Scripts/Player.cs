@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Player : NetworkBehaviour
+public class Player : MonoBehaviour
 {
     private int initialScore;
     private int score;
@@ -14,14 +14,14 @@ public class Player : NetworkBehaviour
     private int currentLevel;
     bool onDeadTrigger = false;
 
-    public override void OnStartLocalPlayer()
-    {
-        short id = GetComponent<NetworkIdentity>().playerControllerId;
-        Debug.Log("playerID" + id);
-        GetComponent<SpriteRenderer>().color = Color.green;
-        Global.Instance.player = gameObject;
-        Camera.main.GetComponent<CameraScript>().playerTransform = gameObject.transform;
-    }
+    //public override void OnStartLocalPlayer()
+    //{
+    //    short id = GetComponent<NetworkIdentity>().playerControllerId;
+    //    Debug.Log("playerID" + id);
+    //    GetComponent<SpriteRenderer>().color = Color.green;
+    //    Global.Instance.player = gameObject;
+    //    Camera.main.GetComponent<CameraScript>().playerTransform = gameObject.transform;
+    //}
 
 
     // Use this for initialization

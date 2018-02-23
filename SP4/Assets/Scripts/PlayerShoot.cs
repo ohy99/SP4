@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class PlayerShoot : NetworkBehaviour
+public class PlayerShoot : MonoBehaviour
 {
     //[SerializeField]
     //GameObject playerObj;
@@ -36,20 +36,24 @@ public class PlayerShoot : NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (!isLocalPlayer)
-            return;
+        //if (!isLocalPlayer)
+        //    return;
 
         //Debug.Log(controlType);
         switch (controlType)
         {
             case CONTROLTYPE.GAMEPAD:
                 GamePadUpdate();
+                if (!Mathf.Approximately(joyStick.GetXAxis(), 0.0f) || !Mathf.Approximately(joyStick.GetYAxis(), 0.0f))
+                    controlType = (CONTROLTYPE.MOBILE);
                 break;
             case CONTROLTYPE.MOBILE:
                 MobileUpdate();
                 break;
             default:
                 KeyboardUpdate();
+                if (!Mathf.Approximately(joyStick.GetXAxis(), 0.0f) || !Mathf.Approximately(joyStick.GetYAxis(), 0.0f))
+                    controlType = (CONTROLTYPE.MOBILE);
                 break;
         }
 
@@ -71,7 +75,7 @@ public class PlayerShoot : NetworkBehaviour
         if (Input.GetButton("Fire1"))
         {
             //Debug.Log("TotalRounds:" + go)
-            CmdFire();
+            Fire();
             //if (go.GetComponent<RangeWeaponBase>())
             //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position + transform.up, transform.rotation);
             //else if (go.GetComponent<MeleeWeaponBase>())
@@ -136,10 +140,12 @@ public class PlayerShoot : NetworkBehaviour
             ////gameObject.transform.position += moveDir * moveSpeed * Time.deltaTime;
             //go.transform.up = shootDir;
 
-            if (go.GetComponent<RangeWeaponBase>())
-                go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
-            else if (go.GetComponent<MeleeWeaponBase>())
-                go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
+            Fire();
+
+            //if (go.GetComponent<RangeWeaponBase>())
+            //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
+            //else if (go.GetComponent<MeleeWeaponBase>())
+            //    go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
         }
 
         
@@ -159,14 +165,16 @@ public class PlayerShoot : NetworkBehaviour
             float rvValue = joyStick.GetYAxis();
             Vector3 shootDir = new Vector3(rhValue, rvValue, 0);
             //gameObject.transform.position += moveDir * moveSpeed * Time.deltaTime;
-            Transform playerTransform = transform.parent.parent; //hacks but fast heh
+            Transform playerTransform = gameObject.transform; //hacks but fast heh
             //Debug.Log(playerTransform.gameObject);
             playerTransform.up = shootDir;
 
-            if (go.GetComponent<RangeWeaponBase>())
-                go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
-            else if (go.GetComponent<MeleeWeaponBase>())
-                go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
+            Fire();
+
+            //if (go.GetComponent<RangeWeaponBase>())
+            //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
+            //else if (go.GetComponent<MeleeWeaponBase>())
+            //    go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
         }
     }
 
@@ -176,8 +184,8 @@ public class PlayerShoot : NetworkBehaviour
     }
 
 
-    [Command]
-    void CmdFire()
+    //[Command]
+    void Fire()
     {
         GameObject projectile = null;
         if (go.GetComponent<RangeWeaponBase>())
@@ -185,8 +193,8 @@ public class PlayerShoot : NetworkBehaviour
         else if (go.GetComponent<MeleeWeaponBase>())
             go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
 
-        if(projectile)
-            NetworkServer.Spawn(projectile);
+        //if(projectile)
+        //    NetworkServer.Spawn(projectile);
 
         Destroy(projectile, 5.0f);
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class EnemySpawner : NetworkBehaviour
+public class EnemySpawner : MonoBehaviour
 {
     int totalWaves;
     [SerializeField]
@@ -26,8 +26,8 @@ public class EnemySpawner : NetworkBehaviour
     void Start()
     {
         totalWaves = Random.Range(3, 10);
-        gameObject.AddComponent<NetworkIdentity>();
-        gameObject.GetComponent<NetworkIdentity>().serverOnly = true;
+        //gameObject.AddComponent<NetworkIdentity>();
+        //gameObject.GetComponent<NetworkIdentity>().serverOnly = true;
         StartCoroutine("SpawnEnemy", spawnDelay);
 
     }
@@ -69,7 +69,7 @@ public class EnemySpawner : NetworkBehaviour
                Random.Range(map.transform.localPosition.y + -map.transform.localScale.y * 0.5f + 2.0f, map.transform.localPosition.y + map.transform.localScale.y * 0.5f - 2.0f), 0);
             var enemy = Instantiate(enemyMelee, pos, Quaternion.identity);
 
-            NetworkServer.Spawn(enemy);
+            //NetworkServer.Spawn(enemy);
         }
         for (int j = 0; j < 3; ++j)
         {
@@ -77,7 +77,7 @@ public class EnemySpawner : NetworkBehaviour
                Random.Range(map.transform.localPosition.y + -map.transform.localScale.y * 0.5f + 2.0f, map.transform.localPosition.y + map.transform.localScale.y * 0.5f - 2.0f), 0);
             var enemy = Instantiate(enemyRange, pos, Quaternion.identity);
 
-            NetworkServer.Spawn(enemy);
+            //NetworkServer.Spawn(enemy);
         }
     }
 
