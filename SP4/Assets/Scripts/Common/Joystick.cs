@@ -6,6 +6,10 @@ public class Joystick : MonoBehaviour {
     
     Vector3 startPosition;
     RectTransform rectTransform;
+
+    [SerializeField]
+    bool onInUnityEditor = true;
+
     // Use this for initialization
     void Start () {
         //parent = transform.parent.gameObject;
@@ -13,11 +17,17 @@ public class Joystick : MonoBehaviour {
     void Awake()
     {
 #if UNITY_WINDOWS
-        //this.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
+        this.gameObject.transform.parent.gameObject.SetActive(false);
 #elif UNITY_ANDROID
-        //this.gameObject.SetActive(true);
-#endif   
+        this.gameObject.SetActive(true);
+        this.gameObject.transform.parent.gameObject.SetActive(true);
+#endif
 
+#if  UNITY_EDITOR
+        this.gameObject.SetActive(onInUnityEditor);
+        this.gameObject.transform.parent.gameObject.SetActive(onInUnityEditor);
+#endif
         //parentTransform = GetComponentInParent<RectTransform>();
         rectTransform = GetComponent<RectTransform>();
     }

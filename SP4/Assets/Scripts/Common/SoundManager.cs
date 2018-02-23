@@ -41,6 +41,9 @@ public class SoundManager : Singleton<SoundManager> {
 
     public void PlaySound(AudioClip clip)
     {
+        if (!globalfxSource)
+            return;
+
         globalfxSource.clip = clip;
 
         globalfxSource.Play();
@@ -48,11 +51,17 @@ public class SoundManager : Singleton<SoundManager> {
 
     public void PlayOneShot(AudioClip clip)
     {
+        if (!globalfxSource)
+            return;
+
         globalfxSource.PlayOneShot(clip);
     }
 
     public void PlayRandomSfx(params AudioClip[] clips)
     {
+        if (!globalfxSource)
+            return;
+
         int randomIndex = Random.Range(0, clips.Length);
 
         float randomPitch = Random.Range(lowPitch, highPitch);
