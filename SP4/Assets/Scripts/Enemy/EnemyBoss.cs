@@ -19,7 +19,7 @@ public class EnemyBoss : MonoBehaviour {
 
     public int numOfProj { get { return _numOfProj; } }
     public int projectileLayer { get { return _projectileLayer; } private set { } }
-    GameObject player;
+    //GameObject player;
     
     FSMSystem sm;
     Health hp;
@@ -41,7 +41,7 @@ public class EnemyBoss : MonoBehaviour {
         sm.AddState(bis);
         sm.AddState(bas);
 
-        player = Global.Instance.player;
+        //player = Global.Instance.player;
 
         Rigidbody2D rigidBody2D = GetComponent<Rigidbody2D>();
         rigidBody2D.velocity = new Vector3(Random.value, Random.value, 0).normalized * flySpd;
@@ -53,8 +53,8 @@ public class EnemyBoss : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        sm.CurrentState.Reason(player, gameObject);
-        sm.CurrentState.Act(player, gameObject);
+        sm.CurrentState.Reason(Global.Instance.player, gameObject);
+        sm.CurrentState.Act(Global.Instance.player, gameObject);
     }
 }
 

@@ -23,7 +23,7 @@ public class GameOverPanelScript : MonoBehaviour {
 		
 	}
 
-    void BackButton()
+    public void BackButton()
     {
         LoadScene.Instance.LoadSceneCall("mainmenu");
     }

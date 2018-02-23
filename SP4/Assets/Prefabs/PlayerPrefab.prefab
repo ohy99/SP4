@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4324475271581398}
   - component: {fileID: 212070838500672770}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: playerWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 114885800031166950}
   - component: {fileID: 114535403005161664}
   - component: {fileID: 114300993720441814}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
