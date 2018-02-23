@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 212372234878090264}
   - component: {fileID: 114902133667152174}
   - component: {fileID: 114522199501244636}
+  - component: {fileID: 114701764009672846}
   m_Layer: 0
   m_Name: SpeedRoom
   m_TagString: Untagged
@@ -1045,6 +1046,38 @@ MonoBehaviour:
   enemyMelee: {fileID: 1121057322748648, guid: bd66e0e699c5c8042b2bddadea72b2df, type: 2}
   enemyRange: {fileID: 1621331323061118, guid: 582b5b78d3b76e24c99ee8434de0197f, type: 2}
   map: {fileID: 1053355793432642}
+--- !u!114 &114701764009672846
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1053355793432642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 192
+    i1: 14
+    i2: 179
+    i3: 58
+    i4: 98
+    i5: 221
+    i6: 95
+    i7: 36
+    i8: 185
+    i9: 184
+    i10: 204
+    i11: 206
+    i12: 167
+    i13: 174
+    i14: 103
+    i15: 60
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114758860923695974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1299,7 +1332,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e541a448f88662e44982e92399884a5b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.38424525, g: 0.5412077, b: 0.75735295, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

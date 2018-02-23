@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System; //To catch argument exception
+using UnityEngine.Networking;
 
 public enum DIRECTION
 {
@@ -66,6 +67,10 @@ public class RoomGenerator : Singleton<RoomGenerator> {
 
 	// Use this for initialization
 	void Start () {
+
+        //gameObject.AddComponent<NetworkIdentity>();
+        //gameObject.GetComponent<NetworkIdentity>().serverOnly = true;
+
         biggestX = biggestY = smallestY = smallestX = 0;
         numOfOpenedDoors = 0;
         generatedBossRoom = false;
@@ -74,17 +79,104 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         currID = 0;
         Global.Instance.bossIsDead = false;
 
+        //biggestX = biggestY = smallestY = smallestX = 0;
+        //numOfOpenedDoors = 0;
+        //generatedBossRoom = false;
+        //roomList = new List<GameObject>();
+        //roomMap = new Dictionary<int, Dictionary<int, GameObject>>();
+        //currID = 0;
+        //Global.Instance.bossIsDead = false;
+
+        ////if (!Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+        ////{
+        ////    Debug.Log("u not the host");
+        ////    return;
+        ////}
+
+        //if (!GenerateOnStart)
+        //    return;
+        ////Debug.Log("RoomGenerator Start()");
+        ////spawn at 0,0, so generate one at 0,0
+        //GameObject room = Instantiate(defaultRoom, new Vector3(0, 0, zOffset), Quaternion.identity);
+        //room.transform.localScale.Set(scaleX, scaleY, 1);
+
+        //RoomScript roomScript = room.GetComponent<RoomScript>();
+        //Dictionary<DIRECTION, bool> boolArray = new Dictionary<DIRECTION, bool>();
+        //float incChance = 0.0f;
+        //for (DIRECTION i = DIRECTION.LEFT; i < DIRECTION.LEFT + 4; ++i)
+        //{
+        //    boolArray[i] = false;
+        //    if (!boolArray[i])
+        //    {
+        //        boolArray[i] = UnityEngine.Random.value < (0.5f + incChance);
+        //        if (boolArray[i])
+        //        {
+        //            ++numOfOpenedDoors;
+        //            incChance -= 0.2f;
+        //        }
+        //        else
+        //            incChance += 0.25f;
+        //    }
+        //}
+        //roomScript.Set(currID, 0, 0, boolArray[DIRECTION.LEFT], boolArray[DIRECTION.RIGHT], boolArray[DIRECTION.UP], boolArray[DIRECTION.DOWN]);
+        //StoreRoom(currID, 0, 0, room);
+
+        //while (numOfOpenedDoors > 0)
+        //{
+
+        //    DIRECTION[] dirList = new DIRECTION[4];
+        //    //check which door open
+        //    for (int i = 0; i < roomList.Count; ++i)
+        //    {
+        //        GameObject daroom = roomList[i];
+        //        RoomScript daroomscript = daroom.GetComponent<RoomScript>();
+
+        //        for (DIRECTION j = DIRECTION.LEFT; j < DIRECTION.LEFT + 4; ++j)
+        //        {
+        //            if (daroomscript.GetHasTriggerBox(j) && !daroomscript.GetIsLocked(j))
+        //            {
+        //                //open tat door
+        //                GenerateRoom(i, j);
+        //            }
+        //        }
+        //    }
+        //}
+
+        //Debug.Log("number of rooms: " + roomList.Count);
+        ////Increase the number of times entered game
+        //PlayerPrefs.SetInt(PREFTYPE.NUM_OF_ENTERGAME.ToString(), PlayerPrefs.GetInt(PREFTYPE.NUM_OF_ENTERGAME.ToString(), 0) + 1);
+    }
+
+    //init the map
+    public void Init()
+    {
+
+        biggestX = biggestY = smallestY = smallestX = 0;
+        numOfOpenedDoors = 0;
+        generatedBossRoom = false;
+        roomList = new List<GameObject>();
+        roomMap = new Dictionary<int, Dictionary<int, GameObject>>();
+        currID = 0;
+        Global.Instance.bossIsDead = false;
+
+        //if (!Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+        //{
+        //    Debug.Log("u not the host");
+        //    return;
+        //}
+
         if (!GenerateOnStart)
             return;
         //Debug.Log("RoomGenerator Start()");
         //spawn at 0,0, so generate one at 0,0
-        GameObject room = Instantiate(defaultRoom, new Vector3(0, 0, zOffset), Quaternion.identity);
+        GameObject room = 
+            Instantiate(defaultRoom, new Vector3(0, 0, zOffset), Quaternion.identity);
         room.transform.localScale.Set(scaleX, scaleY, 1);
 
         RoomScript roomScript = room.GetComponent<RoomScript>();
         Dictionary<DIRECTION, bool> boolArray = new Dictionary<DIRECTION, bool>();
         float incChance = 0.0f;
-        for(DIRECTION i = DIRECTION.LEFT; i < DIRECTION.LEFT + 4; ++i)
+        for (DIRECTION i = DIRECTION.LEFT; i < DIRECTION.LEFT + 4; ++i)
         {
             boolArray[i] = false;
             if (!boolArray[i])
@@ -101,7 +193,9 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         }
         roomScript.Set(currID, 0, 0, boolArray[DIRECTION.LEFT], boolArray[DIRECTION.RIGHT], boolArray[DIRECTION.UP], boolArray[DIRECTION.DOWN]);
         StoreRoom(currID, 0, 0, room);
-        
+        //NETWORK
+        NetworkServer.Spawn(room);
+
         while (numOfOpenedDoors > 0)
         {
 
@@ -123,9 +217,12 @@ public class RoomGenerator : Singleton<RoomGenerator> {
             }
         }
 
+        Debug.Log("number of rooms: " + roomList.Count);
         //Increase the number of times entered game
         PlayerPrefs.SetInt(PREFTYPE.NUM_OF_ENTERGAME.ToString(), PlayerPrefs.GetInt(PREFTYPE.NUM_OF_ENTERGAME.ToString(), 0) + 1);
+
     }
+
 
     public void ReStart()
     {
@@ -224,26 +321,35 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         GameObject room;
         float offsetX = (side == DIRECTION.LEFT ? -scaleX : (side == DIRECTION.RIGHT ? scaleX : 0));
         float offsetY = (side == DIRECTION.DOWN ? -scaleY : (side == DIRECTION.UP ? scaleY : 0));
+        Vector3 tempRoomPos;
+
         if (!generatedBossRoom)
         {
             //attempt to generate bossroom
             if (numOfOpenedDoors == 0 || 0.25f * ((currID + 1) / estTotalRooms) > UnityEngine.Random.value)
             {
-                room = Instantiate(bossRoom, new Vector3(currPos.x + offsetX, currPos.y + offsetY, zOffset), Quaternion.identity);
+                tempRoomPos = new Vector3(currPos.x + offsetX, currPos.y + offsetY, zOffset);
+                room = Instantiate(bossRoom, tempRoomPos, Quaternion.identity);
                 generatedBossRoom = true;
 
-                //here is network spawn the room for sync
+                //NetworkServer.Spawn(room);
             }
             else
             {
                 int randIndex = UnityEngine.Random.Range(0, randomRooms.Count - 1);
-                room = Instantiate(randomRooms[randIndex], new Vector3(currPos.x + offsetX, currPos.y + offsetY, zOffset), Quaternion.identity);
+                tempRoomPos = new Vector3(currPos.x + offsetX, currPos.y + offsetY, zOffset);
+                room = Instantiate(randomRooms[randIndex], tempRoomPos, Quaternion.identity);
 
                 //here is network spawn the room for sync
+                //NetworkServer.Spawn(room);
             }
         }
         else
-            room = Instantiate(defaultRoom, new Vector3(currPos.x + offsetX, currPos.y + offsetY, zOffset), Quaternion.identity);
+        {
+            tempRoomPos = new Vector3(currPos.x + offsetX, currPos.y + offsetY, zOffset);
+            room = Instantiate(defaultRoom, tempRoomPos, Quaternion.identity);
+            //NetworkServer.Spawn(room);
+        }
         room.transform.localScale.Set(scaleX, scaleY, 1);
         RoomScript roomScript = room.GetComponent<RoomScript>();
         roomScript.Set(currID, newGridX, newGridY,
@@ -270,9 +376,20 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         //    DIRECTION oppoSide = GetOppositeDir(dir);
         //    neighbourRS.OffTriggerBox(oppoSide);
         //}
-        
+
         StoreRoom(currID, newGridX, newGridY, room);
         room.SetActive(false);
+
+        //NETWORK
+        //NetworkServer.Spawn(room);
+        //PopulateRoomListMessage popRoomMsg = new PopulateRoomListMessage();
+        //popRoomMsg.roomID = currID;
+        //popRoomMsg.gridX = newGridX;
+        //popRoomMsg.gridY = newGridY;
+        //popRoomMsg.roomPos = tempRoomPos;
+        //popRoomMsg.rooomScale = room.transform.localScale;
+        //for (int i = 0; i < roomList.Count; ++i)
+        //    MessageHandler.Instance.SendSpawnRoom_S2C(roomList[i]);
     }
 
     ////Left, right, up, down. ADDTO : add to the int numOfOpeneddoor
@@ -462,7 +579,8 @@ public class RoomGenerator : Singleton<RoomGenerator> {
 
     public void SetRoomActive(int currRoomID, DIRECTION side)
     {
-        GameObject currentRoom = roomList[currRoomID];
+        GameObject currentRoom 
+            = roomList[currRoomID];
         Vector3 currPos = currentRoom.transform.position;
         RoomScript currRoomScript = currentRoom.GetComponent<RoomScript>();
 
@@ -470,6 +588,10 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         int newGridY = currRoomScript.GetGridY() + (side == DIRECTION.DOWN ? -1 : (side == DIRECTION.UP ? 1 : 0));
 
         roomMap[newGridY][newGridX].SetActive(true);
+
+        // Send msg to client that a room is active
+        NetworkServer.Spawn(roomMap[newGridY][newGridX]);
+        //MessageHandler.Instance.SendSpawnRoom_S2C(currRoomID, side);
     }
 
     public Transform GenerateKeyPos(int currRoomID)
@@ -496,4 +618,17 @@ public class RoomGenerator : Singleton<RoomGenerator> {
 
         return parent;
     }
+
+    public List<GameObject> GetRoomList()
+    {
+        return roomList;
+    }
+
 }
+
+/*
+ * only host will call room gen, client pass pos to host if any client in 
+ * range to gen room host will gen send msg to client that romm gen spawn stuff
+ * stuff in the room shld also be handle by host/server
+ * Send a msg to client on where active doors are and when a room becomes active
+ */

@@ -486,6 +486,7 @@ GameObject:
   - component: {fileID: 212597024631042436}
   - component: {fileID: 114323777524164042}
   - component: {fileID: 114522690711128030}
+  - component: {fileID: 114550138493779742}
   m_Layer: 0
   m_Name: SpotPuzzleRoom
   m_TagString: Untagged
@@ -1424,6 +1425,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef927ef231ff0b4b9076eacc05a1313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114550138493779742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1864703187797008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 97
+    i1: 128
+    i2: 156
+    i3: 239
+    i4: 75
+    i5: 37
+    i6: 208
+    i7: 228
+    i8: 154
+    i9: 220
+    i10: 10
+    i11: 213
+    i12: 127
+    i13: 117
+    i14: 187
+    i15: 201
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114766672412199240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2015,7 +2048,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e541a448f88662e44982e92399884a5b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.71429425, g: 0.7647059, b: 0.39922145, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

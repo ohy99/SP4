@@ -29,7 +29,6 @@ public class EnemySpawner : NetworkBehaviour
         gameObject.AddComponent<NetworkIdentity>();
         gameObject.GetComponent<NetworkIdentity>().serverOnly = true;
         StartCoroutine("SpawnEnemy", spawnDelay);
-
     }
 
     // Update is called once per frame
@@ -44,18 +43,6 @@ public class EnemySpawner : NetworkBehaviour
         {
             yield return new WaitForSeconds(waitTime);
             NetSpawnEnemy();
-            //for (int j = 0; j < 3; ++j)
-            //{
-            //    Vector3 pos = new Vector3(Random.Range(map.transform.localPosition.x + -map.transform.localScale.x * 0.5f + 2.0f, map.transform.localPosition.x + map.transform.localScale.x * 0.5f - 2.0f),
-            //       Random.Range(map.transform.localPosition.y  + - map.transform.localScale.y * 0.5f + 2.0f, map.transform.localPosition.y + map.transform.localScale.y * 0.5f - 2.0f), 0);
-            //    Instantiate(enemyMelee, pos, Quaternion.identity);
-            //}
-            //for (int j = 0; j < 3; ++j)
-            //{
-            //    Vector3 pos = new Vector3(Random.Range(map.transform.localPosition.x + -map.transform.localScale.x * 0.5f + 2.0f, map.transform.localPosition.x + map.transform.localScale.x * 0.5f - 2.0f),
-            //       Random.Range(map.transform.localPosition.y + -map.transform.localScale.y * 0.5f + 2.0f, map.transform.localPosition.y + map.transform.localScale.y * 0.5f - 2.0f), 0);
-            //    Instantiate(enemyRange, pos, Quaternion.identity);
-            //}
         }
 
         gameObject.SendMessageUpwards("UnlockDoor");

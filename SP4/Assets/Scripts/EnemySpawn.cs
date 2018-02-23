@@ -16,8 +16,10 @@ public class EnemySpawn : NetworkBehaviour
 
 	// Use this for initialization
 	void Start () {
-
-	}
+        //NetworkIdentity
+        gameObject.AddComponent<NetworkIdentity>();
+        gameObject.GetComponent<NetworkIdentity>().serverOnly = true;
+    }
 
 	
 	// Update is called once per frame
@@ -33,21 +35,28 @@ public class EnemySpawn : NetworkBehaviour
 
     void SpawnEnemy()
     {
+        //Vector3 pos = new Vector3(Random.Range(map.transform.localPosition.x + -map.transform.localScale.x * 0.5f + 2.0f, map.transform.localPosition.x + map.transform.localScale.x * 0.5f - 2.0f),
+        //   Random.Range(map.transform.localPosition.y + -map.transform.localScale.y * 0.5f + 2.0f, map.transform.localPosition.y + map.transform.localScale.y * 0.5f - 2.0f), 0);
+        //Instantiate(enemyMelee, pos, Quaternion.identity);
+
+        //pos.Set(Random.Range(map.transform.localPosition.x + -map.transform.localScale.x * 0.5f + 2.0f, map.transform.localPosition.x + map.transform.localScale.x * 0.5f - 2.0f),
+        //   Random.Range(map.transform.localPosition.y + -map.transform.localScale.y * 0.5f + 2.0f, map.transform.localPosition.y + map.transform.localScale.y * 0.5f - 2.0f), 0);
+        //Instantiate(enemyRange, pos, Quaternion.identity);
+        NetSpawnEnemy();
+    }
+
+    void NetSpawnEnemy()
+    {
         Vector3 pos = new Vector3(Random.Range(map.transform.localPosition.x + -map.transform.localScale.x * 0.5f + 2.0f, map.transform.localPosition.x + map.transform.localScale.x * 0.5f - 2.0f),
-           Random.Range(map.transform.localPosition.y + -map.transform.localScale.y * 0.5f + 2.0f, map.transform.localPosition.y + map.transform.localScale.y * 0.5f - 2.0f), 0);
-        Instantiate(enemyMelee, pos, Quaternion.identity);
+            Random.Range(map.transform.localPosition.y + -map.transform.localScale.y * 0.5f + 2.0f, map.transform.localPosition.y + map.transform.localScale.y * 0.5f - 2.0f), 0);
+        var enemyGo = Instantiate(enemyMelee, pos, Quaternion.identity);
+
+        NetworkServer.Spawn(enemyGo);
 
         pos.Set(Random.Range(map.transform.localPosition.x + -map.transform.localScale.x * 0.5f + 2.0f, map.transform.localPosition.x + map.transform.localScale.x * 0.5f - 2.0f),
            Random.Range(map.transform.localPosition.y + -map.transform.localScale.y * 0.5f + 2.0f, map.transform.localPosition.y + map.transform.localScale.y * 0.5f - 2.0f), 0);
-        Instantiate(enemyRange, pos, Quaternion.identity);
+        enemyGo = Instantiate(enemyRange, pos, Quaternion.identity);
+
+        NetworkServer.Spawn(enemyGo);
     }
-
-    //[Command]
-    //void SpawnEnemy()
-    //{
-    //    Vector3 position = new Vector3(Random.Range(-5.0f, 5.0f), Random.Range(-5.0f, 5.0f));
-    //    var enemyGo = (GameObject)Instantiate(enemy, position, Quaternion.identity);
-
-    //    NetworkServer.Spawn(enemyGo);
-    //}
 }

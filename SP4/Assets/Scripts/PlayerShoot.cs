@@ -136,10 +136,12 @@ public class PlayerShoot : NetworkBehaviour
             ////gameObject.transform.position += moveDir * moveSpeed * Time.deltaTime;
             //go.transform.up = shootDir;
 
-            if (go.GetComponent<RangeWeaponBase>())
-                go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
-            else if (go.GetComponent<MeleeWeaponBase>())
-                go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
+            CmdFire();
+
+            //if (go.GetComponent<RangeWeaponBase>())
+            //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
+            //else if (go.GetComponent<MeleeWeaponBase>())
+            //    go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
         }
 
         
@@ -163,10 +165,12 @@ public class PlayerShoot : NetworkBehaviour
             //Debug.Log(playerTransform.gameObject);
             playerTransform.up = shootDir;
 
-            if (go.GetComponent<RangeWeaponBase>())
-                go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
-            else if (go.GetComponent<MeleeWeaponBase>())
-                go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
+            CmdFire();
+
+            //if (go.GetComponent<RangeWeaponBase>())
+            //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
+            //else if (go.GetComponent<MeleeWeaponBase>())
+            //    go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
         }
     }
 

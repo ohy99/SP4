@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 4823595088627530}
   - component: {fileID: 212523522012021324}
   - component: {fileID: 114612594043961068}
+  - component: {fileID: 114757335385337794}
   m_Layer: 0
   m_Name: SpawnerRoom
   m_TagString: Untagged
@@ -1040,6 +1041,38 @@ MonoBehaviour:
   rightDoor: {fileID: 114308226266983112}
   upDoor: {fileID: 114899540542356504}
   downDoor: {fileID: 114073905100746672}
+--- !u!114 &114757335385337794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1334630802994978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 124
+    i1: 181
+    i2: 17
+    i3: 247
+    i4: 96
+    i5: 29
+    i6: 234
+    i7: 68
+    i8: 91
+    i9: 42
+    i10: 124
+    i11: 140
+    i12: 109
+    i13: 178
+    i14: 1
+    i15: 232
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114802999922683450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1348,7 +1381,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e541a448f88662e44982e92399884a5b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.99264705, g: 0.5182201, b: 0.5182201, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

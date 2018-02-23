@@ -12,15 +12,26 @@ public class Player : NetworkBehaviour
     private int maxExp;
     private int skillPoints;
     private int currentLevel;
+    private int clientIndex;
     bool onDeadTrigger = false;
 
     public override void OnStartLocalPlayer()
     {
-        short id = GetComponent<NetworkIdentity>().playerControllerId;
-        Debug.Log("playerID" + id);
         GetComponent<SpriteRenderer>().color = Color.green;
+        
         Global.Instance.player = gameObject;
         Camera.main.GetComponent<CameraScript>().playerTransform = gameObject.transform;
+
+        //Debug.Log(Network.player.ToString());
+        //clientIndex = NetworkClient.allClients[0].GetHashCode();
+        //Debug.Log("REGISTER_INDEX: " + clientIndex);
+        //MessageHandler.Instance.index = clientIndex;
+        MessageHandler.Instance.Register(NetworkClient.allClients[0]);
+        MessageHandler.Instance.index = Network.player.GetHashCode();
+        if (isServer)
+            RoomGenerator.Instance.Init();
+        else
+            MessageHandler.Instance.SendSpawnRoom_C2S(); //sent to server/host to get mapinfo
     }
 
 
@@ -46,6 +57,13 @@ public class Player : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isServer && Input.GetKeyUp(KeyCode.L))
+        {   //this for testing 
+            //if (GetComponent<MessageHandler>().myClient != null)
+            //    Debug.Log("server_send");
+            MessageHandler.Instance.SendPosition_C2S(gameObject.transform.position);
+        }
+
         if (hpScript.GetCurrHp() <= 0)
         {
             if (!onDeadTrigger)

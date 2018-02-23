@@ -339,6 +339,7 @@ GameObject:
   - component: {fileID: 212280724037337384}
   - component: {fileID: 114882384098663212}
   - component: {fileID: 114724173632274874}
+  - component: {fileID: 114494604673133066}
   m_Layer: 0
   m_Name: PushPuzzleRoom
   m_TagString: Untagged
@@ -1117,6 +1118,38 @@ MonoBehaviour:
   LeftDoor: {fileID: 1509002418251970}
   RightDoor: {fileID: 1263834555675112}
   isLocked: 0
+--- !u!114 &114494604673133066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820755387426308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 157
+    i1: 234
+    i2: 214
+    i3: 218
+    i4: 153
+    i5: 133
+    i6: 120
+    i7: 36
+    i8: 249
+    i9: 182
+    i10: 194
+    i11: 131
+    i12: 171
+    i13: 184
+    i14: 216
+    i15: 201
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114676089079435802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1423,7 +1456,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e541a448f88662e44982e92399884a5b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.482699, g: 0.66176474, b: 0.37954155, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
