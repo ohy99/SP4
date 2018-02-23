@@ -59,12 +59,4 @@ public class OptionsPanelScript : MonoBehaviour {
         SoundManager.Instance.globalfxSource.mute = !fxToggle.isOn; 
     }
 
-    void OnDestroy()
-    {
-        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
-        PlayerPrefs.SetFloat("FXVolume", fxSlider.value);
-        PlayerPrefs.SetInt("MusicToggle", System.Convert.ToInt32(!musicToggle.isOn));
-        PlayerPrefs.SetInt("FXToggle", System.Convert.ToInt32(!fxToggle.isOn));
-        PlayerPrefs.Save();
-    }
 }
