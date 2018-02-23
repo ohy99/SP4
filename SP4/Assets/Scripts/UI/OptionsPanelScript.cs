@@ -13,6 +13,8 @@ public class OptionsPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        this.transform.parent.gameObject.SetActive(false);
+
         musicSlider = transform.GetChild(0).GetComponent<Slider>();
 
         musicSlider.value = SoundManager.Instance.musicVolume;

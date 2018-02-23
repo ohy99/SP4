@@ -13,7 +13,17 @@ public class SoundManager : Singleton<SoundManager> {
     public float fxVolume = 0.0f;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+
+        musicSource = this.gameObject.AddComponent<AudioSource>();
+        globalfxSource = this.gameObject.AddComponent<AudioSource>();
+
+        musicSource.loop = true;
+
+        AudioClip BGM = (AudioClip)Resources.Load("Music/bensound-creepy");
+        musicSource.clip = BGM;
+        musicSource.Play();
+
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
         fxVolume = PlayerPrefs.GetFloat("FXVolume", 1.0f);
 
