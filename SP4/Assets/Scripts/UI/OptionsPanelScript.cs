@@ -38,11 +38,13 @@ public class OptionsPanelScript : MonoBehaviour {
     public void AdjustMusicVolume()
     {
         SoundManager.Instance.musicSource.volume = musicSlider.value;
+        SoundManager.Instance.musicVolume = musicSlider.value;
     }
 
     public void AdjustFXVolume()
     {
         SoundManager.Instance.globalfxSource.volume = fxSlider.value;
+        SoundManager.Instance.fxVolume = fxSlider.value;
     }
 
     public void ToggleMusic()
