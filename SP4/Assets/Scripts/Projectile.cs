@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PROJLAYER
+{
+    ENEMYPROJ = 9,
+    PLAYERPROJ = 11,
+}
+
+
 public class Projectile : MonoBehaviour {
 
     public float projectileSpeed = 10;
@@ -35,7 +42,7 @@ public class Projectile : MonoBehaviour {
                 {
                     case "Enemy":
                         ParticleManager.Instance.GenerateParticle(ParticleManager.PARTICLETYPE.HITENEMY, coll.gameObject.transform.position);
-                        break;
+                        break;  
                     case "Player":
                         ParticleManager.Instance.GenerateParticle(ParticleManager.PARTICLETYPE.HITPLAYER, coll.gameObject.transform.position);
                         break;

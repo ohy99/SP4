@@ -11,6 +11,8 @@ public class DamageFeedback : Singleton<DamageFeedback> {
     float duration = 1.0f;
     [SerializeField]
     float moveSpd = 5.0f;
+    [SerializeField]
+    float zOffset = -2.0f;
     Vector3 moveDir = new Vector3(0, 1, 0);
 
     class DMGINFO
@@ -57,7 +59,7 @@ public class DamageFeedback : Singleton<DamageFeedback> {
         DMGINFO df = new DMGINFO();
         df.elapsed = 0.0f;
         df.value = damage;
-        df.spriteGO = Instantiate(SpriteText, pos, Quaternion.identity);
+        df.spriteGO = Instantiate(SpriteText, new Vector3(pos.x, pos.y, zOffset), Quaternion.identity);
 
         TextMesh textmesh = df.spriteGO.transform.GetChild(0).GetComponent<TextMesh>();
         textmesh.text = damage.ToString("#.##");//up to 2 dp

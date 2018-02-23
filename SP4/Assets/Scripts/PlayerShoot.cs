@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+
 public class PlayerShoot : MonoBehaviour
 {
     //[SerializeField]
@@ -75,7 +76,7 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             //Debug.Log("TotalRounds:" + go)
-            Fire();
+            Fire(gameObject.tag);
             //if (go.GetComponent<RangeWeaponBase>())
             //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position + transform.up, transform.rotation);
             //else if (go.GetComponent<MeleeWeaponBase>())
@@ -140,7 +141,7 @@ public class PlayerShoot : MonoBehaviour
             ////gameObject.transform.position += moveDir * moveSpeed * Time.deltaTime;
             //go.transform.up = shootDir;
 
-            Fire();
+            Fire(gameObject.tag);
 
             //if (go.GetComponent<RangeWeaponBase>())
             //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
@@ -169,7 +170,7 @@ public class PlayerShoot : MonoBehaviour
             //Debug.Log(playerTransform.gameObject);
             playerTransform.up = shootDir;
 
-            Fire();
+            Fire(gameObject.tag);
 
             //if (go.GetComponent<RangeWeaponBase>())
             //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
@@ -185,7 +186,7 @@ public class PlayerShoot : MonoBehaviour
 
 
     //[Command]
-    void Fire()
+    void Fire(string tag)
     {
         GameObject projectile = null;
         if (go.GetComponent<RangeWeaponBase>())
@@ -193,8 +194,22 @@ public class PlayerShoot : MonoBehaviour
         else if (go.GetComponent<MeleeWeaponBase>())
             go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
 
+        if (!projectile)
+            return;
+
         //if(projectile)
         //    NetworkServer.Spawn(projectile);
+        Debug.Log(projectile);
+        switch (tag)
+        {
+            case "Player":
+                projectile.layer = (int)PROJLAYER.PLAYERPROJ;
+                break;
+            case "Enemy":
+                projectile.layer = (int)PROJLAYER.ENEMYPROJ;
+                break;
+        }
+        Debug.Log(projectile.layer);
 
         Destroy(projectile, 5.0f);
     }
