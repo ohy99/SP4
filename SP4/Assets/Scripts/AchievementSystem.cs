@@ -144,7 +144,7 @@ public class AchievementSystem : Singleton<AchievementSystem> {
 
             //api.moveElasped = Mathf.Min(api.moveElasped + Time.deltaTime, api.moveTime);
             //api.panel.transform.localPosition = Vector3.Lerp(api.startPos, api.endPos, api.moveElasped / api.moveTime);
-            if (api.panel.transform.localPosition == api.endPos)
+            if (api.panel.transform.localPosition == firstEndReference + totalEndReference + api.endPos)
             {
                 deletelist.Add(api);
             }

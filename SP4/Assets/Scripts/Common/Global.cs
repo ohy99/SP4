@@ -8,6 +8,7 @@ public class Global : Singleton<Global> {
     GameObject _player;
     [SerializeField]
     Camera _camera;
+    
 
     public GameObject player { get { return _player; } set { _player = value; } }
 
