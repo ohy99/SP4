@@ -13,12 +13,23 @@ public class SoundManager : Singleton<SoundManager> {
     public float fxVolume = 0.0f;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+
+        musicSource = this.gameObject.AddComponent<AudioSource>();
+        globalfxSource = this.gameObject.AddComponent<AudioSource>();
+
+        musicSource.loop = true;
+
+        AudioClip BGM = (AudioClip)Resources.Load("Music/bensound-creepy");
+        musicSource.clip = BGM;
+        musicSource.Play();
+
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+        Debug.Log(musicVolume);
         fxVolume = PlayerPrefs.GetFloat("FXVolume", 1.0f);
 
-        musicSource.mute = System.Convert.ToBoolean(PlayerPrefs.GetInt("MusicToggle", 1));
-        globalfxSource.mute = System.Convert.ToBoolean(PlayerPrefs.GetInt("FXToggle", 1));
+        musicSource.mute = System.Convert.ToBoolean(PlayerPrefs.GetInt("MusicToggle", 0));
+        globalfxSource.mute = System.Convert.ToBoolean(PlayerPrefs.GetInt("FXToggle", 0));
 
         musicSource.volume = musicVolume;
         globalfxSource.volume = fxVolume;
@@ -61,5 +72,15 @@ public class SoundManager : Singleton<SoundManager> {
         globalfxSource.clip = clips[randomIndex];
 
         globalfxSource.Play();
+    }
+
+    new void OnDestroy()
+    {
+        Debug.Log(musicVolume);
+        PlayerPrefs.SetFloat("MusicVolume", musicVolume);
+        PlayerPrefs.SetFloat("FXVolume", fxVolume);
+        PlayerPrefs.SetInt("MusicToggle", System.Convert.ToInt32(musicSource.mute));
+        PlayerPrefs.SetInt("FXToggle", System.Convert.ToInt32(globalfxSource.mute));
+        PlayerPrefs.Save();
     }
 }

@@ -13,6 +13,8 @@ public class OptionsPanelScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        this.transform.parent.gameObject.SetActive(false);
+
         musicSlider = transform.GetChild(0).GetComponent<Slider>();
 
         musicSlider.value = SoundManager.Instance.musicVolume;
@@ -38,11 +40,13 @@ public class OptionsPanelScript : MonoBehaviour {
     public void AdjustMusicVolume()
     {
         SoundManager.Instance.musicSource.volume = musicSlider.value;
+        SoundManager.Instance.musicVolume = musicSlider.value;
     }
 
     public void AdjustFXVolume()
     {
         SoundManager.Instance.globalfxSource.volume = fxSlider.value;
+        SoundManager.Instance.fxVolume = fxSlider.value;
     }
 
     public void ToggleMusic()
@@ -55,12 +59,4 @@ public class OptionsPanelScript : MonoBehaviour {
         SoundManager.Instance.globalfxSource.mute = !fxToggle.isOn; 
     }
 
-    void OnDestroy()
-    {
-        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
-        PlayerPrefs.SetFloat("FXVolume", fxSlider.value);
-        PlayerPrefs.SetInt("MusicToggle", System.Convert.ToInt32(!musicToggle.isOn));
-        PlayerPrefs.SetInt("FXToggle", System.Convert.ToInt32(!fxToggle.isOn));
-        PlayerPrefs.Save();
-    }
 }
