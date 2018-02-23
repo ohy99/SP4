@@ -2993,6 +2993,66 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &1124125214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1124125216}
+  - component: {fileID: 1124125215}
+  m_Layer: 0
+  m_Name: Achievement System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1124125215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1124125214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7fc0a84e5d0554d8ba24fae3b1dde3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achievementPrefabList:
+  - {fileID: 1580052983099242, guid: f72cad77572745f4aa7a12194ab2bf47, type: 2}
+  - {fileID: 1819883705995220, guid: 1e570d46546c1114abfd8a2802ce27b5, type: 2}
+  - {fileID: 1217731410548958, guid: af1a885dcfb044342b6b4e7984399adb, type: 2}
+  - {fileID: 1272950214214822, guid: 2e53469cd5df3cf43953d7b8fffbcfea, type: 2}
+  - {fileID: 1469065056268328, guid: ea69ca0cb7d14214c8e495e67101e7a4, type: 2}
+  - {fileID: 1896302910555898, guid: e2efba6091da24143b782736537cec33, type: 2}
+  - {fileID: 1547987203010758, guid: 9ef5316c80df6fe4283d7d11cc6dbb96, type: 2}
+  - {fileID: 1015776310970660, guid: fd63568d4e29cf047a3761e58d3a0509, type: 2}
+  - {fileID: 1228572882674368, guid: 213b471b9c2389543a6aa592d732cb44, type: 2}
+  achievementPanel: {fileID: 1319756069167566, guid: 4cc89fe7bc6ca0641879d3a110adf9cb,
+    type: 2}
+  canvas: {fileID: 507841960}
+  panelinfo:
+    offsetFromTop: 5
+    width: 200
+    height: 50
+    lifeTime: 2
+    moveTime: 0.5
+  onHacks: 1
+--- !u!4 &1124125216
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1124125214}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1136345776
 GameObject:
   m_ObjectHideFlags: 0
