@@ -1414,6 +1414,8 @@ MonoBehaviour:
   enemyMelee: {fileID: 1121057322748648, guid: bd66e0e699c5c8042b2bddadea72b2df, type: 2}
   enemyRange: {fileID: 1621331323061118, guid: 582b5b78d3b76e24c99ee8434de0197f, type: 2}
   map: {fileID: 1864703187797008}
+  genericSpawner: {fileID: 1368807512881014, guid: 9a661cf7f8d77f9419b5242b4fc22da5,
+    type: 2}
 --- !u!114 &114528902972931408
 MonoBehaviour:
   m_ObjectHideFlags: 1

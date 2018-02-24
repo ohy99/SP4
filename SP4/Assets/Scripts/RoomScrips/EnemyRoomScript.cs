@@ -10,6 +10,7 @@ public class EnemyRoomScript : RoomScript {
 
     List<DoorInfo> doorInfoList = new List<DoorInfo>();
 
+    [SerializeField]
     GameObject Spawner;
 
     //List<bool> doorList = new List<bool>();

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SpeedRoomScript : RoomScript {
 
@@ -13,6 +14,7 @@ public class SpeedRoomScript : RoomScript {
 
     SpeedRoomItemSpawner spawnerScript;
 
+    //[SyncVar]
     int itemCollected;
 
     bool puzzleComplete;

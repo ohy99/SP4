@@ -40,6 +40,15 @@ public class RoomGenerator : Singleton<RoomGenerator> {
     UnityEngine.UI.Text chanceText;
 
     //Array of rooms with ID
+    //public struct RoomStruct
+    //{
+    //    public GameObject room;
+    //}
+
+    //public class SyncListRoomStruct : SyncListStruct<RoomStruct> { }
+
+    //SyncListRoomStruct syncListRooomStruct = new SyncListRoomStruct();
+
     List<GameObject> roomList;
     int currID; //aka size of roomList. so roomList.count == currID
     float zOffset = 1;
@@ -58,6 +67,10 @@ public class RoomGenerator : Singleton<RoomGenerator> {
     int numOfOpenedDoors;
     bool generatedBossRoom;
 
+
+    //for da network stuff
+    public List<PopulateRoomListMessage> roomDataList;
+
     enum RANDACTION
     {
         MUSTLOCK,
@@ -67,10 +80,11 @@ public class RoomGenerator : Singleton<RoomGenerator> {
 
 	// Use this for initialization
 	void Start () {
-
         //gameObject.AddComponent<NetworkIdentity>();
         //gameObject.GetComponent<NetworkIdentity>().serverOnly = true;
+        //syncListRooomStruct = new SyncListRoomStruct();
 
+        roomDataList = new List<PopulateRoomListMessage>();
         biggestX = biggestY = smallestY = smallestX = 0;
         numOfOpenedDoors = 0;
         generatedBossRoom = false;
@@ -191,10 +205,32 @@ public class RoomGenerator : Singleton<RoomGenerator> {
                     incChance += 0.25f;
             }
         }
+
+        Debug.Log("B4_CurrID: " + currID);
         roomScript.Set(currID, 0, 0, boolArray[DIRECTION.LEFT], boolArray[DIRECTION.RIGHT], boolArray[DIRECTION.UP], boolArray[DIRECTION.DOWN]);
         StoreRoom(currID, 0, 0, room);
-        //NETWORK
-        NetworkServer.Spawn(room);
+        Debug.Log("After_CurrID: " + currID);
+        Debug.Log("roomID" + room.GetComponent<RoomScript>().GetRoomID());
+        //NETWORK asdasd
+        //RoomStruct temp = new RoomStruct();
+        //temp.room = room;
+        //syncListRooomStruct.Add(temp);
+        //NetworkServer.Spawn(room);
+
+        PopulateRoomListMessage popRoomMsg = new PopulateRoomListMessage();
+        popRoomMsg.roomID = room.GetComponent<RoomScript>().GetRoomID();
+        popRoomMsg.gridX = 0;
+        popRoomMsg.gridY = 0;
+        popRoomMsg.roomPos = new Vector3(0, 0, zOffset);
+        popRoomMsg.roomScale = room.transform.localScale;
+        popRoomMsg.roomType = -1;
+        popRoomMsg.isLeft = room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.LEFT);
+        popRoomMsg.isRight = room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.RIGHT);
+        popRoomMsg.isUp = room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.UP);
+        popRoomMsg.isDown = room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.DOWN);
+
+        roomDataList.Add(popRoomMsg);
+
 
         while (numOfOpenedDoors > 0)
         {
@@ -221,6 +257,10 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         //Increase the number of times entered game
         PlayerPrefs.SetInt(PREFTYPE.NUM_OF_ENTERGAME.ToString(), PlayerPrefs.GetInt(PREFTYPE.NUM_OF_ENTERGAME.ToString(), 0) + 1);
 
+        Debug.Log("LEFT: " + room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.LEFT));
+        Debug.Log("UP: " + room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.UP));
+        Debug.Log("RIGHT: " + room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.RIGHT));
+        Debug.Log("DOWN: " + room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.DOWN));
     }
 
 
@@ -322,6 +362,7 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         float offsetX = (side == DIRECTION.LEFT ? -scaleX : (side == DIRECTION.RIGHT ? scaleX : 0));
         float offsetY = (side == DIRECTION.DOWN ? -scaleY : (side == DIRECTION.UP ? scaleY : 0));
         Vector3 tempRoomPos;
+        int randIndex = -1;
 
         if (!generatedBossRoom)
         {
@@ -336,7 +377,7 @@ public class RoomGenerator : Singleton<RoomGenerator> {
             }
             else
             {
-                int randIndex = UnityEngine.Random.Range(0, randomRooms.Count - 1);
+                randIndex = UnityEngine.Random.Range(0, randomRooms.Count - 1);
                 tempRoomPos = new Vector3(currPos.x + offsetX, currPos.y + offsetY, zOffset);
                 room = Instantiate(randomRooms[randIndex], tempRoomPos, Quaternion.identity);
 
@@ -376,20 +417,33 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         //    DIRECTION oppoSide = GetOppositeDir(dir);
         //    neighbourRS.OffTriggerBox(oppoSide);
         //}
-
+        Debug.Log("B4_CurrID: " + currID);
         StoreRoom(currID, newGridX, newGridY, room);
         room.SetActive(false);
-
+        Debug.Log("CurrID: " + currID);
+        Debug.Log("roomID" + room.GetComponent<RoomScript>().GetRoomID());
+        //RoomStruct temp = new RoomStruct();
+        //temp.room = room;
+        //syncListRooomStruct.Add(temp);
         //NETWORK
         //NetworkServer.Spawn(room);
-        //PopulateRoomListMessage popRoomMsg = new PopulateRoomListMessage();
-        //popRoomMsg.roomID = currID;
-        //popRoomMsg.gridX = newGridX;
-        //popRoomMsg.gridY = newGridY;
-        //popRoomMsg.roomPos = tempRoomPos;
-        //popRoomMsg.rooomScale = room.transform.localScale;
-        //for (int i = 0; i < roomList.Count; ++i)
-        //    MessageHandler.Instance.SendSpawnRoom_S2C(roomList[i]);
+
+
+
+        PopulateRoomListMessage popRoomMsg = new PopulateRoomListMessage();
+        //Debug.Log(currID);
+        popRoomMsg.roomID = room.GetComponent<RoomScript>().GetRoomID();
+        popRoomMsg.gridX = newGridX;
+        popRoomMsg.gridY = newGridY;
+        popRoomMsg.roomPos = tempRoomPos;
+        popRoomMsg.roomScale = room.transform.localScale;
+        popRoomMsg.roomType = randIndex;
+        popRoomMsg.isLeft = room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.LEFT);
+        popRoomMsg.isRight = room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.RIGHT);
+        popRoomMsg.isUp = room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.UP);
+        popRoomMsg.isDown = room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.DOWN);
+
+        roomDataList.Add(popRoomMsg);
     }
 
     ////Left, right, up, down. ADDTO : add to the int numOfOpeneddoor
@@ -446,7 +500,7 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         return DIRECTION.NONE;
     }
 
-    void StoreRoom(int ID, int x, int y, GameObject room)
+    public void StoreRoom(int ID, int x, int y, GameObject room)
     {
         if (!roomMap.ContainsKey(y))
             roomMap.Add(y, new Dictionary<int, GameObject>());
@@ -590,7 +644,7 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         roomMap[newGridY][newGridX].SetActive(true);
 
         // Send msg to client that a room is active
-        NetworkServer.Spawn(roomMap[newGridY][newGridX]);
+        //NetworkServer.Spawn(roomMap[newGridY][newGridX]);
         //MessageHandler.Instance.SendSpawnRoom_S2C(currRoomID, side);
     }
 
@@ -623,7 +677,26 @@ public class RoomGenerator : Singleton<RoomGenerator> {
     {
         return roomList;
     }
+    public void AddToRoomList(GameObject go)
+    {
+        if (go != null)
+        {
+            roomList.Add(go);
+            return;
+        }
 
+        Debug.Log("is null");
+    }
+
+    public List<GameObject> GetRandomRoomList()
+    {
+        return randomRooms;
+    }
+
+    public GameObject GetDefaultRoom()
+    {
+        return defaultRoom;
+    }
 }
 
 /*

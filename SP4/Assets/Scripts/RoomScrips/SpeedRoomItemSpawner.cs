@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SpeedRoomItemSpawner : MonoBehaviour {
 
@@ -12,6 +13,9 @@ public class SpeedRoomItemSpawner : MonoBehaviour {
     GameObject map;
     [SerializeField]
     GameObject item;
+
+    [SerializeField]
+    GameObject genericSpawner;
 
     float spawnDelay = 3.0f;
     public int maxSpawns = 5;
@@ -42,11 +46,12 @@ public class SpeedRoomItemSpawner : MonoBehaviour {
         for (numOfItemSpawned = 0; numOfItemSpawned < maxSpawns; ++numOfItemSpawned)
         {
             yield return new WaitForSeconds(spawnDelay);
-            Vector3 pos = new Vector3(Random.Range(map.transform.position.x + -map.transform.localScale.x * 0.5f + 2.5f, map.transform.position.x + map.transform.localScale.x * 0.5f - 2.5f),
-         Random.Range(map.transform.position.y + -map.transform.localScale.y * 0.5f + 2.5f, map.transform.position.y + map.transform.localScale.y * 0.5f - 2.5f), 0);
-            GameObject temp = Instantiate(item, pos, Quaternion.identity);
-            temp.GetComponent<SpeedRoomItemScript>().SetSpawner(this);
-            temp.transform.SetParent(this.transform.parent);
+            //  Vector3 pos = new Vector3(Random.Range(map.transform.position.x + -map.transform.localScale.x * 0.5f + 2.5f, map.transform.position.x + map.transform.localScale.x * 0.5f - 2.5f),
+            //Random.Range(map.transform.position.y + -map.transform.localScale.y * 0.5f + 2.5f, map.transform.position.y + map.transform.localScale.y * 0.5f - 2.5f), 0);
+            //   GameObject temp = Instantiate(item, pos, Quaternion.identity);
+            //   temp.GetComponent<SpeedRoomItemScript>().SetSpawner(this);
+             //  temp.transform.SetParent(game.transform.parent);
+            CallSpawner();
         }
     }
 
@@ -66,5 +71,20 @@ public class SpeedRoomItemSpawner : MonoBehaviour {
 
         if (numOfItemDestroyed == maxSpawns)
             SendMessageUpwards("SpawnEnemies", maxSpawns);
+    }
+
+    void CallSpawner()
+    {
+        if(Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+        {
+            Vector3 pos = new Vector3(Random.Range(map.transform.position.x + -map.transform.localScale.x * 0.5f + 2.5f, map.transform.position.x + map.transform.localScale.x * 0.5f - 2.5f),
+          Random.Range(map.transform.position.y + -map.transform.localScale.y * 0.5f + 2.5f, map.transform.position.y + map.transform.localScale.y * 0.5f - 2.5f), 0);
+            genericSpawner.GetComponent<GenericSpawner>().Init(map);
+            genericSpawner.GetComponent<GenericSpawner>().SpawnSpeedItem(pos, item, map, this);
+        }
+        else
+        {
+            Debug.Log("not server/host");
+        }
     }
 }

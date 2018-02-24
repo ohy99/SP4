@@ -17,6 +17,12 @@ public class Player : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
+
+        //if (!NetworkServer.active)
+        //    Debug.Log("SERVER NOT ACTIVE");
+        //else
+        //    Debug.Log("SERVER ACTIVE");
+
         GetComponent<SpriteRenderer>().color = Color.green;
         
         Global.Instance.player = gameObject;
@@ -31,7 +37,13 @@ public class Player : NetworkBehaviour
         if (isServer)
             RoomGenerator.Instance.Init();
         else
-            MessageHandler.Instance.SendSpawnRoom_C2S(); //sent to server/host to get mapinfo
+            MessageHandler.Instance.SendRoom_C2S(); //sent to server/host to get mapinfo
+
+        //for (int i = 0; i < RoomGenerator.Instance.roomDataList.Count; ++i)
+        //    Debug.Log(RoomGenerator.Instance.roomDataList[i].roomID);
+
+        //for (int i = 0; i < RoomGenerator.Instance.GetRoomList().Count; ++i)
+        //    Debug.Log(RoomGenerator.Instance.GetRoomList()[i].GetComponent<RoomScript>().GetRoomID());
     }
 
 
@@ -52,6 +64,11 @@ public class Player : NetworkBehaviour
         currentLevel = 1;
 
         Global.Instance.player = gameObject;
+
+        if (!NetworkServer.active)
+            Debug.Log("SERVER NOT ACTIVE");
+        else
+            Debug.Log("SERVER ACTIVE");
     }
 
     // Update is called once per frame

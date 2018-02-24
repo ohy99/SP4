@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 4335535216415926}
   - component: {fileID: 61720153869839970}
   - component: {fileID: 114182774695235792}
+  - component: {fileID: 114968378764197680}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -140,6 +141,38 @@ MonoBehaviour:
   LeftDoor: {fileID: 1789349475039458}
   RightDoor: {fileID: 1728912659713918}
   isLocked: 0
+--- !u!114 &114968378764197680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1960496653663730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 223
+    i1: 214
+    i2: 176
+    i3: 153
+    i4: 196
+    i5: 217
+    i6: 194
+    i7: 84
+    i8: 107
+    i9: 15
+    i10: 72
+    i11: 243
+    i12: 139
+    i13: 157
+    i14: 203
+    i15: 59
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!212 &212366048545967402
 SpriteRenderer:
   m_ObjectHideFlags: 1

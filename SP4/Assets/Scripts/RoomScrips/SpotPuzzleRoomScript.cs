@@ -58,6 +58,7 @@ public class SpotPuzzleRoomScript : RoomScript
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.UP), roomScript.GetHasTriggerBox(DIRECTION.UP), DIRECTION.UP));
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.DOWN), roomScript.GetHasTriggerBox(DIRECTION.DOWN), DIRECTION.DOWN));
 
+
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.LEFT));
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.RIGHT));
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.UP));
@@ -136,6 +137,8 @@ public class SpotPuzzleRoomScript : RoomScript
             return;
         }
 
+        //
+        //GetRoomID();
         puzzleComplete = true;
 
         foreach (DoorInfo doorinfo in doorInfoList)
@@ -145,8 +148,8 @@ public class SpotPuzzleRoomScript : RoomScript
             if (!doorinfo.haveTriggerBox)
                 roomScript.OffTriggerBox(doorinfo.dir);
         }
-        
 
+        
 
         //if (doorList[0])
         //    roomScript.LockDoor(DIRECTION.LEFT);
