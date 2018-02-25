@@ -30,6 +30,9 @@ public class MessageHandler : Singleton<MessageHandler>
 
         public static short lockDoorMsg_client = MsgType.Highest + 13;
         public static short lockDoorMsg_server = MsgType.Highest + 14;
+
+        public static short NumberToSpawnMsg_client = MsgType.Highest + 15;
+        public static short NumberToSpawnMsg_server = MsgType.Highest + 16;
     };
 
     //variables
@@ -41,7 +44,6 @@ public class MessageHandler : Singleton<MessageHandler>
     {
         //myClient = new List<NetworkClient>();
     }
-
 
     // RegisterHandler for clients and server
     public void Register(NetworkClient client)
@@ -62,6 +64,9 @@ public class MessageHandler : Singleton<MessageHandler>
 
         myClient.RegisterHandler(MyMsgType.lockDoorMsg_server, OnRecvLockDoor_Client);
         NetworkServer.RegisterHandler(MyMsgType.lockDoorMsg_client, OnRecvLockDoor_Server);
+
+        myClient.RegisterHandler(MyMsgType.NumberToSpawnMsg_server, OnRecvNumberToSpawn_Client);
+        NetworkServer.RegisterHandler(MyMsgType.NumberToSpawnMsg_client, OnRecvNumberToSpawn_Server);
 
         //myClient.RegisterHandler(MyMsgType.spawnRoomMsgType_server, OnRecvSpawnRoom_Client);
         //NetworkServer.RegisterHandler(MyMsgType.spawnRoomMsgType_client, OnRecvSpawnRoom_Server);
@@ -121,6 +126,19 @@ public class MessageHandler : Singleton<MessageHandler>
         Debug.Log("SendLockDoor_S2C");
         if (NetworkServer.active)
             NetworkServer.SendToAll(MyMsgType.lockDoorMsg_server, msg);
+    }
+
+    public void SendNumberToSpawn_S2C(int _roomId, int _spawnNumber, string _roomType)
+    {
+        NumberToSpawnMessage msg = new NumberToSpawnMessage();
+        msg.roomId = _roomId;
+        msg.spawnNumber = _spawnNumber;
+        msg.roomType = _roomType;
+
+        Debug.Log("SendNumberToSpawnDoor_S2C");
+
+        if (NetworkServer.active)
+            NetworkServer.SendToAll(MyMsgType.NumberToSpawnMsg_server, msg);
     }
 
     //SENDING TO SERVER
@@ -188,6 +206,18 @@ public class MessageHandler : Singleton<MessageHandler>
 
         //send to server
         myClient.Send(MyMsgType.lockDoorMsg_client, msg);
+    }
+
+    public void SendNumberToSpawn_C2S(int _roomId, int _spawnNumber, string _roomType)
+    {
+        NumberToSpawnMessage msg = new NumberToSpawnMessage();
+        msg.roomId = _roomId;
+        msg.spawnNumber = _spawnNumber;
+        msg.roomType = _roomType;
+
+        Debug.Log("SendNumberToSpawnDoor_C2S");
+
+        myClient.Send(MyMsgType.NumberToSpawnMsg_client, msg);
     }
     //-----------------------------------------------------------------------------
 
@@ -326,6 +356,38 @@ public class MessageHandler : Singleton<MessageHandler>
 
         Debug.Log("ClientRecv_LockDoor : room_" + msg.roomId);
         RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<RoomScript>().LockAllDoor();
+    }
+
+    //recv spawn num
+    public void OnRecvNumberToSpawn_Server(NetworkMessage netMsg)
+    {
+        NumberToSpawnMessage msg = netMsg.ReadMessage<NumberToSpawnMessage>();
+
+        Debug.Log("Host/ServerRecv_NumberToSpawn : room_" + msg.roomId);
+        //RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<RoomScript>().LockAllDoor();
+    }
+
+    public void OnRecvNumberToSpawn_Client(NetworkMessage netMsg)
+    {
+        if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+            return;
+
+        NumberToSpawnMessage msg = netMsg.ReadMessage<NumberToSpawnMessage>();
+
+        Debug.Log("ClientRecv_NumberToSpawn : room_" + msg.roomId);
+
+        if(msg.roomType == "enemyRoom")
+        {
+            RoomGenerator.Instance.GetRoomList()[msg.roomId].
+                GetComponent<EnemyRoomScript>().GetSpawner().
+                GetComponent<EnemySpawner>().SetTotalWave(msg.spawnNumber);
+
+            //RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<EnemyRoomScript>().totalNumWave = msg.spawnNumber;
+        }
+        else if(msg.roomType == "speedRoom")
+        {
+            RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<SpeedRoomScript>().GetSpawnerScript().maxSpawns = msg.spawnNumber;
+        }
     }
 }
 

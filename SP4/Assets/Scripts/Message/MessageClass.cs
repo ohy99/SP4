@@ -61,5 +61,11 @@ public class PushPuzzleRoomMessage : MessageBase
 public class LockDoorMessage : MessageBase
 {
     public int roomId;
-    public bool isLock; //maybe no need
+}
+
+public class NumberToSpawnMessage : MessageBase
+{
+    public int roomId;
+    public int spawnNumber;
+    public string roomType;
 }

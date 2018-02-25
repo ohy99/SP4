@@ -176,4 +176,9 @@ public class SpeedRoomScript : RoomScript {
         OnTriggerBox(DIRECTION.UP);
         OnTriggerBox(DIRECTION.DOWN);
     }
+
+    public SpeedRoomItemSpawner GetSpawnerScript()
+    {
+        return spawnerScript;
+    }
 }

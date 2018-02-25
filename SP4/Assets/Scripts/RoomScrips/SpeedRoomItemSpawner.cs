@@ -19,6 +19,9 @@ public class SpeedRoomItemSpawner : MonoBehaviour {
     [SerializeField]
     GameObject genericSpawner;
 
+    GameObject player;
+    GameObject[] playersList;
+
     float spawnDelay = 3.0f;
     public int maxSpawns = 5;
 
@@ -35,6 +38,22 @@ public class SpeedRoomItemSpawner : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        playersList = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log("numPlayer: " + playersList.Length);
+        for (int i = 0; i < playersList.Length; i++)
+        {
+            if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+            {
+                player = playersList[i];
+                break;
+            }
+        }
+
+        if(player.GetComponent<NetworkIdentity>().isServer)
+        {
+            //send to all client the no of item spawned
+            MessageHandler.Instance.SendNumberToSpawn_S2C(map.GetComponent<RoomScript>().GetRoomID(), maxSpawns, "speedRoom");
+        }
     }
 
     // Update is called once per frame

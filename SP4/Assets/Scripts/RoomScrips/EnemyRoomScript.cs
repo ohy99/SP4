@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class EnemyRoomScript : RoomScript {
 
     GameObject player;
+    GameObject[] playersList;
 
     RoomScript roomScript;
 
@@ -18,12 +20,15 @@ public class EnemyRoomScript : RoomScript {
     float elapsedTime;
 
     bool completedWaves;
+    bool isLock;
+
+    //public int totalNumWave;
 
     // Use this for initialization
     void Start()
     {
         roomScript = this.GetComponent<RoomScript>();
-
+        //totalNumWave = Random.Range(3, 10);
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.LEFT));
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.RIGHT));
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.UP));
@@ -36,10 +41,20 @@ public class EnemyRoomScript : RoomScript {
 
         Spawner = transform.GetChild(0).gameObject;
 
-        player = Global.Instance.player;
+        playersList = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < playersList.Length; i++)
+        {
+            if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+            {
+                player = playersList[i];
+                break;
+            }
+        }
+        //player = Global.Instance.player;
 
         elapsedTime = 0.0f;
         completedWaves = false;
+        isLock = false;
     }
 
     // Update is called once per frame
@@ -55,6 +70,7 @@ public class EnemyRoomScript : RoomScript {
             if (!Spawner.activeSelf)
             {
                 Spawner.SetActive(true);
+                //Spawner.GetComponent<EnemySpawner>().SetTotalWave(totalNumWave);
                 Spawner.SendMessage("StartSpawner");
             }
 
@@ -67,6 +83,15 @@ public class EnemyRoomScript : RoomScript {
             OnTriggerBox(DIRECTION.RIGHT);
             OnTriggerBox(DIRECTION.UP);
             OnTriggerBox(DIRECTION.DOWN);
+
+            if (!isLock)
+            {
+                if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+                    MessageHandler.Instance.SendLockDoor_S2C(roomScript.GetRoomID());
+                else
+                    MessageHandler.Instance.SendLockDoor_C2S(roomScript.GetRoomID());
+                isLock = true;
+            }
         }
 
     }
@@ -94,5 +119,25 @@ public class EnemyRoomScript : RoomScript {
                 roomScript.OffTriggerBox(doorInfo.dir);
         }
 
+    }
+
+    public GameObject GetSpawner()
+    {
+        return Spawner;
+    }
+
+    public override void LockAllDoor()
+    {
+        Debug.Log("LOCK DOOR_Room -> " + roomScript.GetRoomID());
+
+        LockDoor(DIRECTION.LEFT);
+        LockDoor(DIRECTION.RIGHT);
+        LockDoor(DIRECTION.UP);
+        LockDoor(DIRECTION.DOWN);
+
+        OnTriggerBox(DIRECTION.LEFT);
+        OnTriggerBox(DIRECTION.RIGHT);
+        OnTriggerBox(DIRECTION.UP);
+        OnTriggerBox(DIRECTION.DOWN);
     }
 }
