@@ -301,8 +301,8 @@ public class MessageHandler : Singleton<MessageHandler>
             return;
 
         PushPuzzleRoomMessage msg = netMsg.ReadMessage<PushPuzzleRoomMessage>();
-
         Debug.Log("ClientRecv_PushPuzzle_" + msg.connectionId + ": room_" + msg.roomId);
+
 
         RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<PushPuzzleRoomScript>().SetObjectivePos(msg.objectivePos);
         RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<PushPuzzleRoomScript>().SetTargetPos(msg.targetPos);

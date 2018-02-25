@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class SpotPuzzleRoomScript : RoomScript
 {
     GameObject player;
+    GameObject[] playersList;
 
     Transform OriginalGroup;
     Transform ChangedGroup;
@@ -20,6 +21,7 @@ public class SpotPuzzleRoomScript : RoomScript
     //bool puzzleComplete;
 
     bool wrongSelection;
+    bool isLock;
 
     float elapsedTime;
     float textTimer;
@@ -67,8 +69,19 @@ public class SpotPuzzleRoomScript : RoomScript
         elapsedTime = 0.0f;
 
         puzzleComplete = false;
+        isLock = false;
 
-        player = Global.Instance.player;
+        playersList = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log("numPlayer: " + playersList.Length);
+        for (int i = 0; i < playersList.Length; i++)
+        {
+            if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+            {
+                player = playersList[i];
+                break;
+            }
+        }
+       //player = Global.Instance.player;
     }
 
     // Update is called once per frame
@@ -93,10 +106,14 @@ public class SpotPuzzleRoomScript : RoomScript
             OnTriggerBox(DIRECTION.UP);
             OnTriggerBox(DIRECTION.DOWN);
 
-            if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
-                MessageHandler.Instance.SendLockDoor_S2C(roomScript.GetRoomID());
-            else
-                MessageHandler.Instance.SendLockDoor_C2S(roomScript.GetRoomID());
+            if (!isLock)
+            {
+                if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+                    MessageHandler.Instance.SendLockDoor_S2C(roomScript.GetRoomID());
+                else
+                    MessageHandler.Instance.SendLockDoor_C2S(roomScript.GetRoomID());
+                isLock = true;
+            }
         }
 
         if (textTimer < elapsedTime)

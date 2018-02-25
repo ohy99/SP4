@@ -14,7 +14,7 @@ public class Player : NetworkBehaviour
     private int currentLevel;
     private int clientIndex;
     bool onDeadTrigger = false;
-
+    //GameObject[] playersList;
 
     public override void OnStartLocalPlayer()
     {
@@ -32,6 +32,18 @@ public class Player : NetworkBehaviour
         }
         else
             Debug.Log("global player in use wtf");
+
+        //wiil tis worko
+        //playersList = GameObject.FindGameObjectsWithTag("Player");
+        //Debug.Log("numPlayer: " + playersList.Length);
+        //for (int i = 0; i < playersList.Length; i++)
+        //{
+        //    if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+        //    {
+        //        Global.Instance.player = playersList[i];
+        //        break;
+        //    }
+        //}
 
         Global.Instance.player = gameObject;
         Camera.main.GetComponent<CameraScript>().playerTransform = gameObject.transform;

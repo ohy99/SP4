@@ -4,7 +4,12 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class PushPuzzleRoomScript : RoomScript {
-    
+
+    [SerializeField]
+    GameObject genericSpawner;
+    [SerializeField]
+    GameObject objective;
+
     GameObject player;
     GameObject[] playersList;
 
@@ -21,28 +26,45 @@ public class PushPuzzleRoomScript : RoomScript {
     float elapsedTime;
     float timer;
     bool isLock;
-
+    bool isPosSet;
     // Use this for initialization
 
     void Start()
     {
         //Random.Range(1, 1);
         //wad = new ArrayList();
-        roomScript = this.GetComponent<RoomScript>();
-
         Debug.Log("PuzzleRoomStart");
 
+        roomScript = this.GetComponent<RoomScript>();
+
+        playersList = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log("numPlayer: " + playersList.Length);
+        for (int i = 0; i < playersList.Length; i++)
+        {
+            if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+            {
+                player = playersList[i];
+                break;
+            }
+        }
         //if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
         //{
-        ObjectivePos.Set(Random.Range((transform.position.x - transform.localScale.x * 0.5f + 2.0f), transform.position.x), Random.Range((transform.position.y - transform.localScale.y * 0.5f + 2.0f), (transform.position.y + transform.localScale.y * 0.5f - 2.0f)), 0);
-        TargetPos.Set(Random.Range((transform.position.x + transform.localScale.x * 0.5f - 2.0f), transform.position.x), Random.Range((transform.position.y - transform.localScale.y * 0.5f + 2.0f), (transform.position.y + transform.localScale.y * 0.5f - 2.0f)), 0);
+        
+        if(!isPosSet || player.GetComponent<NetworkIdentity>().isServer)
+        {
+            //Debug.Log("IS SETTING AGN");
+            ObjectivePos.Set(Random.Range((transform.position.x - transform.localScale.x * 0.5f + 2.0f), transform.position.x), Random.Range((transform.position.y - transform.localScale.y * 0.5f + 2.0f), (transform.position.y + transform.localScale.y * 0.5f - 2.0f)), 0);
+            TargetPos.Set(Random.Range((transform.position.x + transform.localScale.x * 0.5f - 2.0f), transform.position.x), Random.Range((transform.position.y - transform.localScale.y * 0.5f + 2.0f), (transform.position.y + transform.localScale.y * 0.5f - 2.0f)), 0);
 
-        transform.GetChild(0).position = ObjectivePos;
-        transform.GetChild(1).position = TargetPos;
+            //transform.GetChild(0).position = ObjectivePos;
+            transform.GetChild(0).position = TargetPos;
 
-        if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+            if (player.GetComponent<NetworkIdentity>().isServer)
+                genericSpawner.GetComponent<GenericSpawner>().SpawnObject(ObjectivePos, objective);
+        }
+
+        if (player.GetComponent<NetworkIdentity>().isServer)
             MessageHandler.Instance.SendPushPuzzle_S2C(1, roomScript.GetRoomID(), ObjectivePos, TargetPos);
-        //}
         //else
         //{
         //    Debug.Log("pushRommId: " + roomScript.GetRoomID());
@@ -58,21 +80,7 @@ public class PushPuzzleRoomScript : RoomScript {
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.RIGHT), roomScript.GetHasTriggerBox(DIRECTION.RIGHT), DIRECTION.RIGHT));
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.UP), roomScript.GetHasTriggerBox(DIRECTION.UP), DIRECTION.UP));
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.DOWN), roomScript.GetHasTriggerBox(DIRECTION.DOWN), DIRECTION.DOWN));
-
-
-        playersList = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log("numPlayer: " + playersList.Length);
-        for (int i = 0; i < playersList.Length; i++)
-        {
-            if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
-            {
-                player = playersList[i];
-                break;
-            }
-        }
-
-
-
+        
         elapsedTime = 0.0f;
         timer = 5.0f;
 
@@ -90,8 +98,8 @@ public class PushPuzzleRoomScript : RoomScript {
         timer -= Time.deltaTime;
 
 
-        if (player.GetComponent<NetworkIdentity>().isLocalPlayer)
-           Debug.Log(Vector3.Distance(player.transform.position, transform.position));
+        //if (player.GetComponent<NetworkIdentity>().isLocalPlayer)
+        //   Debug.Log(Vector3.Distance(player.transform.position, transform.position));
 
 
         float dist = Vector3.Distance(player.GetComponent<NetworkIdentity>().transform.position, transform.position);
@@ -178,8 +186,8 @@ public class PushPuzzleRoomScript : RoomScript {
 
     void ResetPuzzle()
     {
-        transform.GetChild(0).position = ObjectivePos;
-        transform.GetChild(1).position = TargetPos;
+        //transform.GetChild(0).position = ObjectivePos;
+        transform.GetChild(0).position = TargetPos;
     }
 
     public Vector3 GetObjectivePos()
@@ -194,14 +202,16 @@ public class PushPuzzleRoomScript : RoomScript {
 
     public void SetObjectivePos(Vector3 _objectPos)
     {
-        ObjectivePos = _objectPos;
-        transform.GetChild(0).position = ObjectivePos;
+        //ObjectivePos = _objectPos;
+        //transform.GetChild(0).position = ObjectivePos;
+        isPosSet = true;
     }
 
     public void SetTargetPos(Vector3 _targetPos)
     {
         TargetPos = _targetPos;
-        transform.GetChild(1).position = TargetPos;
+        transform.GetChild(0).position = TargetPos;
+        isPosSet = true;
     }
 
     public override void LockAllDoor()

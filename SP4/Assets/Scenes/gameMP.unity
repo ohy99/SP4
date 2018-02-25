@@ -1939,12 +1939,14 @@ Prefab:
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1429465175509260, guid: 1eed3e4b2e8bdbd479e3c9e836fe3570,
+        type: 2}
     - target: {fileID: 114772466577174824, guid: df377193933d1604781ada6571b3f979,
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.data[4]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1915913847916984, guid: b05892af97e8195469c3ddcd20cf1b7e,
+        type: 2}
     - target: {fileID: 114772466577174824, guid: df377193933d1604781ada6571b3f979,
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.data[5]
@@ -1979,8 +1981,7 @@ Prefab:
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.data[11]
       value: 
-      objectReference: {fileID: 1915913847916984, guid: b05892af97e8195469c3ddcd20cf1b7e,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 114772466577174824, guid: df377193933d1604781ada6571b3f979,
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.data[12]
