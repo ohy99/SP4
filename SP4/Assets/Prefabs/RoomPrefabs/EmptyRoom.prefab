@@ -318,7 +318,6 @@ GameObject:
   - component: {fileID: 4917688193712678}
   - component: {fileID: 212185479649926944}
   - component: {fileID: 114861709081464702}
-  - component: {fileID: 114708631640884628}
   m_Layer: 0
   m_Name: EmptyRoom
   m_TagString: Untagged
@@ -996,38 +995,6 @@ MonoBehaviour:
   LeftDoor: {fileID: 1628349887957952}
   RightDoor: {fileID: 1718968875520176}
   isLocked: 0
---- !u!114 &114708631640884628
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1865273027175096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 166
-    i1: 209
-    i2: 39
-    i3: 194
-    i4: 98
-    i5: 18
-    i6: 196
-    i7: 148
-    i8: 107
-    i9: 103
-    i10: 202
-    i11: 108
-    i12: 202
-    i13: 117
-    i14: 90
-    i15: 131
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &114856406606556166
 MonoBehaviour:
   m_ObjectHideFlags: 1

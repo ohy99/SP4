@@ -15,6 +15,7 @@ public class Player : NetworkBehaviour
     private int clientIndex;
     bool onDeadTrigger = false;
 
+
     public override void OnStartLocalPlayer()
     {
 
@@ -25,6 +26,13 @@ public class Player : NetworkBehaviour
 
         GetComponent<SpriteRenderer>().color = Color.green;
         
+        if(Global.Instance.player == null)
+        {
+            Debug.Log("global player is null");
+        }
+        else
+            Debug.Log("global player in use wtf");
+
         Global.Instance.player = gameObject;
         Camera.main.GetComponent<CameraScript>().playerTransform = gameObject.transform;
 
@@ -34,6 +42,7 @@ public class Player : NetworkBehaviour
         //MessageHandler.Instance.index = clientIndex;
         MessageHandler.Instance.Register(NetworkClient.allClients[0]);
         MessageHandler.Instance.index = Network.player.GetHashCode();
+
         if (isServer)
             RoomGenerator.Instance.Init();
         else
@@ -69,6 +78,8 @@ public class Player : NetworkBehaviour
             Debug.Log("SERVER NOT ACTIVE");
         else
             Debug.Log("SERVER ACTIVE");
+
+  
     }
 
     // Update is called once per frame

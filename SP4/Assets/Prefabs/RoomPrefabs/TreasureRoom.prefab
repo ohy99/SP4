@@ -122,7 +122,6 @@ GameObject:
   - component: {fileID: 4377146455280430}
   - component: {fileID: 212490901702274492}
   - component: {fileID: 114116177364936342}
-  - component: {fileID: 114683336654953482}
   m_Layer: 0
   m_Name: TreasureRoom
   m_TagString: Untagged
@@ -1040,38 +1039,6 @@ MonoBehaviour:
   LeftDoor: {fileID: 1397855001840400}
   RightDoor: {fileID: 1542080376860178}
   isLocked: 0
---- !u!114 &114683336654953482
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1282715517241922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 59
-    i1: 202
-    i2: 184
-    i3: 167
-    i4: 45
-    i5: 198
-    i6: 10
-    i7: 148
-    i8: 107
-    i9: 226
-    i10: 243
-    i11: 91
-    i12: 237
-    i13: 55
-    i14: 245
-    i15: 83
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &114705280626376234
 MonoBehaviour:
   m_ObjectHideFlags: 1

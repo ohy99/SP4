@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 50736424804363078}
   - component: {fileID: 61749908186937162}
   - component: {fileID: 114418960076579078}
+  - component: {fileID: 114102853353726166}
   m_Layer: 8
   m_Name: Boss
   m_TagString: EnemyBoss
@@ -89,6 +90,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114102853353726166
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1593450052167110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 136
+    i1: 206
+    i2: 6
+    i3: 191
+    i4: 191
+    i5: 165
+    i6: 96
+    i7: 148
+    i8: 152
+    i9: 30
+    i10: 255
+    i11: 87
+    i12: 166
+    i13: 142
+    i14: 120
+    i15: 219
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114418960076579078
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class PushPuzzleRoomScript : RoomScript {
     
     GameObject player;
+    GameObject[] playersList;
 
     Vector3 ObjectivePos;
     Vector3 TargetPos;
@@ -14,10 +16,11 @@ public class PushPuzzleRoomScript : RoomScript {
 
     List<DoorInfo> doorInfoList = new List<DoorInfo>();
 
-    bool puzzleComplete;
+    //bool puzzleComplete;
 
     float elapsedTime;
     float timer;
+    bool isLock;
 
     // Use this for initialization
 
@@ -25,13 +28,26 @@ public class PushPuzzleRoomScript : RoomScript {
     {
         //Random.Range(1, 1);
         //wad = new ArrayList();
+        roomScript = this.GetComponent<RoomScript>();
+
+        Debug.Log("PuzzleRoomStart");
+
+        //if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+        //{
         ObjectivePos.Set(Random.Range((transform.position.x - transform.localScale.x * 0.5f + 2.0f), transform.position.x), Random.Range((transform.position.y - transform.localScale.y * 0.5f + 2.0f), (transform.position.y + transform.localScale.y * 0.5f - 2.0f)), 0);
         TargetPos.Set(Random.Range((transform.position.x + transform.localScale.x * 0.5f - 2.0f), transform.position.x), Random.Range((transform.position.y - transform.localScale.y * 0.5f + 2.0f), (transform.position.y + transform.localScale.y * 0.5f - 2.0f)), 0);
 
         transform.GetChild(0).position = ObjectivePos;
         transform.GetChild(1).position = TargetPos;
 
-        roomScript = this.GetComponent<RoomScript>();
+        if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+            MessageHandler.Instance.SendPushPuzzle_S2C(1, roomScript.GetRoomID(), ObjectivePos, TargetPos);
+        //}
+        //else
+        //{
+        //    Debug.Log("pushRommId: " + roomScript.GetRoomID());
+        //    MessageHandler.Instance.SendPushPuzzle_C2S(roomScript.GetRoomID());
+        //}
 
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.LEFT)) ;
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.RIGHT));
@@ -44,12 +60,26 @@ public class PushPuzzleRoomScript : RoomScript {
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.DOWN), roomScript.GetHasTriggerBox(DIRECTION.DOWN), DIRECTION.DOWN));
 
 
-        player = Global.Instance.player;
+        playersList = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log("numPlayer: " + playersList.Length);
+        for (int i = 0; i < playersList.Length; i++)
+        {
+            if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+            {
+                player = playersList[i];
+                break;
+            }
+        }
+
+
 
         elapsedTime = 0.0f;
         timer = 5.0f;
 
         puzzleComplete = false;
+        isLock = false;
+
+        Debug.Log("minDist: " + (transform.localScale.x * 0.5f - 2.0f));
     }
 
     // Update is called once per frame
@@ -59,8 +89,15 @@ public class PushPuzzleRoomScript : RoomScript {
 
         timer -= Time.deltaTime;
 
-        if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x * 0.5f - 2.0f && !puzzleComplete)
+
+        if (player.GetComponent<NetworkIdentity>().isLocalPlayer)
+           Debug.Log(Vector3.Distance(player.transform.position, transform.position));
+
+
+        float dist = Vector3.Distance(player.GetComponent<NetworkIdentity>().transform.position, transform.position);
+        if (dist < transform.localScale.x * 0.5f - 2.0f && !puzzleComplete)
         {
+
             LockDoor(DIRECTION.LEFT);
             LockDoor(DIRECTION.RIGHT);
             LockDoor(DIRECTION.UP);
@@ -71,12 +108,33 @@ public class PushPuzzleRoomScript : RoomScript {
             OnTriggerBox(DIRECTION.UP);
             OnTriggerBox(DIRECTION.DOWN);
 
+            if (!isLock)
+            {
+                if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+                    MessageHandler.Instance.SendLockDoor_S2C(roomScript.GetRoomID());
+                else
+                    MessageHandler.Instance.SendLockDoor_C2S(roomScript.GetRoomID());
+                isLock = true;
+            }
+
         }
 
         if (timer <= 0 && !puzzleComplete)
         {
             timer = 5.0f;
             SendMessage("SpawnEnemy");
+        }
+
+        if (!Global.Instance.player.GetComponent<NetworkIdentity>().isServer
+           && puzzleComplete == true)
+        {
+            foreach (DoorInfo doorInfo in doorInfoList)
+            {
+                if (!doorInfo.isLocked)
+                    roomScript.UnlockDoor(doorInfo.dir);
+                if (!doorInfo.haveTriggerBox)
+                    roomScript.OffTriggerBox(doorInfo.dir);
+            }
         }
     }
 
@@ -103,6 +161,11 @@ public class PushPuzzleRoomScript : RoomScript {
     {
         puzzleComplete = true;
 
+        if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+            MessageHandler.Instance.SendUnlockDoor_S2C(roomScript.GetRoomID(), puzzleComplete);
+        //else
+           // MessageHandler.Instance.SendUnlockDoor_C2S(roomScript.GetRoomID(), puzzleComplete);
+
         foreach (DoorInfo doorInfo in doorInfoList)
         {
             if (!doorInfo.isLocked)
@@ -117,5 +180,42 @@ public class PushPuzzleRoomScript : RoomScript {
     {
         transform.GetChild(0).position = ObjectivePos;
         transform.GetChild(1).position = TargetPos;
+    }
+
+    public Vector3 GetObjectivePos()
+    {
+        return ObjectivePos;
+    }
+
+    public Vector3 GetTargetPos()
+    {
+        return TargetPos;
+    }
+
+    public void SetObjectivePos(Vector3 _objectPos)
+    {
+        ObjectivePos = _objectPos;
+        transform.GetChild(0).position = ObjectivePos;
+    }
+
+    public void SetTargetPos(Vector3 _targetPos)
+    {
+        TargetPos = _targetPos;
+        transform.GetChild(1).position = TargetPos;
+    }
+
+    public override void LockAllDoor()
+    {
+        Debug.Log("LOCK DOOR_Room -> " + roomScript.GetRoomID());
+
+        LockDoor(DIRECTION.LEFT);
+        LockDoor(DIRECTION.RIGHT);
+        LockDoor(DIRECTION.UP);
+        LockDoor(DIRECTION.DOWN);
+
+        OnTriggerBox(DIRECTION.LEFT);
+        OnTriggerBox(DIRECTION.RIGHT);
+        OnTriggerBox(DIRECTION.UP);
+        OnTriggerBox(DIRECTION.DOWN);
     }
 }

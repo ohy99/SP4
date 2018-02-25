@@ -203,7 +203,6 @@ GameObject:
   - component: {fileID: 4593340049669494}
   - component: {fileID: 212648755691009718}
   - component: {fileID: 114658245156230192}
-  - component: {fileID: 114980700547918746}
   m_Layer: 0
   m_Name: BossRoom
   m_TagString: Untagged
@@ -1148,38 +1147,6 @@ MonoBehaviour:
   LeftDoor: {fileID: 1031408158949308}
   RightDoor: {fileID: 1981049176884250}
   isLocked: 0
---- !u!114 &114980700547918746
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1729273878151420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 163
-    i1: 215
-    i2: 238
-    i3: 125
-    i4: 174
-    i5: 61
-    i6: 141
-    i7: 20
-    i8: 42
-    i9: 230
-    i10: 5
-    i11: 111
-    i12: 30
-    i13: 177
-    i14: 102
-    i15: 227
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!212 &212067441800572326
 SpriteRenderer:
   m_ObjectHideFlags: 1

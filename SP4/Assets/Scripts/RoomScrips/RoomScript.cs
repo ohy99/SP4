@@ -31,11 +31,12 @@ public class RoomScript : MonoBehaviour {
     public int GetGridX() { return gridx; }
     public int GetGridY() { return gridy; }
 
+    protected bool puzzleComplete = false;
+
     // Use this for initialization
     void Start () {
         //Random.Range(1, 1);
         //wad = new ArrayList();
-        
 	}
 	
 	// Update is called once per frame
@@ -47,6 +48,7 @@ public class RoomScript : MonoBehaviour {
     void GenerateRoom(DIRECTION side)
     {
         RoomGenerator.Instance.SetRoomActive(roomID, side);
+
     }
 
     //sets the roomid, and the grid x, y
@@ -146,5 +148,15 @@ public class RoomScript : MonoBehaviour {
     public int GetRoomID()
     {
         return roomID;
+    }
+
+    public void SetPuzzleComplete(bool _puzzleComplete)
+    {
+        puzzleComplete = _puzzleComplete;
+    }
+
+    public virtual void LockAllDoor()
+    {
+        Debug.Log("RoomScript_LockAllDoor");
     }
 }

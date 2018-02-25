@@ -9,6 +9,8 @@ public class SpeedRoomItemSpawner : MonoBehaviour {
 
     private int numOfItemDestroyed;
 
+    public int roomId;
+
     [SerializeField]
     GameObject map;
     [SerializeField]
@@ -59,6 +61,8 @@ public class SpeedRoomItemSpawner : MonoBehaviour {
     {
         if (col.tag.Equals("Player") && !spawnerActive)
         {
+            roomId = map.GetComponent<RoomScript>().GetRoomID();
+            //Debug.Log("SpawnerActive: " + spawnerActive);
             spawnerActive = true;
             this.GetComponent<SpriteRenderer>().enabled = false;
             StartCoroutine("SpawnItem");
@@ -80,6 +84,7 @@ public class SpeedRoomItemSpawner : MonoBehaviour {
             Vector3 pos = new Vector3(Random.Range(map.transform.position.x + -map.transform.localScale.x * 0.5f + 2.5f, map.transform.position.x + map.transform.localScale.x * 0.5f - 2.5f),
           Random.Range(map.transform.position.y + -map.transform.localScale.y * 0.5f + 2.5f, map.transform.position.y + map.transform.localScale.y * 0.5f - 2.5f), 0);
             genericSpawner.GetComponent<GenericSpawner>().Init(map);
+            item.GetComponent<SpeedRoomItemScript>().roomID = roomId;
             genericSpawner.GetComponent<GenericSpawner>().SpawnSpeedItem(pos, item, map, this);
         }
         else

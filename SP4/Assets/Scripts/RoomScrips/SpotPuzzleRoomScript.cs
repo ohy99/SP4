@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SpotPuzzleRoomScript : RoomScript
 {
@@ -16,7 +17,7 @@ public class SpotPuzzleRoomScript : RoomScript
     //List<bool> doorList = new List<bool>();
     List<DoorInfo> doorInfoList = new List<DoorInfo>();
 
-    bool puzzleComplete;
+    //bool puzzleComplete;
 
     bool wrongSelection;
 
@@ -58,7 +59,6 @@ public class SpotPuzzleRoomScript : RoomScript
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.UP), roomScript.GetHasTriggerBox(DIRECTION.UP), DIRECTION.UP));
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.DOWN), roomScript.GetHasTriggerBox(DIRECTION.DOWN), DIRECTION.DOWN));
 
-
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.LEFT));
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.RIGHT));
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.UP));
@@ -92,11 +92,27 @@ public class SpotPuzzleRoomScript : RoomScript
             OnTriggerBox(DIRECTION.RIGHT);
             OnTriggerBox(DIRECTION.UP);
             OnTriggerBox(DIRECTION.DOWN);
+
+            if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+                MessageHandler.Instance.SendLockDoor_S2C(roomScript.GetRoomID());
+            else
+                MessageHandler.Instance.SendLockDoor_C2S(roomScript.GetRoomID());
         }
 
         if (textTimer < elapsedTime)
             wrongSelection = false;
 
+
+        if(puzzleComplete)
+        {
+            foreach (DoorInfo doorinfo in doorInfoList)
+            {
+                if (!doorinfo.isLocked)
+                    roomScript.UnlockDoor(doorinfo.dir);
+                if (!doorinfo.haveTriggerBox)
+                    roomScript.OffTriggerBox(doorinfo.dir);
+            }
+        }
     }
 
     void OnGUI()
@@ -140,6 +156,10 @@ public class SpotPuzzleRoomScript : RoomScript
         //
         //GetRoomID();
         puzzleComplete = true;
+        if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+            MessageHandler.Instance.SendUnlockDoor_S2C(roomScript.GetRoomID(), puzzleComplete);
+        else
+            MessageHandler.Instance.SendUnlockDoor_C2S(roomScript.GetRoomID(), puzzleComplete);
 
         foreach (DoorInfo doorinfo in doorInfoList)
         {
@@ -170,5 +190,18 @@ public class SpotPuzzleRoomScript : RoomScript
         //    roomScript.LockDoor(DIRECTION.DOWN);
         //else
         //    roomScript.UnlockDoor(DIRECTION.DOWN);
+    }
+
+    public override void LockAllDoor()
+    {
+        LockDoor(DIRECTION.LEFT);
+        LockDoor(DIRECTION.RIGHT);
+        LockDoor(DIRECTION.UP);
+        LockDoor(DIRECTION.DOWN);
+
+        OnTriggerBox(DIRECTION.LEFT);
+        OnTriggerBox(DIRECTION.RIGHT);
+        OnTriggerBox(DIRECTION.UP);
+        OnTriggerBox(DIRECTION.DOWN);
     }
 }

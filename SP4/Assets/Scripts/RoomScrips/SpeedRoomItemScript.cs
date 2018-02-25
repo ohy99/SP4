@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SpeedRoomItemScript : MonoBehaviour {
 
     SpeedRoomItemSpawner spawner;
+    public int roomID;
 
     // Use this for initialization
     void Start()
@@ -15,7 +17,6 @@ public class SpeedRoomItemScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
     }
 
     void OnDestroy()
@@ -29,7 +30,14 @@ public class SpeedRoomItemScript : MonoBehaviour {
         Debug.Log("Hit");
         if (col.gameObject.tag.Equals("Player"))//if the collided is player OR player(clone)
         {
-            SendMessageUpwards("AddCollect");
+            if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+                SendMessageUpwards("AddCollect");
+            else
+            {
+                RoomGenerator.Instance.GetRoomList()[roomID].
+                   GetComponent<SpeedRoomScript>().AddCollect();
+            }
+
             Destroy(gameObject);
         }
     }

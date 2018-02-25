@@ -71,6 +71,7 @@ public class RoomGenerator : Singleton<RoomGenerator> {
     //for da network stuff
     public List<PopulateRoomListMessage> roomDataList;
 
+
     enum RANDACTION
     {
         MUSTLOCK,

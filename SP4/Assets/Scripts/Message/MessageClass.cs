@@ -38,3 +38,28 @@ public class PopulateRoomListMessage : MessageBase
     //public GameObject room;
 }
 
+public class UnlockDoorMessage : MessageBase
+{
+    public int roomId;
+    public bool isClear;
+}
+
+public class SpotPuzzleRoomMessage : MessageBase
+{
+    public int roomId;
+
+}
+
+public class PushPuzzleRoomMessage : MessageBase
+{
+    public int connectionId;
+    public int roomId;
+    public Vector3 objectivePos;
+    public Vector3 targetPos;
+}
+
+public class LockDoorMessage : MessageBase
+{
+    public int roomId;
+    public bool isLock; //maybe no need
+}
