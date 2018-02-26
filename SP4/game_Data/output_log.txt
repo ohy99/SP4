@@ -15,14 +15,14 @@ Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngin
 Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.023 seconds
+- Completed reload, in  0.038 seconds
 Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.110219 ms
+UnloadTime: 2.611919 ms
 ItemManagerStart
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
@@ -83,7 +83,7 @@ Add IdleState
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-number of rooms: 12
+number of rooms: 11
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -151,17 +151,25 @@ SendRoom_S2C
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-SendRoom_S2C
+PuzzleRoomStart
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+minDist: 8
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Treasure Key(Clone) (UnityEngine.GameObject)
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Setting up 6 worker threads for Enlighten.
-  Thread -> id: 1a14 -> priority: 1 
-  Thread -> id: 283c -> priority: 1 
-  Thread -> id: 2450 -> priority: 1 
-  Thread -> id: 2a3c -> priority: 1 
-  Thread -> id: 258c -> priority: 1 
-  Thread -> id: 45c -> priority: 1 
+  Thread -> id: 21bc -> priority: 1 
+  Thread -> id: 27a0 -> priority: 1 
+  Thread -> id: 230 -> priority: 1 
+  Thread -> id: 420 -> priority: 1 
+  Thread -> id: 20d0 -> priority: 1 
+  Thread -> id: 27a8 -> priority: 1 
 [Singleton] is at OnDestroy
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)

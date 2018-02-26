@@ -39,6 +39,9 @@ public class MessageHandler : Singleton<MessageHandler>
 
         public static short playerIdMsgType_client = MsgType.Highest + 19;
         public static short playerIdMsgType_server = MsgType.Highest + 20;
+
+        public static short itemCollectedMsgType_client = MsgType.Highest + 21;
+        public static short itemCollectedMsgType_server = MsgType.Highest + 22;
     };
 
     //variables
@@ -79,6 +82,10 @@ public class MessageHandler : Singleton<MessageHandler>
 
         myClient.RegisterHandler(MyMsgType.playerIdMsgType_server, OnRecvPlayerId_Client);
         NetworkServer.RegisterHandler(MyMsgType.playerIdMsgType_client, OnRecvPlayerId_Server);
+
+        myClient.RegisterHandler(MyMsgType.itemCollectedMsgType_server, OnRecvItemCollected_Client);
+        NetworkServer.RegisterHandler(MyMsgType.itemCollectedMsgType_client, OnRecvItemCollected_Server);
+
         //myClient.RegisterHandler(MyMsgType.spawnRoomMsgType_server, OnRecvSpawnRoom_Client);
         //NetworkServer.RegisterHandler(MyMsgType.spawnRoomMsgType_client, OnRecvSpawnRoom_Server);
     }
@@ -170,6 +177,17 @@ public class MessageHandler : Singleton<MessageHandler>
         if (NetworkServer.active) //playerId msg shld only be send once
             NetworkServer.SendToClient(msg.playerId, MyMsgType.playerIdMsgType_server, msg);
         //NetworkServer.SendToAll(MyMsgType.spotPuzzleMsgType_server, msg);
+    }
+
+    public void SendItemCollected_S2C(int _roomId, int _itemCollected)
+    {
+        itemCollectedMessage msg = new itemCollectedMessage();
+        msg.roomId = _roomId;
+        msg.itemCollected = _itemCollected;
+        Debug.Log("SendItemCollected_S2C");
+
+        if (NetworkServer.active)
+            NetworkServer.SendToAll(MyMsgType.itemCollectedMsgType_server, msg);
     }
 
     // SENDING TO SERVER
@@ -267,6 +285,18 @@ public class MessageHandler : Singleton<MessageHandler>
 
         myClient.Send(MyMsgType.playerIdMsgType_client, msg);
     }
+
+    public void SendItemCollected_C2S(int _roomId, int _itemCollected)
+    {
+        itemCollectedMessage msg = new itemCollectedMessage();
+        msg.roomId = _roomId;
+        msg.itemCollected = _itemCollected;
+        Debug.Log("SendItemCollected_C2S");
+
+        if (NetworkServer.active)
+            NetworkServer.SendToAll(MyMsgType.itemCollectedMsgType_client, msg);
+    }
+
     //-----------------------------------------------------------------------------
 
 
@@ -481,6 +511,22 @@ public class MessageHandler : Singleton<MessageHandler>
         index = msg.playerId;
 
         MessageHandler.Instance.SendRoom_C2S(); //sent to server/host to get mapinfo
+    }
+
+    public void OnRecvItemCollected_Server(NetworkMessage netMsg)
+    {
+        itemCollectedMessage msg = netMsg.ReadMessage<itemCollectedMessage>();
+        Debug.Log("Host/ServerRecv_itemCollected");
+
+        RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<SpeedRoomScript>()._itemCollected = msg.itemCollected;
+    }
+
+    public void OnRecvItemCollected_Client(NetworkMessage netMsg)
+    {
+        itemCollectedMessage msg = netMsg.ReadMessage<itemCollectedMessage>();
+        Debug.Log("ClientRecv_itemCollected");
+
+        RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<SpeedRoomScript>()._itemCollected = msg.itemCollected;
     }
 }
 

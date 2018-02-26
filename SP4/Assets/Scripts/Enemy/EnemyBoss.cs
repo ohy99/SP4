@@ -54,7 +54,7 @@ public class EnemyBoss : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if(!player)
-        {
+        {   //er player = num of player in game(neareset or something)
             player = Global.Instance.player;
             return;
         }

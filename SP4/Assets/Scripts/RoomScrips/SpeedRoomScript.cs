@@ -117,6 +117,8 @@ public class SpeedRoomScript : RoomScript {
             yPos += 10.0f;
         }
 
+    
+
         if(!Global.Instance.player.GetComponent<NetworkIdentity>().isServer
             && puzzleComplete == true)
         {
@@ -134,6 +136,11 @@ public class SpeedRoomScript : RoomScript {
     {
         //Debug.Log("TrueRoomId: " + GetRoomID());
         itemCollected++;
+
+        if (player.GetComponent<NetworkIdentity>().isServer)
+            MessageHandler.Instance.SendItemCollected_S2C(roomScript.GetRoomID(), itemCollected);
+        else
+            MessageHandler.Instance.SendItemCollected_C2S(roomScript.GetRoomID(), itemCollected);
     }
 
     void SpawnEnemies(int maxItem)
@@ -182,4 +189,6 @@ public class SpeedRoomScript : RoomScript {
     {
         return spawnerScript;
     }
+
+    public int _itemCollected { get { return itemCollected; } set { itemCollected = _itemCollected; } }
 }

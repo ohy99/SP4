@@ -79,3 +79,9 @@ public class PlayerIdMessage : MessageBase
 {
     public int playerId;
 }
+
+public class itemCollectedMessage : MessageBase
+{
+    public int roomId;
+    public int itemCollected;
+}
