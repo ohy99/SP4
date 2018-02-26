@@ -18,6 +18,7 @@ public class BossRoomScript : RoomScript {
 
         if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
         {
+            Debug.Log("Spwning da boss");
             GameObject spawnBoss = genericSpawner.GetComponent<GenericSpawner>().SpawnObject(transform.position, boss);
             spawnBoss.transform.parent = this.transform;
             Global.Instance.boss = spawnBoss;

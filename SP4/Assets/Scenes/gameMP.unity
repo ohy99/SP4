@@ -1066,6 +1066,12 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114568938663323876, guid: 95b1ef2d6cf50b64587e2e68326f8183,
+        type: 2}
+      propertyPath: genericSpawner
+      value: 
+      objectReference: {fileID: 1368807512881014, guid: 9a661cf7f8d77f9419b5242b4fc22da5,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 95b1ef2d6cf50b64587e2e68326f8183, type: 2}
   m_IsPrefabParent: 0
@@ -1847,7 +1853,7 @@ Prefab:
     - target: {fileID: 114772466577174824, guid: df377193933d1604781ada6571b3f979,
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4297246296469844, guid: df377193933d1604781ada6571b3f979, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1961,12 +1967,14 @@ Prefab:
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.data[6]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1853471210836276, guid: 3f26222794eb4234b826dc6ab107af4f,
+        type: 2}
     - target: {fileID: 114772466577174824, guid: df377193933d1604781ada6571b3f979,
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.data[7]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1147157688347744, guid: ddf337c78515c1048812005090882acd,
+        type: 2}
     - target: {fileID: 114772466577174824, guid: df377193933d1604781ada6571b3f979,
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.data[8]
@@ -2118,6 +2126,12 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114320645510608390, guid: aa85c54931418ca4a99c40c3500b5a9e,
+        type: 2}
+      propertyPath: genericSpawner
+      value: 
+      objectReference: {fileID: 1368807512881014, guid: 9a661cf7f8d77f9419b5242b4fc22da5,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aa85c54931418ca4a99c40c3500b5a9e, type: 2}
   m_IsPrefabParent: 0

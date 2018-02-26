@@ -53,6 +53,12 @@ public class EnemyBoss : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if(!player)
+        {
+            player = Global.Instance.player;
+            return;
+        }
+
         sm.CurrentState.Reason(player, gameObject);
         sm.CurrentState.Act(player, gameObject);
     }

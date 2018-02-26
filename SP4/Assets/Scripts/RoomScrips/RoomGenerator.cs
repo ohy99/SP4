@@ -25,6 +25,7 @@ public class RoomGenerator : Singleton<RoomGenerator> {
     List<GameObject> randomRooms;
     [SerializeField]
     GameObject bossRoom;
+
     //[SerializeField]
     //GameObject room1;
     //[SerializeField]
