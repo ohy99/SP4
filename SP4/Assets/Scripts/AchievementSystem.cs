@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class AchievementSystem : Singleton<AchievementSystem> {
 
-    
+
     //Should be heavily using playerpref
 
     [SerializeField]
     List<GameObject> achievementPrefabList = new List<GameObject>();
     List<AchievementBase> achievementList;
-
+    public List<AchievementBase> GetAchievementList() { return achievementList; }
     //[SerializeField]
     //AchievementBase wad;
 
