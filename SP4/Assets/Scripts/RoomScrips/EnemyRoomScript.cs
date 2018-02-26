@@ -41,16 +41,16 @@ public class EnemyRoomScript : RoomScript {
 
         //Spawner = transform.GetChild(0).gameObject;
 
-        playersList = GameObject.FindGameObjectsWithTag("Player");
-        for (int i = 0; i < playersList.Length; i++)
-        {
-            if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
-            {
-                player = playersList[i];
-                break;
-            }
-        }
-        //player = Global.Instance.player;
+        //playersList = GameObject.FindGameObjectsWithTag("Player");
+        //for (int i = 0; i < playersList.Length; i++)
+        //{
+        //    if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+        //    {
+        //        player = playersList[i];
+        //        break;
+        //    }
+        //}
+        player = Global.Instance.player;
 
         elapsedTime = 0.0f;
         completedWaves = false;

@@ -47,17 +47,18 @@ public class SpeedRoomScript : RoomScript {
         isLock = false;
         puzzleComplete = false;
 
-        playersList = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log("numPlayer: " + playersList.Length);
-        for (int i = 0; i < playersList.Length; i++)
-        {
-            if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
-            {
-                player = playersList[i];
-                break;
-            }
-        }
-        //player = Global.Instance.player;
+        //playersList = GameObject.FindGameObjectsWithTag("Player");
+        //Debug.Log("numPlayer: " + playersList.Length);
+        //for (int i = 0; i < playersList.Length; i++)
+        //{
+        //    if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+        //    {
+        //        player = playersList[i];
+        //        break;
+        //    }
+        //}
+
+        player = Global.Instance.player;
 
         itemCollected = 0;
     }

@@ -35,18 +35,18 @@ public class SpotPuzzleRoomScript : RoomScript
         //Random.Range(1, 1);
         //wad = new ArrayList();
 
-        playersList = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log("numPlayer: " + playersList.Length);
-        for (int i = 0; i < playersList.Length; i++)
-        {
-            if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
-            {
-                player = playersList[i];
-                //break;
-            }
-        }
+        //playersList = GameObject.FindGameObjectsWithTag("Player");
+        //Debug.Log("numPlayer: " + playersList.Length);
+        //for (int i = 0; i < playersList.Length; i++)
+        //{
+        //    if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+        //    {
+        //        player = playersList[i];
+        //        //break;
+        //    }
+        //}
 
-        //player = Global.Instance.player;
+        player = Global.Instance.player;
 
         OriginalGroup = this.transform.GetChild(0);
         ChangedGroup = this.transform.GetChild(1);

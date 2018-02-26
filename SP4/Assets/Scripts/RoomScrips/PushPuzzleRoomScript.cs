@@ -37,18 +37,19 @@ public class PushPuzzleRoomScript : RoomScript {
 
         roomScript = this.GetComponent<RoomScript>();
 
-        playersList = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log("numPlayer: " + playersList.Length);
-        for (int i = 0; i < playersList.Length; i++)
-        {
-            if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
-            {
-                player = playersList[i];
-                break;
-            }
-        }
-        //if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+        //playersList = GameObject.FindGameObjectsWithTag("Player");
+        //Debug.Log("numPlayer: " + playersList.Length);
+        //for (int i = 0; i < playersList.Length; i++)
         //{
+        //    if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+        //    {
+        //        player = playersList[i];
+        //        break;
+        //    }
+        //}
+
+        player = Global.Instance.player;
+
         
         if(!isPosSet || player.GetComponent<NetworkIdentity>().isServer)
         {
