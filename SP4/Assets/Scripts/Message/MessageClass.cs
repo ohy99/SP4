@@ -45,9 +45,14 @@ public class UnlockDoorMessage : MessageBase
 }
 
 public class SpotPuzzleRoomMessage : MessageBase
-{
+{   //yay
     public int roomId;
-
+    public int changedObjectIndex;
+    public Vector3 shape01_pos;
+    public Vector3 shape02_pos;
+    public Vector3 shape03_pos;
+    public Vector3 shape04_pos;
+    public Color changedObjectColor; 
 }
 
 public class PushPuzzleRoomMessage : MessageBase

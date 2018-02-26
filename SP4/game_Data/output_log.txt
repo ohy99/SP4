@@ -15,14 +15,14 @@ Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngin
 Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.044 seconds
+- Completed reload, in  0.019 seconds
 Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.075323 ms
+UnloadTime: 2.601655 ms
 ItemManagerStart
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
@@ -159,43 +159,7 @@ roomID6
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-B4_CurrID: 7
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-CurrID: 8
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-roomID7
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-B4_CurrID: 8
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-CurrID: 9
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-roomID8
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-B4_CurrID: 9
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-CurrID: 10
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-roomID9
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-number of rooms: 10
+number of rooms: 7
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -203,11 +167,11 @@ LEFT: True
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-UP: True
+UP: False
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-RIGHT: False
+RIGHT: True
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -231,35 +195,7 @@ numPlayer: 2
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-SendNumberToSpawnDoor_S2C
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Host/ServerRecv_LockDoor : room_1
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-LOCK DOOR_Room -> 1
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-[Singleton] Using instance already created: DmgFeedback
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-[Singleton] Using instance already created: ParticleManager
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-exp: 10
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-numPlayer: 2
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-SendNumberToSpawnDoor_S2C
+SendSpotPuzzle_S2C
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -267,13 +203,18 @@ SendLockDoor_S2C
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
+Log: connection {1} has been disconnected by timeout; address {::ffff:127.0.0.1:50738} time {21686}, last rec time {19676} rtt {11} timeout {2000}
+ServerDisconnected due to error: Timeout
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
 Setting up 6 worker threads for Enlighten.
-  Thread -> id: 23d4 -> priority: 1 
-  Thread -> id: 2e8 -> priority: 1 
-  Thread -> id: 230 -> priority: 1 
-  Thread -> id: 2388 -> priority: 1 
-  Thread -> id: 23e0 -> priority: 1 
-  Thread -> id: 2398 -> priority: 1 
+  Thread -> id: 12c0 -> priority: 1 
+  Thread -> id: 970 -> priority: 1 
+  Thread -> id: 23ec -> priority: 1 
+  Thread -> id: 1724 -> priority: 1 
+  Thread -> id: 1a30 -> priority: 1 
+  Thread -> id: 218c -> priority: 1 
 [Singleton] is at OnDestroy
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)

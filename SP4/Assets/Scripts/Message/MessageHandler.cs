@@ -33,6 +33,9 @@ public class MessageHandler : Singleton<MessageHandler>
 
         public static short NumberToSpawnMsg_client = MsgType.Highest + 15;
         public static short NumberToSpawnMsg_server = MsgType.Highest + 16;
+
+        public static short spotPuzzleMsgType_client = MsgType.Highest + 17;
+        public static short spotPuzzleMsgType_server = MsgType.Highest + 18;
     };
 
     //variables
@@ -68,11 +71,14 @@ public class MessageHandler : Singleton<MessageHandler>
         myClient.RegisterHandler(MyMsgType.NumberToSpawnMsg_server, OnRecvNumberToSpawn_Client);
         NetworkServer.RegisterHandler(MyMsgType.NumberToSpawnMsg_client, OnRecvNumberToSpawn_Server);
 
+        myClient.RegisterHandler(MyMsgType.spotPuzzleMsgType_server, OnRecvSpotPuzzle_Client);
+        NetworkServer.RegisterHandler(MyMsgType.spotPuzzleMsgType_client, OnRecvSpotPuzzle_Server);
+
         //myClient.RegisterHandler(MyMsgType.spawnRoomMsgType_server, OnRecvSpawnRoom_Client);
         //NetworkServer.RegisterHandler(MyMsgType.spawnRoomMsgType_client, OnRecvSpawnRoom_Server);
     }
 
-    //SENDING TO CLIENTS
+    // SENDING TO CLIENTS
     public void SendPosition_S2C(Vector3 _position)
     {
         PositionMessage msg = new PositionMessage();
@@ -141,7 +147,16 @@ public class MessageHandler : Singleton<MessageHandler>
             NetworkServer.SendToAll(MyMsgType.NumberToSpawnMsg_server, msg);
     }
 
-    //SENDING TO SERVER
+    public void SendSpotPuzzle_S2C(SpotPuzzleRoomMessage _message)
+    {
+        SpotPuzzleRoomMessage msg = _message;
+        Debug.Log("SendSpotPuzzle_S2C");
+
+        if (NetworkServer.active)
+            NetworkServer.SendToAll(MyMsgType.spotPuzzleMsgType_server, msg);
+    }
+
+    // SENDING TO SERVER
     public void SendPosition_C2S(Vector3 _position)
     {
         if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
@@ -218,6 +233,14 @@ public class MessageHandler : Singleton<MessageHandler>
         Debug.Log("SendNumberToSpawnDoor_C2S");
 
         myClient.Send(MyMsgType.NumberToSpawnMsg_client, msg);
+    }
+
+    public void SendSpotPuzzle_C2S(SpotPuzzleRoomMessage _message)
+    {
+        SpotPuzzleRoomMessage msg = _message;
+        Debug.Log("SendSpotPuzzle_C2S");
+
+        myClient.Send(MyMsgType.spotPuzzleMsgType_client, msg);
     }
     //-----------------------------------------------------------------------------
 
@@ -392,6 +415,26 @@ public class MessageHandler : Singleton<MessageHandler>
         {
             RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<SpeedRoomScript>().GetSpawnerScript().maxSpawns = msg.spawnNumber;
         }
+    }
+
+    public void OnRecvSpotPuzzle_Server(NetworkMessage netMsg)
+    {
+        SpotPuzzleRoomMessage msg = netMsg.ReadMessage<SpotPuzzleRoomMessage>();
+        Debug.Log("Host/ServerRecv_SpotPuzzle : room_" + msg.roomId);
+    }
+
+    public void OnRecvSpotPuzzle_Client(NetworkMessage netMsg)
+    {
+        if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+            return;
+
+        SpotPuzzleRoomMessage msg = netMsg.ReadMessage<SpotPuzzleRoomMessage>();
+
+        Debug.Log("ClientRecv_SpotPuzzle : room_" + msg.roomId);
+        //reinit the pos of the puzzles to match with host
+        RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<SpotPuzzleRoomScript>().
+            RepositionObjectClient(msg);
+
     }
 }
 

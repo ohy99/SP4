@@ -15,6 +15,8 @@ public class SpotPuzzleRoomScript : RoomScript
 
     RoomScript roomScript;
 
+    //SpotPuzzleRoomMessage spotPuzzleMsg;
+
     //List<bool> doorList = new List<bool>();
     List<DoorInfo> doorInfoList = new List<DoorInfo>();
 
@@ -33,26 +35,45 @@ public class SpotPuzzleRoomScript : RoomScript
         //Random.Range(1, 1);
         //wad = new ArrayList();
 
-        OriginalGroup = this.transform.GetChild(0);
-        ChangedGroup = this.transform.GetChild(1);
-
-        for(int i =0; i < OriginalGroup.childCount; ++i)
+        playersList = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log("numPlayer: " + playersList.Length);
+        for (int i = 0; i < playersList.Length; i++)
         {
-            Vector3 newPos = new Vector3(Random.Range(transform.position.x - transform.localScale.x * 0.5f + 2.5f, transform.position.x - 2.5f), Random.Range(transform.position.y - transform.localScale.y * 0.5f + 2.5f, transform.position.y + transform.localScale.y * 0.5f - 2.5f), 1);
-            OriginalGroup.GetChild(i).position = newPos;
-            newPos.x += transform.localScale.x * 0.5f;
-            ChangedGroup.GetChild(i).position = newPos;
+            if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+            {
+                player = playersList[i];
+                break;
+            }
         }
 
-        changedObject = ChangedGroup.GetChild(Random.Range(0, 4)).gameObject;
+        OriginalGroup = this.transform.GetChild(0);
+        ChangedGroup = this.transform.GetChild(1);
+        int randIndex = 0;
+        Color newColor = new Color(1,1,1);
 
-        Color newColor = changedObject.GetComponent<SpriteRenderer>().color;
-        newColor.r = Random.Range(0.0f,1.0f);
-        newColor.g = Random.Range(0.0f, 1.0f);
-        newColor.b = Random.Range(0.0f, 1.0f);
-        newColor.a = Random.Range(0.0f, 1.0f);
+        if (player.GetComponent<NetworkIdentity>().isServer)
+        {
+            for (int i = 0; i < OriginalGroup.childCount; ++i)
+            {
+                Vector3 newPos = new Vector3(Random.Range(transform.position.x - transform.localScale.x * 0.5f + 2.5f, transform.position.x - 2.5f), Random.Range(transform.position.y - transform.localScale.y * 0.5f + 2.5f, transform.position.y + transform.localScale.y * 0.5f - 2.5f), 1);
+                OriginalGroup.GetChild(i).position = newPos;
+                newPos.x += transform.localScale.x * 0.5f;
+                ChangedGroup.GetChild(i).position = newPos;
+            }
 
-        changedObject.GetComponent<SpriteRenderer>().color = newColor;
+            randIndex = Random.Range(0, 4);
+            changedObject = ChangedGroup.GetChild(randIndex).gameObject;
+
+            newColor = changedObject.GetComponent<SpriteRenderer>().color;
+            newColor.r = Random.Range(0.0f, 1.0f);
+            newColor.g = Random.Range(0.0f, 1.0f);
+            newColor.b = Random.Range(0.0f, 1.0f);
+            newColor.a = Random.Range(0.0f, 1.0f);
+
+            changedObject.GetComponent<SpriteRenderer>().color = newColor;
+        }
+       
+
 
         roomScript = this.GetComponent<RoomScript>();
 
@@ -66,21 +87,30 @@ public class SpotPuzzleRoomScript : RoomScript
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.UP));
         //doorList.Add(roomScript.GetIsLocked(DIRECTION.DOWN));
 
+        //if (spotPuzzleMsg != null)
+        //    RepositionObjectClient(spotPuzzleMsg);
+
         elapsedTime = 0.0f;
 
         puzzleComplete = false;
         isLock = false;
 
-        playersList = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log("numPlayer: " + playersList.Length);
-        for (int i = 0; i < playersList.Length; i++)
+        //if is host/server
+        if(player.GetComponent<NetworkIdentity>().isServer)
         {
-            if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
-            {
-                player = playersList[i];
-                break;
-            }
+            //send msg to clients
+            SpotPuzzleRoomMessage message = new SpotPuzzleRoomMessage();
+            message.roomId = roomScript.GetRoomID();
+            message.shape01_pos = OriginalGroup.GetChild(0).position;
+            message.shape02_pos = OriginalGroup.GetChild(1).position;
+            message.shape03_pos = OriginalGroup.GetChild(2).position;
+            message.shape04_pos = OriginalGroup.GetChild(3).position;
+            message.changedObjectIndex = randIndex;
+            message.changedObjectColor = newColor;
+
+            MessageHandler.Instance.SendSpotPuzzle_S2C(message);
         }
+
        //player = Global.Instance.player;
     }
 
@@ -170,13 +200,11 @@ public class SpotPuzzleRoomScript : RoomScript
             return;
         }
 
-        //
-        //GetRoomID();
         puzzleComplete = true;
-        if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
-            MessageHandler.Instance.SendUnlockDoor_S2C(roomScript.GetRoomID(), puzzleComplete);
-        else
-            MessageHandler.Instance.SendUnlockDoor_C2S(roomScript.GetRoomID(), puzzleComplete);
+        //if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+        //    MessageHandler.Instance.SendUnlockDoor_S2C(roomScript.GetRoomID(), puzzleComplete);
+        //else
+        //    MessageHandler.Instance.SendUnlockDoor_C2S(roomScript.GetRoomID(), puzzleComplete);
 
         foreach (DoorInfo doorinfo in doorInfoList)
         {
@@ -185,8 +213,6 @@ public class SpotPuzzleRoomScript : RoomScript
             if (!doorinfo.haveTriggerBox)
                 roomScript.OffTriggerBox(doorinfo.dir);
         }
-
-        
 
         //if (doorList[0])
         //    roomScript.LockDoor(DIRECTION.LEFT);
@@ -221,4 +247,36 @@ public class SpotPuzzleRoomScript : RoomScript
         OnTriggerBox(DIRECTION.UP);
         OnTriggerBox(DIRECTION.DOWN);
     }
+
+    public void RepositionObjectClient(SpotPuzzleRoomMessage _msg)
+    {
+        List<Vector3> tempList = new List<Vector3>();
+        tempList.Add(_msg.shape01_pos);
+        tempList.Add(_msg.shape02_pos);
+        tempList.Add(_msg.shape03_pos);
+        tempList.Add(_msg.shape04_pos);
+
+        OriginalGroup = this.transform.GetChild(0);
+        ChangedGroup = this.transform.GetChild(1);
+
+        for (int i = 0; i < OriginalGroup.childCount; ++i)
+        {
+            Vector3 newPos = tempList[i];
+            OriginalGroup.GetChild(i).position = newPos;
+            newPos.x += transform.localScale.x * 0.5f;
+            ChangedGroup.GetChild(i).position = newPos;
+        }
+
+        changedObject = ChangedGroup.GetChild(_msg.changedObjectIndex).gameObject;
+
+        Color newColor = changedObject.GetComponent<SpriteRenderer>().color;
+        newColor = _msg.changedObjectColor;
+
+        changedObject.GetComponent<SpriteRenderer>().color = newColor;
+    }
+
+    //public void SetSpotPuzzleMsg(SpotPuzzleRoomMessage _msg)
+    //{
+    //    spotPuzzleMsg = _msg;
+    //}
 }
