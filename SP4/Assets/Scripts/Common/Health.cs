@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Health : MonoBehaviour {
+public class Health : NetworkBehaviour {
 
     [SerializeField]
     bool isInvincible = false;
 
+    [SyncVar]
     private float currHp;
     private float maxHp;
 
@@ -34,6 +36,10 @@ public class Health : MonoBehaviour {
     public void ModifyHp(float value)
     {
         if (isInvincible)
+            return;
+
+        //syncing of hp
+        if (!isServer)
             return;
 
         currHp += value;

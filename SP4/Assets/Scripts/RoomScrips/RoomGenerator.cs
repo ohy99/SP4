@@ -258,10 +258,10 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         //Increase the number of times entered game
         PlayerPrefs.SetInt(PREFTYPE.NUM_OF_ENTERGAME.ToString(), PlayerPrefs.GetInt(PREFTYPE.NUM_OF_ENTERGAME.ToString(), 0) + 1);
 
-        Debug.Log("LEFT: " + room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.LEFT));
-        Debug.Log("UP: " + room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.UP));
-        Debug.Log("RIGHT: " + room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.RIGHT));
-        Debug.Log("DOWN: " + room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.DOWN));
+        //Debug.Log("LEFT: " + room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.LEFT));
+        //Debug.Log("UP: " + room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.UP));
+        //Debug.Log("RIGHT: " + room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.RIGHT));
+        //Debug.Log("DOWN: " + room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.DOWN));
     }
 
 
@@ -418,11 +418,9 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         //    DIRECTION oppoSide = GetOppositeDir(dir);
         //    neighbourRS.OffTriggerBox(oppoSide);
         //}
-        Debug.Log("B4_CurrID: " + currID);
+       
         StoreRoom(currID, newGridX, newGridY, room);
         room.SetActive(false);
-        Debug.Log("CurrID: " + currID);
-        Debug.Log("roomID" + room.GetComponent<RoomScript>().GetRoomID());
         //RoomStruct temp = new RoomStruct();
         //temp.room = room;
         //syncListRooomStruct.Add(temp);

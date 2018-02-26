@@ -8,7 +8,7 @@ public class Crossbow : RangeWeaponBase
 	// Use this for initialization
 	public override void Start ()
     {
-        damage = 10;
+        damage = 0.5f;
         damageOverTime = 0;
 
         totalRounds = 9999999;
@@ -23,8 +23,7 @@ public class Crossbow : RangeWeaponBase
     public override void Update ()
     {
         //Debug.Log("WEAPON_UPDATE");
-        
-	}
+    }
 
     // Fire Weapon 
     public override GameObject Discharge(Vector3 pos, Quaternion rotation)

@@ -12,68 +12,57 @@ public class Player : NetworkBehaviour
     private int maxExp;
     private int skillPoints;
     private int currentLevel;
-    private int clientIndex;
+    public int playerId;
     bool onDeadTrigger = false;
-    //GameObject[] playersList;
 
+    GameObject[] playersList;
+    
     public override void OnStartLocalPlayer()
     {
-
-        //if (!NetworkServer.active)
-        //    Debug.Log("SERVER NOT ACTIVE");
-        //else
-        //    Debug.Log("SERVER ACTIVE");
-
         GetComponent<SpriteRenderer>().color = Color.green;
-        
-        if(Global.Instance.player == null)
-        {
-            Debug.Log("global player is null");
-        }
-        else
-            Debug.Log("global player in use wtf");
 
         //wiil tis worko
-        //playersList = GameObject.FindGameObjectsWithTag("Player");
-        //Debug.Log("numPlayer: " + playersList.Length);
-        //for (int i = 0; i < playersList.Length; i++)
-        //{
-        //    if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
-        //    {
-        //        Global.Instance.player = playersList[i];
-        //        break;
-        //    }
-        //}
+        playersList = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < playersList.Length; i++)
+        {
+            if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+            {
+                //set global instance of player to local player
+                Global.Instance.player = playersList[i];
+                break;
+            }
+        }
 
-        Global.Instance.player = gameObject;
         Camera.main.GetComponent<CameraScript>().playerTransform = gameObject.transform;
 
-        //Debug.Log(Network.player.ToString());
-        //clientIndex = NetworkClient.allClients[0].GetHashCode();
-        //Debug.Log("REGISTER_INDEX: " + clientIndex);
-        //MessageHandler.Instance.index = clientIndex;
+        //Debug.Log(NetworkClient.allClients[0].connection.connectionId);
+      
+        if(isServer)
+            playerId = NetworkServer.connections.Count;
+        else
+            //send msg to server to get da id
+
         MessageHandler.Instance.Register(NetworkClient.allClients[0]);
+
+        Debug.Log("number client in local game: " + NetworkClient.allClients.Count);
+
         MessageHandler.Instance.index = Network.player.GetHashCode();
 
         if (isServer)
             RoomGenerator.Instance.Init();
         else
             MessageHandler.Instance.SendRoom_C2S(); //sent to server/host to get mapinfo
-
-        //for (int i = 0; i < RoomGenerator.Instance.roomDataList.Count; ++i)
-        //    Debug.Log(RoomGenerator.Instance.roomDataList[i].roomID);
-
-        //for (int i = 0; i < RoomGenerator.Instance.GetRoomList().Count; ++i)
-        //    Debug.Log(RoomGenerator.Instance.GetRoomList()[i].GetComponent<RoomScript>().GetRoomID());
     }
 
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         score = PlayerPrefs.GetInt("Score", 0);
         initialScore = score;
         float maxHealth = PlayerPrefs.GetFloat("Max Health", 100);
 
+        //float maxHealth = 100;
         hpScript = gameObject.GetComponent<Health>();
 
         hpScript.SetHp(maxHealth);
@@ -84,24 +73,37 @@ public class Player : NetworkBehaviour
         skillPoints = 0;
         currentLevel = 1;
 
-        Global.Instance.player = gameObject;
+        //Global.Instance.player = gameObject;
 
         if (!NetworkServer.active)
             Debug.Log("SERVER NOT ACTIVE");
         else
             Debug.Log("SERVER ACTIVE");
 
-  
+
+        if (isServer)
+            playerId = NetworkServer.connections.Count;
+        //Debug.Log("playerId: " + playerId);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isServer && Input.GetKeyUp(KeyCode.L))
+
+        if (Input.GetKeyUp(KeyCode.L))
         {   //this for testing 
-            //if (GetComponent<MessageHandler>().myClient != null)
-            //    Debug.Log("server_send");
-            MessageHandler.Instance.SendPosition_C2S(gameObject.transform.position);
+
+            if (isServer)
+            {
+                Debug.Log("keypressed");
+                Debug.Log(NetworkServer.connections.Count);
+                for (int i = 0; i < NetworkServer.connections.Count; ++i)
+                {
+                    Debug.Log("ConnectionId: " + NetworkServer.connections[i].connectionId);
+                }
+            }
+
+            //MessageHandler.Instance.SendPosition_C2S(gameObject.transform.position);
         }
 
         if (hpScript.GetCurrHp() <= 0)
@@ -183,3 +185,8 @@ public class Player : NetworkBehaviour
     public bool IsDead() { return hpScript.GetCurrHp() <= 0; }
     public void AddHealth(float value) { hpScript.ModifyHp(value); }
 }
+
+/*
+ * server will set id of clients that connects -> set in start
+ * client will msg server to get index
+ */
