@@ -25,6 +25,16 @@ public class SpotPuzzleRoomScript : RoomScript
 
     int fontSize = 60;
 
+    GUIStyle style;
+
+    string text;
+
+    Vector2 size;
+
+    GUIContent content;
+
+    float screenCenter;
+
     // Use this for initialization
 
     void Start()
@@ -69,6 +79,11 @@ public class SpotPuzzleRoomScript : RoomScript
 
         puzzleComplete = false;
 
+        style = new GUIStyle();
+
+        content = new GUIContent();
+
+
         player = Global.Instance.player;
     }
 
@@ -102,31 +117,30 @@ public class SpotPuzzleRoomScript : RoomScript
 
     void OnGUI()
     {
-        GUIStyle style = new GUIStyle();
-
-        string text;
-
         style.fontSize = Mathf.Min(Mathf.FloorToInt(Screen.width * fontSize / 1000), Mathf.FloorToInt(Screen.height * fontSize / 1000));
+        style.alignment = TextAnchor.UpperCenter;
 
-        float screenCenter = Screen.width * 0.5f;
+        screenCenter = Screen.width * 0.5f;
 
         float yPos = 0.0f;
-
-        style.alignment = TextAnchor.UpperCenter;
 
         if (!puzzleComplete)
         {
             if (elapsedTime < 5.0f)
             {
                 text = "Spot the difference (Collide into the object to select)";
-                GUI.Label(new Rect(screenCenter - text.Length * 1.5f, yPos, 220.0f, 20.0f), text, style);
-                yPos += 10.0f;
+                content.text = text;
+                size = style.CalcSize(content);
+                GUI.Label(new Rect(screenCenter - size.x, yPos, size.x * 2.0f, size.y * 2.0f), text, style);
+                yPos += size.y;
             }
 
             if (wrongSelection)
             {
                 text = "Wrong Answer";
-                GUI.Label(new Rect(screenCenter - text.Length * 1.5f, yPos, 220.0f, 20.0f), text, style);
+                content.text = text;
+                size = style.CalcSize(content);
+                GUI.Label(new Rect(screenCenter - size.x, yPos, size.x * 2.0f, size.y * 2.0f), text, style);
             }
         }
     }

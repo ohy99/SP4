@@ -138,6 +138,8 @@ public class RoomGenerator : MonoBehaviour {
             roomList.Clear();
         }
 
+        Global.Instance.player.transform.position = this.transform.position;
+
         Start();
     }
 	

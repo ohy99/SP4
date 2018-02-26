@@ -13,6 +13,10 @@ public class SpeedRoomScript : RoomScript {
 
     SpeedRoomItemSpawner spawnerScript;
 
+    GUIStyle style;
+
+    GUIContent content;
+
     int itemCollected;
 
     bool puzzleComplete;
@@ -21,6 +25,11 @@ public class SpeedRoomScript : RoomScript {
     float textTimer;
 
     int fontSize = 60;
+    string text;
+    float textWidth;
+    float screenCenter;
+
+    Vector2 size;
 
     // Use this for initialization
 
@@ -46,6 +55,12 @@ public class SpeedRoomScript : RoomScript {
         puzzleComplete = false;
 
         player = Global.Instance.player;
+
+        style = new GUIStyle();
+
+        style.alignment = TextAnchor.UpperCenter;
+
+        content = new GUIContent();
 
         itemCollected = 0;
     }
@@ -74,32 +89,39 @@ public class SpeedRoomScript : RoomScript {
 
     void OnGUI()
     {
-        GUIStyle style = new GUIStyle();
-        string text;
         style.fontSize = Mathf.Min(Mathf.FloorToInt(Screen.width * fontSize / 1000), Mathf.FloorToInt(Screen.height * fontSize / 1000));
         style.alignment = TextAnchor.UpperCenter;
-        float screenCenter = Screen.width * 0.5f;
+
+        screenCenter = Screen.width * 0.5f;
 
         float yPos = 0.0f;
 
         if (elapsedTime < 5.0f && !spawnerScript.spawnerActive)
         {
             text = "Collect as many coins as possible";
-            GUI.Label(new Rect(screenCenter - text.Length * 1.5f, yPos, 220.0f, 20.0f), text, style);
-            yPos += 10.0f;
+            content.text = text;
+            size = style.CalcSize(content);
+            GUI.Label(new Rect(screenCenter - size.x, yPos, size.x * 2.0f, size.y * 2.0f), text, style);
+            yPos += size.y;
             text = "Colide into the middle circle to start";
-            GUI.Label(new Rect(screenCenter - text.Length * 1.5f, yPos, 220.0f, 20.0f), text, style);
-            yPos += 10.0f;
+            content.text = text;
+            size = style.CalcSize(content);
+            GUI.Label(new Rect(screenCenter - size.x, yPos, size.x * 2.0f, size.y * 2.0f), text, style);
+            yPos += size.y;
         }
 
         if (spawnerScript.spawnerActive && !puzzleComplete)
         {
             text = "Item: " + spawnerScript.numOfItemSpawned + "/" + spawnerScript.maxSpawns;
-            GUI.Label(new Rect(screenCenter - text.Length * 1.5f, yPos, 220.0f, 20.0f), text, style);
-            yPos += 10.0f;
+            content.text = text;
+            size = style.CalcSize(content);
+            GUI.Label(new Rect(screenCenter - size.x, yPos, size.x * 2.0f, size.y * 2.0f), text, style);
+            yPos += size.y;
             text = "You collected: " + itemCollected;
-            GUI.Label(new Rect(screenCenter - text.Length * 1.5f, yPos, 220.0f, 20.0f), text, style);
-            yPos += 10.0f;
+            content.text = text;
+            size = style.CalcSize(content);
+            GUI.Label(new Rect(screenCenter - size.x, yPos, size.x * 2.0f, size.y * 2.0f), text, style);
+            yPos += size.y;
         }
     }
 

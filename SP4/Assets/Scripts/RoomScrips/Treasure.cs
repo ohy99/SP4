@@ -13,10 +13,24 @@ public class Treasure : MonoBehaviour {
 
     int fontSize = 60;
 
-	// Use this for initialization
-	void Start () {
+    GUIStyle style;
+
+    GUIContent content;
+
+    float screenCenter;
+
+    string text;
+
+    Vector2 size;
+
+    // Use this for initialization
+    void Start () {
         SendMessageUpwards("GenerateTreasureKey", TreasureKey);
-	}
+
+        style = new GUIStyle();
+
+        content = new GUIContent();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -33,18 +47,17 @@ public class Treasure : MonoBehaviour {
 
     void OnGUI()
     {
-        GUIStyle style = new GUIStyle();
         style.fontSize = Mathf.Min(Mathf.FloorToInt(Screen.width * fontSize / 1000), Mathf.FloorToInt(Screen.height * fontSize / 1000));
         style.alignment = TextAnchor.UpperCenter;
-        float screenCenter = Screen.width * 0.5f;
 
-        string text;
+        screenCenter = Screen.width * 0.5f;
 
         if (textTrigger)
         {
             text = "Find the key around the map to unlock this chest";
-
-            GUI.Label(new Rect(screenCenter - text.Length * 1.5f, 0, 220.0f, 20.0f), text, style);
+            content.text = text;
+            size = style.CalcSize(content);
+            GUI.Label(new Rect(screenCenter - size.x, 0, size.x * 2.0f, size.y * 2.0f), text, style);
         }
     }
 

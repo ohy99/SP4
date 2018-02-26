@@ -20,6 +20,16 @@ public class EnemyRoomScript : RoomScript {
 
     int fontSize = 60;
 
+    GUIStyle style;
+
+    GUIContent content;
+
+    float screenCenter;
+
+    string text;
+
+    Vector2 size;
+
     // Use this for initialization
     void Start()
     {
@@ -41,6 +51,7 @@ public class EnemyRoomScript : RoomScript {
 
         elapsedTime = 0.0f;
         completedWaves = false;
+        style = new GUIStyle();
     }
 
     // Update is called once per frame
@@ -76,15 +87,15 @@ public class EnemyRoomScript : RoomScript {
     {
         if (elapsedTime < 5.0f)
         {
-            GUIStyle style = new GUIStyle();
-            string text = "Survive the wave of enemies";
-            float screenCenter = Screen.width * 0.5f;
-
             style.fontSize = Mathf.Min(Mathf.FloorToInt(Screen.width * fontSize / 1000), Mathf.FloorToInt(Screen.height * fontSize / 1000));
-
             style.alignment = TextAnchor.UpperCenter;
 
-            GUI.Label(new Rect(screenCenter -text.Length * 1.5f, 0, 220.0f, 20.0f), text, style);
+            screenCenter = Screen.width * 0.5f;
+
+            text = "Survive the wave of enemies";
+            content.text = text;
+            size = style.CalcSize(content);
+            GUI.Label(new Rect(screenCenter - size.x, 0, size.x * 2.0f, size.y * 2.0f), text, style);
         }
     }
 
