@@ -23,6 +23,8 @@ public class SpotPuzzleRoomScript : RoomScript
     float elapsedTime;
     float textTimer;
 
+    int fontSize = 60;
+
     // Use this for initialization
 
     void Start()
@@ -101,21 +103,30 @@ public class SpotPuzzleRoomScript : RoomScript
     void OnGUI()
     {
         GUIStyle style = new GUIStyle();
-        style.fontSize = 15;
+
+        string text;
+
+        style.fontSize = Mathf.Min(Mathf.FloorToInt(Screen.width * fontSize / 1000), Mathf.FloorToInt(Screen.height * fontSize / 1000));
+
+        float screenCenter = Screen.width * 0.5f;
 
         float yPos = 0.0f;
+
+        style.alignment = TextAnchor.UpperCenter;
 
         if (!puzzleComplete)
         {
             if (elapsedTime < 5.0f)
             {
-                GUI.TextField(new Rect(Screen.width * 0.5f - 150.0f, yPos, 220.0f, 20.0f), "Spot the difference (Collide into the object to select)", 100, style);
+                text = "Spot the difference (Collide into the object to select)";
+                GUI.Label(new Rect(screenCenter - text.Length * 1.5f, yPos, 220.0f, 20.0f), text, style);
                 yPos += 10.0f;
             }
 
             if (wrongSelection)
             {
-                GUI.TextField(new Rect(Screen.width * 0.5f - 60.0f, yPos, 220.0f, 20.0f), "Wrong Answer", 100, style);
+                text = "Wrong Answer";
+                GUI.Label(new Rect(screenCenter - text.Length * 1.5f, yPos, 220.0f, 20.0f), text, style);
             }
         }
     }

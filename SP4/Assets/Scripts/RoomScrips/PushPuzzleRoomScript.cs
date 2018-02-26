@@ -19,6 +19,8 @@ public class PushPuzzleRoomScript : RoomScript {
     float elapsedTime;
     float timer;
 
+    int fontSize = 60;
+
     // Use this for initialization
 
     void Start()
@@ -83,7 +85,10 @@ public class PushPuzzleRoomScript : RoomScript {
     void OnGUI()
     {
         GUIStyle style = new GUIStyle();
-        style.fontSize = 15;
+        style.fontSize = Mathf.Min(Mathf.FloorToInt(Screen.width * fontSize / 1000), Mathf.FloorToInt(Screen.height * fontSize / 1000));
+        string text;
+        style.alignment = TextAnchor.UpperCenter;
+        float screenCenter = Screen.width * 0.5f;
 
         float yPos = 0.0f;
 
@@ -91,10 +96,13 @@ public class PushPuzzleRoomScript : RoomScript {
         {
             if (elapsedTime < 5.0)
             {
-                GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "Push the red circle to the blue circle", 50, style);
+                text = "Push the red circle to the blue circle";
+
+                GUI.Label(new Rect(screenCenter - text.Length * 1.5f, yPos, 220.0f, 20.0f), text, style);
                 yPos += 10.0f;
             }
-            GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "Enemy spawning in " + timer, 50, style);
+            text = "Enemy spawning in " + timer.ToString("F2");
+            GUI.Label(new Rect(screenCenter - text.Length * 1.5f, yPos, 220.0f, 20.0f), text, style);
         }
     }
 

@@ -21,6 +21,6 @@ public class EndGamePanelScript : MonoBehaviour {
 
     public void GameOverButton()
     {
-        LoadScene.Instance.LoadSceneCall("GameOver");
+        Global.Instance.roomGen.ReStart();
     }
 }

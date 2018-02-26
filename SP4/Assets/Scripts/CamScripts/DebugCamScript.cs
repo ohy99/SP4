@@ -40,7 +40,7 @@ public class DebugCamScript : MonoBehaviour {
 	void Update () {
         float w = 0;
         float h = 0;
-        Vector3 outPos = RoomGenerator.Instance.GetMidPoint(out w, out h);
+        Vector3 outPos = Global.Instance.roomGen.GetMidPoint(out w, out h);
         cam.transform.position = new Vector3(outPos.x, outPos.y, zPosOffset);
         cam.orthographicSize = (w > h? w * 0.5f: h * 0.5f) + offset;
         

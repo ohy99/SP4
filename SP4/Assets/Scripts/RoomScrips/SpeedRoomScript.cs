@@ -20,6 +20,8 @@ public class SpeedRoomScript : RoomScript {
     float elapsedTime;
     float textTimer;
 
+    int fontSize = 60;
+
     // Use this for initialization
 
     void Start()
@@ -73,23 +75,30 @@ public class SpeedRoomScript : RoomScript {
     void OnGUI()
     {
         GUIStyle style = new GUIStyle();
-        style.fontSize = 15;
+        string text;
+        style.fontSize = Mathf.Min(Mathf.FloorToInt(Screen.width * fontSize / 1000), Mathf.FloorToInt(Screen.height * fontSize / 1000));
+        style.alignment = TextAnchor.UpperCenter;
+        float screenCenter = Screen.width * 0.5f;
 
         float yPos = 0.0f;
 
         if (elapsedTime < 5.0f && !spawnerScript.spawnerActive)
         {
-            GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "Collect as many coins as possible", 100, style);
+            text = "Collect as many coins as possible";
+            GUI.Label(new Rect(screenCenter - text.Length * 1.5f, yPos, 220.0f, 20.0f), text, style);
             yPos += 10.0f;
-            GUI.TextField(new Rect(Screen.width * 0.5f - 110.0f, yPos, 220.0f, 20.0f), "Colide into the middle circle to start", 100, style);
+            text = "Colide into the middle circle to start";
+            GUI.Label(new Rect(screenCenter - text.Length * 1.5f, yPos, 220.0f, 20.0f), text, style);
             yPos += 10.0f;
         }
 
         if (spawnerScript.spawnerActive && !puzzleComplete)
         {
-            GUI.TextField(new Rect(Screen.width * 0.5f - 10.0f, yPos, 220.0f, 20.0f), "Item: " + spawnerScript.numOfItemSpawned + "/" + spawnerScript.maxSpawns, 100, style);
+            text = "Item: " + spawnerScript.numOfItemSpawned + "/" + spawnerScript.maxSpawns;
+            GUI.Label(new Rect(screenCenter - text.Length * 1.5f, yPos, 220.0f, 20.0f), text, style);
             yPos += 10.0f;
-            GUI.TextField(new Rect(Screen.width * 0.5f - 50.0f, yPos, 220.0f, 20.0f), "You collected: " + itemCollected, 100, style);
+            text = "You collected: " + itemCollected;
+            GUI.Label(new Rect(screenCenter - text.Length * 1.5f, yPos, 220.0f, 20.0f), text, style);
             yPos += 10.0f;
         }
     }

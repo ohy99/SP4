@@ -14,7 +14,7 @@ public enum DIRECTION
 }
 
 
-public class RoomGenerator : Singleton<RoomGenerator> {
+public class RoomGenerator : MonoBehaviour {
 
     const bool DEBUG_ROOMGEN = false;
 
@@ -59,7 +59,11 @@ public class RoomGenerator : Singleton<RoomGenerator> {
     }
 
 	// Use this for initialization
-	void Start () {
+	public void Start () {
+        DontDestroyOnLoad(this.gameObject);
+
+        Global.Instance.roomGen = this;
+
         biggestX = biggestY = smallestY = smallestX = 0;
         numOfOpenedDoors = 0;
         generatedBossRoom = false;

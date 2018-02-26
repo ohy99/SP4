@@ -8,6 +8,8 @@ public class Global : Singleton<Global> {
     GameObject _player;
     [SerializeField]
     Camera _camera;
+    [SerializeField]
+    RoomGenerator _roomGen;
 
     private bool _victory;
     
@@ -19,6 +21,8 @@ public class Global : Singleton<Global> {
     public bool victory { get { return _victory; } set { _victory = value; } }
 
     public GameObject boss;
+
+    public RoomGenerator roomGen { get { return _roomGen; } set { _roomGen = value; } }
 
     public bool bossIsDead;
 
