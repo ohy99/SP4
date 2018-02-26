@@ -18,7 +18,7 @@ public class EnemyRoomScript : RoomScript {
 
     bool completedWaves;
 
-    int fontSize = 60;
+    int fontSize = 50;
 
     GUIStyle style;
 

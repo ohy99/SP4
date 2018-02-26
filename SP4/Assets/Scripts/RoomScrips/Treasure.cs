@@ -11,7 +11,7 @@ public class Treasure : MonoBehaviour {
 
     bool textTrigger = false;
 
-    int fontSize = 60;
+    int fontSize = 50;
 
     GUIStyle style;
 

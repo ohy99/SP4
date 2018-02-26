@@ -23,7 +23,7 @@ public class SpotPuzzleRoomScript : RoomScript
     float elapsedTime;
     float textTimer;
 
-    int fontSize = 60;
+    int fontSize = 50;
 
     GUIStyle style;
 

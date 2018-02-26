@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spear : MeleeWeaponBase {
 
+    public AudioClip shootEffect;
     // Use this for initialization
     public override void Start ()
     {
@@ -26,6 +27,7 @@ public class Spear : MeleeWeaponBase {
         // Spawn a aabb here if collision occur damage is done
         meleeCollider.SetActive(true);
         Instantiate(meleeCollider, pos, rotation);
+        SoundManager.Instance.PlayOneShot(shootEffect);
         //meleeCollider.transform.localScale = new Vector3(0.5f, 2.5f, 1);
         //meleeCollider.transform.position = new Vector3(0, meleeCollider.transform.position.y + range, 0);
         //meleeCollider.GetComponent<BoxCollider2D>().offset = new Vector2(0, range);

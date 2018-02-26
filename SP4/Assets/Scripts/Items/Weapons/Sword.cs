@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Sword : MeleeWeaponBase {
 
-	// Use this for initialization
-	public override void Start ()
+    public AudioClip shootEffect;
+    // Use this for initialization
+    public override void Start ()
     {
         damage = 10;
         damageOverTime = 0;
@@ -27,7 +28,7 @@ public class Sword : MeleeWeaponBase {
         // Spawn a aabb here if collision occur damage is done
         Instantiate(meleeCollider, pos, rotation);
         meleeCollider.SetActive(true);
- 
+        SoundManager.Instance.PlayOneShot(shootEffect);
         Debug.Log(pos);
         //meleeCollider.GetComponent<BoxCollider2D>().offset = new Vector2(0, range);
         //meleeCollider.GetComponent<BoxCollider2D>().size = new Vector2(1, 1.5f);

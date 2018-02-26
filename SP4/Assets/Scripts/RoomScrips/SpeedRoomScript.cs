@@ -24,7 +24,7 @@ public class SpeedRoomScript : RoomScript {
     float elapsedTime;
     float textTimer;
 
-    int fontSize = 60;
+    int fontSize = 50;
     string text;
     float textWidth;
     float screenCenter;

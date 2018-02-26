@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Staff : RangeWeaponBase
 {
+    public AudioClip shootEffect;
 
     // Use this for initialization
     public override void Start()
@@ -29,6 +30,7 @@ public class Staff : RangeWeaponBase
         if (magRounds > 0)
         {
             Debug.Log("Staff_Attack");
+            SoundManager.Instance.PlayOneShot(shootEffect);
             GameObject go = Instantiate(projectile, pos, rotation);
             --magRounds;
             return go;

@@ -19,7 +19,7 @@ public class PushPuzzleRoomScript : RoomScript {
     float elapsedTime;
     float timer;
 
-    int fontSize = 60;
+    int fontSize = 50;
 
     GUIContent content;
 
@@ -110,8 +110,7 @@ public class PushPuzzleRoomScript : RoomScript {
             if (elapsedTime < 5.0)
             {
                 text = "Push the red circle to the blue circle";
-                content.text = text;
-                size = style.CalcSize(content);
+ 
                 GUI.Label(new Rect(screenCenter - size.x, yPos, size.x * 2.0f, size.y * 2.0f), text, style);
                 yPos += size.y;
             }
