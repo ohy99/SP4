@@ -378,6 +378,10 @@ public class MessageHandler : Singleton<MessageHandler>
 
         if(msg.roomType == "enemyRoom")
         {
+            Debug.Log("RoomId: " + msg.roomId + " totalWave: " + msg.spawnNumber);
+            if (RoomGenerator.Instance.GetRoomList()[msg.roomId] == null)
+                Debug.Log("Room not started yet");
+
             RoomGenerator.Instance.GetRoomList()[msg.roomId].
                 GetComponent<EnemyRoomScript>().GetSpawner().
                 GetComponent<EnemySpawner>().SetTotalWave(msg.spawnNumber);

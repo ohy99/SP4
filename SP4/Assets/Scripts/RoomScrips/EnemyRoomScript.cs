@@ -39,7 +39,7 @@ public class EnemyRoomScript : RoomScript {
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.UP), roomScript.GetHasTriggerBox(DIRECTION.UP), DIRECTION.UP));
         doorInfoList.Add(new DoorInfo(roomScript.GetIsLocked(DIRECTION.DOWN), roomScript.GetHasTriggerBox(DIRECTION.DOWN), DIRECTION.DOWN));
 
-        Spawner = transform.GetChild(0).gameObject;
+        //Spawner = transform.GetChild(0).gameObject;
 
         playersList = GameObject.FindGameObjectsWithTag("Player");
         for (int i = 0; i < playersList.Length; i++)
