@@ -22,24 +22,25 @@ public class Player : NetworkBehaviour
         GetComponent<SpriteRenderer>().color = Color.green;
 
         //wiil tis worko
-        playersList = GameObject.FindGameObjectsWithTag("Player");
-        for (int i = 0; i < playersList.Length; i++)
-        {
-            if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
-            {
-                //set global instance of player to local player
-                Global.Instance.player = playersList[i];
-                break;
-            }
-        }
+        //playersList = GameObject.FindGameObjectsWithTag("Player");
+        //for (int i = 0; i < playersList.Length; i++)
+        //{
+        //    if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+        //    {
+        //        //set global instance of player to local player
+        //        Global.Instance.player = playersList[i];
+        //        break;
+        //    }
+        //}
 
         Camera.main.GetComponent<CameraScript>().playerTransform = gameObject.transform;
 
         //Debug.Log(NetworkClient.allClients[0].connection.connectionId);
-      
+
+        Global.Instance.player = gameObject;
+
         if(isServer)
             playerId = NetworkServer.connections.Count;
-        else
             //send msg to server to get da id
 
         MessageHandler.Instance.Register(NetworkClient.allClients[0]);

@@ -39,13 +39,14 @@ public class SpotPuzzleRoomScript : RoomScript
         Debug.Log("numPlayer: " + playersList.Length);
         for (int i = 0; i < playersList.Length; i++)
         {
-            Debug.Log("playerIndex: " + playersList[i].GetComponent<Player>().clientIndex);
             if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
             {
                 player = playersList[i];
                 //break;
             }
         }
+
+        //player = Global.Instance.player;
 
         OriginalGroup = this.transform.GetChild(0);
         ChangedGroup = this.transform.GetChild(1);

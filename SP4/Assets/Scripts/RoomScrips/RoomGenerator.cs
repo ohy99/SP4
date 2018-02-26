@@ -212,6 +212,7 @@ public class RoomGenerator : Singleton<RoomGenerator> {
         StoreRoom(currID, 0, 0, room);
         Debug.Log("After_CurrID: " + currID);
         Debug.Log("roomID" + room.GetComponent<RoomScript>().GetRoomID());
+
         //NETWORK asdasd
         //RoomStruct temp = new RoomStruct();
         //temp.room = room;

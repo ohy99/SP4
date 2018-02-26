@@ -15,14 +15,14 @@ Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngin
 Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.022 seconds
+- Completed reload, in  0.023 seconds
 Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 0.988230 ms
+UnloadTime: 1.911067 ms
 ItemManagerStart
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
@@ -71,58 +71,25 @@ number client in local game: 1
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-B4_CurrID: 0
+SendRoom_C2S_1
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-After_CurrID: 1
+SERVER NOT ACTIVE
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-roomID0
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Add IdleState
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-number of rooms: 9
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-SERVER ACTIVE
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-clientIndex: 1
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-SERVER ACTIVE
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-clientIndex: 2
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Host/ServerRecv_Room_
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Log: connection {1} has been disconnected by timeout; address {::ffff:127.0.0.1:62558} time {29312}, last rec time {27302} rtt {11} timeout {2000}
-ServerDisconnected due to error: Timeout
+SERVER NOT ACTIVE
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Setting up 6 worker threads for Enlighten.
-  Thread -> id: f10 -> priority: 1 
-  Thread -> id: 240c -> priority: 1 
-  Thread -> id: 2a10 -> priority: 1 
-  Thread -> id: 1ea4 -> priority: 1 
-  Thread -> id: 1ff0 -> priority: 1 
-  Thread -> id: 2078 -> priority: 1 
+  Thread -> id: 2944 -> priority: 1 
+  Thread -> id: 2004 -> priority: 1 
+  Thread -> id: 22a0 -> priority: 1 
+  Thread -> id: 25b8 -> priority: 1 
+  Thread -> id: 2230 -> priority: 1 
+  Thread -> id: 20f8 -> priority: 1 
 [Singleton] is at OnDestroy
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
