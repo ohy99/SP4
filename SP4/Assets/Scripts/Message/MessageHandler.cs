@@ -516,17 +516,17 @@ public class MessageHandler : Singleton<MessageHandler>
     public void OnRecvItemCollected_Server(NetworkMessage netMsg)
     {
         itemCollectedMessage msg = netMsg.ReadMessage<itemCollectedMessage>();
-        Debug.Log("Host/ServerRecv_itemCollected");
+        Debug.Log("Host/ServerRecv_itemCollected = " + msg.itemCollected);
 
-        RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<SpeedRoomScript>()._itemCollected = msg.itemCollected;
+        RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<SpeedRoomScript>().SetItemCollected(msg.itemCollected);
     }
 
     public void OnRecvItemCollected_Client(NetworkMessage netMsg)
     {
         itemCollectedMessage msg = netMsg.ReadMessage<itemCollectedMessage>();
-        Debug.Log("ClientRecv_itemCollected");
+        Debug.Log("ClientRecv_itemCollected = " + msg.itemCollected);
 
-        RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<SpeedRoomScript>()._itemCollected = msg.itemCollected;
+        RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<SpeedRoomScript>().SetItemCollected(msg.itemCollected);
     }
 }
 

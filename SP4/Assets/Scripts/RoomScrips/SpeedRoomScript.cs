@@ -190,5 +190,10 @@ public class SpeedRoomScript : RoomScript {
         return spawnerScript;
     }
 
-    public int _itemCollected { get { return itemCollected; } set { itemCollected = _itemCollected; } }
+    public void SetItemCollected(int _itemCollected)
+    {
+        itemCollected = _itemCollected;
+        Debug.Log("itemCollected: " + itemCollected);
+    }
+    //public int _itemCollected { get { return itemCollected; } set { itemCollected = _itemCollected; } }
 }
