@@ -28,14 +28,17 @@ public class MessageHandler : Singleton<MessageHandler>
         public static short pushPuzzleMsgType_client = MsgType.Highest + 11;
         public static short pushPuzzleMsgType_server = MsgType.Highest + 12;
 
-        public static short lockDoorMsg_client = MsgType.Highest + 13;
-        public static short lockDoorMsg_server = MsgType.Highest + 14;
+        public static short lockDoorMsgType_client = MsgType.Highest + 13;
+        public static short lockDoorMsgType_server = MsgType.Highest + 14;
 
-        public static short NumberToSpawnMsg_client = MsgType.Highest + 15;
-        public static short NumberToSpawnMsg_server = MsgType.Highest + 16;
+        public static short NumberToSpawnMsgType_client = MsgType.Highest + 15;
+        public static short NumberToSpawnMsgType_server = MsgType.Highest + 16;
 
         public static short spotPuzzleMsgType_client = MsgType.Highest + 17;
         public static short spotPuzzleMsgType_server = MsgType.Highest + 18;
+
+        public static short playerIdMsgType_client = MsgType.Highest + 19;
+        public static short playerIdMsgType_server = MsgType.Highest + 20;
     };
 
     //variables
@@ -65,15 +68,17 @@ public class MessageHandler : Singleton<MessageHandler>
         myClient.RegisterHandler(MyMsgType.pushPuzzleMsgType_server, OnRecvPushPuzzle_Client);
         NetworkServer.RegisterHandler(MyMsgType.pushPuzzleMsgType_client, OnRecvPushPuzzle_Server);
 
-        myClient.RegisterHandler(MyMsgType.lockDoorMsg_server, OnRecvLockDoor_Client);
-        NetworkServer.RegisterHandler(MyMsgType.lockDoorMsg_client, OnRecvLockDoor_Server);
+        myClient.RegisterHandler(MyMsgType.lockDoorMsgType_server, OnRecvLockDoor_Client);
+        NetworkServer.RegisterHandler(MyMsgType.lockDoorMsgType_client, OnRecvLockDoor_Server);
 
-        myClient.RegisterHandler(MyMsgType.NumberToSpawnMsg_server, OnRecvNumberToSpawn_Client);
-        NetworkServer.RegisterHandler(MyMsgType.NumberToSpawnMsg_client, OnRecvNumberToSpawn_Server);
+        myClient.RegisterHandler(MyMsgType.NumberToSpawnMsgType_server, OnRecvNumberToSpawn_Client);
+        NetworkServer.RegisterHandler(MyMsgType.NumberToSpawnMsgType_client, OnRecvNumberToSpawn_Server);
 
         myClient.RegisterHandler(MyMsgType.spotPuzzleMsgType_server, OnRecvSpotPuzzle_Client);
         NetworkServer.RegisterHandler(MyMsgType.spotPuzzleMsgType_client, OnRecvSpotPuzzle_Server);
 
+        myClient.RegisterHandler(MyMsgType.playerIdMsgType_server, OnRecvPlayerId_Client);
+        NetworkServer.RegisterHandler(MyMsgType.playerIdMsgType_client, OnRecvPlayerId_Server);
         //myClient.RegisterHandler(MyMsgType.spawnRoomMsgType_server, OnRecvSpawnRoom_Client);
         //NetworkServer.RegisterHandler(MyMsgType.spawnRoomMsgType_client, OnRecvSpawnRoom_Server);
     }
@@ -93,10 +98,10 @@ public class MessageHandler : Singleton<MessageHandler>
         PopulateRoomListMessage msg = _container;
         msg.connectionId = _connectionId;
 
-        //Debug.Log(_room.GetComponent<RoomScript>().GetRoomID());
+        Debug.Log("SendRoom_S2C");
 
         if (NetworkServer.active)
-            NetworkServer.SendToClient(_connectionId, MyMsgType.roomListMsgType_server, msg);
+            NetworkServer.SendToClient(msg.connectionId, MyMsgType.roomListMsgType_server, msg);
         //NetworkServer.SendToAll(MyMsgType.spawnRoomMsgType_server, msg);
     }
 
@@ -131,7 +136,7 @@ public class MessageHandler : Singleton<MessageHandler>
 
         Debug.Log("SendLockDoor_S2C");
         if (NetworkServer.active)
-            NetworkServer.SendToAll(MyMsgType.lockDoorMsg_server, msg);
+            NetworkServer.SendToAll(MyMsgType.lockDoorMsgType_server, msg);
     }
 
     public void SendNumberToSpawn_S2C(int _roomId, int _spawnNumber, string _roomType)
@@ -144,7 +149,7 @@ public class MessageHandler : Singleton<MessageHandler>
         Debug.Log("SendNumberToSpawnDoor_S2C");
 
         if (NetworkServer.active)
-            NetworkServer.SendToAll(MyMsgType.NumberToSpawnMsg_server, msg);
+            NetworkServer.SendToAll(MyMsgType.NumberToSpawnMsgType_server, msg);
     }
 
     public void SendSpotPuzzle_S2C(SpotPuzzleRoomMessage _message)
@@ -154,6 +159,17 @@ public class MessageHandler : Singleton<MessageHandler>
 
         if (NetworkServer.active)
             NetworkServer.SendToAll(MyMsgType.spotPuzzleMsgType_server, msg);
+    }
+
+    public void SendPlayerId_S2C()
+    {
+        PlayerIdMessage msg = new PlayerIdMessage();
+        msg.playerId = NetworkServer.connections.Count - 1;
+        Debug.Log("SendPlayerId_S2C: playerid = " + msg.playerId);
+
+        if (NetworkServer.active) //playerId msg shld only be send once
+            NetworkServer.SendToClient(msg.playerId, MyMsgType.playerIdMsgType_server, msg);
+        //NetworkServer.SendToAll(MyMsgType.spotPuzzleMsgType_server, msg);
     }
 
     // SENDING TO SERVER
@@ -174,9 +190,9 @@ public class MessageHandler : Singleton<MessageHandler>
         if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
             return;
 
-        Debug.Log("SendRoom_C2S_" + myClient.connection.connectionId);
+        Debug.Log("SendRoom_C2S_" + index);
         PopulateRoomListMessage msg = new PopulateRoomListMessage();
-        msg.connectionId = myClient.connection.connectionId;
+        msg.connectionId = index;
 
         //send to server
         myClient.Send(MyMsgType.roomListMsgType_client, msg);
@@ -187,7 +203,7 @@ public class MessageHandler : Singleton<MessageHandler>
         if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
             return;
 
-        Debug.Log("SendUnlockDoor_C2S_" + myClient.connection.connectionId);
+        Debug.Log("SendUnlockDoor_C2S_" + index);
         UnlockDoorMessage msg = new UnlockDoorMessage();
         msg.roomId = _roomId;
         msg.isClear = _isClear;
@@ -201,10 +217,10 @@ public class MessageHandler : Singleton<MessageHandler>
         if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
             return;
 
-        Debug.Log("SendPushPuzzle_C2S_" + myClient.connection.connectionId);
+        Debug.Log("SendPushPuzzle_C2S_" + index);
         PushPuzzleRoomMessage msg = new PushPuzzleRoomMessage();
         msg.roomId = _roomId;
-        msg.connectionId = myClient.connection.connectionId;
+        msg.connectionId = index;
 
         //send to server
         myClient.Send(MyMsgType.pushPuzzleMsgType_client, msg);
@@ -215,12 +231,12 @@ public class MessageHandler : Singleton<MessageHandler>
         if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
             return;
 
-        Debug.Log("SendLockDoor_C2S_" + myClient.connection.connectionId);
+        Debug.Log("SendLockDoor_C2S_" + index);
         LockDoorMessage msg = new LockDoorMessage();
         msg.roomId = _roomId;
 
         //send to server
-        myClient.Send(MyMsgType.lockDoorMsg_client, msg);
+        myClient.Send(MyMsgType.lockDoorMsgType_client, msg);
     }
 
     public void SendNumberToSpawn_C2S(int _roomId, int _spawnNumber, string _roomType)
@@ -232,7 +248,7 @@ public class MessageHandler : Singleton<MessageHandler>
 
         Debug.Log("SendNumberToSpawnDoor_C2S");
 
-        myClient.Send(MyMsgType.NumberToSpawnMsg_client, msg);
+        myClient.Send(MyMsgType.NumberToSpawnMsgType_client, msg);
     }
 
     public void SendSpotPuzzle_C2S(SpotPuzzleRoomMessage _message)
@@ -241,6 +257,15 @@ public class MessageHandler : Singleton<MessageHandler>
         Debug.Log("SendSpotPuzzle_C2S");
 
         myClient.Send(MyMsgType.spotPuzzleMsgType_client, msg);
+    }
+
+    public void SendPlayerId_C2S()
+    {
+        PlayerIdMessage msg = new PlayerIdMessage();
+        msg.playerId = -12;
+        Debug.Log("SendPlayerId_C2S");
+
+        myClient.Send(MyMsgType.playerIdMsgType_client, msg);
     }
     //-----------------------------------------------------------------------------
 
@@ -255,7 +280,7 @@ public class MessageHandler : Singleton<MessageHandler>
         PositionMessage msg = netMsg.ReadMessage<PositionMessage>();
 
         //if(Global.Instance.player.GetComponent<Player>().isServer)
-        Debug.Log("Host/ServerRecv_Position_" + index + " : " + msg.position);
+        Debug.Log("Host/ServerRecv_Position_: " + msg.position);
     }
     public void OnRecvPosition_Client(NetworkMessage netMsg)
     {
@@ -269,7 +294,7 @@ public class MessageHandler : Singleton<MessageHandler>
     public void OnRecvRoom_Server(NetworkMessage netMsg)
     {
         PopulateRoomListMessage msg = netMsg.ReadMessage<PopulateRoomListMessage>();
-
+        
         //if(Global.Instance.player.GetComponent<Player>().isServer)
         Debug.Log("Host/ServerRecv_Room_");
         for (int i = 0; i < RoomGenerator.Instance.roomDataList.Count; ++i)
@@ -300,7 +325,7 @@ public class MessageHandler : Singleton<MessageHandler>
         if (msg.roomID != 0)
             room.SetActive(false);
 
-
+        Debug.Log("ClientRecv_Room");
         //Debug.Log("==============================");
         //Debug.Log("ClientRecv_Room_" + msg.connectionId);
         //Debug.Log("ClientRecv_Room_RoomId" + msg.roomID);
@@ -354,7 +379,7 @@ public class MessageHandler : Singleton<MessageHandler>
             return;
 
         PushPuzzleRoomMessage msg = netMsg.ReadMessage<PushPuzzleRoomMessage>();
-        Debug.Log("ClientRecv_PushPuzzle_" + msg.connectionId + ": room_" + msg.roomId);
+        Debug.Log("ClientRecv_PushPuzzle_" + index + ": room_" + msg.roomId);
 
 
         RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<PushPuzzleRoomScript>().SetObjectivePos(msg.objectivePos);
@@ -368,6 +393,7 @@ public class MessageHandler : Singleton<MessageHandler>
 
         Debug.Log("Host/ServerRecv_LockDoor : room_" + msg.roomId);
         RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<RoomScript>().LockAllDoor();
+        SendLockDoor_S2C(msg.roomId);
     }
 
     public void OnRecvLockDoor_Client(NetworkMessage netMsg)
@@ -435,6 +461,26 @@ public class MessageHandler : Singleton<MessageHandler>
         RoomGenerator.Instance.GetRoomList()[msg.roomId].GetComponent<SpotPuzzleRoomScript>().
             RepositionObjectClient(msg);
 
+    }
+
+    public void OnRecvPlayerId_Server(NetworkMessage netMsg)
+    {
+        PlayerIdMessage msg = netMsg.ReadMessage<PlayerIdMessage>();
+        Debug.Log("Host/ServerRecv_PlayerId");
+        SendPlayerId_S2C();
+    }
+
+    public void OnRecvPlayerId_Client(NetworkMessage netMsg)
+    {
+        if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+            return;
+
+        PlayerIdMessage msg = netMsg.ReadMessage<PlayerIdMessage>();
+        Debug.Log("ClientRecv_PlayerId_" + msg.playerId);
+        Global.Instance.player.GetComponent<Player>().playerId = msg.playerId;
+        index = msg.playerId;
+
+        MessageHandler.Instance.SendRoom_C2S(); //sent to server/host to get mapinfo
     }
 }
 

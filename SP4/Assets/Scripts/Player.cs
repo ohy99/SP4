@@ -12,11 +12,12 @@ public class Player : NetworkBehaviour
     private int maxExp;
     private int skillPoints;
     private int currentLevel;
+    //dont change player id = connection id
     public int playerId;
     bool onDeadTrigger = false;
 
     GameObject[] playersList;
-    
+
     public override void OnStartLocalPlayer()
     {
         GetComponent<SpriteRenderer>().color = Color.green;
@@ -35,24 +36,26 @@ public class Player : NetworkBehaviour
 
         Camera.main.GetComponent<CameraScript>().playerTransform = gameObject.transform;
 
-        //Debug.Log(NetworkClient.allClients[0].connection.connectionId);
+        Debug.Log("connectionId: " + NetworkClient.allClients[0].connection.connectionId);
 
         Global.Instance.player = gameObject;
 
-        if(isServer)
-            playerId = NetworkServer.connections.Count;
-            //send msg to server to get da id
+        Debug.Log("Starting up");
 
         MessageHandler.Instance.Register(NetworkClient.allClients[0]);
 
-        Debug.Log("number client in local game: " + NetworkClient.allClients.Count);
-
-        MessageHandler.Instance.index = Network.player.GetHashCode();
+        if (isServer)
+            playerId = NetworkServer.connections.Count - 1;
+        else //send msg to server to get da id
+        {
+            Debug.Log("Sending for id");
+            MessageHandler.Instance.SendPlayerId_C2S();
+        }
 
         if (isServer)
             RoomGenerator.Instance.Init();
-        else
-            MessageHandler.Instance.SendRoom_C2S(); //sent to server/host to get mapinfo
+        //else
+          //  MessageHandler.Instance.SendRoom_C2S(); //sent to server/host to get mapinfo
     }
 
 
@@ -83,8 +86,7 @@ public class Player : NetworkBehaviour
 
 
         if (isServer)
-            playerId = NetworkServer.connections.Count;
-        //Debug.Log("playerId: " + playerId);
+            playerId = NetworkServer.connections.Count - 1;
     }
 
     // Update is called once per frame

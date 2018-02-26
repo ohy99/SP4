@@ -29,6 +29,8 @@ public class PushPuzzleRoomScript : RoomScript {
     bool isPosSet;
     // Use this for initialization
 
+        //172.21.134.118
+
     void Start()
     {
         //Random.Range(1, 1);

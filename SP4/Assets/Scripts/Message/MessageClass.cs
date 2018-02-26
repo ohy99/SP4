@@ -74,3 +74,8 @@ public class NumberToSpawnMessage : MessageBase
     public int spawnNumber;
     public string roomType;
 }
+
+public class PlayerIdMessage : MessageBase
+{
+    public int playerId;
+}

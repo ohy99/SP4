@@ -3521,13 +3521,13 @@ Prefab:
         type: 2}
       propertyPath: randomRooms.Array.data[4]
       value: 
-      objectReference: {fileID: 1864703187797008, guid: 61809cef4b25d0e49adc0ad57f75bbc9,
+      objectReference: {fileID: 1282715517241922, guid: 3bcab8a72dc60a946be2f35bed37f553,
         type: 2}
     - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
         type: 2}
       propertyPath: randomRooms.Array.data[1]
       value: 
-      objectReference: {fileID: 1864703187797008, guid: 61809cef4b25d0e49adc0ad57f75bbc9,
+      objectReference: {fileID: 1820755387426308, guid: 9dead6da99857824f9b6c283abb8d8c9,
         type: 2}
     - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
         type: 2}
@@ -3539,13 +3539,13 @@ Prefab:
         type: 2}
       propertyPath: randomRooms.Array.data[3]
       value: 
-      objectReference: {fileID: 1864703187797008, guid: 61809cef4b25d0e49adc0ad57f75bbc9,
+      objectReference: {fileID: 1053355793432642, guid: c00eb33a62dd5f24b9b8cccea7ae673c,
         type: 2}
     - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
         type: 2}
       propertyPath: randomRooms.Array.data[2]
       value: 
-      objectReference: {fileID: 1864703187797008, guid: 61809cef4b25d0e49adc0ad57f75bbc9,
+      objectReference: {fileID: 1334630802994978, guid: 7cb511f7601dea445b2a7c8c6db201e8,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2f9123e5f6be9f4cb510d58961c8ea6, type: 2}

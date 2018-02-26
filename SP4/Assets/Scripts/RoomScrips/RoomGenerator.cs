@@ -207,11 +207,11 @@ public class RoomGenerator : Singleton<RoomGenerator> {
             }
         }
 
-        Debug.Log("B4_CurrID: " + currID);
+        //Debug.Log("B4_CurrID: " + currID);
         roomScript.Set(currID, 0, 0, boolArray[DIRECTION.LEFT], boolArray[DIRECTION.RIGHT], boolArray[DIRECTION.UP], boolArray[DIRECTION.DOWN]);
         StoreRoom(currID, 0, 0, room);
-        Debug.Log("After_CurrID: " + currID);
-        Debug.Log("roomID" + room.GetComponent<RoomScript>().GetRoomID());
+        //Debug.Log("After_CurrID: " + currID);
+        //Debug.Log("roomID" + room.GetComponent<RoomScript>().GetRoomID());
 
         //NETWORK asdasd
         //RoomStruct temp = new RoomStruct();

@@ -137,6 +137,7 @@ public class RoomScript : MonoBehaviour {
         }
     }
 
+
     void GenerateTreasureKey(GameObject TreasureKey)
     {
         Transform keyParent = RoomGenerator.Instance.GenerateKeyPos(roomID);
