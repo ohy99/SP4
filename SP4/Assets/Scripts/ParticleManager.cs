@@ -21,10 +21,12 @@ public class ParticleManager : Singleton<ParticleManager> {
 
 	// Use this for initialization
 	void Start() {
-        psList.Add(((GameObject)Resources.Load("Feedback/Hit Enemy")).GetComponent<ParticleSystem>());
-        psList.Add(((GameObject)Resources.Load("Feedback/Hit Enemy")).GetComponent<ParticleSystem>());
+
     }
-    void Awake() {
+    void Awake()
+    {
+        psList.Add(((GameObject)Resources.Load("Feedback/Hit Enemy")).GetComponent<ParticleSystem>());
+        psList.Add(((GameObject)Resources.Load("Feedback/Hit Enemy")).GetComponent<ParticleSystem>());
     }
 	
 	// Update is called once per frame

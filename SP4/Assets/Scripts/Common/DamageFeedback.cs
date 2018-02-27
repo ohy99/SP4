@@ -41,7 +41,6 @@ public class DamageFeedback : Singleton<DamageFeedback> {
             df.elapsed += Time.deltaTime;
             if (df.elapsed > duration)
             {
-                Destroy(df.spriteGO);
                 removeList.Add(df);
                 continue;
             }
@@ -51,7 +50,10 @@ public class DamageFeedback : Singleton<DamageFeedback> {
 
         //Remove them
         foreach (DMGINFO remove in removeList)
+        {
+            Destroy(remove.spriteGO);
             dmginfos.Remove(remove);
+        }
         removeList.Clear();
 	}
 

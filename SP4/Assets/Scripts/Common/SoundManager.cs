@@ -13,7 +13,8 @@ public class SoundManager : Singleton<SoundManager> {
     public float fxVolume = 0.0f;
 
 	// Use this for initialization
-	void Awake () {
+	public void Awake () {
+        Debug.Log("Hello");
 
         musicSource = this.gameObject.AddComponent<AudioSource>();
         globalfxSource = this.gameObject.AddComponent<AudioSource>();
@@ -33,6 +34,7 @@ public class SoundManager : Singleton<SoundManager> {
 
         musicSource.volume = musicVolume;
         globalfxSource.volume = fxVolume;
+        Debug.Log(musicSource.volume);
     }
 
     // Update is called once per frame
