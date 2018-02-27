@@ -85,3 +85,9 @@ public class itemCollectedMessage : MessageBase
     public int roomId;
     public int itemCollected;
 }
+
+public class activeRoomMessage : MessageBase
+{
+    public int roomId;
+    public string strRoomIds;
+}

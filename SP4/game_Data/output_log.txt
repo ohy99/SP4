@@ -15,14 +15,14 @@ Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngin
 Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.044 seconds
+- Completed reload, in  0.033 seconds
 Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 2.630423 ms
+UnloadTime: 2.793762 ms
 ItemManagerStart
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
@@ -63,7 +63,7 @@ NumberOfItems: 4
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-connectionId: 0
+connectionId: 1
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -75,71 +75,67 @@ Starting up
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-number of rooms: 9
+Sending for id
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-SERVER ACTIVE
+SendPlayerId_C2S
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-SERVER ACTIVE
+SERVER NOT ACTIVE
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Host/ServerRecv_PlayerId
+SERVER NOT ACTIVE
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-SendPlayerId_S2C: playerid = 1
+ClientRecv_PlayerId_1
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Host/ServerRecv_Room_
+SendRoom_C2S_1
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-SendRoom_S2C
+ClientRecv_Room
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-SendRoom_S2C
+ClientRecv_Room
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-SendRoom_S2C
+ClientRecv_Room
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-SendRoom_S2C
+ClientRecv_Room
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-SendRoom_S2C
+ClientRecv_Room
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-SendRoom_S2C
+ClientRecv_Room
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-SendRoom_S2C
+ClientRecv_Room
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-SendRoom_S2C
+ClientRecv_Room
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-SendRoom_S2C
+exp: 10
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Treasure Key(Clone) (UnityEngine.GameObject)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Untagged
+exp: 20
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -147,45 +143,205 @@ Treasure Key(Clone) (UnityEngine.GameObject)
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Treasure Key(Clone) (UnityEngine.GameObject)
+numPlayer: 2
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Untagged
+Initialize engine version: 5.6.3f1 (d3101c3b8468)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA Quadro K2200 (ID=0x13ba)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+    Driver:   21.21.13.7662
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.031 seconds
+Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.004956 ms
+ItemManagerStart
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Spwning da boss
+INVETORY START
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Add IdleState
+[Singleton] Using instance already created: Manager
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Untagged
+added Crossbow
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Untagged
+[Singleton] Using instance already created: Manager
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-[Singleton] Using instance already created: DmgFeedback
+InventoryManagerInit
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-[Singleton] Using instance already created: ParticleManager
+[Singleton] Using instance already created: EventSystem
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+InventoryManagerStart
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+NumberOfItems: 4
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+[Singleton] Using instance already created: RoomGenerator
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SERVER NOT ACTIVE
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+connectionId: 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Starting up
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+[Singleton] Using instance already created: Manager
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Sending for id
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SendPlayerId_C2S
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SERVER NOT ACTIVE
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SERVER NOT ACTIVE
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SERVER NOT ACTIVE
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+exp: 10
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ClientRecv_PlayerId_2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SendRoom_C2S_2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ClientRecv_Room
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ClientRecv_Room
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ClientRecv_Room
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ClientRecv_Room
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ClientRecv_Room
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ClientRecv_Room
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ClientRecv_Room
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ClientRecv_Room
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Setting up 6 worker threads for Enlighten.
-  Thread -> id: 23f0 -> priority: 1 
-  Thread -> id: 228c -> priority: 1 
-  Thread -> id: 884 -> priority: 1 
-  Thread -> id: 20b4 -> priority: 1 
-  Thread -> id: 1cc4 -> priority: 1 
-  Thread -> id: 970 -> priority: 1 
+  Thread -> id: 26c4 -> priority: 1 
+  Thread -> id: 26a4 -> priority: 1 
+  Thread -> id: 18d8 -> priority: 1 
+  Thread -> id: 8ec -> priority: 1 
+  Thread -> id: 10b0 -> priority: 1 
+  Thread -> id: 2270 -> priority: 1 
+[Singleton] is at OnDestroy
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+[Singleton] is at OnDestroy
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+[Singleton] is at OnDestroy
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+[Singleton] is at OnDestroy
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+[Singleton] is at OnDestroy
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+[Singleton] is at OnDestroy
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+[Singleton] is at OnDestroy
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+[Singleton] is at OnDestroy
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+[Singleton] is at OnDestroy
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Setting up 6 worker threads for Enlighten.
+  Thread -> id: 249c -> priority: 1 
+  Thread -> id: 12c8 -> priority: 1 
+  Thread -> id: 2008 -> priority: 1 
+  Thread -> id: 2710 -> priority: 1 
+  Thread -> id: 13c0 -> priority: 1 
+  Thread -> id: 25b8 -> priority: 1 
 [Singleton] is at OnDestroy
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
