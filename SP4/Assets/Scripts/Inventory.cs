@@ -89,6 +89,11 @@ public class Inventory
         currency = _currency;
     }
 
+    public void AddCurrency(int currencyToAdd)
+    {
+        currency += currencyToAdd;
+    }
+
     public void AddToSlot(string iName)
     {
         for(int i = 0; i < 15; ++i)

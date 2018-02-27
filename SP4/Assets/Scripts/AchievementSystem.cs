@@ -224,10 +224,10 @@ public class AchievementSystem : Singleton<AchievementSystem> {
         activepanels.Add(api);
     }
 
-    new void OnDestroy()
-    {
-        PlayerPrefs.DeleteAll();
-    }
+    //new void OnDestroy()
+    //{
+    //    PlayerPrefs.DeleteAll();
+    //}
 }
 
 public enum PREFTYPE

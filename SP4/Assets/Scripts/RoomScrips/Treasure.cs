@@ -57,7 +57,7 @@ public class Treasure : MonoBehaviour {
         {
             if (col.transform.GetChild(0).tag.Equals("Key") && col.transform.GetChild(0).GetComponent<TreasureKey>().GetTreasureRoomID() == this.GetComponentInParent<RoomScript>().GetRoomID())
             {
-                //InventoryManager.Instance.GetInventory("player").AddCurrency(100);
+                InventoryManager.Instance.GetInventory("player").AddCurrency(100);
                 Destroy(this.gameObject);
                 Destroy(col.transform.GetChild(0).gameObject);
             }

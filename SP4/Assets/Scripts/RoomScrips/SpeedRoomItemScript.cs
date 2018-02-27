@@ -11,7 +11,7 @@ public class SpeedRoomItemScript : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        Destroy(gameObject, 1.0f);
+        Destroy(gameObject, 2.0f);
     }
 
     // Update is called once per frame
