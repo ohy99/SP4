@@ -3823,11 +3823,11 @@ Prefab:
     - target: {fileID: 224509100630239974, guid: 07a96eb0d64094544a0d28342798c513,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 342.49915
       objectReference: {fileID: 0}
     - target: {fileID: 1062711654339362, guid: 07a96eb0d64094544a0d28342798c513, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 07a96eb0d64094544a0d28342798c513, type: 2}
