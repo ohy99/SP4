@@ -22,11 +22,11 @@ public class Sword : MeleeWeaponBase {
 	}
 
     // Attack with weapon
-    public override void Attack(Vector3 pos, Quaternion rotation)
+    public override GameObject Attack(Vector3 pos, Quaternion rotation)
     {
         Debug.Log("swordAtck");
         // Spawn a aabb here if collision occur damage is done
-        Instantiate(meleeCollider, pos, rotation);
+        GameObject go = Instantiate(meleeCollider, pos, rotation);
         meleeCollider.SetActive(true);
         SoundManager.Instance.PlayOneShot(shootEffect);
         Debug.Log(pos);
@@ -34,6 +34,7 @@ public class Sword : MeleeWeaponBase {
         //meleeCollider.GetComponent<BoxCollider2D>().size = new Vector2(1, 1.5f);
         //meleeCollider.transform.localScale = new Vector3(0.5f, range, 1);
         isAttack = true;
+        return go;
     }
 
     public override void OnClick()

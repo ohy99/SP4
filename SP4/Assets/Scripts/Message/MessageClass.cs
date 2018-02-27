@@ -34,7 +34,8 @@ public class PopulateRoomListMessage : MessageBase
     public bool isRight;
     public bool isUp;
     public bool isDown;
-
+    public bool isActive;
+    public bool isCompleted;
     //public GameObject room;
 }
 

@@ -32,17 +32,18 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         totalWaves = Random.Range(3, 10);
-        StartCoroutine("SpawnEnemy", spawnDelay);
 
-        playersList = GameObject.FindGameObjectsWithTag("Player");
-        for (int i = 0; i < playersList.Length; i++)
-        {
-            if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
-            {
-                player = playersList[i];
-                break;
-            }
-        }
+        //playersList = GameObject.FindGameObjectsWithTag("Player");
+        //for (int i = 0; i < playersList.Length; i++)
+        //{
+        //    if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+        //    {
+        //        player = playersList[i];
+        //        break;
+        //    }
+        //}
+
+        player = Global.Instance.player;
 
         if (player.GetComponent<NetworkIdentity>().isServer)
         {
@@ -92,6 +93,7 @@ public class EnemySpawner : MonoBehaviour
         //       Random.Range(map.transform.localPosition.y + -map.transform.localScale.y * 0.5f + 2.0f, map.transform.localPosition.y + map.transform.localScale.y * 0.5f - 2.0f), 0);
         //    var enemy = Instantiate(enemyMelee, pos, Quaternion.identity);
             //NetworkServer.Spawn(enemy);
+        //}    
     }
 
     public void StartSpawner()

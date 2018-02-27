@@ -197,6 +197,7 @@ public class PushPuzzleRoomScript : RoomScript {
     {
         puzzleComplete = true;
         isCompleted = true;
+        Global.Instance.roomGen.roomDataList[roomScript.GetRoomID()].isCompleted = true;
         if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
             MessageHandler.Instance.SendUnlockDoor_S2C(roomScript.GetRoomID(), puzzleComplete);
         //else

@@ -222,7 +222,8 @@ public class RoomGenerator : MonoBehaviour {
         popRoomMsg.isRight = room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.RIGHT);
         popRoomMsg.isUp = room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.UP);
         popRoomMsg.isDown = room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.DOWN);
-
+        popRoomMsg.isActive = true;
+        popRoomMsg.isCompleted = false;
         roomDataList.Add(popRoomMsg);
 
 
@@ -436,7 +437,8 @@ public class RoomGenerator : MonoBehaviour {
         popRoomMsg.isRight = room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.RIGHT);
         popRoomMsg.isUp = room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.UP);
         popRoomMsg.isDown = room.GetComponent<RoomScript>().GetIsLocked(DIRECTION.DOWN);
-
+        popRoomMsg.isActive = false;
+        popRoomMsg.isCompleted = false;
         roomDataList.Add(popRoomMsg);
     }
 
@@ -627,8 +629,7 @@ public class RoomGenerator : MonoBehaviour {
 
     public void SetRoomActive(int currRoomID, DIRECTION side)
     {
-        GameObject currentRoom 
-            = roomList[currRoomID];
+        GameObject currentRoom = roomList[currRoomID];
         Vector3 currPos = currentRoom.transform.position;
         RoomScript currRoomScript = currentRoom.GetComponent<RoomScript>();
 
@@ -637,6 +638,10 @@ public class RoomGenerator : MonoBehaviour {
 
         roomMap[newGridY][newGridX].SetActive(true);
 
+        Debug.Log("SetRoomActive: " + currRoomID);
+        Debug.Log("roomDataList size:" + roomDataList.Count);
+        if(roomDataList.Count > 0)
+            roomDataList[currRoomID].isActive = true;
         // Send msg to client that a room is active
         //NetworkServer.Spawn(roomMap[newGridY][newGridX]);
         //MessageHandler.Instance.SendSpawnRoom_S2C(currRoomID, side);

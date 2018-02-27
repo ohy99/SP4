@@ -27,8 +27,9 @@ public class MeleeWeaponBase : ItemBase
     }
 
     // Fire Weapon 
-    virtual public void Attack(Vector3 pos, Quaternion rotation)
+    virtual public GameObject Attack(Vector3 pos, Quaternion rotation)
     {
+        return null;
     }
 
     // Getter/Setter

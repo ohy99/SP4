@@ -379,9 +379,13 @@ public class MessageHandler : Singleton<MessageHandler>
         room.transform.localScale = msg.roomScale;
         room.GetComponent<RoomScript>().Set(msg.roomID, msg.gridX, msg.gridY,
             !msg.isLeft, !msg.isRight, !msg.isUp, !msg.isDown);
+        //determine if room is already visited b4 hand
+        room.SetActive(msg.isActive);
+        if (msg.isActive)
+            room.GetComponent<RoomScript>().SetIsComplete(msg.isCompleted);
         Global.Instance.roomGen.StoreRoom(msg.roomID + 1, msg.gridX, msg.gridY, room);
-        if (msg.roomID != 0)
-            room.SetActive(false);
+        //if (msg.roomID != 0)
+
 
         Debug.Log("ClientRecv_Room");
         //Debug.Log("==============================");
@@ -601,4 +605,26 @@ public class MessageHandler : Singleton<MessageHandler>
  * sync speed room number of item to spawn and whne item picked up
  * sync push room ball spawn location and the movement
  * sync spot room position of objects and da colors
+ */
+
+
+/* For reference
+ 
+using UnityEngine;
+using System.Collections;
+using UnityEngine.Networking;
+ 
+public class MyNetworkManager : NetworkManager {
+ 
+    public override void OnServerDisconnect (NetworkConnection conn)
+    {
+        base.OnServerDisconnect (conn);
+    }
+ 
+    public override void OnClientDisconnect (NetworkConnection conn)
+    {
+        base.OnClientDisconnect (conn);
+    }
+}
+
  */

@@ -15,14 +15,14 @@ Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngin
 Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.024 seconds
+- Completed reload, in  0.018 seconds
 Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 2.165041 ms
+UnloadTime: 1.009355 ms
 ItemManagerStart
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
@@ -56,28 +56,8 @@ InventoryManagerStart
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 6.313016 ms
-ItemManagerStart
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-INVETORY START
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-added Crossbow
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-InventoryManagerInit
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
+UnloadTime: 3.856488 ms
 [Singleton] Using instance already created: EventSystem
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-InventoryManagerStart
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -106,8 +86,8 @@ SERVER ACTIVE
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 
-Unloading 50 unused Assets to reduce memory usage. Loaded Objects now: 2483.
-Total: 2.166214 ms (FindLiveObjects: 0.220814 ms CreateObjectMapping: 0.153661 ms MarkObjects: 1.718426 ms  DeleteObjects: 0.072725 ms)
+Unloading 50 unused Assets to reduce memory usage. Loaded Objects now: 2471.
+Total: 2.054780 ms (FindLiveObjects: 0.190610 ms CreateObjectMapping: 0.145450 ms MarkObjects: 1.648046 ms  DeleteObjects: 0.070085 ms)
 
 SERVER ACTIVE
  
@@ -165,6 +145,50 @@ SendRoom_S2C
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
+exp: 10
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SetRoomActive: 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+roomDataList size:10
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+speed start
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SendNumberToSpawn_S2C
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SetRoomActive: 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+roomDataList size:10
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SetRoomActive: 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+roomDataList size:10
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PuzzleRoomStart
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+minDist: 8
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
 1
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
@@ -173,21 +197,82 @@ SendRoom_S2C
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
+SetRoomActive: 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+roomDataList size:10
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Host/ServerRecv_LockDoor : room_2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+LOCK DOOR_Room -> 2
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SendLockDoor_S2C
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+spawn in da generic spawner
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+spawn in da generic spawner
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+[Singleton] Using instance already created: DmgFeedback
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+[Singleton] Using instance already created: ParticleManager
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+spawn in da generic spawner
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+spawn in da generic spawner
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Enter
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+spawn in da generic spawner
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+spawn in da generic spawner
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+spawn in da generic spawner
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+spawn in da generic spawner
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Log: connection {1} has been disconnected by timeout; address {::ffff:127.0.0.1:64411} time {37795}, last rec time {35675} rtt {7} timeout {2000}
+ServerDisconnected due to error: Timeout
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
 Setting up 6 worker threads for Enlighten.
-  Thread -> id: 2994 -> priority: 1 
-  Thread -> id: 2858 -> priority: 1 
-  Thread -> id: 1d9c -> priority: 1 
-  Thread -> id: 8ec -> priority: 1 
-  Thread -> id: 1f28 -> priority: 1 
-  Thread -> id: 2998 -> priority: 1 
-[Singleton] is at OnDestroy
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-[Singleton] is at OnDestroy
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
+  Thread -> id: 1784 -> priority: 1 
+  Thread -> id: 2f64 -> priority: 1 
+  Thread -> id: 2e24 -> priority: 1 
+  Thread -> id: 2f88 -> priority: 1 
+  Thread -> id: 2e48 -> priority: 1 
+  Thread -> id: 2b28 -> priority: 1 
 1
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
