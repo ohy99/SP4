@@ -29,7 +29,10 @@ public class EnemyMelee : MonoBehaviour {
     void FixedUpdate()
     {
         if (player == null)
+        {
+            player = Global.Instance.player; //try find dat player
             return;
+        }
 
         sm.CurrentState.Reason(player, gameObject);
         sm.CurrentState.Act(player, gameObject);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
     private int initialScore;
     private int score;
@@ -12,28 +12,61 @@ public class Player : MonoBehaviour
     private int maxExp;
     private int skillPoints;
     private int currentLevel;
+    //dont change player id = connection id
+    public int playerId;
     bool onDeadTrigger = false;
 
-    //public override void OnStartLocalPlayer()
-    //{
-    //    short id = GetComponent<NetworkIdentity>().playerControllerId;
-    //    Debug.Log("playerID" + id);
-    //    GetComponent<SpriteRenderer>().color = Color.green;
-    //    Global.Instance.player = gameObject;
-    //    Camera.main.GetComponent<CameraScript>().playerTransform = gameObject.transform;
-    //}
+    GameObject[] playersList;
 
-    void Awake()
+    public override void OnStartLocalPlayer()
     {
-        Global.Instance.player = this.gameObject;
+        GetComponent<SpriteRenderer>().color = Color.green;
+
+        //wiil tis worko
+        //playersList = GameObject.FindGameObjectsWithTag("Player");
+        //for (int i = 0; i < playersList.Length; i++)
+        //{
+        //    if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+        //    {
+        //        //set global instance of player to local player
+        //        Global.Instance.player = playersList[i];
+        //        break;
+        //    }
+        //}
+
+        Camera.main.GetComponent<CameraScript>().playerTransform = gameObject.transform;
+
+        Debug.Log("connectionId: " + NetworkClient.allClients[0].connection.connectionId);
+
+        Global.Instance.player = gameObject;
+
+        Debug.Log("Starting up");
+
+        MessageHandler.Instance.Register(NetworkClient.allClients[0]);
+
+        if (isServer)
+            playerId = NetworkServer.connections.Count - 1;
+        else //send msg to server to get da id
+        {
+            Debug.Log("Sending for id");
+            MessageHandler.Instance.SendPlayerId_C2S();
+        }
+
+        if (isServer)
+            Global.Instance.roomGen.Init();
+            //RoomGenerator.Init();
+        //else
+          //  MessageHandler.Instance.SendRoom_C2S(); //sent to server/host to get mapinfo
     }
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         score = PlayerPrefs.GetInt("Score", 0);
         initialScore = score;
         float maxHealth = PlayerPrefs.GetFloat("Max Health", 100);
 
+        //float maxHealth = 100;
         hpScript = gameObject.GetComponent<Health>();
 
         hpScript.SetHp(maxHealth);
@@ -44,12 +77,38 @@ public class Player : MonoBehaviour
         skillPoints = 0;
         currentLevel = 1;
 
-        Global.Instance.player = gameObject;
+        //Global.Instance.player = gameObject;
+
+        if (!NetworkServer.active)
+            Debug.Log("SERVER NOT ACTIVE");
+        else
+            Debug.Log("SERVER ACTIVE");
+
+
+        if (isServer)
+            playerId = NetworkServer.connections.Count - 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyUp(KeyCode.L))
+        {   //this for testing 
+
+            if (isServer)
+            {
+                Debug.Log("keypressed");
+                Debug.Log(NetworkServer.connections.Count);
+                for (int i = 0; i < NetworkServer.connections.Count; ++i)
+                {
+                    Debug.Log("ConnectionId: " + NetworkServer.connections[i].connectionId);
+                }
+            }
+
+            //MessageHandler.Instance.SendPosition_C2S(gameObject.transform.position);
+        }
+
         if (hpScript.GetCurrHp() <= 0)
         {
             if (!onDeadTrigger)
@@ -61,7 +120,7 @@ public class Player : MonoBehaviour
 
             if (onDeadTrigger)
             {
-                Debug.Log("Test");
+                //Debug.Log("Test");
                 Global.Instance.victory = false;
                 LoadScene.Instance.LoadSceneCall("GameOver");
             }
@@ -136,3 +195,8 @@ public class Player : MonoBehaviour
     public bool IsDead() { return hpScript.GetCurrHp() <= 0; }
     public void AddHealth(float value) { hpScript.ModifyHp(value); }
 }
+
+/*
+ * server will set id of clients that connects -> set in start
+ * client will msg server to get index
+ */

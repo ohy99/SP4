@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : NetworkBehaviour
+{
 
     [SerializeField]
     PlayerShoot playerShoot;
@@ -33,8 +34,8 @@ public class PlayerMovement : MonoBehaviour {
     void Update()
     {
         // networking stuff
-        //if (!isLocalPlayer)
-        //    return;
+        if (!isLocalPlayer)
+            return;
 
         //if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         //    ChangeControlType(CONTROLTYPE.KEYBOARD);

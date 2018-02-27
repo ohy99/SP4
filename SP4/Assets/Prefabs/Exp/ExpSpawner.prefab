@@ -53,5 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 0}
   expObj: {fileID: 1853471210836276, guid: 3f26222794eb4234b826dc6ab107af4f, type: 2}
+  genericSpawner: {fileID: 1368807512881014, guid: 9a661cf7f8d77f9419b5242b4fc22da5,
+    type: 2}
   spawnDelay: 2
   maxSpawns: 20

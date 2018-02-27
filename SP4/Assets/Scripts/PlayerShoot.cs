@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public class PlayerShoot : MonoBehaviour
+public class PlayerShoot : NetworkBehaviour
 {
     //[SerializeField]
     //GameObject playerObj;
@@ -45,6 +45,8 @@ public class PlayerShoot : MonoBehaviour
         {
             case CONTROLTYPE.GAMEPAD:
                 GamePadUpdate();
+                if (!joyStick)
+                    break;
                 if (!Mathf.Approximately(joyStick.GetXAxis(), 0.0f) || !Mathf.Approximately(joyStick.GetYAxis(), 0.0f))
                     controlType = (CONTROLTYPE.MOBILE);
                 break;
@@ -53,6 +55,8 @@ public class PlayerShoot : MonoBehaviour
                 break;
             default:
                 KeyboardUpdate();
+                if (!joyStick)
+                    break;
                 if (!Mathf.Approximately(joyStick.GetXAxis(), 0.0f) || !Mathf.Approximately(joyStick.GetYAxis(), 0.0f))
                     controlType = (CONTROLTYPE.MOBILE);
                 break;
@@ -76,7 +80,8 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             //Debug.Log("TotalRounds:" + go)
-            Fire(gameObject.tag);
+            CmdFire(gameObject.tag);
+
             //if (go.GetComponent<RangeWeaponBase>())
             //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position + transform.up, transform.rotation);
             //else if (go.GetComponent<MeleeWeaponBase>())
@@ -141,7 +146,8 @@ public class PlayerShoot : MonoBehaviour
             ////gameObject.transform.position += moveDir * moveSpeed * Time.deltaTime;
             //go.transform.up = shootDir;
 
-            Fire(gameObject.tag);
+            CmdFire(gameObject.tag);
+
 
             //if (go.GetComponent<RangeWeaponBase>())
             //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
@@ -170,7 +176,7 @@ public class PlayerShoot : MonoBehaviour
             //Debug.Log(playerTransform.gameObject);
             playerTransform.up = shootDir;
 
-            Fire(gameObject.tag);
+            CmdFire(gameObject.tag);
 
             //if (go.GetComponent<RangeWeaponBase>())
             //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
@@ -185,8 +191,8 @@ public class PlayerShoot : MonoBehaviour
     }
 
 
-    //[Command]
-    void Fire(string tag)
+    [Command]
+    void CmdFire(string tag)
     {
         GameObject projectile = null;
         if (go.GetComponent<RangeWeaponBase>())
@@ -197,9 +203,7 @@ public class PlayerShoot : MonoBehaviour
         if (!projectile)
             return;
 
-        //if(projectile)
-        //    NetworkServer.Spawn(projectile);
-        Debug.Log(projectile);
+        //Debug.Log(projectile);
         switch (tag)
         {
             case "Player":
@@ -209,7 +213,10 @@ public class PlayerShoot : MonoBehaviour
                 projectile.layer = (int)PROJLAYER.ENEMYPROJ;
                 break;
         }
-        Debug.Log(projectile.layer);
+        //Debug.Log(projectile.layer);
+
+        if(projectile)
+            NetworkServer.Spawn(projectile);
 
         Destroy(projectile, 5.0f);
     }

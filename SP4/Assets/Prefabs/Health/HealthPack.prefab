@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212826347965883358}
   - component: {fileID: 114865924843078316}
   - component: {fileID: 58660267312235378}
+  - component: {fileID: 114971676609880188}
   m_Layer: 0
   m_Name: HealthPack
   m_TagString: Untagged
@@ -69,6 +70,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthValue: 10
+--- !u!114 &114971676609880188
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1147157688347744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 221
+    i1: 243
+    i2: 55
+    i3: 199
+    i4: 133
+    i5: 21
+    i6: 193
+    i7: 4
+    i8: 136
+    i9: 18
+    i10: 0
+    i11: 80
+    i12: 144
+    i13: 136
+    i14: 42
+    i15: 205
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!212 &212826347965883358
 SpriteRenderer:
   m_ObjectHideFlags: 1

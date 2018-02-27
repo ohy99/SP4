@@ -52,6 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 0}
-  healthPack: {fileID: 0}
+  healthPack: {fileID: 1147157688347744, guid: ddf337c78515c1048812005090882acd, type: 2}
+  genericSpawner: {fileID: 1368807512881014, guid: 9a661cf7f8d77f9419b5242b4fc22da5,
+    type: 2}
   spawnDelay: 5
   maxSpawns: 5

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SpeedRoomScript : RoomScript {
 
     GameObject player;
+    GameObject[] playersList;
 
     RoomScript roomScript;
 
@@ -19,8 +21,6 @@ public class SpeedRoomScript : RoomScript {
 
     int itemCollected;
 
-    bool puzzleComplete;
-
     float elapsedTime;
     float textTimer;
 
@@ -31,12 +31,14 @@ public class SpeedRoomScript : RoomScript {
 
     Vector2 size;
 
-    // Use this for initialization
+    bool isLock;
 
+    // Use this for initialization
     void Start()
     {
         //Random.Range(1, 1);
         //wad = new ArrayList();
+        Debug.Log("speed start");
         roomScript = this.GetComponent<RoomScript>();
         spawnerScript = this.transform.GetChild(0).GetComponent<SpeedRoomItemSpawner>();
 
@@ -52,7 +54,19 @@ public class SpeedRoomScript : RoomScript {
 
         elapsedTime = 0.0f;
 
+        isLock = false;
         puzzleComplete = false;
+
+        //playersList = GameObject.FindGameObjectsWithTag("Player");
+        //Debug.Log("numPlayer: " + playersList.Length);
+        //for (int i = 0; i < playersList.Length; i++)
+        //{
+        //    if (playersList[i].GetComponent<NetworkIdentity>().isLocalPlayer == true)
+        //    {
+        //        player = playersList[i];
+        //        break;
+        //    }
+        //}
 
         player = Global.Instance.player;
 
@@ -83,6 +97,15 @@ public class SpeedRoomScript : RoomScript {
             OnTriggerBox(DIRECTION.RIGHT);
             OnTriggerBox(DIRECTION.UP);
             OnTriggerBox(DIRECTION.DOWN);
+
+            if (!isLock)
+            {
+                if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+                    MessageHandler.Instance.SendLockDoor_S2C(roomScript.GetRoomID());
+                else
+                    MessageHandler.Instance.SendLockDoor_C2S(roomScript.GetRoomID());
+                isLock = true;
+            }
         }
 
     }
@@ -123,11 +146,31 @@ public class SpeedRoomScript : RoomScript {
             GUI.Label(new Rect(screenCenter - size.x, yPos, size.x * 2.0f, size.y * 2.0f), text, style);
             yPos += size.y;
         }
+
+    
+
+        if(!Global.Instance.player.GetComponent<NetworkIdentity>().isServer
+            && puzzleComplete == true)
+        {
+            foreach (DoorInfo doorInfo in doorInfoList)
+            {
+                if (!doorInfo.isLocked)
+                    roomScript.UnlockDoor(doorInfo.dir);
+                if (!doorInfo.haveTriggerBox)
+                    roomScript.OffTriggerBox(doorInfo.dir);
+            }
+        }
     }
 
-    void AddCollect()
+    public void AddCollect()
     {
+        //Debug.Log("TrueRoomId: " + GetRoomID());
         itemCollected++;
+
+        if (player.GetComponent<NetworkIdentity>().isServer)
+            MessageHandler.Instance.SendItemCollected_S2C(roomScript.GetRoomID(), itemCollected);
+        else
+            MessageHandler.Instance.SendItemCollected_C2S(roomScript.GetRoomID(), itemCollected);
     }
 
     void SpawnEnemies(int maxItem)
@@ -137,7 +180,7 @@ public class SpeedRoomScript : RoomScript {
 
     IEnumerator EnemySpawn(int numberOfWavesToSpawn)
     {
-        Debug.Log(numberOfWavesToSpawn);
+        Debug.Log("waves: " + numberOfWavesToSpawn);
         for (int i = 0; i < numberOfWavesToSpawn; ++i)
         {
             yield return new WaitForSeconds(3.0f);
@@ -145,6 +188,10 @@ public class SpeedRoomScript : RoomScript {
         }
 
         puzzleComplete = true;
+        if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+            MessageHandler.Instance.SendUnlockDoor_S2C(roomScript.GetRoomID(), puzzleComplete);
+        //else
+        //    MessageHandler.Instance.SendUnlockDoor_C2S(roomScript.GetRoomID(), puzzleComplete);
 
         foreach (DoorInfo doorInfo in doorInfoList)
         {
@@ -153,6 +200,35 @@ public class SpeedRoomScript : RoomScript {
             if (!doorInfo.haveTriggerBox)
                 roomScript.OffTriggerBox(doorInfo.dir);
         }
-
     }
+
+    public override void LockAllDoor()
+    {
+        LockDoor(DIRECTION.LEFT);
+        LockDoor(DIRECTION.RIGHT);
+        LockDoor(DIRECTION.UP);
+        LockDoor(DIRECTION.DOWN);
+
+        OnTriggerBox(DIRECTION.LEFT);
+        OnTriggerBox(DIRECTION.RIGHT);
+        OnTriggerBox(DIRECTION.UP);
+        OnTriggerBox(DIRECTION.DOWN);
+    }
+
+    public SpeedRoomItemSpawner GetSpawnerScript()
+    {
+        return spawnerScript;
+    }
+
+    public void SetSpawnerScript()
+    {
+        spawnerScript = this.transform.GetChild(0).GetComponent<SpeedRoomItemSpawner>();
+    }
+
+    public void SetItemCollected(int _itemCollected)
+    {
+        itemCollected = _itemCollected;
+        Debug.Log("itemCollected: " + itemCollected);
+    }
+    //public int _itemCollected { get { return itemCollected; } set { itemCollected = _itemCollected; } }
 }

@@ -27,6 +27,7 @@ public class Crossbow : RangeWeaponBase
         timer += Time.deltaTime;
 	}
 
+
     // Fire Weapon 
     public override GameObject Discharge(Vector3 pos, Quaternion rotation)
     {

@@ -31,15 +31,17 @@ public class RoomScript : MonoBehaviour {
     public int GetGridX() { return gridx; }
     public int GetGridY() { return gridy; }
 
+    protected bool puzzleComplete = false;
+
     // Use this for initialization
     void Start () {
         //Random.Range(1, 1);
         //wad = new ArrayList();
-        
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		
 	}
 
@@ -134,6 +136,7 @@ public class RoomScript : MonoBehaviour {
         }
     }
 
+
     void GenerateTreasureKey(GameObject TreasureKey)
     {
         Transform keyParent = Global.Instance.roomGen.GenerateKeyPos(roomID);
@@ -145,5 +148,15 @@ public class RoomScript : MonoBehaviour {
     public int GetRoomID()
     {
         return roomID;
+    }
+
+    public void SetPuzzleComplete(bool _puzzleComplete)
+    {
+        puzzleComplete = _puzzleComplete;
+    }
+
+    public virtual void LockAllDoor()
+    {
+        Debug.Log("RoomScript_LockAllDoor");
     }
 }

@@ -1104,9 +1104,11 @@ MonoBehaviour:
   rightDoor: {fileID: 114822279630509654}
   upDoor: {fileID: 114772120771049196}
   downDoor: {fileID: 114340389457421942}
-  bossList:
+  bossPrefabList:
   - {fileID: 1593450052167110, guid: 88ce06bfbfa56094981eff57a68e78db, type: 2}
   - {fileID: 1275940416061716, guid: fb244c15b7de27a4e8185a5e84a5c2d7, type: 2}
+  genericSpawner: {fileID: 1368807512881014, guid: 9a661cf7f8d77f9419b5242b4fc22da5,
+    type: 2}
 --- !u!114 &114733670112663106
 MonoBehaviour:
   m_ObjectHideFlags: 1

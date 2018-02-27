@@ -150,7 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3c7028f08a9a14d9ec7e9edeb01270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInvincible: 1
+  isInvincible: 0
+  currHp: 0
 --- !u!114 &114300993720441814
 MonoBehaviour:
   m_ObjectHideFlags: 1
