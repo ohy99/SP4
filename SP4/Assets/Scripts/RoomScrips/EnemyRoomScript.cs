@@ -52,13 +52,6 @@ public class EnemyRoomScript : RoomScript {
         elapsedTime = 0.0f;
         completedWaves = false;
         style = new GUIStyle();
-
-        style.alignment = TextAnchor.UpperCenter;
-
-        content = new GUIContent();
-
-        text = "Survive the wave of enemies";
-        content.text = text;
     }
 
     // Update is called once per frame
@@ -95,9 +88,12 @@ public class EnemyRoomScript : RoomScript {
         if (elapsedTime < 5.0f)
         {
             style.fontSize = Mathf.Min(Mathf.FloorToInt(Screen.width * fontSize / 1000), Mathf.FloorToInt(Screen.height * fontSize / 1000));
+            style.alignment = TextAnchor.UpperCenter;
 
             screenCenter = Screen.width * 0.5f;
 
+            text = "Survive the wave of enemies";
+            content.text = text;
             size = style.CalcSize(content);
             GUI.Label(new Rect(screenCenter - size.x, 0, size.x * 2.0f, size.y * 2.0f), text, style);
         }

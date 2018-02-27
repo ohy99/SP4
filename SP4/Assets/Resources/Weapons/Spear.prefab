@@ -70,4 +70,3 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 844c73311003063429ad7a3060509e47, type: 3}
   meleeCollider: {fileID: 1255601706598804, guid: f3858ea7ede5bff429bc88ae2c9f3f52,
     type: 2}
-  shootEffect: {fileID: 8300000, guid: 4e6b860a9d303234db9fde7ad28236a2, type: 3}

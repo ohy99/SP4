@@ -60,6 +60,8 @@ public class RoomGenerator : MonoBehaviour {
 
 	// Use this for initialization
 	public void Start () {
+        DontDestroyOnLoad(this.gameObject);
+
         Global.Instance.roomGen = this;
 
         biggestX = biggestY = smallestY = smallestX = 0;
