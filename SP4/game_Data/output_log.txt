@@ -1,28 +1,28 @@
 Initialize engine version: 5.6.3f1 (d3101c3b8468)
 GfxDevice: creating device client; threaded=1
 Direct3D:
-    Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce GTX 970 (ID=0x13c2)
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA Quadro K2200 (ID=0x13ba)
     Vendor:   NVIDIA
     VRAM:     3072 MB
-    Driver:   21.21.13.7654
+    Driver:   21.21.13.7662
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\Steven\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\Steven\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\Steven\Desktop\SP4\SP4\game_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\Steven\Desktop\SP4\SP4\game_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\Steven\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\Steven\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\Steven\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\Steven\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.035 seconds
-Platform assembly: C:\Users\Steven\Desktop\SP4\SP4\game_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\Steven\Desktop\SP4\SP4\game_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.027 seconds
+Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\161692W\Desktop\SP4\SP4\game_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 0.981603 ms
+UnloadTime: 2.674410 ms
 ItemManagerStart
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
@@ -75,6 +75,10 @@ Starting up
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
+boss awkae
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
 Spwning da boss
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
@@ -83,7 +87,7 @@ Add IdleState
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-number of rooms: 9
+number of rooms: 10
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -143,79 +147,17 @@ SendRoom_S2C
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-exp: 10
+SendRoom_S2C
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Treasure Key(Clone) (UnityEngine.GameObject)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Untagged
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Untagged
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Treasure Key(Clone) (UnityEngine.GameObject)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Treasure Key(Clone) (UnityEngine.GameObject)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Treasure Key(Clone) (UnityEngine.GameObject)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-exp: 10
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-exp: 20
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-exp: 30
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Treasure Key(Clone) (UnityEngine.GameObject)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Treasure Key(Clone) (UnityEngine.GameObject)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Treasure Key(Clone) (UnityEngine.GameObject)
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Key
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Key
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-[Singleton] Using instance already created: DmgFeedback
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-[Singleton] Using instance already created: ParticleManager
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
-
-Setting up 4 worker threads for Enlighten.
-  Thread -> id: 3bc -> priority: 1 
-  Thread -> id: 7728 -> priority: 1 
-  Thread -> id: 2750 -> priority: 1 
-  Thread -> id: 5da8 -> priority: 1 
+Setting up 6 worker threads for Enlighten.
+  Thread -> id: 5f4 -> priority: 1 
+  Thread -> id: 1738 -> priority: 1 
+  Thread -> id: 1b8c -> priority: 1 
+  Thread -> id: 7d0 -> priority: 1 
+  Thread -> id: 1cd8 -> priority: 1 
+  Thread -> id: 121c -> priority: 1 
 [Singleton] is at OnDestroy
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)

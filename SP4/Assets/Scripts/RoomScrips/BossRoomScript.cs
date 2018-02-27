@@ -23,6 +23,7 @@ public class BossRoomScript : RoomScript {
         //spawnBoss.transform.parent = this.transform;
         //Global.Instance.boss = spawnBoss;
 
+        //cahnge to be in update ltr
         if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
         {
             Debug.Log("Spwning da boss");
