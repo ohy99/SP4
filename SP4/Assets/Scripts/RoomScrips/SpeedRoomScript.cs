@@ -56,7 +56,7 @@ public class SpeedRoomScript : RoomScript {
 
         isLock = false;
         puzzleComplete = false;
-
+        isCompleted = false;
         //playersList = GameObject.FindGameObjectsWithTag("Player");
         //Debug.Log("numPlayer: " + playersList.Length);
         //for (int i = 0; i < playersList.Length; i++)
@@ -83,7 +83,8 @@ public class SpeedRoomScript : RoomScript {
     void Update()
     {
         elapsedTime += Time.deltaTime;
-
+        if (isCompleted || puzzleComplete)
+            return;
         //Debug.Log(player.transform.position);
 
         if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x * 0.5f - 2.0f && !puzzleComplete)
@@ -188,6 +189,7 @@ public class SpeedRoomScript : RoomScript {
         }
 
         puzzleComplete = true;
+        isCompleted = true;
         if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
             MessageHandler.Instance.SendUnlockDoor_S2C(roomScript.GetRoomID(), puzzleComplete);
         //else

@@ -32,6 +32,7 @@ public class RoomScript : MonoBehaviour {
     public int GetGridY() { return gridy; }
 
     protected bool puzzleComplete = false;
+    protected bool isCompleted = false;
 
     // Use this for initialization
     void Start () {
@@ -159,4 +160,11 @@ public class RoomScript : MonoBehaviour {
     {
         Debug.Log("RoomScript_LockAllDoor");
     }
+
+    //set if the room was cleared already or not
+    public void SetIsComplete(bool _isComplete)
+    {
+        isCompleted = _isComplete;
+    }
+
 }

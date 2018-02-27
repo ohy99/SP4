@@ -80,11 +80,18 @@ MonoBehaviour:
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 1
-  m_OfflineScene: 
-  m_OnlineScene: 
+  m_OfflineScene: mainmenu
+  m_OnlineScene: gameMP
   m_SpawnPrefabs:
   - {fileID: 1859548745114154, guid: 68e227eb8a1f064419576d2e367187eb, type: 2}
-  m_CustomConfig: 0
+  - {fileID: 1621331323061118, guid: 582b5b78d3b76e24c99ee8434de0197f, type: 2}
+  - {fileID: 1121057322748648, guid: bd66e0e699c5c8042b2bddadea72b2df, type: 2}
+  - {fileID: 1429465175509260, guid: 1eed3e4b2e8bdbd479e3c9e836fe3570, type: 2}
+  - {fileID: 1915913847916984, guid: b05892af97e8195469c3ddcd20cf1b7e, type: 2}
+  - {fileID: 1593450052167110, guid: 88ce06bfbfa56094981eff57a68e78db, type: 2}
+  - {fileID: 1853471210836276, guid: 3f26222794eb4234b826dc6ab107af4f, type: 2}
+  - {fileID: 1147157688347744, guid: ddf337c78515c1048812005090882acd, type: 2}
+  m_CustomConfig: 1
   m_MaxConnections: 4
   m_ConnectionConfig:
     m_PacketSize: 1440
@@ -126,7 +133,7 @@ MonoBehaviour:
     m_MaxTimerTimeout: 12000
     m_MinNetSimulatorTimeout: 1
     m_MaxNetSimulatorTimeout: 12000
-  m_Channels: 
+  m_Channels: 0500000000000000
   m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 1

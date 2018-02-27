@@ -96,6 +96,7 @@ public class SpotPuzzleRoomScript : RoomScript
         elapsedTime = 0.0f;
 
         puzzleComplete = false;
+        isCompleted = false;
         isLock = false;
 
         style = new GUIStyle();
@@ -125,7 +126,8 @@ public class SpotPuzzleRoomScript : RoomScript
             return;
 
         elapsedTime += Time.deltaTime;
-
+        if (isCompleted || puzzleComplete)
+            return;
         //Debug.Log(player.transform.position);
 
         // put a list of player connected in global and then cehck them
@@ -214,6 +216,7 @@ public class SpotPuzzleRoomScript : RoomScript
         }
 
         puzzleComplete = true;
+        isCompleted = true;
         //if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
         //    MessageHandler.Instance.SendUnlockDoor_S2C(roomScript.GetRoomID(), puzzleComplete);
         //else

@@ -104,6 +104,7 @@ public class PushPuzzleRoomScript : RoomScript {
         content = new GUIContent();
 
         puzzleComplete = false;
+        isCompleted = false;
         isLock = false;
 
         Debug.Log("minDist: " + (transform.localScale.x * 0.5f - 2.0f));
@@ -115,7 +116,8 @@ public class PushPuzzleRoomScript : RoomScript {
         elapsedTime += Time.deltaTime;
 
         timer -= Time.deltaTime;
-
+        if (isCompleted || puzzleComplete)
+            return;
 
         //if (player.GetComponent<NetworkIdentity>().isLocalPlayer)
         //   Debug.Log(Vector3.Distance(player.transform.position, transform.position));
@@ -194,7 +196,7 @@ public class PushPuzzleRoomScript : RoomScript {
     void OnTarget()
     {
         puzzleComplete = true;
-
+        isCompleted = true;
         if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
             MessageHandler.Instance.SendUnlockDoor_S2C(roomScript.GetRoomID(), puzzleComplete);
         //else

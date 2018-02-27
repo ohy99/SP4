@@ -21,6 +21,7 @@ public class BossRoomScript : RoomScript {
     void Start ()
     {
         isBossSpawn = false;
+        isCompleted = false;
         randIndex = Random.Range(0, bossPrefabList.Count - 1);
         //GameObject spawnBoss = Instantiate(bossPrefabList[randIndex], transform.position, Quaternion.identity);
         //spawnBoss.transform.parent = this.transform;
@@ -30,7 +31,7 @@ public class BossRoomScript : RoomScript {
     // Update is called once per frame
     void Update()
     {
-        if (!isBossSpawn)
+        if (!isBossSpawn && !isCompleted)
         {
             //might puts this in global instead, but use it like this for now
             playersList = GameObject.FindGameObjectsWithTag("Player");

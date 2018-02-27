@@ -42,6 +42,9 @@ public class MessageHandler : Singleton<MessageHandler>
 
         public static short itemCollectedMsgType_client = MsgType.Highest + 21;
         public static short itemCollectedMsgType_server = MsgType.Highest + 22;
+
+        public static short activeRoomMsgType_client = MsgType.Highest + 23;
+        public static short activeRoomMsgType_server = MsgType.Highest + 24;
     };
 
     //variables
@@ -85,6 +88,9 @@ public class MessageHandler : Singleton<MessageHandler>
 
         myClient.RegisterHandler(MyMsgType.itemCollectedMsgType_server, OnRecvItemCollected_Client);
         NetworkServer.RegisterHandler(MyMsgType.itemCollectedMsgType_client, OnRecvItemCollected_Server);
+
+        myClient.RegisterHandler(MyMsgType.activeRoomMsgType_server, OnRecvActiveRoom_Client);
+        NetworkServer.RegisterHandler(MyMsgType.activeRoomMsgType_client, OnRecvActiveRoom_Server); 
 
         //myClient.RegisterHandler(MyMsgType.spawnRoomMsgType_server, OnRecvSpawnRoom_Client);
         //NetworkServer.RegisterHandler(MyMsgType.spawnRoomMsgType_client, OnRecvSpawnRoom_Server);
@@ -190,7 +196,19 @@ public class MessageHandler : Singleton<MessageHandler>
             NetworkServer.SendToAll(MyMsgType.itemCollectedMsgType_server, msg);
     }
 
-    // SENDING TO SERVER
+    public void SendActiveRoom_S2C(int _connectionId, int _roomId, bool _isRoomCompleted)
+    {
+        ActiveRoomMessage msg = new ActiveRoomMessage();
+        msg.connectionId = _connectionId;
+        msg.roomId = _roomId;
+        msg.isRoomCompleted = _isRoomCompleted;
+        Debug.Log("SendActiveRoom_S2C");
+
+        if(NetworkServer.active)
+            NetworkServer.SendToClient(msg.connectionId, MyMsgType.playerIdMsgType_server, msg);
+    }
+
+    // ============================SENDING TO SERVER======================================
     public void SendPosition_C2S(Vector3 _position)
     {
         if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
@@ -293,8 +311,18 @@ public class MessageHandler : Singleton<MessageHandler>
         msg.itemCollected = _itemCollected;
         Debug.Log("SendItemCollected_C2S");
 
-        if (NetworkServer.active)
-            NetworkServer.SendToAll(MyMsgType.itemCollectedMsgType_client, msg);
+        //if (NetworkServer.active)
+        //    NetworkServer.SendToAll(MyMsgType.itemCollectedMsgType_client, msg);
+        myClient.Send(MyMsgType.playerIdMsgType_client, msg);
+    }
+
+    public void SendActiveRoom_C2S(int _connectionId)
+    {
+        ActiveRoomMessage msg = new ActiveRoomMessage();
+        msg.connectionId = _connectionId;
+        Debug.Log("SendActiveRoom_C2S");
+
+        myClient.Send(MyMsgType.activeRoomMsgType_client, msg);
     }
 
     //-----------------------------------------------------------------------------
@@ -519,7 +547,7 @@ public class MessageHandler : Singleton<MessageHandler>
         Global.Instance.player.GetComponent<Player>().playerId = msg.playerId;
         index = msg.playerId;
 
-        MessageHandler.Instance.SendRoom_C2S(); //sent to server/host to get mapinfo
+        SendRoom_C2S(); //sent to server/host to get mapinfo
     }
 
     public void OnRecvItemCollected_Server(NetworkMessage netMsg)
@@ -536,6 +564,27 @@ public class MessageHandler : Singleton<MessageHandler>
         Debug.Log("ClientRecv_itemCollected = " + msg.itemCollected);
 
         Global.Instance.roomGen.GetRoomList()[msg.roomId].GetComponent<SpeedRoomScript>().SetItemCollected(msg.itemCollected);
+    }
+
+    public void OnRecvActiveRoom_Server(NetworkMessage netMsg)
+    {
+        ActiveRoomMessage msg = netMsg.ReadMessage<ActiveRoomMessage>();
+        Debug.Log("Host/ServerRecv_ActiveRoom_" + msg.connectionId);
+
+        for(int i = 0;i < Global.Instance.roomGen.GetRoomList().Count; ++i)
+        {
+            if(Global.Instance.roomGen.GetRoomList()[i].activeSelf)
+                SendActiveRoom_S2C(msg.connectionId, i, msg.isRoomCompleted);
+        }
+    }
+
+    public void OnRecvActiveRoom_Client(NetworkMessage netMsg)
+    {
+        ActiveRoomMessage msg = netMsg.ReadMessage<ActiveRoomMessage>();
+        Debug.Log("Host/ServerRecv_ActiveRoom_" + msg.connectionId);
+
+        Global.Instance.roomGen.GetRoomList()[msg.roomId].SetActive(true);
+        Global.Instance.roomGen.GetRoomList()[msg.roomId].GetComponent<RoomScript>().SetIsComplete(msg.isRoomCompleted);
     }
 }
 

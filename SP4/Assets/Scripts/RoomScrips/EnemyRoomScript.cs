@@ -77,6 +77,7 @@ public class EnemyRoomScript : RoomScript {
         content.text = text;
 
         isLock = false;
+        isCompleted = false;
     }
 
     // Update is called once per frame
@@ -86,6 +87,8 @@ public class EnemyRoomScript : RoomScript {
             return;
 
         elapsedTime += Time.deltaTime;
+        if (isCompleted || completedWaves)
+            return;
 
         if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x * 0.5f - 2.0f && !completedWaves)
         {
@@ -135,6 +138,7 @@ public class EnemyRoomScript : RoomScript {
     void UnlockDoor()
     {
         completedWaves = true;
+        isCompleted = true;
 
         foreach (DoorInfo doorInfo in doorInfoList)
         {

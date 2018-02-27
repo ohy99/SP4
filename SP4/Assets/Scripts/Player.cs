@@ -50,6 +50,7 @@ public class Player : NetworkBehaviour
         {
             Debug.Log("Sending for id");
             MessageHandler.Instance.SendPlayerId_C2S();
+            
         }
 
         if (isServer)

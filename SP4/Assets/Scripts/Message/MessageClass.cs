@@ -86,8 +86,9 @@ public class itemCollectedMessage : MessageBase
     public int itemCollected;
 }
 
-public class activeRoomMessage : MessageBase
+public class ActiveRoomMessage : MessageBase
 {
+    public int connectionId;
     public int roomId;
-    public string strRoomIds;
+    public bool isRoomCompleted;
 }
