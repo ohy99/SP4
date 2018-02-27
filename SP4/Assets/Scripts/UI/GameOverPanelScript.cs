@@ -15,7 +15,7 @@ public class GameOverPanelScript : MonoBehaviour {
 
         text = this.transform.GetChild(0).GetComponent<Text>();
 
-        text.text = "GAMEOVER\n" + textResult;
+        text.text = "GAMEOVER\n" + textResult + "\nYour score is " + PlayerPrefs.GetInt(PREFTYPE.NUM_OF_KILLS.ToString(), 0);
 	}
 	
 	// Update is called once per frame

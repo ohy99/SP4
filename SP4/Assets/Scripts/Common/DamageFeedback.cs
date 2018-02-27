@@ -8,9 +8,9 @@ public class DamageFeedback : Singleton<DamageFeedback> {
     GameObject SpriteText;
 
     [SerializeField]
-    float duration = 1.0f;
+    float duration = 0.5f;
     [SerializeField]
-    float moveSpd = 5.0f;
+    float moveSpd = 2.0f;
     [SerializeField]
     float zOffset = -2.0f;
     Vector3 moveDir = new Vector3(0, 1, 0);
@@ -29,6 +29,7 @@ public class DamageFeedback : Singleton<DamageFeedback> {
     }
     void Awake() {
         dmginfos = new List<DMGINFO>();
+        SpriteText = (GameObject)Resources.Load("Feedback/DmgNumber");
     }
 	
 	// Update is called once per frame
