@@ -6,6 +6,8 @@ public class CoinValue : MonoBehaviour {
 
     public int value = 1;
 
+    public GameObject textPrefab;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -20,6 +22,12 @@ public class CoinValue : MonoBehaviour {
     {
         if (other.tag != "Player")
             return;
+
+        GameObject text = Instantiate(textPrefab);
+
+        text.transform.position = this.transform.position;
+
+        text.GetComponent<CoinText>().coinvalue = value;
 
         InventoryManager.Instance.GetInventory("player").AddCurrency(value);
         Destroy(this.gameObject);

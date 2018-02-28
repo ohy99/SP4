@@ -49,8 +49,6 @@ public class PlayerShoot : NetworkBehaviour
 
         playerWeapon.GetComponent<SpriteRenderer>().sprite = weaponSprite["Crossbow"];
 
-        playerWeapon.GetComponent<SpriteRenderer>().sprite.bounds.size.Scale(new Vector3(100.0f, 100.0f, 100.0f));
-
         playerWeapon.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
 	

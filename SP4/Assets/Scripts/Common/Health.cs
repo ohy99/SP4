@@ -58,7 +58,7 @@ public class Health : NetworkBehaviour {
                 Global.Instance.player.SendMessage("AddScore", 2);
 
                 float chance = Random.Range(0.0f, 1.0f);
-                if (chance > 0.25f)
+                if (chance > 0.75f)
                 {
                     GameObject temp = Instantiate(coinPrefab);
                     temp.transform.position = this.transform.position;

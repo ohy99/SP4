@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 50449906296103470}
   - component: {fileID: 198181354123840740}
   - component: {fileID: 199891145286882852}
+  - component: {fileID: 58603611107850522}
   m_Layer: 0
   m_Name: Coins
   m_TagString: Untagged
@@ -64,6 +65,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &58603611107850522
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027863897882106}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.64
 --- !u!114 &114118866013799112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -76,6 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
+  textPrefab: {fileID: 1077412237606678, guid: 2ab2f411d0fb9de4e8c6e0f263ca9ae5, type: 2}
 --- !u!198 &198181354123840740
 ParticleSystem:
   m_ObjectHideFlags: 1

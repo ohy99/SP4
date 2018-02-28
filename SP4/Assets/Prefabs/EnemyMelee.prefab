@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
+  coinPrefab: {fileID: 1027863897882106, guid: e278218ba29162640883fc919dad53e9, type: 2}
 --- !u!114 &114626202025187886
 MonoBehaviour:
   m_ObjectHideFlags: 1
