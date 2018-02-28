@@ -12,6 +12,9 @@ public class Health : NetworkBehaviour {
     private float currHp;
     private float maxHp;
 
+    [SerializeField]
+    private GameObject coinPrefab;
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -53,6 +56,14 @@ public class Health : NetworkBehaviour {
             {
                 PlayerPrefs.SetInt(PREFTYPE.NUM_OF_KILLS.ToString(), PlayerPrefs.GetInt(PREFTYPE.NUM_OF_KILLS.ToString(), 0) + 1);
                 Global.Instance.player.SendMessage("AddScore", 2);
+
+                float chance = Random.Range(0.0f, 1.0f);
+                if (chance > 0.25f)
+                {
+                    GameObject temp = Instantiate(coinPrefab);
+                    temp.transform.position = this.transform.position;
+                }
+
                 Destroy(gameObject);
             }
         }
