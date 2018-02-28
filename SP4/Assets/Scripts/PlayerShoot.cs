@@ -10,8 +10,12 @@ public class PlayerShoot : NetworkBehaviour
     //GameObject playerObj;
     [SerializeField]
     Joystick joyStick;
+
+    [SerializeField]
+    Dictionary<string, Sprite> weaponSprite = new Dictionary<string, Sprite>();
     
     private GameObject go;
+    private GameObject playerWeapon;
     private Inventory playerGear;
 
     private int itemIndex = 0;
@@ -32,6 +36,23 @@ public class PlayerShoot : NetworkBehaviour
 
         playerGear = InventoryManager.Instance.GetInventory("player");
         go = playerGear.GetItem("Crossbow");
+
+        foreach(string item in playerGear.GetItemNameList())
+        {
+            string weaponName = "WeaponSprite/" + item;
+            Texture2D tex = (Texture2D)Resources.Load(weaponName);
+            Rect rect = new Rect(0, 0, tex.width, tex.height);
+            weaponSprite.Add(item, Sprite.Create(tex, rect, new Vector2(0.5f, 0.5f)));
+        }
+
+        playerWeapon = this.transform.GetChild(0).gameObject;
+
+        playerWeapon.GetComponent<SpriteRenderer>().sprite = weaponSprite["Crossbow"];
+
+        playerWeapon.GetComponent<SpriteRenderer>().sprite.bounds.size.Scale(new Vector3(100.0f, 100.0f, 100.0f));
+
+        playerWeapon.transform.localPosition = new Vector3(0.0f, 0.5f, 0.0f);
+        playerWeapon.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
 	
 	// Update is called once per frame
@@ -75,6 +96,7 @@ public class PlayerShoot : NetworkBehaviour
             string itemName = playerGear.GetItemName(itemIndex);
             Debug.Log("ItemChange" + itemIndex + " - " + itemName);
             go = playerGear.GetItem(itemName);
+            playerWeapon.GetComponent<SpriteRenderer>().sprite = weaponSprite[itemName];
         }
 
         if (Input.GetButton("Fire1"))
