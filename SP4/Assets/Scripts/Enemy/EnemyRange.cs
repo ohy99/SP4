@@ -10,6 +10,9 @@ public class EnemyRange : MonoBehaviour
 
     private Health hpScript;
 
+    private GameObject[] playersList;
+    private float maxDist;
+
     public void SetTransition(Transition t) { sm.PerformTransition(t); }
 
     // Use this for initialization
@@ -20,6 +23,7 @@ public class EnemyRange : MonoBehaviour
         hpScript.SetHp(5.0f);
 
         player = Global.Instance.player;
+        maxDist = 100;
 
         MakeFSM();
     }
@@ -31,6 +35,21 @@ public class EnemyRange : MonoBehaviour
         {
             player = Global.Instance.player; //try find dat player
             return;
+        }
+
+        playersList = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < playersList.Length; ++i)
+        {
+            if (!playersList[i].activeSelf || !playersList[i])
+                continue;
+
+            //find nearest player
+            float dist = Vector3.Distance(playersList[i].transform.position, transform.position);
+            if (dist < maxDist)
+            {
+                maxDist = dist;
+                player = playersList[i];
+            }
         }
 
         sm.CurrentState.Reason(player, gameObject);

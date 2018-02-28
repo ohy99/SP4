@@ -108,7 +108,6 @@ public class PushPuzzleRoomScript : RoomScript {
         timer = 5.0f;
 
         style = new GUIStyle();
-
         content = new GUIContent();
 
         puzzleComplete = false;
@@ -131,7 +130,7 @@ public class PushPuzzleRoomScript : RoomScript {
         //   Debug.Log(Vector3.Distance(player.transform.position, transform.position));
 
 
-        float dist = Vector3.Distance(player.GetComponent<NetworkIdentity>().transform.position, transform.position);
+        float dist = Vector3.Distance(player.transform.position, transform.position);
         if (dist < transform.localScale.x * 0.5f - 2.0f && !puzzleComplete)
         {
 
@@ -191,6 +190,10 @@ public class PushPuzzleRoomScript : RoomScript {
 
     void OnGUI()
     {
+        if(style == null)
+            style = new GUIStyle();
+        
+
         style.fontSize = Mathf.Min(Mathf.FloorToInt(Screen.width * fontSize / 1000), Mathf.FloorToInt(Screen.height * fontSize / 1000));
         style.alignment = TextAnchor.UpperCenter;
 
