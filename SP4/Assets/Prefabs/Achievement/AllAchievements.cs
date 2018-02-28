@@ -18,6 +18,11 @@ public class AllAchievements : MonoBehaviour {
 
     void Awake()
     {
+
+    }
+
+	// Use this for initialization
+	void Start () {
         achList = new List<AchievementBase>();
         UnityEngine.UI.VerticalLayoutGroup vlg = GetComponent<VerticalLayoutGroup>();
         RectTransform rectTransform = GetComponent<RectTransform>();
@@ -46,11 +51,6 @@ public class AllAchievements : MonoBehaviour {
             achList.Add(a);
         }
     }
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void Update () {

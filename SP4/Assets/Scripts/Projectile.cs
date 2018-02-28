@@ -13,12 +13,12 @@ public class Projectile : MonoBehaviour {
 
     public float projectileSpeed = 10;
     private float damage = 1;
-
+    
 	// Use this for initialization
 	void Start ()
     {
-		
-	}
+        Destroy(gameObject, 5.0f);
+    }
 
     // Update is called once per frame
     void Update()
@@ -49,10 +49,10 @@ public class Projectile : MonoBehaviour {
                 }
                
             }
-
-            //TODO: DO DAMAGE
-            Destroy(gameObject);
+            
         }
+
+        Destroy(gameObject);
     }
 
     public void SetDamage(float dmg) { damage = dmg; }

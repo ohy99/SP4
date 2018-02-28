@@ -5,15 +5,16 @@ using UnityEngine;
 public class BossRoomScript : RoomScript {
 
     [SerializeField]
-    GameObject boss;
+    List<GameObject> bossList = new List<GameObject>();
 	// Use this for initialization
 	void Start () {
-		
-	}
-    void Awake() {
-        GameObject spawnBoss = Instantiate(boss, transform.position, Quaternion.identity);
+        int randIndex = Random.Range(0, bossList.Count - 1);
+        GameObject spawnBoss = Instantiate(bossList[randIndex], transform.position, Quaternion.identity);
         spawnBoss.transform.parent = this.transform;
         Global.Instance.boss = spawnBoss;
+    }
+    void Awake() {
+
     }
 	
 	// Update is called once per frame

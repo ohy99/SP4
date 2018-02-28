@@ -2,46 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBoss : MonoBehaviour {
+public class EnemyBoss2 : MonoBehaviour {
 
     [SerializeField]
     Projectile proj;
     [SerializeField]
     int _projectileLayer = (int)PROJLAYER.ENEMYPROJ;
     [SerializeField]
-    float flySpd = 10;
+    float moveSpd = 10;
+    [SerializeField]
+    public float maxAngle = 30.0f;
     [SerializeField]
     int _numOfProj = 10;
     [SerializeField]
     public float projectileSpd = 10.0f;
     [SerializeField]
-    public float shootInterval = 0.5f;
+    public float shootInterval = 0.25f;
     [SerializeField]
-    public float damage = 5.0f;
+    public float damage = 3.0f;
     [SerializeField]
-    float _hp = 600;
+    float _hp = 500;
 
     public int numOfProj { get { return _numOfProj; } }
     public int projectileLayer { get { return _projectileLayer; } private set { } }
-    //GameObject player;
-    
+
     FSMSystem sm;
     Health hp;
 
     public void SetTransition(Transition t) { sm.PerformTransition(t); }
 
-    void Awake()
-    {
-        
-    }
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         sm = new FSMSystem();
         Debug.Log("Add IdleState");
         BossIdleState bis = new BossIdleState();
         bis.AddTransition(Transition.NearPlayer, StateID.BossAttack);
 
-        BossAttackState bas = new BossAttackState();
+        Boss2AttackState bas = new Boss2AttackState();
         bas.AttackProjPrefab(proj);
         bas.AddTransition(Transition.LostPlayer, StateID.BossIdle);
         bas.shootInterval = shootInterval;
@@ -52,7 +49,7 @@ public class EnemyBoss : MonoBehaviour {
         //player = Global.Instance.player;
 
         Rigidbody2D rigidBody2D = GetComponent<Rigidbody2D>();
-        rigidBody2D.velocity = new Vector3(Random.value, Random.value, 0).normalized * flySpd;
+        rigidBody2D.velocity = new Vector3(Random.value, Random.value, 0).normalized * moveSpd;
 
         Global.Instance.boss = this.gameObject;
 
@@ -65,75 +62,59 @@ public class EnemyBoss : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        sm.CurrentState.Reason(Global.Instance.player, gameObject);
-        sm.CurrentState.Act(Global.Instance.player, gameObject);
-    }
+		
+	}
 }
 
-public class BossIdleState : FSMState
-{
-    public BossIdleState()
-    {
-        stateID = StateID.BossIdle;
-    }
-
-    public override void Act(GameObject player, GameObject npc)
-    {
-    }
-
-    public override void Reason(GameObject player, GameObject npc)
-    {
-        if (Vector3.Distance(npc.transform.position, player.transform.position) < 20)
-        {
-            if (npc.GetComponent<EnemyBoss>())
-                npc.GetComponent<EnemyBoss>().SetTransition(Transition.NearPlayer);
-            else if (npc.GetComponent<EnemyBoss2>())
-                npc.GetComponent<EnemyBoss2>().SetTransition(Transition.NearPlayer);
-        }
-    }
-}
-
-public class BossAttackState : FSMState
+public class Boss2AttackState : FSMState
 {
     Projectile proj;
     public double shootInterval = 0.5;
     double shootElapsed = 0.0;
+    public float massShootInterval = 2.0f;
+    public float massShootElapsed = 0.0f;
+    int projShot = 0;
+    float aimingAngle = 0.0f;
 
-    public BossAttackState()
+    public Boss2AttackState()
     {
         stateID = StateID.BossAttack;
     }
 
     public override void Act(GameObject player, GameObject npc)
     {
-        if ((shootElapsed += Time.deltaTime) >= shootInterval)
+        if ((massShootElapsed += Time.deltaTime) >= massShootInterval)
         {
-            EnemyBoss boss = npc.GetComponent<EnemyBoss>();
-
-            //Vector3 upDir = npc.transform.up;
-
-            float rotateAngle = 180.0f / (float)boss.numOfProj; 
-            for (int i = 0; i < boss.numOfProj; ++i)
+            EnemyBoss2 boss = npc.GetComponent<EnemyBoss2>();
+            if ((shootElapsed += Time.deltaTime) >= shootInterval)
             {
-                Quaternion quat = Quaternion.Euler(0, 0, rotateAngle * i);
-                //quat.SetFromToRotation(new Vector3(0, 1, 0), upDir);
+                Vector3 bossToPlayer = -boss.transform.position + player.transform.position;
+                aimingAngle = Mathf.Rad2Deg * Mathf.Sin((projShot / (boss.numOfProj - 1)) * (2.0f * Mathf.PI));
+                Quaternion quat = Quaternion.Euler(0, 0, aimingAngle);
 
                 Projectile newProj = GameObject.Instantiate(proj, npc.transform.position, quat);
                 newProj.transform.up = quat * newProj.transform.up;
                 newProj.gameObject.layer = boss.projectileLayer;
                 newProj.projectileSpeed = boss.projectileSpd;
                 newProj.SetDamage(boss.damage);
-            }
 
-            shootElapsed = 0.0;
+                shootElapsed = 0.0;
+                ++projShot;
+            }
+            if (projShot >= boss.numOfProj)
+            {
+                projShot = 0;
+                massShootElapsed = 0.0f;
+            }
         }
+
     }
 
     public override void Reason(GameObject player, GameObject npc)
     {
         if (Vector3.Distance(npc.transform.position, player.transform.position) >= 10)
         {
-            npc.GetComponent<EnemyBoss>().SetTransition(Transition.LostPlayer);
+            npc.GetComponent<EnemyBoss2>().SetTransition(Transition.LostPlayer);
         }
     }
 
