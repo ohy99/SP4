@@ -42,6 +42,7 @@ public class SpeedRoomItemScript : MonoBehaviour {
             }
 
             Destroy(gameObject);
+            ParticleManager.Instance.GenerateParticle(ParticleManager.PARTICLETYPE.PICKUP_ITEM, this.gameObject.transform.position);
         }
     }
 
