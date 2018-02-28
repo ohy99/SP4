@@ -59,13 +59,26 @@ public class DebugCamScript : MonoBehaviour {
             CreateIcon(boss, bossIcon);
         }
 
+        Dictionary<GameObject, GameObject> removalPair = new Dictionary<GameObject, GameObject>();
         foreach (KeyValuePair<GameObject, GameObject> pair in iconMap)
         {
+            if (pair.Key == null)
+            {
+                removalPair.Add(pair.Key, pair.Value);
+                continue;
+            }
+
             Transform objTransform = pair.Key.GetComponent<Transform>();
             Transform spriteTransform = pair.Value.GetComponent<Transform>();
             spriteTransform.position = new Vector3(objTransform.position.x, objTransform.position.y, iconInfo.iconPosZOffset);
             //spriteTransform.localScale = new Vector3(w * 0.1f, h * 0.1f);
         }
+        foreach (KeyValuePair<GameObject, GameObject> pair in removalPair)
+        {
+            iconMap.Remove(pair.Key);
+            Destroy(pair.Value);
+        }
+        removalPair.Clear();
 	}
 
     void CreateIcon(GameObject obj, GameObject iconImage)

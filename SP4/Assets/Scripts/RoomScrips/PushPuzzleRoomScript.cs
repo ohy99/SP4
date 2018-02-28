@@ -183,7 +183,7 @@ public class PushPuzzleRoomScript : RoomScript {
             guideLine.transform.rotation = Quaternion.FromToRotation(new Vector3(1, 0, 0), objToTarget);
             guideLine.transform.localPosition = spawnedObj.transform.localPosition + objToTarget * len * 0.5f;
             guideLine.transform.localScale = new Vector3(len, guideLine.transform.localScale.y, guideLine.transform.localScale.z);
-            Debug.Log(spawnedObj.transform.position + " to " + TargetPos + "  len = " + len);
+            //Debug.Log(spawnedObj.transform.position + " to " + TargetPos + "  len = " + len);
         }
 
     }

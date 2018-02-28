@@ -4821,32 +4821,32 @@ Prefab:
     - target: {fileID: 224656131302471064, guid: 3fd3bfc93d7723f4b8cfd00152b385f3,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 319
+      value: -81
       objectReference: {fileID: 0}
     - target: {fileID: 224656131302471064, guid: 3fd3bfc93d7723f4b8cfd00152b385f3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 154
+      value: -68
       objectReference: {fileID: 0}
     - target: {fileID: 224656131302471064, guid: 3fd3bfc93d7723f4b8cfd00152b385f3,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 224656131302471064, guid: 3fd3bfc93d7723f4b8cfd00152b385f3,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 444
       objectReference: {fileID: 0}
     - target: {fileID: 224656131302471064, guid: 3fd3bfc93d7723f4b8cfd00152b385f3,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224656131302471064, guid: 3fd3bfc93d7723f4b8cfd00152b385f3,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224656131302471064, guid: 3fd3bfc93d7723f4b8cfd00152b385f3,
         type: 2}

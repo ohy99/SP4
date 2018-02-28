@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 114124001595205012}
   - component: {fileID: 114580258884471200}
   - component: {fileID: 114564225146190358}
+  - component: {fileID: 114288396649117446}
+  - component: {fileID: 114008927277313896}
   m_Layer: 8
   m_Name: Boss2
   m_TagString: EnemyBoss
@@ -90,6 +92,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114008927277313896
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1275940416061716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114124001595205012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,6 +125,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
+--- !u!114 &114288396649117446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1275940416061716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 251
+    i1: 36
+    i2: 76
+    i3: 21
+    i4: 183
+    i5: 222
+    i6: 39
+    i7: 164
+    i8: 232
+    i9: 24
+    i10: 90
+    i11: 94
+    i12: 132
+    i13: 165
+    i14: 194
+    i15: 215
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114564225146190358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,10 +173,10 @@ MonoBehaviour:
   moveSpd: 10
   maxAngle: 30
   _numOfProj: 10
-  projectileSpd: 10
-  shootInterval: 0.25
+  projectileSpd: 12
+  shootInterval: 0.1
   damage: 3
-  _hp: 500
+  _hp: 200
 --- !u!114 &114580258884471200
 MonoBehaviour:
   m_ObjectHideFlags: 1

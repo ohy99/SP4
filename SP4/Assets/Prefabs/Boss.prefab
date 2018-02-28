@@ -175,7 +175,7 @@ MonoBehaviour:
   projectileSpd: 3
   shootInterval: 1
   damage: 5
-  _hp: 600
+  _hp: 300
 --- !u!114 &114909536826520416
 MonoBehaviour:
   m_ObjectHideFlags: 1

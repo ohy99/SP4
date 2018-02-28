@@ -22,7 +22,9 @@ public class BossRoomScript : RoomScript {
     {
         isBossSpawn = false;
         isCompleted = false;
-        randIndex = Random.Range(0, bossPrefabList.Count - 1);
+        randIndex = Random.Range(0, bossPrefabList.Count);
+        randIndex = (bossPrefabList.Count - 1) - randIndex;
+        Debug.Log("RANDOM INDEX BOSS SPAWN : " + randIndex);
         //GameObject spawnBoss = Instantiate(bossPrefabList[randIndex], transform.position, Quaternion.identity);
         //spawnBoss.transform.parent = this.transform;
         //Global.Instance.boss = spawnBoss;

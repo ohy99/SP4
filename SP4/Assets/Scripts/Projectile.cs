@@ -37,6 +37,8 @@ public class Projectile : MonoBehaviour {
             {
                 //hpScript
                 hpScript.ModifyHp(-damage);
+                Debug.Log("Projectile: " + damage + " name: " + coll.gameObject.name + " maxhp: " + hpScript.GetMaxHp());
+
                 DamageFeedback.Instance.ShowDamage(damage, coll.gameObject.transform.position + coll.gameObject.transform.lossyScale);
                 switch (coll.gameObject.tag)
                 {
