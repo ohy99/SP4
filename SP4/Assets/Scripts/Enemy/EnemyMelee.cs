@@ -34,8 +34,12 @@ public class EnemyMelee : MonoBehaviour {
             return;
         }
 
-        sm.CurrentState.Reason(player, gameObject);
-        sm.CurrentState.Act(player, gameObject);
+        if(player.activeSelf)
+        {
+            sm.CurrentState.Reason(player, gameObject);
+            sm.CurrentState.Act(player, gameObject);
+        }
+
     }
 
     private void MakeFSM()
@@ -150,7 +154,7 @@ public class ChasePlayerState : FSMState
 public class AttackPlayerState : FSMState
 {
     const float rotateSpeed = 0.5f;
-    private float damageValue = -10.0f;
+    private float damageValue = -1.0f;
 
     float attackDelay = 1.0f;
     float elapsedTime;

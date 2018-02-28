@@ -228,6 +228,7 @@ MonoBehaviour:
   itemName: 
   itemDescription: 
   sprite: {fileID: 0}
+  shootEffect: {fileID: 0}
   projectile: {fileID: 1859548745114154, guid: 68e227eb8a1f064419576d2e367187eb, type: 2}
 --- !u!114 &114698365331049366
 MonoBehaviour:
@@ -240,8 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.09090909
   m_SyncRotationAxis: 3
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
