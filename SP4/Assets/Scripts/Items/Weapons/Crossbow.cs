@@ -15,7 +15,7 @@ public class Crossbow : RangeWeaponBase
         maxMagRounds = 8;
         magRounds = 8;
         timer = 0.0f;
-        fireRate = 0.01f;
+        fireRate = 0.1f;
     }
 
     // Update is called once per frame

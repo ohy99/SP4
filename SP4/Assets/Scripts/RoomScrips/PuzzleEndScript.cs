@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class PuzzleEndScript : MonoBehaviour {
 
@@ -21,6 +22,10 @@ public class PuzzleEndScript : MonoBehaviour {
         {
             Debug.Log("Send");
             gameObject.SendMessageUpwards("OnTarget");
+            //if(!Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+
         }
+
+
     }
 }

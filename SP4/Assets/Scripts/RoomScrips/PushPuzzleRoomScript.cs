@@ -38,8 +38,8 @@ public class PushPuzzleRoomScript : RoomScript {
 
     bool isLock;
     bool isPosSet;
-
     GameObject spawnedObj;
+
     [SerializeField]
     GameObject targetObj;
     [SerializeField]
@@ -80,10 +80,11 @@ public class PushPuzzleRoomScript : RoomScript {
             transform.GetChild(0).position = TargetPos;
 
             if (player.GetComponent<NetworkIdentity>().isServer)
+            {
                 spawnedObj = genericSpawner.GetComponent<GenericSpawner>().SpawnObject(ObjectivePos, objective);
-
-            //put the obj as child of room
-            spawnedObj.transform.SetParent(this.gameObject.transform);
+                //put the obj as child of room
+                spawnedObj.transform.SetParent(this.gameObject.transform);
+            }
         }
 
         if (player.GetComponent<NetworkIdentity>().isServer)
@@ -108,7 +109,6 @@ public class PushPuzzleRoomScript : RoomScript {
         timer = 5.0f;
 
         style = new GUIStyle();
-
         content = new GUIContent();
 
         puzzleComplete = false;
@@ -124,17 +124,13 @@ public class PushPuzzleRoomScript : RoomScript {
         elapsedTime += Time.deltaTime;
 
         timer -= Time.deltaTime;
-        if (isCompleted || puzzleComplete)
-            return;
-
         //if (player.GetComponent<NetworkIdentity>().isLocalPlayer)
         //   Debug.Log(Vector3.Distance(player.transform.position, transform.position));
 
 
-        float dist = Vector3.Distance(player.GetComponent<NetworkIdentity>().transform.position, transform.position);
+        float dist = Vector3.Distance(player.transform.position, transform.position);
         if (dist < transform.localScale.x * 0.5f - 2.0f && !puzzleComplete)
         {
-
             LockDoor(DIRECTION.LEFT);
             LockDoor(DIRECTION.RIGHT);
             LockDoor(DIRECTION.UP);
@@ -164,14 +160,15 @@ public class PushPuzzleRoomScript : RoomScript {
 
         if (!Global.Instance.player.GetComponent<NetworkIdentity>().isServer
            && puzzleComplete == true)
-        {
-            foreach (DoorInfo doorInfo in doorInfoList)
-            {
-                if (!doorInfo.isLocked)
-                    roomScript.UnlockDoor(doorInfo.dir);
-                if (!doorInfo.haveTriggerBox)
-                    roomScript.OffTriggerBox(doorInfo.dir);
-            }
+        { 
+            OnTarget();
+            //foreach (DoorInfo doorInfo in doorInfoList)
+            //{
+            //    if (!doorInfo.isLocked)
+            //        roomScript.UnlockDoor(doorInfo.dir);
+            //    if (!doorInfo.haveTriggerBox)
+            //        roomScript.OffTriggerBox(doorInfo.dir);
+            //}
         }
 
         if (spawnedObj)
@@ -191,6 +188,11 @@ public class PushPuzzleRoomScript : RoomScript {
 
     void OnGUI()
     {
+        if(style == null)
+            style = new GUIStyle();
+        if (content == null)
+            content = new GUIContent();
+
         style.fontSize = Mathf.Min(Mathf.FloorToInt(Screen.width * fontSize / 1000), Mathf.FloorToInt(Screen.height * fontSize / 1000));
         style.alignment = TextAnchor.UpperCenter;
 
@@ -215,15 +217,17 @@ public class PushPuzzleRoomScript : RoomScript {
     }
 
 
-    void OnTarget()
+    public void OnTarget()
     {
+        Global.Instance.player.SendMessage("AddScore", 5);
         puzzleComplete = true;
         isCompleted = true;
+
         Global.Instance.roomGen.roomDataList[roomScript.GetRoomID()].isCompleted = true;
         if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
             MessageHandler.Instance.SendUnlockDoor_S2C(roomScript.GetRoomID(), puzzleComplete);
         //else
-           // MessageHandler.Instance.SendUnlockDoor_C2S(roomScript.GetRoomID(), puzzleComplete);
+        // MessageHandler.Instance.SendUnlockDoor_C2S(roomScript.GetRoomID(), puzzleComplete);
 
         foreach (DoorInfo doorInfo in doorInfoList)
         {

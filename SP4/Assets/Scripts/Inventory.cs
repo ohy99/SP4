@@ -92,6 +92,7 @@ public class Inventory
 
     public void AddCurrency(int currencyToAdd)
     {
+        Debug.Log(currencyToAdd);
         currency += currencyToAdd;
     }
 

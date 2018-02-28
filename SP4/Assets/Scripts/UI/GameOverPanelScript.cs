@@ -15,11 +15,27 @@ public class GameOverPanelScript : MonoBehaviour {
 
         text = this.transform.GetChild(0).GetComponent<Text>();
 
-        text.text = "GAMEOVER\n" + textResult + "\nYour score is " + PlayerPrefs.GetInt(PREFTYPE.NUM_OF_KILLS.ToString(), 0);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        int score = PlayerPrefs.GetInt("Score", 0);
+
+        int highScore;
+
+        highScore = PlayerPrefs.GetInt("Highscore", 0);
+
+        if (highScore < score)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("Highscore", highScore);
+            PlayerPrefs.Save();
+        }
+
+        PlayerPrefs.SetInt("Highscore", highScore);
+        PlayerPrefs.Save();
+
+        text.text = "GAMEOVER\n" + textResult + "\nYour score is " + score + "\nYour highscore is " + highScore;
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
