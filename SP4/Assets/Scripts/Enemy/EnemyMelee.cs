@@ -41,8 +41,8 @@ public class EnemyMelee : MonoBehaviour {
             return;
         }
 
-        playersList = GameObject.FindGameObjectsWithTag("Player");
-        Debug.Log(playersList.Length);
+        //playersList = GameObject.FindGameObjectsWithTag("Player");
+        playersList = Global.Instance.listOfPlayer;
         for (int i = 0; i < playersList.Length; ++i)
         {
             if (!playersList[i].activeSelf || !playersList[i])
@@ -53,7 +53,7 @@ public class EnemyMelee : MonoBehaviour {
             // Debug.Log("DIST: " + dist);
             if (dist < maxDist)
             {
-                Debug.Log("E2P: " + playersList[i].GetComponent<Player>().playerId);
+                //Debug.Log("E2P: " + playersList[i].GetComponent<Player>().playerId);
                 maxDist = dist;
                 player = playersList[i];
             }

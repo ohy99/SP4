@@ -11,8 +11,13 @@ public class Global : Singleton<Global> {
     [SerializeField]
     RoomGenerator _roomGen;
 
+    private int _deathCounter;
     private bool _victory;
-    
+    private GameObject[] _listOfPlayer;
+
+    public int deathCounter { get { return _deathCounter; } set { _deathCounter = value; } }
+
+    public GameObject[] listOfPlayer { get { return _listOfPlayer; } set { _listOfPlayer = value; } }
 
     public GameObject player { get { return _player; } set { _player = value; } }
 

@@ -88,6 +88,8 @@ public class Player : NetworkBehaviour
 
         if (isServer)
             playerId = NetworkServer.connections.Count - 1;
+
+        Global.Instance.listOfPlayer = GameObject.FindGameObjectsWithTag("Player");
     }
 
     // Update is called once per frame
@@ -116,6 +118,7 @@ public class Player : NetworkBehaviour
             {
                 PlayerPrefs.SetInt(PREFTYPE.NUM_OF_DEATHS.ToString(), PlayerPrefs.GetInt(PREFTYPE.NUM_OF_DEATHS.ToString(), 0) + 1);
                 onDeadTrigger = true;
+                Global.Instance.deathCounter = Global.Instance.deathCounter + 1;
                 gameObject.SetActive(false);
             }
             Save();

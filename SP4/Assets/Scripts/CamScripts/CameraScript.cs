@@ -20,20 +20,38 @@ public class CameraScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
+	void Update ()
+    {
         if (player == null)
         {
-            if (playerTransform == null)
-                return;
-
-            transform.position = playerTransform.position + new Vector3(0, 0, -10);
+            //if (playerTransform == null)
+            //    return;
+            //transform.position = playerTransform.position + new Vector3(0, 0, -10);
+            player = Global.Instance.player;
+            return;
         }
-        else
+
+        if(!player.activeSelf)
+            ChangeTarget();
+
+        transform.position = player.transform.position + new Vector3(0, 0, -10);
+        //Debug.Log(transform.position + ", player:" +player.transform.position.x +"," +player.transform.position.y);
+
+    }
+
+    //change who the cam follow
+    void ChangeTarget()
+    {
+        Debug.Log("Changing cam target");
+        GameObject[] playersList = Global.Instance.listOfPlayer;
+        for(int i = 0; i < playersList.Length; ++i)
         {
-            //transform.position.Set(player.transform.position.x, player.transform.position.y, -10);
-            transform.position = player.transform.position + new Vector3(0, 0, -10);
-            //Debug.Log(transform.position + ", player:" +player.transform.position.x +"," +player.transform.position.y);
+            if(playersList[i].activeSelf)
+            {
+                player = playersList[i];
+                break;
+            }
         }
     }
+
 }
