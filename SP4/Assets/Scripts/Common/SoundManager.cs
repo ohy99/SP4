@@ -14,8 +14,6 @@ public class SoundManager : Singleton<SoundManager> {
 
 	// Use this for initialization
 	public void Awake () {
-        Debug.Log("Hello");
-
         musicSource = this.gameObject.AddComponent<AudioSource>();
         globalfxSource = this.gameObject.AddComponent<AudioSource>();
 
@@ -26,7 +24,6 @@ public class SoundManager : Singleton<SoundManager> {
         musicSource.Play();
 
         musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
-        Debug.Log(musicVolume);
         fxVolume = PlayerPrefs.GetFloat("FXVolume", 1.0f);
 
         musicSource.mute = System.Convert.ToBoolean(PlayerPrefs.GetInt("MusicToggle", 0));
@@ -34,7 +31,6 @@ public class SoundManager : Singleton<SoundManager> {
 
         musicSource.volume = musicVolume;
         globalfxSource.volume = fxVolume;
-        Debug.Log(musicSource.volume);
     }
 
     // Update is called once per frame
@@ -78,7 +74,6 @@ public class SoundManager : Singleton<SoundManager> {
 
     new void OnDestroy()
     {
-        Debug.Log(musicVolume);
         PlayerPrefs.SetFloat("MusicVolume", musicVolume);
         PlayerPrefs.SetFloat("FXVolume", fxVolume);
         PlayerPrefs.SetInt("MusicToggle", System.Convert.ToInt32(musicSource.mute));
