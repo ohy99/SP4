@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Sword : MeleeWeaponBase {
 
-    public AudioClip shootEffect;
     // Use this for initialization
     public override void Start ()
     {

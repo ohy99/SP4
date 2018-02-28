@@ -12,6 +12,9 @@ public class MeleeWeaponBase : ItemBase
     [SerializeField]
     protected GameObject meleeCollider;
 
+    [SerializeField]
+    protected AudioClip shootEffect;
+
     public MeleeWeaponBase()
     {
     }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Staff : RangeWeaponBase
 {
-    public AudioClip shootEffect;
-
     // Use this for initialization
     public override void Start()
     {
