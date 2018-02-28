@@ -29,6 +29,8 @@ public class CoinValue : MonoBehaviour {
 
         text.GetComponent<CoinText>().coinvalue = value;
 
+        ParticleManager.Instance.GenerateParticle(ParticleManager.PARTICLETYPE.PICKUP_COIN, text.gameObject.transform.position);
+
         InventoryManager.Instance.GetInventory("player").AddCurrency(value);
         Destroy(this.gameObject);
     }

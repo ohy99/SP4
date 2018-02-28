@@ -8,6 +8,7 @@ public class ParticleManager : Singleton<ParticleManager> {
     {
         HITENEMY,
         HITPLAYER,
+        PICKUP_COIN,
 
         PT_COUNT //end
     }
@@ -26,7 +27,8 @@ public class ParticleManager : Singleton<ParticleManager> {
     void Awake()
     {
         psList.Add(((GameObject)Resources.Load("Feedback/Hit Enemy")).GetComponent<ParticleSystem>());
-        psList.Add(((GameObject)Resources.Load("Feedback/Hit Enemy")).GetComponent<ParticleSystem>());
+        psList.Add(((GameObject)Resources.Load("Feedback/Hit Player")).GetComponent<ParticleSystem>());
+        psList.Add(((GameObject)Resources.Load("Feedback/Pickup Coin")).GetComponent<ParticleSystem>());
     }
 	
 	// Update is called once per frame
