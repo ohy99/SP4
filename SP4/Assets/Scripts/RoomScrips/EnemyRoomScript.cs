@@ -83,10 +83,12 @@ public class EnemyRoomScript : RoomScript {
     // Update is called once per frame
     void Update()
     {
+
+        elapsedTime += Time.deltaTime;
+
         if (player == null)
             return;
 
-        elapsedTime += Time.deltaTime;
         if (isCompleted || completedWaves)
             return;
 
@@ -139,6 +141,7 @@ public class EnemyRoomScript : RoomScript {
     {
         completedWaves = true;
         isCompleted = true;
+        Global.Instance.roomGen.roomDataList[roomScript.GetRoomID()].isCompleted = true;
 
         foreach (DoorInfo doorInfo in doorInfoList)
         {

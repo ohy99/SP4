@@ -198,7 +198,7 @@ public class PlayerShoot : NetworkBehaviour
         if (go.GetComponent<RangeWeaponBase>())
             projectile = go.GetComponent<RangeWeaponBase>().Discharge(transform.position + transform.up, transform.rotation);
         else if (go.GetComponent<MeleeWeaponBase>())
-            go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
+            projectile = go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
 
         if (!projectile)
             return;
@@ -218,7 +218,7 @@ public class PlayerShoot : NetworkBehaviour
         if(projectile)
             NetworkServer.Spawn(projectile);
 
-        Destroy(projectile, 5.0f);
+        Destroy(projectile, 3.0f);
     }
 
 }

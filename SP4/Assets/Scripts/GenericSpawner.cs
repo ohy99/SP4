@@ -34,6 +34,8 @@ public class GenericSpawner : NetworkBehaviour
         if (!NetworkServer.active)
             Debug.Log("SERVER NOT ACTIVE");
 
+        Debug.Log("spawn in da generic spawner");
+
         for (int i = 0; i < numSpawn; ++i)
         {
             Vector3 pos = new Vector3(Random.Range(map.transform.localPosition.x + -map.transform.localScale.x * 0.5f + 2.0f, map.transform.localPosition.x + map.transform.localScale.x * 0.5f - 2.0f),
