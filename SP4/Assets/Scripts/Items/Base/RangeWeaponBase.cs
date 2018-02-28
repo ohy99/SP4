@@ -14,7 +14,8 @@ public class RangeWeaponBase : ItemBase
     protected float fireRate;
     protected float timer;
 
-
+    [SerializeField]
+    protected AudioClip shootEffect;
 
     [SerializeField]
     protected GameObject projectile;

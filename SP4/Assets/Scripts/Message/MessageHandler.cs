@@ -313,7 +313,7 @@ public class MessageHandler : Singleton<MessageHandler>
 
         //if (NetworkServer.active)
         //    NetworkServer.SendToAll(MyMsgType.itemCollectedMsgType_client, msg);
-        myClient.Send(MyMsgType.playerIdMsgType_client, msg);
+        myClient.Send(MyMsgType.itemCollectedMsgType_client, msg);
     }
 
     public void SendActiveRoom_C2S(int _connectionId)
@@ -564,6 +564,9 @@ public class MessageHandler : Singleton<MessageHandler>
 
     public void OnRecvItemCollected_Client(NetworkMessage netMsg)
     {
+        if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+            return;
+
         itemCollectedMessage msg = netMsg.ReadMessage<itemCollectedMessage>();
         Debug.Log("ClientRecv_itemCollected = " + msg.itemCollected);
 
@@ -584,6 +587,9 @@ public class MessageHandler : Singleton<MessageHandler>
 
     public void OnRecvActiveRoom_Client(NetworkMessage netMsg)
     {
+        if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+            return;
+
         ActiveRoomMessage msg = netMsg.ReadMessage<ActiveRoomMessage>();
         Debug.Log("Host/ServerRecv_ActiveRoom_" + msg.connectionId);
 

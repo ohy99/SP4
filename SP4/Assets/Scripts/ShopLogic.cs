@@ -10,10 +10,12 @@ public class ShopLogic : MonoBehaviour
 
     private bool isClicked = false;
     private bool isPurchaseable = true;
+    private bool isPurchased = false;
     private string itemToBuy;
     private List<GameObject> buttonList;
     private Rect windowRect0;
     private Rect windowRect1;
+    private Rect windowRect2;
 
     public GameObject confirmationPanel;
     public GameObject buttonPrefab;
@@ -29,9 +31,11 @@ public class ShopLogic : MonoBehaviour
         Time.timeScale = 1;
         isClicked = false;
         isPurchaseable = true;
+        isPurchased = false;
         windowRect0 = new Rect(Screen.width * 0.5f - 100, Screen.height * 0.5f - 100, 200, 200);
         windowRect1 = new Rect(Screen.width * 0.5f - 100, Screen.height * 0.5f - 100, 200, 200);
-        buttonList = new List<GameObject>(); 
+        windowRect2 = new Rect(Screen.width * 0.5f - 100, Screen.height * 0.5f - 100, 200, 200);
+        buttonList = new List<GameObject>();
 
         for (int i = 0; i < ItemManager.Instance.itemNames.Count; ++i)
         {
@@ -66,7 +70,14 @@ public class ShopLogic : MonoBehaviour
         {
             Debug.Log("BUYING -> " + itemName);
             itemToBuy = itemName;
-            isClicked = true;
+
+            if (InventoryManager.Instance.GetInventory("player").GetItemNameList().Contains(itemToBuy))
+            {
+                isPurchased = true;
+            }
+            else
+                isClicked = true;
+
             confirmationPanel.SetActive(true);
         }
     }
@@ -88,10 +99,15 @@ public class ShopLogic : MonoBehaviour
             GUI.color = Color.red;
             windowRect1 = GUI.Window(1, windowRect1, DoMyWindow, "Not enough money!");
         }
+        if (isPurchased)
+        {
+            GUI.color = Color.red;
+            windowRect2 = GUI.Window(2, windowRect1, DoMyWindow, "Already have " + itemToBuy + "!");
+        }
     }
     void DoMyWindow(int windowID)
     {
-        switch(windowID)
+        switch (windowID)
         {
             case 0:
                 {
@@ -105,6 +121,7 @@ public class ShopLogic : MonoBehaviour
                             print("Bought Item");
                             InventoryManager.Instance.GetInventory("player").SetCurrency(currency - itemCost);
                             InventoryManager.Instance.GetInventory("player").AddItem(ItemManager.Instance.items[itemToBuy], itemToBuy);
+                            InventoryManager.Instance.GetInventory("player").SaveItems();
                             confirmationPanel.SetActive(false);
                         }
                         else
@@ -131,6 +148,17 @@ public class ShopLogic : MonoBehaviour
                         //go back
                         print("backed");
                         isPurchaseable = true;
+                        confirmationPanel.SetActive(false);
+                    }
+                }
+                break;
+            case 2:
+                {
+                    if (GUI.Button(new Rect(50, 120, 100, 20), "Back"))
+                    {
+                        //go back
+                        print("backed");
+                        isPurchased = false;
                         confirmationPanel.SetActive(false);
                     }
                 }

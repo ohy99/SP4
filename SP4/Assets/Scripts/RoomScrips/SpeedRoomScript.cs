@@ -69,6 +69,8 @@ public class SpeedRoomScript : RoomScript {
         //}
 
         player = Global.Instance.player;
+        if (player.GetComponent<NetworkIdentity>().isServer)
+            Debug.Log("is a server");
 
         style = new GUIStyle();
 
@@ -101,11 +103,11 @@ public class SpeedRoomScript : RoomScript {
 
             if (!isLock)
             {
+                isLock = true;
                 if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
                     MessageHandler.Instance.SendLockDoor_S2C(roomScript.GetRoomID());
                 else
                     MessageHandler.Instance.SendLockDoor_C2S(roomScript.GetRoomID());
-                isLock = true;
             }
         }
 
@@ -165,7 +167,6 @@ public class SpeedRoomScript : RoomScript {
 
     public void AddCollect()
     {
-        //Debug.Log("TrueRoomId: " + GetRoomID());
         itemCollected++;
 
         if (player.GetComponent<NetworkIdentity>().isServer)

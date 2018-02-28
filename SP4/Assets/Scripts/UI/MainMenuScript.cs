@@ -14,14 +14,9 @@ public class MainMenuScript : MonoBehaviour {
 		
 	}
 
-    public void OnStartButtonClick()
+    public void OnLoadSceneButtonClick(string sceneName)
     {
-        LoadScene.Instance.LoadSceneCall("game");
-    }
-
-    public void OnOnlineButtonClick()
-    {
-        LoadScene.Instance.LoadSceneCall("mp_game");
+        LoadScene.Instance.LoadSceneCall(sceneName);
     }
 
     public void OnwadButtonClick()

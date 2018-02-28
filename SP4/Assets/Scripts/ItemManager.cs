@@ -37,6 +37,7 @@ public class ItemManager : Singleton<ItemManager>
         temp.Init();
         InventoryManager.Instance.Init(); // init the manager
         InventoryManager.Instance.AddInventory("player", temp); //Add inventory with key of player
+        InventoryManager.Instance.GetInventory("player").LoadItems();
     }
 
     public void LoadAllItems()
@@ -65,5 +66,4 @@ public class ItemManager : Singleton<ItemManager>
         //    items["items"].Add(go);
         //}
     }
-
 }
