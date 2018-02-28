@@ -89,8 +89,8 @@ public class EnemyRoomScript : RoomScript {
         if (player == null)
             return;
 
-        if (isCompleted || completedWaves)
-            return;
+        //if (isCompleted || completedWaves)
+        //    return;
 
         if (Vector3.Distance(player.transform.position, transform.position) < transform.localScale.x * 0.5f - 2.0f && !completedWaves)
         {
@@ -133,6 +133,15 @@ public class EnemyRoomScript : RoomScript {
 
             size = style.CalcSize(content);
             GUI.Label(new Rect(screenCenter - size.x, 0, size.x * 2.0f, size.y * 2.0f), text, style);
+        }
+        float yPos = 0.0f;
+        if (!completedWaves)
+        {
+            text = "Number of Wave: " + Spawner.GetComponent<EnemySpawner>().GetTotalWave();
+            content.text = text;
+            size = style.CalcSize(content);
+            GUI.Label(new Rect(screenCenter - size.x, yPos, size.x * 2.0f, size.y * 2.0f), text, style);
+            yPos += size.y;
         }
     }
 

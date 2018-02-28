@@ -385,7 +385,7 @@ public class MessageHandler : Singleton<MessageHandler>
             room.GetComponent<RoomScript>().SetIsComplete(msg.isCompleted);
         Global.Instance.roomGen.StoreRoom(msg.roomID + 1, msg.gridX, msg.gridY, room);
         //if (msg.roomID != 0)
-
+        Global.Instance.roomGen.roomDataList.Add(msg);
 
         Debug.Log("ClientRecv_Room");
         //Debug.Log("==============================");

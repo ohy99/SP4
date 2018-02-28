@@ -31,7 +31,7 @@ public class BossRoomScript : RoomScript {
     // Update is called once per frame
     void Update()
     {
-        if (!isBossSpawn && !isCompleted)
+        if (!isBossSpawn)
         {
             //might puts this in global instead, but use it like this for now
             playersList = GameObject.FindGameObjectsWithTag("Player");
