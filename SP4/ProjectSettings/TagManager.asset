@@ -52,3 +52,6 @@ TagManager:
   - name: Character
     uniqueID: 1149124533
     locked: 0
+  - name: Coins
+    uniqueID: 3741138957
+    locked: 0

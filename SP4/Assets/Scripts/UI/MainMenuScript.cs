@@ -23,4 +23,9 @@ public class MainMenuScript : MonoBehaviour {
     {
         LoadScene.Instance.LoadSceneCall("mp_game");
     }
+
+    public void OnwadButtonClick()
+    {
+        LoadScene.Instance.LoadSceneCall("achievements");
+    }
 }

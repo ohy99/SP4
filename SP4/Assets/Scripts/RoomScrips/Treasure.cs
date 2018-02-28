@@ -6,6 +6,8 @@ public class Treasure : MonoBehaviour {
 
     [SerializeField]
     GameObject TreasureKey;
+    [SerializeField]
+    GameObject coin;
 
     bool textTrigger = false;
 
@@ -21,6 +23,15 @@ public class Treasure : MonoBehaviour {
 
     Vector2 size;
 
+    bool unlockingNow;
+    bool isUnlocked;
+    bool isEmpty;
+    float unlockingAnimElapsed;
+    float unlockAnimDuration;
+
+    [SerializeField]
+    bool OnTouchUnlock = false;
+
     // Use this for initialization
     void Start () {
         SendMessageUpwards("GenerateTreasureKey", TreasureKey);
@@ -28,11 +39,59 @@ public class Treasure : MonoBehaviour {
         style = new GUIStyle();
 
         content = new GUIContent();
+
+        isUnlocked = false;
+        unlockingNow = false;
+        isEmpty = false;
+        unlockingAnimElapsed = 0.0f;
+        unlockAnimDuration = 1.0f;
     }
-	
+
+    bool rotateLeft = true;
+    float rotateSpd = 360.0f;
+    float rotationLimit = 30.0f;
+    float currRotation = 0.0f;
+    [SerializeField]
+    float coinOutVel = 0.3f;
+    [SerializeField]
+    int numOfCoinsOut = 5;
+    [SerializeField]
+    int coinValue = 20;
+
 	// Update is called once per frame
 	void Update () {
 
+        if (unlockingNow && !isUnlocked)
+        {
+            unlockingAnimElapsed += Time.deltaTime;
+
+            //SHAKE IT
+            Quaternion quat = Quaternion.Euler(0, 0, (currRotation = Mathf.Clamp(currRotation + (rotateLeft ? -rotateSpd : rotateSpd) * Time.deltaTime, -rotationLimit, rotationLimit)));
+            if (Mathf.Approximately(currRotation, (currRotation > 0.0f ? rotationLimit : -rotationLimit)))
+                rotateLeft = !rotateLeft;
+            gameObject.transform.rotation = quat;
+
+            if (unlockingAnimElapsed >= unlockAnimDuration)
+            {
+                isUnlocked = true;
+            }
+        }
+        if (isUnlocked && !isEmpty)
+        {
+            for (int i = 0; i < numOfCoinsOut; ++i)
+            {
+                GameObject newCoin = Instantiate(coin, transform.position, Quaternion.identity);
+                Vector2 outDir = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
+                outDir.Normalize();
+                Rigidbody2D rb = newCoin.GetComponent<Rigidbody2D>();
+                //rb.AddRelativeForce(new Vector2(outDir.x * coinOutForce, outDir.y * coinOutForce));
+                rb.velocity = new Vector2(outDir.x * coinOutVel, outDir.y * coinOutVel);
+                CoinValue cv = newCoin.GetComponent<CoinValue>();
+                cv.value = coinValue;
+            }
+            isEmpty = true;
+            
+        }
 	}
 
     void OnGUI()
@@ -55,11 +114,13 @@ public class Treasure : MonoBehaviour {
     {
         if (col.tag.Equals("Player"))
         {
-            if (col.transform.GetChild(0).tag.Equals("Key") && col.transform.GetChild(0).GetComponent<TreasureKey>().GetTreasureRoomID() == this.GetComponentInParent<RoomScript>().GetRoomID())
+            if (col.transform.GetChild(0).tag.Equals("Key") || OnTouchUnlock)// && col.transform.GetChild(0).GetComponent<TreasureKey>().GetTreasureRoomID() == this.GetComponentInParent<RoomScript>().GetRoomID())
             {
-                InventoryManager.Instance.GetInventory("player").AddCurrency(100);
-                Destroy(this.gameObject);
-                Destroy(col.transform.GetChild(0).gameObject);
+                //InventoryManager.Instance.GetInventory("player").AddCurrency(100);
+                //Destroy(this.gameObject);
+                if (!OnTouchUnlock)
+                    Destroy(col.transform.GetChild(0).gameObject);
+                unlockingNow = true;
             }
             else if (!textTrigger)
             {
