@@ -1997,7 +1997,7 @@ Prefab:
         type: 2}
     - target: {fileID: 1137529832112996, guid: aa85c54931418ca4a99c40c3500b5a9e, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114320645510608390, guid: aa85c54931418ca4a99c40c3500b5a9e,
         type: 2}
@@ -3766,8 +3766,8 @@ MonoBehaviour:
   canvas: {fileID: 507841960}
   panelinfo:
     offsetFromTop: 5
-    width: 200
-    height: 50
+    width: 250
+    height: 80
     lifeTime: 2
     moveTime: 0.5
   onHacks: 1
