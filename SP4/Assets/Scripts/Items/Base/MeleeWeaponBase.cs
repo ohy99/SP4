@@ -8,7 +8,8 @@ public class MeleeWeaponBase : ItemBase
     protected float damageOverTime;
     protected float range;
     protected bool isAttack;
-
+    protected float fireRate;
+    protected float timer;
     [SerializeField]
     protected GameObject meleeCollider;
 

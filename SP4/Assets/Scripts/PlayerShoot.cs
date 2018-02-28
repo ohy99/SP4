@@ -228,7 +228,7 @@ public class PlayerShoot : NetworkBehaviour
         if (go.GetComponent<RangeWeaponBase>())
             projectile = go.GetComponent<RangeWeaponBase>().Discharge(transform.position + transform.up, transform.rotation);
         else if (go.GetComponent<MeleeWeaponBase>())
-            projectile = go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up, transform.rotation);
+            projectile = go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up * go.GetComponent<MeleeWeaponBase>().GetRange(), transform.rotation);
 
         if (!projectile)
             return;

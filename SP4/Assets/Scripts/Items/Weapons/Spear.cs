@@ -12,11 +12,15 @@ public class Spear : MeleeWeaponBase {
         range = 2.5f;
         isAttack = false;
         meleeCollider.SetActive(false);
-	}
+
+        timer = 0.0f;
+        fireRate = 0.5f;
+    }
 
     // Update is called once per frame
     public override void Update () 
     {
+        timer += Time.deltaTime;
     }
 
     // Attack with weapon (stab - long range)
@@ -24,16 +28,26 @@ public class Spear : MeleeWeaponBase {
     {
         Debug.Log("MeleeAttack");
         // Spawn a aabb here if collision occur damage is done
-        meleeCollider.SetActive(true);
-        GameObject go =Instantiate(meleeCollider, pos, rotation);
-        SoundManager.Instance.PlayOneShot(shootEffect);
-        //meleeCollider.transform.localScale = new Vector3(0.5f, 2.5f, 1);
-        //meleeCollider.transform.position = new Vector3(0, meleeCollider.transform.position.y + range, 0);
-        //meleeCollider.GetComponent<BoxCollider2D>().offset = new Vector2(0, range);
-        //meleeCollider.GetComponent<BoxCollider2D>().size = new Vector2(0.5f, 2.5f);
-        //meleeCollider.transform.localScale = new Vector3(0.5f, range, 1);
-        isAttack = true;
-        return go;
+        if (fireRate < timer)
+        {
+            timer = 0;
+            meleeCollider.SetActive(true);
+            GameObject go = Instantiate(meleeCollider, pos, rotation);
+            SoundManager.Instance.PlayOneShot(shootEffect);
+            MeleeCollider meleeScript = go.GetComponent<MeleeCollider>();
+            if (meleeScript)
+                meleeScript.SetDamage(damage);
+
+            meleeCollider.transform.localScale = new Vector3(0.5f, 2.5f, 1);
+            //meleeCollider.transform.position = new Vector3(0, meleeCollider.transform.position.y + range, 0);
+            //meleeCollider.GetComponent<BoxCollider2D>().offset = new Vector2(0, range);
+            //meleeCollider.GetComponent<BoxCollider2D>().size = new Vector2(0.5f, 2.5f);
+            //meleeCollider.transform.localScale = new Vector3(0.5f, range, 1);
+            isAttack = true;
+            return go;
+        }
+
+        return null;
     }
 
     public override void OnClick()
