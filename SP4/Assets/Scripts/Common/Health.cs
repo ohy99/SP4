@@ -54,6 +54,7 @@ public class Health : NetworkBehaviour {
             if (!gameObject.tag.Equals("Player"))
             {
                 PlayerPrefs.SetInt(PREFTYPE.NUM_OF_KILLS.ToString(), PlayerPrefs.GetInt(PREFTYPE.NUM_OF_KILLS.ToString(), 0) + 1);
+                Global.Instance.player.SendMessage("AddScore", 2);
                 Destroy(gameObject);
             }
         }

@@ -45,14 +45,15 @@ public class DamageFeedback : Singleton<DamageFeedback> {
                 continue;
             }
 
-            df.spriteGO.transform.position += moveDir * Time.deltaTime * moveSpd;
+            if (df.spriteGO)
+                df.spriteGO.transform.position += moveDir * Time.deltaTime * moveSpd;
         }
 
         //Remove them
         foreach (DMGINFO remove in removeList)
         {
-            Destroy(remove.spriteGO);
             dmginfos.Remove(remove);
+            Destroy(remove.spriteGO);
         }
         removeList.Clear();
 	}

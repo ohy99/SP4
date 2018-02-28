@@ -215,6 +215,7 @@ public class SpotPuzzleRoomScript : RoomScript
             return;
         }
 
+        Global.Instance.player.SendMessage("AddScore", 5);
         puzzleComplete = true;
         isCompleted = true;
         Global.Instance.roomGen.roomDataList[roomScript.GetRoomID()].isCompleted = true;

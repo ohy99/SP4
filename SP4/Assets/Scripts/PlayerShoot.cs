@@ -51,7 +51,6 @@ public class PlayerShoot : NetworkBehaviour
 
         playerWeapon.GetComponent<SpriteRenderer>().sprite.bounds.size.Scale(new Vector3(100.0f, 100.0f, 100.0f));
 
-        playerWeapon.transform.localPosition = new Vector3(0.0f, 0.5f, 0.0f);
         playerWeapon.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
 	
