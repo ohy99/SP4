@@ -7,8 +7,6 @@ public class Treasure : MonoBehaviour {
     [SerializeField]
     GameObject TreasureKey;
 
-    float timer = 2.0f;
-
     bool textTrigger = false;
 
     int fontSize = 50;
@@ -34,14 +32,6 @@ public class Treasure : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (textTrigger)
-            timer -= Time.deltaTime;
-
-        if (timer <= 0)
-        {
-            timer = 2.0f;
-            textTrigger = false;
-        }
 
 	}
 
@@ -65,7 +55,6 @@ public class Treasure : MonoBehaviour {
     {
         if (col.tag.Equals("Player"))
         {
-            Debug.Log(col.transform.GetChild(0).tag);
             if (col.transform.GetChild(0).tag.Equals("Key") && col.transform.GetChild(0).GetComponent<TreasureKey>().GetTreasureRoomID() == this.GetComponentInParent<RoomScript>().GetRoomID())
             {
                 //InventoryManager.Instance.GetInventory("player").AddCurrency(100);
@@ -76,6 +65,15 @@ public class Treasure : MonoBehaviour {
             {
                 textTrigger = true;
             }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.tag.Equals("Player"))
+        {
+            if (textTrigger)
+                textTrigger = false;
         }
     }
 }
