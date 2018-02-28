@@ -15,14 +15,14 @@ public class MyEventController : Singleton<MyEventController> {
 	// Update is called once per frame
 	void Update ()
     {
-        //if (!Global.Instance)
-        //    return;
+        if (Global.Instance.listOfPlayer == null)
+            return;
 
-        //if(Global.Instance.deathCounter >= Global.Instance.listOfPlayer.Length)
-        //{   //set scene to death scene
-        //    Global.Instance.victory = false;
-        //    LoadScene.Instance.LoadSceneCall("GameOver");
-        //}
+        if (Global.Instance.deathCounter >= Global.Instance.listOfPlayer.Length)
+        {   //set scene to death scene
+            Global.Instance.victory = false;
+            LoadScene.Instance.LoadSceneCall("GameOver");
+        }
     }
 
     public void TriggerEndGame(bool trigger)
