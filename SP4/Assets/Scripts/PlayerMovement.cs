@@ -50,8 +50,9 @@ public class PlayerMovement : NetworkBehaviour
                 MoveOnGamePad();
                 if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
                     ChangeControlType(CONTROLTYPE.KEYBOARD);
-                else if (!Mathf.Approximately(moveJoy.GetXAxis(), 0.0f) || !Mathf.Approximately(moveJoy.GetYAxis(), 0.0f))
-                    ChangeControlType(CONTROLTYPE.MOBILE);
+                else if (moveJoy)
+                    if (!Mathf.Approximately(moveJoy.GetXAxis(), 0.0f) || !Mathf.Approximately(moveJoy.GetYAxis(), 0.0f))
+                        ChangeControlType(CONTROLTYPE.MOBILE);
                 break;
             case CONTROLTYPE.MOBILE:
                 MoveOnMobile();
