@@ -15,4 +15,13 @@ public class CoinValue : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag != "Player")
+            return;
+
+        InventoryManager.Instance.GetInventory("player").AddCurrency(value);
+        Destroy(this.gameObject);
+    }
 }

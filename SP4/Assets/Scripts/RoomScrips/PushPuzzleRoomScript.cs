@@ -39,6 +39,11 @@ public class PushPuzzleRoomScript : RoomScript {
     bool isLock;
     bool isPosSet;
 
+    GameObject spawnedObj;
+    [SerializeField]
+    GameObject targetObj;
+    [SerializeField]
+    GameObject guideLine;
     // Use this for initialization
 
         //172.21.134.118
@@ -75,7 +80,10 @@ public class PushPuzzleRoomScript : RoomScript {
             transform.GetChild(0).position = TargetPos;
 
             if (player.GetComponent<NetworkIdentity>().isServer)
-                genericSpawner.GetComponent<GenericSpawner>().SpawnObject(ObjectivePos, objective);
+                spawnedObj = genericSpawner.GetComponent<GenericSpawner>().SpawnObject(ObjectivePos, objective);
+
+            //put the obj as child of room
+            spawnedObj.transform.SetParent(this.gameObject.transform);
         }
 
         if (player.GetComponent<NetworkIdentity>().isServer)
@@ -165,6 +173,20 @@ public class PushPuzzleRoomScript : RoomScript {
                     roomScript.OffTriggerBox(doorInfo.dir);
             }
         }
+
+        if (spawnedObj)
+        {
+            //Update the guideLine
+            Vector3 objToTarget = -spawnedObj.transform.localPosition + targetObj.transform.localPosition;
+            objToTarget = new Vector3(objToTarget.x, objToTarget.y, 0);//force 0
+            float len = objToTarget.magnitude;
+            objToTarget.Normalize();
+            guideLine.transform.rotation = Quaternion.FromToRotation(new Vector3(1, 0, 0), objToTarget);
+            guideLine.transform.localPosition = spawnedObj.transform.localPosition + objToTarget * len * 0.5f;
+            guideLine.transform.localScale = new Vector3(len, guideLine.transform.localScale.y, guideLine.transform.localScale.z);
+            Debug.Log(spawnedObj.transform.position + " to " + TargetPos + "  len = " + len);
+        }
+
     }
 
     void OnGUI()

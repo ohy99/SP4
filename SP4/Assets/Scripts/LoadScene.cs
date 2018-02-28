@@ -7,7 +7,7 @@ public class LoadScene : Singleton<LoadScene> {
 
 	// Use this for initialization
 	void Start () {
-        DontDestroyOnLoad(gameObject);
+
 	}
 	
 	// Update is called once per frame

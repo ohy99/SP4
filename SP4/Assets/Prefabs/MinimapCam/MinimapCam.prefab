@@ -107,12 +107,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 5
   cam: {fileID: 20740933628936592}
-  playerIcon: {fileID: 1091575973915688, guid: f448c127ec3bd264eac23e040ae52098, type: 2}
-  bossIcon: {fileID: 1043973009469612, guid: e0ca70a4ca76b5349b334a82e6b4ae76, type: 2}
+  playerIcon: {fileID: 1525080892732308, guid: ead56f6be3a66634f981ddce793dc3d9, type: 2}
+  bossIcon: {fileID: 1707258556751924, guid: b55732f318a19ea49a61346732bd566b, type: 2}
   zPosOffset: -60
   iconInfo:
     iconPosZOffset: -50
-    scale: 1
+    scale: 10
 --- !u!124 &124417538586285970
 Behaviour:
   m_ObjectHideFlags: 1
