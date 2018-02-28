@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class Player : NetworkBehaviour
 {
@@ -15,6 +16,9 @@ public class Player : NetworkBehaviour
     //dont change player id = connection id
     public int playerId;
     bool onDeadTrigger = false;
+
+    public Text scoreText;
+    public Text currencyText;
 
     GameObject[] playersList;
 
@@ -53,6 +57,12 @@ public class Player : NetworkBehaviour
             
         }
 
+        scoreText = GameObject.Find("Score").GetComponent<Text>();
+        currencyText = GameObject.Find("Currency").GetComponent<Text>();
+
+        scoreText.text = "Score : " + score;
+        currencyText.text = "Coins : " + InventoryManager.Instance.GetInventory("player").GetCurrency();
+
         if (isServer)
             Global.Instance.roomGen.Init();
             //RoomGenerator.Init();
@@ -63,7 +73,7 @@ public class Player : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        score = PlayerPrefs.GetInt("Score", 0);
+        score = 0;
         initialScore = score;
         float maxHealth = PlayerPrefs.GetFloat("Max Health", 100);
 
@@ -119,9 +129,10 @@ public class Player : NetworkBehaviour
                 PlayerPrefs.SetInt(PREFTYPE.NUM_OF_DEATHS.ToString(), PlayerPrefs.GetInt(PREFTYPE.NUM_OF_DEATHS.ToString(), 0) + 1);
                 onDeadTrigger = true;
                 Global.Instance.deathCounter = Global.Instance.deathCounter + 1;
+
+                Save();
                 gameObject.SetActive(false);
             }
-            Save();
 
             //if (onDeadTrigger)
             //{
@@ -144,14 +155,17 @@ public class Player : NetworkBehaviour
             }
         }
         gameObject.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
+
+        scoreText.text = "Score : " + score;
+        currencyText.text = "Coins : " + InventoryManager.Instance.GetInventory("player").GetCurrency();
     }
 
     void Save()
     {
         PlayerPrefs.SetInt("Score", score);
         PlayerPrefs.SetFloat("Max Health", hpScript.GetMaxHp());
-        PlayerPrefs.SetInt("Money", Mathf.Max(0,score - initialScore));
-
+        InventoryManager.Instance.GetInventory("player").AddCurrency(Mathf.Max(0, score - initialScore) * 10);
+        InventoryManager.Instance.GetInventory("player").SaveItems();
         /*
          * By default Unity writes preferences to disk during OnApplicationQuit(). 
          * In cases when the game crashes or otherwise prematuraly exits, you might want to write the PlayerPrefs at sensible 'checkpoints' in your game. 
@@ -199,6 +213,7 @@ public class Player : NetworkBehaviour
     public int GetMaxExp() { return maxExp; }
     public bool IsDead() { return hpScript.GetCurrHp() <= 0; }
     public void AddHealth(float value) { hpScript.ModifyHp(value); }
+    public void AddScore(int scoreValue) { score += scoreValue; }
 }
 
 /*

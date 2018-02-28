@@ -31,7 +31,10 @@ public class SpeedRoomItemScript : MonoBehaviour {
         if (col.gameObject.tag.Equals("Player"))//if the collided is player OR player(clone)
         {
             if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+            {
                 SendMessageUpwards("AddCollect");
+                col.gameObject.SendMessage("AddScore", 5);
+            }
             else
             {
                 Global.Instance.roomGen.GetRoomList()[roomID].

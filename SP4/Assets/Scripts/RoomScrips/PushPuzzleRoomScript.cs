@@ -219,6 +219,7 @@ public class PushPuzzleRoomScript : RoomScript {
 
     public void OnTarget()
     {
+        Global.Instance.player.SendMessage("AddScore", 5);
         puzzleComplete = true;
         isCompleted = true;
 
