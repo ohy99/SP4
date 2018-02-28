@@ -4,7 +4,9 @@ using UnityEngine;
 
 [System.Serializable]
 public class AchievementBase : MonoBehaviour {
-    
+
+    [System.NonSerialized]
+    public AchievementSystem aSystem = null;
     
     public int id { get { return id; } set { this.id = value; } } //unique id of achievement, can be used to retrieve data from player pref
     [SerializeField]
@@ -42,7 +44,7 @@ public class AchievementBase : MonoBehaviour {
         if (!this.completed)
         {
             if (IsCompletedCheck())
-                AchievementSystem.Instance.AchievementUnlocked(this);
+                aSystem.AchievementUnlocked(this);
         }
     }
 

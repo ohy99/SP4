@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class AchievementSystem : Singleton<AchievementSystem> {
+public class AchievementSystem : MonoBehaviour {
 
 
     //Should be heavily using playerpref
@@ -67,6 +67,7 @@ public class AchievementSystem : Singleton<AchievementSystem> {
         {
             GameObject clone = Instantiate(a, this.transform);
             AchievementBase abase = clone.GetComponent<AchievementBase>();
+            abase.aSystem = this;
             achievementList.Add(abase);
 
             if (abase.IsCompletedCheck()) //deactivate it if it is done
