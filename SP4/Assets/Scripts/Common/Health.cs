@@ -14,8 +14,6 @@ public class Health : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        maxHp = 10;
-        currHp = maxHp;
 	}
 	
 	// Update is called once per frame

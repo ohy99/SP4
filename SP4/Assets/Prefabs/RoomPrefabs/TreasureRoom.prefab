@@ -1080,6 +1080,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TreasureKey: {fileID: 1103868201682176, guid: 3abc00a297eee7941835f00d0cc463f0,
     type: 2}
+  coin: {fileID: 1027863897882106, guid: e278218ba29162640883fc919dad53e9, type: 2}
+  OnTouchUnlock: 0
+  coinOutVel: 2
+  numOfCoinsOut: 5
+  coinValue: 20
 --- !u!114 &114951947280786252
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -17,7 +17,7 @@ public class EnemyBoss2 : MonoBehaviour {
     [SerializeField]
     public float projectileSpd = 10.0f;
     [SerializeField]
-    public float shootInterval = 0.25f;
+    public float shootInterval = 0.1f;
     [SerializeField]
     public float damage = 3.0f;
     [SerializeField]
@@ -62,8 +62,13 @@ public class EnemyBoss2 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (!Global.Instance.player)
+            return;
+
+
+        sm.CurrentState.Reason(Global.Instance.player, gameObject);
+        sm.CurrentState.Act(Global.Instance.player, gameObject);
+    }
 }
 
 public class Boss2AttackState : FSMState
@@ -89,11 +94,13 @@ public class Boss2AttackState : FSMState
             if ((shootElapsed += Time.deltaTime) >= shootInterval)
             {
                 Vector3 bossToPlayer = -boss.transform.position + player.transform.position;
+                bossToPlayer = new Vector3(bossToPlayer.x, bossToPlayer.y, 0); //force z = 0;
                 aimingAngle = Mathf.Rad2Deg * Mathf.Sin((projShot / (boss.numOfProj - 1)) * (2.0f * Mathf.PI));
                 Quaternion quat = Quaternion.Euler(0, 0, aimingAngle);
 
-                Projectile newProj = GameObject.Instantiate(proj, npc.transform.position, quat);
-                newProj.transform.up = quat * newProj.transform.up;
+                Projectile newProj = GameObject.Instantiate(proj, npc.transform.position, Quaternion.identity);
+                
+                newProj.transform.up = quat * bossToPlayer;
                 newProj.gameObject.layer = boss.projectileLayer;
                 newProj.projectileSpeed = boss.projectileSpd;
                 newProj.SetDamage(boss.damage);

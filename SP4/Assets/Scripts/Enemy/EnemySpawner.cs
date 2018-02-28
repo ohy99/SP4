@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class EnemySpawner : MonoBehaviour
 {
-    int totalWaves;
+    int totalWaves = 0;
     [SerializeField]
     GameObject map;
     [SerializeField]
@@ -25,13 +25,15 @@ public class EnemySpawner : MonoBehaviour
 
     void Awake()
     {
-        totalWaves = Random.Range(3, 10);
+        if (totalWaves <= 0)
+            totalWaves = 0;
     }
 
     // Use this for initialization
     void Start()
     {
-        totalWaves = Random.Range(3, 10);
+        if(totalWaves <= 0)
+            totalWaves = Random.Range(3, 10);
 
         //playersList = GameObject.FindGameObjectsWithTag("Player");
         //for (int i = 0; i < playersList.Length; i++)
@@ -103,7 +105,13 @@ public class EnemySpawner : MonoBehaviour
 
     public void SetTotalWave(int _totalWaves)
     {
+        Debug.Log("SetTotalWave: " + _totalWaves);
         totalWaves = _totalWaves;
+    }
+
+    public int GetTotalWave()
+    {
+        return totalWaves;
     }
 }
 

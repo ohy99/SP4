@@ -127,14 +127,15 @@ public class Player : NetworkBehaviour
                 PlayerPrefs.SetInt(PREFTYPE.NUM_OF_DEATHS.ToString(), PlayerPrefs.GetInt(PREFTYPE.NUM_OF_DEATHS.ToString(), 0) + 1);
                 onDeadTrigger = true;
                 Save();
+                gameObject.SetActive(false);
             }
 
-            if (onDeadTrigger)
-            {
-                //Debug.Log("Test");
-                Global.Instance.victory = false;
-                LoadScene.Instance.LoadSceneCall("GameOver");
-            }
+            //if (onDeadTrigger)
+            //{
+            //    //Debug.Log("Test");
+            //    Global.Instance.victory = false;
+            //    LoadScene.Instance.LoadSceneCall("GameOver");
+            //}
         }
 
         if (Debug.isDebugBuild)

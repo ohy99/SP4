@@ -10,6 +10,11 @@ public class EnemyMelee : MonoBehaviour {
     private FSMSystem sm;
     private Health hpScript;
 
+    //for eenmy to select their prey
+    private GameObject[] playersList;
+    private float maxDist;
+
+
     public void SetTransition(Transition t) { sm.PerformTransition(t); }
 
     // Use this for initialization
@@ -21,6 +26,8 @@ public class EnemyMelee : MonoBehaviour {
         hpScript.SetHp(10.0f);
 
         player = Global.Instance.player;
+        Debug.Log("THIS PLAYAR ID IS:" + player.GetComponent<Player>().playerId);
+        maxDist = 1000;
 
         MakeFSM();
     }
@@ -32,6 +39,24 @@ public class EnemyMelee : MonoBehaviour {
         {
             player = Global.Instance.player; //try find dat player
             return;
+        }
+
+        playersList = GameObject.FindGameObjectsWithTag("Player");
+        Debug.Log(playersList.Length);
+        for (int i = 0; i < playersList.Length; ++i)
+        {
+            if (!playersList[i].activeSelf || !playersList[i])
+                continue;
+
+            // Find nearest player
+            float dist = Vector3.Distance(playersList[i].transform.position, transform.position);
+            // Debug.Log("DIST: " + dist);
+            if (dist < maxDist)
+            {
+                Debug.Log("E2P: " + playersList[i].GetComponent<Player>().playerId);
+                maxDist = dist;
+                player = playersList[i];
+            }
         }
 
         sm.CurrentState.Reason(player, gameObject);
@@ -150,7 +175,7 @@ public class ChasePlayerState : FSMState
 public class AttackPlayerState : FSMState
 {
     const float rotateSpeed = 0.5f;
-    private float damageValue = -10.0f;
+    private float damageValue = -1.0f;
 
     float attackDelay = 1.0f;
     float elapsedTime;

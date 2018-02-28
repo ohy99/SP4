@@ -57,8 +57,8 @@ public class PlayerShoot : NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        //if (!isLocalPlayer)
-        //    return;
+        if (!isLocalPlayer)
+            return;
 
         //Debug.Log(controlType);
         switch (controlType)

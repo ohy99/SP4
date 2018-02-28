@@ -1151,7 +1151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &335557920
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3400,18 +3400,6 @@ Prefab:
       propertyPath: m_Name
       value: MiniMapCamera
       objectReference: {fileID: 0}
-    - target: {fileID: 114390784287392672, guid: c736a4570d286b447855868a23e5fb40,
-        type: 2}
-      propertyPath: playerIcon
-      value: 
-      objectReference: {fileID: 1525080892732308, guid: ead56f6be3a66634f981ddce793dc3d9,
-        type: 2}
-    - target: {fileID: 114390784287392672, guid: c736a4570d286b447855868a23e5fb40,
-        type: 2}
-      propertyPath: bossIcon
-      value: 
-      objectReference: {fileID: 1707258556751924, guid: b55732f318a19ea49a61346732bd566b,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c736a4570d286b447855868a23e5fb40, type: 2}
   m_IsPrefabParent: 0
@@ -4270,46 +4258,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
-        type: 2}
-      propertyPath: debugText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
-        type: 2}
-      propertyPath: chanceText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
-        type: 2}
-      propertyPath: randomRooms.Array.data[4]
-      value: 
-      objectReference: {fileID: 1282715517241922, guid: 3bcab8a72dc60a946be2f35bed37f553,
-        type: 2}
-    - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
-        type: 2}
-      propertyPath: randomRooms.Array.data[1]
-      value: 
-      objectReference: {fileID: 1334630802994978, guid: 7cb511f7601dea445b2a7c8c6db201e8,
-        type: 2}
-    - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
-        type: 2}
-      propertyPath: randomRooms.Array.data[0]
-      value: 
-      objectReference: {fileID: 1820755387426308, guid: 9dead6da99857824f9b6c283abb8d8c9,
-        type: 2}
-    - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
-        type: 2}
-      propertyPath: randomRooms.Array.data[3]
-      value: 
-      objectReference: {fileID: 1864703187797008, guid: 61809cef4b25d0e49adc0ad57f75bbc9,
-        type: 2}
-    - target: {fileID: 114430470048324550, guid: f2f9123e5f6be9f4cb510d58961c8ea6,
-        type: 2}
-      propertyPath: randomRooms.Array.data[2]
-      value: 
-      objectReference: {fileID: 1053355793432642, guid: c00eb33a62dd5f24b9b8cccea7ae673c,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2f9123e5f6be9f4cb510d58961c8ea6, type: 2}
   m_IsPrefabParent: 0
@@ -4888,7 +4836,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5023,32 +4971,32 @@ Prefab:
     - target: {fileID: 224656131302471064, guid: 3fd3bfc93d7723f4b8cfd00152b385f3,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 319
+      value: -81
       objectReference: {fileID: 0}
     - target: {fileID: 224656131302471064, guid: 3fd3bfc93d7723f4b8cfd00152b385f3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 154
+      value: -68
       objectReference: {fileID: 0}
     - target: {fileID: 224656131302471064, guid: 3fd3bfc93d7723f4b8cfd00152b385f3,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 224656131302471064, guid: 3fd3bfc93d7723f4b8cfd00152b385f3,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 444
       objectReference: {fileID: 0}
     - target: {fileID: 224656131302471064, guid: 3fd3bfc93d7723f4b8cfd00152b385f3,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224656131302471064, guid: 3fd3bfc93d7723f4b8cfd00152b385f3,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224656131302471064, guid: 3fd3bfc93d7723f4b8cfd00152b385f3,
         type: 2}
