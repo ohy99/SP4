@@ -15,7 +15,6 @@ public class OptionsPanelScript : MonoBehaviour {
     {
         this.transform.parent.gameObject.SetActive(false);
 
-        Debug.Log("Hi");
         musicSlider = transform.GetChild(0).GetComponent<Slider>();
 
         musicSlider.value = SoundManager.Instance.musicVolume;
@@ -42,7 +41,6 @@ public class OptionsPanelScript : MonoBehaviour {
     {
         SoundManager.Instance.musicSource.volume = musicSlider.value;
         SoundManager.Instance.musicVolume = musicSlider.value;
-        Debug.Log(SoundManager.Instance.musicSource.volume);
     }
 
     public void AdjustFXVolume()

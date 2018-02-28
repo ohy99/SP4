@@ -34,6 +34,7 @@ public class Inventory
         AddItem(ItemManager.Instance.items["Crossbow"], "Crossbow");
 
         isInvetory = false;
+
         currency = 1000;
     }
 
@@ -121,5 +122,30 @@ public class Inventory
     public void SetIsInventory(bool _isInventory)
     {
         isInvetory = _isInventory;
+    }
+
+    public void LoadItems()
+    {
+        foreach(string itemName in ItemManager.Instance.itemNames)
+        {
+            if (System.Convert.ToBoolean(PlayerPrefs.GetInt(itemName)))
+            {
+                AddItem(ItemManager.Instance.items[itemName], itemName);
+            }
+        }
+
+
+        currency = PlayerPrefs.GetInt("Currency", 1000);
+    }
+
+    public void SaveItems()
+    {
+        foreach(string itemName in ItemManager.Instance.itemNames)
+        {
+            PlayerPrefs.SetInt(itemName, System.Convert.ToInt32(myItems.ContainsKey(itemName)));
+        }
+
+        PlayerPrefs.SetInt("Currency", currency);
+        PlayerPrefs.Save();
     }
 }
