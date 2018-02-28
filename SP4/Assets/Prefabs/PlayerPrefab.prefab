@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91dbcfd7c288c514380694dc4b8fecb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerShoot: {fileID: 0}
+  playerShoot: {fileID: 114885800031166950}
   moveJoy: {fileID: 0}
   debugText: {fileID: 0}
   moveSpeed: 10

@@ -18,7 +18,8 @@ public class PlayerShoot : NetworkBehaviour
     private GameObject playerWeapon;
     private Inventory playerGear;
 
-    private int itemIndex = 0;
+    [System.NonSerialized]
+    public int itemIndex = 0;
 
     enum CONTROLTYPE
     {
@@ -80,6 +81,11 @@ public class PlayerShoot : NetworkBehaviour
                 break;
         }
 
+
+        string itemName = playerGear.GetItemName(itemIndex);
+        Debug.Log("ItemChange" + itemIndex + " - " + itemName);
+        go = playerGear.GetItem(itemName);
+        playerWeapon.GetComponent<SpriteRenderer>().sprite = weaponSprite[itemName];
     }
 
     void KeyboardUpdate()
@@ -90,10 +96,10 @@ public class PlayerShoot : NetworkBehaviour
             if (itemIndex >= playerGear.GetItemNameList().Count)
                 itemIndex = 0;
 
-            string itemName = playerGear.GetItemName(itemIndex);
-            Debug.Log("ItemChange" + itemIndex + " - " + itemName);
-            go = playerGear.GetItem(itemName);
-            playerWeapon.GetComponent<SpriteRenderer>().sprite = weaponSprite[itemName];
+            //string itemName = playerGear.GetItemName(itemIndex);
+            //Debug.Log("ItemChange" + itemIndex + " - " + itemName);
+            //go = playerGear.GetItem(itemName);
+            //playerWeapon.GetComponent<SpriteRenderer>().sprite = weaponSprite[itemName];
         }
 
         if (Input.GetButton("Fire1"))
@@ -131,28 +137,26 @@ public class PlayerShoot : NetworkBehaviour
 
     void GamePadUpdate()
     {
+        
+
         if (Input.GetButtonDown("LB"))
         {
             --itemIndex;
             if (itemIndex < 0)
                 itemIndex = playerGear.GetItemNameList().Count - 1;
 
-            string itemName = playerGear.GetItemName(itemIndex);
-            Debug.Log("ItemChange" + itemIndex + " - " + itemName);
-            go = playerGear.GetItem(itemName);
+            //string itemName = playerGear.GetItemName(itemIndex);
+            //Debug.Log("ItemChange" + itemIndex + " - " + itemName);
+            //go = playerGear.GetItem(itemName);
         }
         if (Input.GetButtonDown("RB"))
         {
             ++itemIndex;
             if (itemIndex >= playerGear.GetItemNameList().Count)
                 itemIndex = 0;
-
-            string itemName = playerGear.GetItemName(itemIndex);
-            Debug.Log("ItemChange" + itemIndex + " - " + itemName);
-            go = playerGear.GetItem(itemName);
         }
 
-
+        
         //Debug.Log("TotalRounds:" + go)
         //Debug.Log(Input.GetAxis("RightHorizontal") + " , " + Input.GetAxis("RightVertical"));
 
@@ -167,7 +171,7 @@ public class PlayerShoot : NetworkBehaviour
 
             CmdFire(gameObject.tag);
 
-
+           
             //if (go.GetComponent<RangeWeaponBase>())
             //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
             //else if (go.GetComponent<MeleeWeaponBase>())
@@ -180,6 +184,13 @@ public class PlayerShoot : NetworkBehaviour
         {
             Debug.Log("Reloading");
             go.GetComponent<RangeWeaponBase>().Reload();
+        }
+        if (Input.GetButtonDown("Y"))
+        {
+            if (!playerGear.GetIsInventory())
+                playerGear.SetIsInventory(true);
+            else
+                playerGear.SetIsInventory(false);
         }
     }
 
@@ -239,5 +250,6 @@ public class PlayerShoot : NetworkBehaviour
 
         Destroy(projectile, 3.0f);
     }
+
 
 }

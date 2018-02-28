@@ -1064,6 +1064,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224643486913177756, guid: 05889aeca7843b44889e9275547a01c7,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 05889aeca7843b44889e9275547a01c7, type: 2}
   m_IsPrefabParent: 0
@@ -2751,7 +2756,7 @@ RectTransform:
   m_GameObject: {fileID: 1011327703}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99987787, y: 0.99987787, z: 0.99987787}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 259091685}
   m_Father: {fileID: 507841961}
@@ -2759,8 +2764,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 129.99994, y: 111.000046}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 121, y: 126}
+  m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1011327705
 MonoBehaviour:
@@ -3643,6 +3648,9 @@ MonoBehaviour:
   icon: {fileID: 1515942906143460, guid: 0c2cc2f64d0b1584eaf2cb1085dbc34a, type: 2}
   parentBackground: {fileID: 1819466262}
   panel: {fileID: 34473068}
+  equipedColor: {r: 0, g: 0.6275859, b: 1, a: 1}
+  selectionColor: {r: 0, g: 1, b: 0.6275861, a: 1}
+  defaultcolor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &1584474900
 Transform:
   m_ObjectHideFlags: 0
@@ -4722,8 +4730,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 680, y: 111.000046}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 685, y: 126}
+  m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1962617374
 MonoBehaviour:
