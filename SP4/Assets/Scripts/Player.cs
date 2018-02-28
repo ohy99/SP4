@@ -154,10 +154,20 @@ public class Player : NetworkBehaviour
                 hpScript.ModifyHp(-1);
             }
         }
+
+        if (Global.Instance.deathCounter >= Global.Instance.listOfPlayer.Length)
+        {   //set scene to death scene
+            Global.Instance.victory = false;
+            LoadScene.Instance.LoadSceneCall("GameOver");
+        }
+
         gameObject.GetComponent<Rigidbody2D>().velocity.Set(0, 0);
 
-        scoreText.text = "Score : " + score;
-        currencyText.text = "Coins : " + InventoryManager.Instance.GetInventory("player").GetCurrency();
+
+        if(scoreText)
+            scoreText.text = "Score : " + score;
+        if(currencyText)
+            currencyText.text = "Coins : " + InventoryManager.Instance.GetInventory("player").GetCurrency();
     }
 
     void Save()

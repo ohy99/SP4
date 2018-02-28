@@ -34,10 +34,12 @@ public class Global : Singleton<Global> {
     // Use this for initialization
     void Start () {
         _victory = false;
-	}
+    }
     void Awake()
     {
         bossIsDead = false;
+        _deathCounter = 0;
+        _listOfPlayer = null;
     }
 	
 	// Update is called once per frame
