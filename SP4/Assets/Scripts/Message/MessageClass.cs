@@ -99,3 +99,9 @@ public class ChangeItemMessage : MessageBase
     public int playerId;
     public string itemName;
 }
+
+public class ItemsPossessedMessage : MessageBase
+{
+    public int playerId;
+    public string itemName;
+}

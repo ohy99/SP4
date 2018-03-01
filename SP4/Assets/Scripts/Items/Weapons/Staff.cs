@@ -10,7 +10,7 @@ public class Staff : RangeWeaponBase
         damage = 10;
         damageOverTime = 0;
 
-        totalRounds = 80;
+        totalRounds = 900000;
 
         maxMagRounds = 5;
         magRounds = 5;
@@ -21,13 +21,12 @@ public class Staff : RangeWeaponBase
     // Update is called once per frame
     public override void Update()
     {
+        timer += Time.deltaTime;
     }
 
     // Fire Weapon 
     public override GameObject Discharge(Vector3 pos, Quaternion rotation)
     {
-        // if (magRounds > 0)
-        //{
         if (fireRate < timer)
         {
             timer = 0.0f;
@@ -36,12 +35,13 @@ public class Staff : RangeWeaponBase
             GameObject go = Instantiate(projectile, pos, rotation);
             Projectile projScript = go.GetComponent<Projectile>();
             if (projScript)
+            {
                 projScript.SetDamage(damage);
+                projScript.projectileSpeed = 15;
+            }
             //--magRounds;
             return go;
         }
-        //}
-
         return null;
     }
 

@@ -48,6 +48,9 @@ public class MessageHandler : Singleton<MessageHandler>
 
         public static short itemChangedMsgType_client = MsgType.Highest + 25;
         public static short itemChangedMsgType_server = MsgType.Highest + 26;
+
+        public static short itemPossessedMsgType_client = MsgType.Highest + 27;
+        public static short itemPossessedMsgType_server = MsgType.Highest + 28;
     };
 
     //variables
@@ -224,6 +227,16 @@ public class MessageHandler : Singleton<MessageHandler>
         myClient.Send(MyMsgType.itemChangedMsgType_server, msg);
     }
 
+    public void SendItemPossessed_S2C(int _playerId, string name)
+    {
+        ChangeItemMessage msg = new ChangeItemMessage();
+        msg.itemName = name;
+        msg.playerId = _playerId;
+        Debug.Log("SendItemPossessed_S2C");
+
+        myClient.Send(MyMsgType.itemPossessedMsgType_server, msg);
+    }
+
     // ============================SENDING TO SERVER======================================
     public void SendPosition_C2S(Vector3 _position)
     {
@@ -349,6 +362,16 @@ public class MessageHandler : Singleton<MessageHandler>
         Debug.Log("SendItemChanged_C2S");
 
         myClient.Send(MyMsgType.itemChangedMsgType_client, msg);
+    }
+
+    public void SendItemPossessed_C2S(int _playerId, string name)
+    {
+        ChangeItemMessage msg = new ChangeItemMessage();
+        msg.itemName = name;
+        msg.playerId = _playerId;
+        Debug.Log("SendItemPossessed_C2S");
+
+        myClient.Send(MyMsgType.itemPossessedMsgType_client, msg);
     }
     //-----------------------------------------------------------------------------
 
@@ -580,7 +603,11 @@ public class MessageHandler : Singleton<MessageHandler>
         temp.Init();
         temp.AddCurrency(InventoryManager.Instance.GetInventory("player").GetCurrency());
         InventoryManager.Instance.AddInventory("player" + index, temp);
+        Debug.Log("player" + index);
         Global.Instance.player.GetComponent<Player>().SetPlayerInventory("player" + index);
+
+        //for (int i = 0; i < InventoryManager.Instance.GetInventory("player" + index).GetItemNameList().Count; ++i)
+        //    SendItemPossessed_C2S(index, InventoryManager.Instance.GetInventory("player").GetItemName(i));
 
         SendRoom_C2S(); //sent to server/host to get mapinfo
     }
@@ -638,6 +665,7 @@ public class MessageHandler : Singleton<MessageHandler>
             if(Global.Instance.listOfPlayer[i].GetComponent<Player>().playerId == msg.playerId)
             {
                 string iName = Global.Instance.listOfPlayer[i].GetComponent<Player>().playerInventory;
+                Debug.Log(msg.itemName);
                 Global.Instance.listOfPlayer[i].GetComponent<PlayerShoot>().PlayerChangedWeapon(msg.itemName);
             }
         }
@@ -645,9 +673,32 @@ public class MessageHandler : Singleton<MessageHandler>
 
     public void OnRecvItemChanged_Client(NetworkMessage netMsg)
     {
-
+        ChangeItemMessage msg = netMsg.ReadMessage<ChangeItemMessage>();
+        Debug.Log("ClientRecv_ItemChanged_");
     }
 
+    public void OnRecvItemPossessed_Server(NetworkMessage netMsg)
+    {
+        ItemsPossessedMessage msg = netMsg.ReadMessage<ItemsPossessedMessage>();
+        Debug.Log("Host/ServerRecv_ItemPossessed");
+
+        for (int i = 0; i < Global.Instance.listOfPlayer.Length; ++i)
+        {
+            if (Global.Instance.listOfPlayer[i].GetComponent<Player>().playerId == msg.playerId)
+            {
+                string iName = Global.Instance.listOfPlayer[i].GetComponent<Player>().playerInventory;
+                InventoryManager.Instance.AddInventory(iName);
+                Debug.Log(msg.itemName);
+                InventoryManager.Instance.GetInventory(iName).AddItem(ItemManager.Instance.items[msg.itemName], msg.itemName);
+            }
+        }
+    }
+
+    public void OnRecvItemPossessed_Client(NetworkMessage netMsg)
+    {
+        ItemsPossessedMessage msg = netMsg.ReadMessage<ItemsPossessedMessage>();
+        Debug.Log("ClientRecv_ItemPossessed");
+    }
 }
 
 

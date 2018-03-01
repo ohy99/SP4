@@ -25,7 +25,6 @@ public class Sword : MeleeWeaponBase {
     // Attack with weapon
     public override GameObject Attack(Vector3 pos, Quaternion rotation)
     {
-        Debug.Log("swordAtck");
         if (fireRate < timer)
         {
             timer = 0;

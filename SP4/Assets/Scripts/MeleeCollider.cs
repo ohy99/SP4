@@ -12,7 +12,7 @@ public class MeleeCollider : MonoBehaviour
     void Start()
     {
         //Debug.Log("COLLIDER_START");
-        Debug.Log("melee_collider");
+        //Debug.Log("melee_collider");
         isAttacking = true;
     }
 

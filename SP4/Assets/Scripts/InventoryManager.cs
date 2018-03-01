@@ -88,4 +88,19 @@ public class InventoryManager : Singleton<InventoryManager>
         AddInventory(key);
         return inventories[key];
     }
+
+    public void AddAllItems(string key)
+    {
+        if (inventories.ContainsKey(key))
+        {
+            for(int i = 0; i < ItemManager.Instance.itemNames.Count; ++i)
+            {
+                string itemName = ItemManager.Instance.itemNames[i];
+                inventories[key].AddItem(ItemManager.Instance.items[itemName], itemName);
+            }
+
+        }
+
+        Debug.Log("key does not exist");
+    }
 }

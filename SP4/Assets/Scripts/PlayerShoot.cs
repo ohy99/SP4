@@ -37,10 +37,14 @@ public class PlayerShoot : NetworkBehaviour
         //playerGear = new Inventory();
         //playerGear.Init();
 
-        playerGear = InventoryManager.Instance.GetInventory("player");
+        if(isServer)
+            playerGear = InventoryManager.Instance.GetInventory("player");
+        else
+            playerGear = InventoryManager.Instance.GetInventory(Global.Instance.player.GetComponent<Player>().playerInventory);
+
         go = playerGear.GetItem("Crossbow");
 
-        foreach(string item in playerGear.GetItemNameList())
+        foreach (string item in InventoryManager.Instance.GetInventory("all").GetItemNameList())
         {
             string weaponName = "WeaponSprite/" + item;
             Texture2D tex = (Texture2D)Resources.Load(weaponName);
@@ -317,7 +321,9 @@ public class PlayerShoot : NetworkBehaviour
 
     public void PlayerChangedWeapon(string _itemName)
     {
-        go = playerGear.GetItem(_itemName);
+        //go = playerGear.GetItem(_itemName);
+        go = InventoryManager.Instance.GetInventory("all").GetItem(_itemName);
+        playerWeapon = go;
         playerWeapon.GetComponent<SpriteRenderer>().sprite = weaponSprite[_itemName];
     }
 }

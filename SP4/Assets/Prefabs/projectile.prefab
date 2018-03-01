@@ -123,6 +123,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpeed: 10
+  isExplosive: 0
+  explosiveCollider: {fileID: 1380189753663122, guid: a82a649d5268a2d4888256dc282a825b,
+    type: 2}
+  genericSpawner: {fileID: 1368807512881014, guid: 9a661cf7f8d77f9419b5242b4fc22da5,
+    type: 2}
 --- !u!114 &114428124916331252
 MonoBehaviour:
   m_ObjectHideFlags: 1

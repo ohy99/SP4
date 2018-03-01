@@ -7,38 +7,33 @@ public class ExplosiveCollider : MonoBehaviour
 
     [SerializeField]
     float countDown = 0.25f;
-    private float damage = 1;
-    private bool isAttacking = false;
+    private float damage = 13;
+    private float timer;
 
     // Use this for initialization
     void Start()
     {
         Debug.Log("explosive collider start");
-        isAttacking = true;
+        timer = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isAttacking)
+        timer += Time.deltaTime;
+        if (timer >= countDown)
         {
-            Debug.Log("minusing: " + countDown);
-            countDown -= Time.deltaTime;
-            //transform.Rotate(Vector3.forward * -1.5f * Mathf.Rad2Deg * Time.deltaTime);
-            if (countDown <= 0)
-            {
-                Debug.Log("delete");
-                gameObject.SetActive(false);
-                Destroy(gameObject);
-            }
-
+            timer = 0;
+            Debug.Log("delete");
+            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
         Debug.Log("hit");
-        if (!coll.gameObject.CompareTag(this.gameObject.tag))
+        if (!coll.gameObject.CompareTag(this.gameObject.tag) && coll.gameObject.tag != "Player")
         {
             //Enters when the tags are different
             Health hpScript = coll.gameObject.GetComponent<Health>();
@@ -64,16 +59,6 @@ public class ExplosiveCollider : MonoBehaviour
         }
 
         Destroy(gameObject);
-    }
-
-    public bool GetIsAttacking()
-    {
-        return isAttacking;
-    }
-
-    public void SetIsAttacking(bool _isAttacking)
-    {
-        isAttacking = _isAttacking;
     }
 
     public float GetCountDown()

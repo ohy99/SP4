@@ -2812,7 +2812,7 @@ Prefab:
     - target: {fileID: 114772466577174824, guid: df377193933d1604781ada6571b3f979,
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.size
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4297246296469844, guid: df377193933d1604781ada6571b3f979, type: 2}
       propertyPath: m_LocalPosition.x
@@ -2868,6 +2868,12 @@ Prefab:
       propertyPath: m_SpawnPrefabs.Array.data[10]
       value: 
       objectReference: {fileID: 1255601706598804, guid: f3858ea7ede5bff429bc88ae2c9f3f52,
+        type: 2}
+    - target: {fileID: 114772466577174824, guid: df377193933d1604781ada6571b3f979,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[11]
+      value: 
+      objectReference: {fileID: 1380189753663122, guid: a82a649d5268a2d4888256dc282a825b,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df377193933d1604781ada6571b3f979, type: 2}
@@ -4243,34 +4249,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1618036051}
---- !u!1 &1620993602
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1620993603}
-  m_Layer: 0
-  m_Name: Fireball
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1620993603
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1620993602}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.401715, y: 12.509342, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1635362887
 GameObject:
   m_ObjectHideFlags: 0

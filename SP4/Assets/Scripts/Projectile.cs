@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public enum PROJLAYER
 {
@@ -17,8 +18,13 @@ public enum PROJLAYER
 public class Projectile : MonoBehaviour {
 
     public float projectileSpeed = 10;
+    public bool isExplosive = false;
     private float damage = 1;
-   // public PROJECTILE_TYPE pType;
+    // public PROJECTILE_TYPE pType;
+    [SerializeField]
+    GameObject explosiveCollider;
+    [SerializeField]
+    GameObject genericSpawner;
 
     // Use this for initialization
     void Start ()
@@ -56,7 +62,12 @@ public class Projectile : MonoBehaviour {
                         ParticleManager.Instance.GenerateParticle(ParticleManager.PARTICLETYPE.HITPLAYER, coll.gameObject.transform.position);
                         break;
                 }
+            }
 
+            if (isExplosive)
+            {
+                if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+                    genericSpawner.GetComponent<GenericSpawner>().SpawnObject(transform.position, explosiveCollider);
             }
 
             Destroy(gameObject);

@@ -38,7 +38,6 @@ public class Player : NetworkBehaviour
         //        break;
         //    }
         //}
-
         Camera.main.GetComponent<CameraScript>().playerTransform = gameObject.transform;
 
         Debug.Log("connectionId: " + NetworkClient.allClients[0].connection.connectionId);
@@ -72,7 +71,8 @@ public class Player : NetworkBehaviour
 
 
 
-
+        InventoryManager.Instance.AddInventory("all");
+        InventoryManager.Instance.AddAllItems("all");
     }
 
     // Use this for initialization
@@ -93,6 +93,7 @@ public class Player : NetworkBehaviour
         skillPoints = 0;
         currentLevel = 1;
 
+        playerInventory = "player" + playerId;
         //Global.Instance.player = gameObject;
 
         if (!NetworkServer.active)
@@ -102,7 +103,18 @@ public class Player : NetworkBehaviour
 
 
         if (isServer)
+        {
             playerId = NetworkServer.connections.Count - 1;
+        }
+
+        if (!isServer)
+        {
+            InventoryManager.Instance.AddInventory(playerInventory);
+            InventoryManager.Instance.AddAllItems(playerInventory);
+
+        }
+
+
 
         Global.Instance.listOfPlayer = GameObject.FindGameObjectsWithTag("Player");
 

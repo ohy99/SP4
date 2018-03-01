@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireBall : RangeWeaponBase
+public class Fireball : RangeWeaponBase
 {
     // Use this for initialization
     public override void Start()
@@ -14,7 +14,7 @@ public class FireBall : RangeWeaponBase
 
         maxMagRounds = 1;
         magRounds = 1;
-        timer = 0.0f;
+        timer = 1.0f;
         fireRate = 1.0f;
     }
 
@@ -38,6 +38,7 @@ public class FireBall : RangeWeaponBase
             {
                 projScript.SetDamage(damage);
                 projScript.projectileSpeed = 5;
+                projScript.isExplosive = true;
             }
             return projGO;
         }
