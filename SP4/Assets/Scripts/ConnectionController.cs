@@ -12,6 +12,8 @@ public class ConnectionController : MonoBehaviour
     InputField inputField;
     //public string _networkAddress;
 
+    public Text text;
+
     void Awake()
     {
         manager = GetComponent<NetworkManager>();
@@ -75,14 +77,17 @@ public class ConnectionController : MonoBehaviour
     public void OnClickHost()
     {
         if (!NetworkServer.active)
+        {
             manager.StartHost();
+            //Application.logMessageReceived += Application_logMessageReceived;
+        }
         else
             Debug.Log("Already have a server/host");
     }
 
     public void OnClickClient()
     {
-        if(!NetworkClient.active)
+        if(!NetworkClient.active) 
             manager.StartClient();
         else
             Debug.Log("No server/host");
@@ -92,4 +97,9 @@ public class ConnectionController : MonoBehaviour
     {
         manager.networkAddress = _networkAddress;
     }
+
+    //private void Application_logMessageReceived(string condition, string stackTrace, LogType type)
+    //{
+    //    text.GetComponent<Text>().text = string.Format("{0}, {1}, {2}", condition, stackTrace, type);
+    //}
 }

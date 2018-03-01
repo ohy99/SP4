@@ -7,6 +7,7 @@ public class MeleeCollider : MonoBehaviour
     [SerializeField]
     float countDown = 0.2f;
     private bool isAttacking = false;
+    private float damage = 1;
 
     // Use this for initialization
     void Start()
@@ -33,9 +34,35 @@ public class MeleeCollider : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D coll)
     {
         Debug.Log("hit");
+        if (!coll.gameObject.CompareTag(this.gameObject.tag))
+        {
+            //Enters when the tags are different
+            Health hpScript = coll.gameObject.GetComponent<Health>();
+            if (hpScript)
+            {
+                //hpScript
+                hpScript.ModifyHp(-damage);
+                Debug.Log("Projectile: " + damage + " name: " + coll.gameObject.name + " maxhp: " + hpScript.GetMaxHp());
+
+                DamageFeedback.Instance.ShowDamage(damage, coll.gameObject.transform.position + coll.gameObject.transform.lossyScale);
+                switch (coll.gameObject.tag)
+                {
+                    case "Enemy":
+                        ParticleManager.Instance.GenerateParticle(ParticleManager.PARTICLETYPE.HITENEMY, coll.gameObject.transform.position);
+                        break;
+                    case "Player":
+                        ParticleManager.Instance.GenerateParticle(ParticleManager.PARTICLETYPE.HITPLAYER, coll.gameObject.transform.position);
+                        break;
+                }
+
+            }
+
+        }
+
+        Destroy(gameObject);
     }
 
     public bool GetIsAttacking()
@@ -57,4 +84,6 @@ public class MeleeCollider : MonoBehaviour
     {
         countDown = _countDown;
     }
+
+    public void SetDamage(float dmg) { damage = dmg; }
 }
