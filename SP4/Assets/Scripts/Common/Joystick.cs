@@ -14,10 +14,8 @@ public class Joystick : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //parent = transform.parent.gameObject;
-    }
-    void Awake()
-    {
-#if UNITY_WINDOWS
+
+#if UNITY_STANDALONE
         this.gameObject.SetActive(false);
         this.gameObject.transform.parent.gameObject.SetActive(false);
 #elif UNITY_ANDROID
@@ -25,12 +23,19 @@ public class Joystick : MonoBehaviour {
         this.gameObject.transform.parent.gameObject.SetActive(true);
 #endif
 
-#if  UNITY_EDITOR
+
+#if UNITY_EDITOR
         this.gameObject.SetActive(onInUnityEditor);
         this.gameObject.transform.parent.gameObject.SetActive(onInUnityEditor);
 #endif
+
+
         //parentTransform = GetComponentInParent<RectTransform>();
         rectTransform = GetComponent<RectTransform>();
+    }
+    void Awake()
+    {
+
     }
 
     // Update is called once per frame
@@ -51,7 +56,7 @@ public class Joystick : MonoBehaviour {
 
     public void OnDragEnter()
     {
-#if UNITY_EDITOR || UNITY_WINDOWS
+#if UNITY_EDITOR || UNITY_STANDALONE
         startPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
         //Debug.Log("WAD");
 #elif UNITY_ANDROID
@@ -65,7 +70,7 @@ public class Joystick : MonoBehaviour {
     public void Dragging()
     {
         Vector3 newPosition = new Vector3(0, 0, 0);
-#if UNITY_EDITOR || UNITY_WINDOWS
+#if UNITY_EDITOR || UNITY_STANDALONE
         //Vector3 screenPos = UICamera.ScreenToWorldPoint(Input.mousePosition);
         newPosition = new Vector3(Input.mousePosition.x - startPosition.x, 
             Input.mousePosition.y - startPosition.y, 0);

@@ -69,16 +69,7 @@ public class Player : NetworkBehaviour
         //  MessageHandler.Instance.SendRoom_C2S(); //sent to server/host to get mapinfo
 
 
-        //attach joystick
-        GameObject canvasGO = GameObject.Find("Canvas");
-        GameObject LJoyBG = canvasGO.transform.Find("JoyBG").gameObject;
-        GameObject RJoyBG = canvasGO.transform.Find("JoyBGRight").gameObject;
 
-        //Attach the joysticks
-        PlayerMovement playerMovementScript = GetComponent<PlayerMovement>();
-        playerMovementScript.moveJoy = LJoyBG.transform.GetChild(0).gameObject.GetComponent<Joystick>();
-        PlayerShoot playerShootScript = GetComponent<PlayerShoot>();
-        playerShootScript.joyStick = RJoyBG.transform.GetChild(0).gameObject.GetComponent<Joystick>();
 
     }
 
@@ -112,6 +103,17 @@ public class Player : NetworkBehaviour
             playerId = NetworkServer.connections.Count - 1;
 
         Global.Instance.listOfPlayer = GameObject.FindGameObjectsWithTag("Player");
+
+        //attach joystick
+        GameObject canvasGO = GameObject.Find("Canvas");
+        GameObject LJoyBG = canvasGO.transform.Find("JoyBG").gameObject;
+        GameObject RJoyBG = canvasGO.transform.Find("JoyBGRight").gameObject;
+
+        //Attach the joysticks
+        PlayerMovement playerMovementScript = GetComponent<PlayerMovement>();
+        playerMovementScript.moveJoy = LJoyBG.transform.GetChild(0).gameObject.GetComponent<Joystick>();
+        PlayerShoot playerShootScript = GetComponent<PlayerShoot>();
+        playerShootScript.joyStick = RJoyBG.transform.GetChild(0).gameObject.GetComponent<Joystick>();
     }
 
     // Update is called once per frame
