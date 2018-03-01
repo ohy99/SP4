@@ -64,9 +64,22 @@ public class Player : NetworkBehaviour
 
         if (isServer)
             Global.Instance.roomGen.Init();
-            //RoomGenerator.Init();
+        //RoomGenerator.Init();
         //else
-          //  MessageHandler.Instance.SendRoom_C2S(); //sent to server/host to get mapinfo
+        //  MessageHandler.Instance.SendRoom_C2S(); //sent to server/host to get mapinfo
+
+
+        //attach joystick
+        GameObject canvasGO = GameObject.Find("Canvas");
+        GameObject LJoyBG = canvasGO.transform.Find("JoyBG").gameObject;
+        GameObject RJoyBG = canvasGO.transform.Find("JoyBGRight").gameObject;
+
+        //Attach the joysticks
+        PlayerMovement playerMovementScript = GetComponent<PlayerMovement>();
+        playerMovementScript.moveJoy = LJoyBG.transform.GetChild(0).gameObject.GetComponent<Joystick>();
+        PlayerShoot playerShootScript = GetComponent<PlayerShoot>();
+        playerShootScript.joyStick = RJoyBG.transform.GetChild(0).gameObject.GetComponent<Joystick>();
+
     }
 
     // Use this for initialization

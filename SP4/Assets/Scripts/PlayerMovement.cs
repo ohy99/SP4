@@ -9,7 +9,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField]
     PlayerShoot playerShoot;
     [SerializeField]
-    Joystick moveJoy;
+    public Joystick moveJoy;
     [SerializeField]
     UnityEngine.UI.Text debugText;
 
