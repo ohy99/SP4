@@ -26,7 +26,7 @@ public class EnemyMelee : MonoBehaviour {
         hpScript.SetHp(10.0f);
 
         player = Global.Instance.player;
-        Debug.Log("THIS PLAYAR ID IS:" + player.GetComponent<Player>().playerId);
+        //Debug.Log("THIS PLAYAR ID IS:" + player.GetComponent<Player>().playerId);
         maxDist = 1000;
 
         MakeFSM();
@@ -39,6 +39,18 @@ public class EnemyMelee : MonoBehaviour {
         {
             player = Global.Instance.player; //try find dat player
             return;
+        }
+
+        if(!player.activeSelf) //player not active
+        {
+            foreach(GameObject go in Global.Instance.listOfPlayer)
+            {
+                if (go.activeSelf)
+                {
+                    player = go;
+                    break;
+                }
+            }
         }
 
         //playersList = GameObject.FindGameObjectsWithTag("Player");

@@ -8,15 +8,22 @@ public enum PROJLAYER
     PLAYERPROJ = 11,
 }
 
+//public enum PROJECTILE_TYPE //last min stuff
+//{
+//    BULLET,
+//    BOMB,
+//}
 
 public class Projectile : MonoBehaviour {
 
     public float projectileSpeed = 10;
     private float damage = 1;
-    
-	// Use this for initialization
-	void Start ()
+   // public PROJECTILE_TYPE pType;
+
+    // Use this for initialization
+    void Start ()
     {
+       // pType = PROJECTILE_TYPE.BULLET;
         Destroy(gameObject, 5.0f);
     }
 
@@ -44,17 +51,16 @@ public class Projectile : MonoBehaviour {
                 {
                     case "Enemy":
                         ParticleManager.Instance.GenerateParticle(ParticleManager.PARTICLETYPE.HITENEMY, coll.gameObject.transform.position);
-                        break;  
+                        break;
                     case "Player":
                         ParticleManager.Instance.GenerateParticle(ParticleManager.PARTICLETYPE.HITPLAYER, coll.gameObject.transform.position);
                         break;
                 }
-               
-            }
-            
-        }
 
-        Destroy(gameObject);
+            }
+
+            Destroy(gameObject);
+        }
     }
 
     public void SetDamage(float dmg) { damage = dmg; }

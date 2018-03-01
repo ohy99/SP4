@@ -35,6 +35,9 @@ public class DamageFeedback : Singleton<DamageFeedback> {
 	// Update is called once per frame
 	void Update () {
 
+        if (dmginfos == null)
+            return;
+
         List<DMGINFO> removeList = new List<DMGINFO>();
         foreach (DMGINFO df in dmginfos)
         {
