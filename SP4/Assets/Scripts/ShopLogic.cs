@@ -23,6 +23,10 @@ public class ShopLogic : MonoBehaviour
     ControllerNavigation controllerNavigationScript;
     [SerializeField]
     Button backButton;
+    [SerializeField]
+    ControllerNavigation ContNavForConfirmationPanel;
+
+    bool hasResetControllerButton = false;
 
     void Start ()
     {
@@ -113,6 +117,14 @@ public class ShopLogic : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if ( (!Input.GetButton("A") && !Input.GetButton("B")) && confirmationPanel.activeSelf )
+        {
+            hasResetControllerButton = true;
+        }
+        else if ( (Input.GetButton("A") || Input.GetButton("B")) && confirmationPanel.activeSelf == false )
+        {
+            hasResetControllerButton = false;
+        }
 	}
 
     void OnGUI()
@@ -132,14 +144,20 @@ public class ShopLogic : MonoBehaviour
             GUI.color = Color.red;
             windowRect0 = GUI.Window(2, windowRect0, DoMyWindow, "Already have " + itemToBuy + "!");
         }
+
+        //Debug.Log("OnGUI");
     }
     void DoMyWindow(int windowID)
     {
+        //Debug.Log("DoMyWindow  " + windowID);
+        //Debug.Log("Button A,B " + Input.GetButton("A") + " " +  Input.GetButton("B"));
+        //Debug.Log(hasResetControllerButton);
         switch (windowID)
         {
             case 0:
                 {
-                    if (GUI.Button(new Rect(windowRect0.width * 0.25f, windowRect0.height * 0.15f, windowRect0.width * 0.5f, windowRect0.height * 0.25f), "Buy"))
+                    if (GUI.Button(new Rect(windowRect0.width * 0.25f, windowRect0.height * 0.15f, windowRect0.width * 0.5f, windowRect0.height * 0.25f), "Buy") 
+                        || (Input.GetButton("A") && hasResetControllerButton) ) //controller
                     {
                         int currency = InventoryManager.Instance.GetInventory("player").GetCurrency();
                         int itemCost = ItemManager.Instance.items[itemToBuy].GetComponent<ItemBase>().cost;
@@ -151,6 +169,7 @@ public class ShopLogic : MonoBehaviour
                             InventoryManager.Instance.GetInventory("player").AddItem(ItemManager.Instance.items[itemToBuy], itemToBuy);
                             InventoryManager.Instance.GetInventory("player").SaveItems();
                             confirmationPanel.SetActive(false);
+                            
                         }
                         else
                         {
@@ -160,7 +179,8 @@ public class ShopLogic : MonoBehaviour
 
                         isClicked = false;
                     }
-                    if (GUI.Button(new Rect(windowRect0.width * 0.25f, windowRect0.height * 0.65f, windowRect0.width * 0.5f, windowRect0.height * 0.25f), "Cancel"))
+                    if (GUI.Button(new Rect(windowRect0.width * 0.25f, windowRect0.height * 0.65f, windowRect0.width * 0.5f, windowRect0.height * 0.25f), "Cancel")
+                        || ( (Input.GetButton("B") ) && hasResetControllerButton) ) //controller
                     {
                         //go back
                         print("Canceled");
@@ -171,7 +191,8 @@ public class ShopLogic : MonoBehaviour
                 break;
             case 1:
                 {
-                    if (GUI.Button(new Rect(windowRect0.width * 0.25f, windowRect0.height * 0.425f, windowRect0.width * 0.5f, windowRect0.height * 0.25f), "Back"))
+                    if (GUI.Button(new Rect(windowRect0.width * 0.25f, windowRect0.height * 0.425f, windowRect0.width * 0.5f, windowRect0.height * 0.25f), "Back")
+                         || ((Input.GetButton("A") || Input.GetButton("B")) && hasResetControllerButton))
                     {
                         //go back
                         print("backed");
@@ -182,7 +203,8 @@ public class ShopLogic : MonoBehaviour
                 break;
             case 2:
                 {
-                    if (GUI.Button(new Rect(windowRect0.width * 0.25f, windowRect0.height * 0.425f, windowRect0.width * 0.5f, windowRect0.height * 0.25f), "Back"))
+                    if (GUI.Button(new Rect(windowRect0.width * 0.25f, windowRect0.height * 0.425f, windowRect0.width * 0.5f, windowRect0.height * 0.25f), "Back")
+                         || ( ( Input.GetButton("A") || Input.GetButton("B") ) && hasResetControllerButton) )
                     {
                         //go back
                         print("backed");
