@@ -25,7 +25,6 @@ public class Player : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         GetComponent<SpriteRenderer>().color = Color.green;
-
         //wiil tis worko
         //playersList = GameObject.FindGameObjectsWithTag("Player");
         //for (int i = 0; i < playersList.Length; i++)
@@ -158,6 +157,7 @@ public class Player : NetworkBehaviour
         if (Global.Instance.deathCounter >= Global.Instance.listOfPlayer.Length)
         {   //set scene to death scene
             Global.Instance.victory = false;
+            Global.Instance.ReInit();
             LoadScene.Instance.LoadSceneCall("GameOver");
         }
 

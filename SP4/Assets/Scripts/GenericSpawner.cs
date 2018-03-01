@@ -57,7 +57,7 @@ public class GenericSpawner : NetworkBehaviour
         return go;
     }
 
-    //special case
+    //special cases
     public void SpawnSpeedItem(Vector3 pos, GameObject _go,GameObject _parent, SpeedRoomItemSpawner script)
     {
         if (!NetworkServer.active)
@@ -67,5 +67,23 @@ public class GenericSpawner : NetworkBehaviour
         go.GetComponent<SpeedRoomItemScript>().SetSpawner(script);
         go.transform.SetParent(_parent.transform);
         NetworkServer.Spawn(go);
+    }
+
+    public void SpawnCoins(GameObject _coin, Vector3 _pos, float _vel, int _coinValue, int _numCoins)
+    {
+        for (int i = 0; i < _numCoins; ++i)
+        {
+            GameObject newCoin = Instantiate(_coin, _pos, Quaternion.identity);
+            Vector2 outDir = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
+            outDir.Normalize();
+            Rigidbody2D rb = newCoin.GetComponent<Rigidbody2D>();
+            //rb.AddRelativeForce(new Vector2(outDir.x * coinOutForce, outDir.y * coinOutForce));
+            rb.velocity = new Vector2(outDir.x * _vel, outDir.y * _vel);
+            CoinValue cv = newCoin.GetComponent<CoinValue>();
+            cv.value = _coinValue;
+
+            var go = newCoin;
+            NetworkServer.Spawn(go);
+        }
     }
 }

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class GameOverPanelScript : MonoBehaviour {
+public class GameOverPanelScript : NetworkBehaviour {
 
     private string textResult;
 
@@ -41,6 +42,10 @@ public class GameOverPanelScript : MonoBehaviour {
 
     public void BackButton()
     {
-        LoadScene.Instance.LoadSceneCall("mainmenu");
+        if (NetworkServer.active && NetworkClient.active)
+        {
+            NetworkManager.singleton.StopHost();
+        }
+        //LoadScene.Instance.LoadSceneCall("mainmenu");
     }
 }
