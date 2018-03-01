@@ -64,6 +64,8 @@ public class Health : NetworkBehaviour {
                     {
                         GameObject temp = Instantiate(coinPrefab);
                         temp.transform.position = this.transform.position;
+                        CoinValue cvscript = temp.GetComponent<CoinValue>();
+                        cvscript.value = Random.Range(10, 30);
                     }
                 }
 
