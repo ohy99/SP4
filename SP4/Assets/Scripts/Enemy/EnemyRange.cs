@@ -37,6 +37,18 @@ public class EnemyRange : MonoBehaviour
             return;
         }
 
+        if (!player.activeSelf) //player not active
+        {
+            foreach (GameObject go in Global.Instance.listOfPlayer)
+            {
+                if (go.activeSelf)
+                {
+                    player = go;
+                    break;
+                }
+            }
+        }
+
         //playersList = GameObject.FindGameObjectsWithTag("Player");
         playersList = Global.Instance.listOfPlayer;
         for (int i = 0; i < playersList.Length; ++i)

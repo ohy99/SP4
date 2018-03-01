@@ -31,6 +31,7 @@ public class Spear : MeleeWeaponBase {
         if (fireRate < timer)
         {
             timer = 0;
+            meleeCollider.transform.localScale = new Vector3(0.5f, range, 1);
             meleeCollider.SetActive(true);
             GameObject go = Instantiate(meleeCollider, pos, rotation);
             SoundManager.Instance.PlayOneShot(shootEffect);
@@ -38,7 +39,7 @@ public class Spear : MeleeWeaponBase {
             if (meleeScript)
                 meleeScript.SetDamage(damage);
 
-            meleeCollider.transform.localScale = new Vector3(0.5f, 2.5f, 1);
+
             //meleeCollider.transform.position = new Vector3(0, meleeCollider.transform.position.y + range, 0);
             //meleeCollider.GetComponent<BoxCollider2D>().offset = new Vector2(0, range);
             //meleeCollider.GetComponent<BoxCollider2D>().size = new Vector2(0.5f, 2.5f);

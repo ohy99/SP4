@@ -83,7 +83,7 @@ public class PlayerShoot : NetworkBehaviour
 
 
         string itemName = playerGear.GetItemName(itemIndex);
-        Debug.Log("ItemChange" + itemIndex + " - " + itemName);
+        //Debug.Log("ItemChange" + itemIndex + " - " + itemName);
         go = playerGear.GetItem(itemName);
         playerWeapon.GetComponent<SpriteRenderer>().sprite = weaponSprite[itemName];
     }
