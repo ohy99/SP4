@@ -14,8 +14,6 @@ public class ShopLogic : MonoBehaviour
     private string itemToBuy;
     private List<GameObject> buttonList;
     private Rect windowRect0;
-    private Rect windowRect1;
-    private Rect windowRect2;
 
     public GameObject confirmationPanel;
     public GameObject buttonPrefab;
@@ -32,9 +30,8 @@ public class ShopLogic : MonoBehaviour
         isClicked = false;
         isPurchaseable = true;
         isPurchased = false;
-        windowRect0 = new Rect(Screen.width * 0.5f - 100, Screen.height * 0.5f - 100, 200, 200);
-        windowRect1 = new Rect(Screen.width * 0.5f - 100, Screen.height * 0.5f - 100, 200, 200);
-        windowRect2 = new Rect(Screen.width * 0.5f - 100, Screen.height * 0.5f - 100, 200, 200);
+        windowRect0 = new Rect(Screen.width * 0.5f, Screen.height * 0.25f, Screen.height * 0.5f, Screen.height * 0.5f);
+        windowRect0.x -= (windowRect0.width * 0.5f);
         buttonList = new List<GameObject>();
 
         for (int i = 0; i < ItemManager.Instance.itemNames.Count; ++i)
@@ -49,6 +46,7 @@ public class ShopLogic : MonoBehaviour
             button.transform.GetChild(1).GetComponent<Text>().text = ItemManager.Instance.items[iName].GetComponent<ItemBase>().itemDescription;
             button.transform.GetChild(2).GetComponent<Text>().text = ItemManager.Instance.items[iName].GetComponent<ItemBase>().cost.ToString();
             buttonList.Add(button);
+
         }
 
         //for (int i = 0; i < 20; ++i)
@@ -62,7 +60,7 @@ public class ShopLogic : MonoBehaviour
         //}
     }
 
-	void OnClick(string itemName)
+    void OnClick(string itemName)
     {
         //player clicked on this item
         //display a pop_up to confirm purchase
@@ -97,12 +95,12 @@ public class ShopLogic : MonoBehaviour
         if(!isPurchaseable)
         {
             GUI.color = Color.red;
-            windowRect1 = GUI.Window(1, windowRect1, DoMyWindow, "Not enough money!");
+            windowRect0 = GUI.Window(1, windowRect0, DoMyWindow, "Not enough money!");
         }
         if (isPurchased)
         {
             GUI.color = Color.red;
-            windowRect2 = GUI.Window(2, windowRect1, DoMyWindow, "Already have " + itemToBuy + "!");
+            windowRect0 = GUI.Window(2, windowRect0, DoMyWindow, "Already have " + itemToBuy + "!");
         }
     }
     void DoMyWindow(int windowID)
@@ -111,7 +109,7 @@ public class ShopLogic : MonoBehaviour
         {
             case 0:
                 {
-                    if (GUI.Button(new Rect(50, 80, 100, 20), "Buy"))
+                    if (GUI.Button(new Rect(windowRect0.width * 0.25f, windowRect0.height * 0.15f, windowRect0.width * 0.5f, windowRect0.height * 0.25f), "Buy"))
                     {
                         int currency = InventoryManager.Instance.GetInventory("player").GetCurrency();
                         int itemCost = ItemManager.Instance.items[itemToBuy].GetComponent<ItemBase>().cost;
@@ -132,7 +130,7 @@ public class ShopLogic : MonoBehaviour
 
                         isClicked = false;
                     }
-                    if (GUI.Button(new Rect(50, 120, 100, 20), "Cancel"))
+                    if (GUI.Button(new Rect(windowRect0.width * 0.25f, windowRect0.height * 0.65f, windowRect0.width * 0.5f, windowRect0.height * 0.25f), "Cancel"))
                     {
                         //go back
                         print("Canceled");
@@ -143,7 +141,7 @@ public class ShopLogic : MonoBehaviour
                 break;
             case 1:
                 {
-                    if (GUI.Button(new Rect(50, 120, 100, 20), "Back"))
+                    if (GUI.Button(new Rect(windowRect0.width * 0.25f, windowRect0.height * 0.425f, windowRect0.width * 0.5f, windowRect0.height * 0.25f), "Back"))
                     {
                         //go back
                         print("backed");
@@ -154,7 +152,7 @@ public class ShopLogic : MonoBehaviour
                 break;
             case 2:
                 {
-                    if (GUI.Button(new Rect(50, 120, 100, 20), "Back"))
+                    if (GUI.Button(new Rect(windowRect0.width * 0.25f, windowRect0.height * 0.425f, windowRect0.width * 0.5f, windowRect0.height * 0.25f), "Back"))
                     {
                         //go back
                         print("backed");
