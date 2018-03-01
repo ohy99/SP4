@@ -274,7 +274,10 @@ public class RoomGenerator : MonoBehaviour {
 
         Global.Instance.player.transform.position = this.transform.position;
 
-        Start();
+        Health playerHealth = Global.Instance.player.GetComponent<Health>();
+        playerHealth.SetHp(playerHealth.GetMaxHp());
+
+        Init();
     }
 	
 	// Update is called once per frame
