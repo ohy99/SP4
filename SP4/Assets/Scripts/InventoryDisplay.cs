@@ -16,6 +16,9 @@ public class InventoryDisplay : MonoBehaviour {
     bool isPressedLR = false;
     bool isPressedUD = false;
 
+    [SerializeField]
+    GameObject settingsButton;
+
     // Use this for initialization
     void Start ()
     {
@@ -52,6 +55,14 @@ public class InventoryDisplay : MonoBehaviour {
 
     void Update()
     {
+        if (settingsButton)
+        {
+            if (Input.GetButtonDown("StartButton"))
+            {
+                settingsButton.GetComponent<Button>().onClick.Invoke();
+            }
+        }
+
         if (!InventoryManager.Instance.GetInventory("player").GetIsInventory())
             return;
 
@@ -159,5 +170,13 @@ public class InventoryDisplay : MonoBehaviour {
         //iconList[index].transform.GetChild(0).GetComponent<Image>().sprite = icon;
     }
 
+    public void ToggleInventory()
+    {
+        Inventory inventory = InventoryManager.Instance.GetInventory("player");
+        if (!inventory.GetIsInventory())
+            inventory.SetIsInventory(true);
+        else
+            inventory.SetIsInventory(false);
+    }
     
 }
