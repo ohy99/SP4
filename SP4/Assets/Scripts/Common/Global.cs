@@ -37,6 +37,7 @@ public class Global : Singleton<Global> {
     }
     void Awake()
     {
+        Debug.Log("CALLING GLOBAL START");
         bossIsDead = false;
         _deathCounter = 0;
         _listOfPlayer = null;
@@ -46,4 +47,13 @@ public class Global : Singleton<Global> {
 	void Update () {
 		
 	}
+
+    //reInit all global variables
+    public void ReInit()
+    {
+        _victory = false;
+        bossIsDead = false;
+        _deathCounter = 0;
+        _listOfPlayer = null;
+    }
 }

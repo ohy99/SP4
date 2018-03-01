@@ -9,21 +9,22 @@ public class ConnectionController : MonoBehaviour
     NetworkManager manager;
 
     [SerializeField]
-    InputField inputField;
+    GameObject inputField;
     //public string _networkAddress;
+    string _networkAddress;
 
     public Text text;
 
     void Awake()
     {
-        manager = GetComponent<NetworkManager>();
-        manager.networkAddress = "localhost";
+
     }
 
     // Use this for initialization
-    void Start () {
-		
-	}
+    void Start ()
+    {
+        NetworkManager.singleton.networkAddress = "localhost";
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -76,10 +77,11 @@ public class ConnectionController : MonoBehaviour
 
     public void OnClickHost()
     {
+        Debug.Log("on_click_host");
         if (!NetworkServer.active)
         {
-            manager.StartHost();
-            //Application.logMessageReceived += Application_logMessageReceived;
+            Debug.Log("start_host");
+            NetworkManager.singleton.StartHost();
         }
         else
             Debug.Log("Already have a server/host");
@@ -87,15 +89,16 @@ public class ConnectionController : MonoBehaviour
 
     public void OnClickClient()
     {
-        if(!NetworkClient.active) 
-            manager.StartClient();
+        if(!NetworkClient.active)
+            NetworkManager.singleton.StartClient();
         else
             Debug.Log("No server/host");
     }
 
-    public void OnTypeAdress(string _networkAddress)
+    public void OnTypeAdress(Text _networkAddress)
     {
-        manager.networkAddress = _networkAddress;
+        NetworkManager.singleton.networkAddress = _networkAddress.text;
+        Debug.Log(NetworkManager.singleton.networkAddress);
     }
 
     //private void Application_logMessageReceived(string condition, string stackTrace, LogType type)

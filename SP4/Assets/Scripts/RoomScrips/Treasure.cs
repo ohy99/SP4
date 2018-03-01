@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class Treasure : MonoBehaviour {
 
@@ -8,6 +9,8 @@ public class Treasure : MonoBehaviour {
     GameObject TreasureKey;
     [SerializeField]
     GameObject coin;
+    [SerializeField]
+    GameObject genericSpawner;
 
     bool textTrigger = false;
 
@@ -78,17 +81,22 @@ public class Treasure : MonoBehaviour {
         }
         if (isUnlocked && !isEmpty)
         {
-            for (int i = 0; i < numOfCoinsOut; ++i)
-            {
-                GameObject newCoin = Instantiate(coin, transform.position, Quaternion.identity);
-                Vector2 outDir = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
-                outDir.Normalize();
-                Rigidbody2D rb = newCoin.GetComponent<Rigidbody2D>();
-                //rb.AddRelativeForce(new Vector2(outDir.x * coinOutForce, outDir.y * coinOutForce));
-                rb.velocity = new Vector2(outDir.x * coinOutVel, outDir.y * coinOutVel);
-                CoinValue cv = newCoin.GetComponent<CoinValue>();
-                cv.value = coinValue;
-            }
+            //for (int i = 0; i < numOfCoinsOut; ++i)
+            //{
+                //GameObject newCoin = Instantiate(coin, transform.position, Quaternion.identity);
+                //Vector2 outDir = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
+                //outDir.Normalize();
+                //Rigidbody2D rb = newCoin.GetComponent<Rigidbody2D>();
+                ////rb.AddRelativeForce(new Vector2(outDir.x * coinOutForce, outDir.y * coinOutForce));
+                //rb.velocity = new Vector2(outDir.x * coinOutVel, outDir.y * coinOutVel);
+                //CoinValue cv = newCoin.GetComponent<CoinValue>();
+                //cv.value = coinValue;
+                
+            //}
+
+            if (Global.Instance.player.GetComponent<NetworkIdentity>().isServer)
+                genericSpawner.GetComponent<GenericSpawner>().SpawnCoins(coin, transform.position, coinOutVel, coinValue, numOfCoinsOut);
+
             isEmpty = true;
             
         }

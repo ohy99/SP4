@@ -1081,6 +1081,8 @@ MonoBehaviour:
   TreasureKey: {fileID: 1103868201682176, guid: 3abc00a297eee7941835f00d0cc463f0,
     type: 2}
   coin: {fileID: 1027863897882106, guid: e278218ba29162640883fc919dad53e9, type: 2}
+  genericSpawner: {fileID: 1368807512881014, guid: 9a661cf7f8d77f9419b5242b4fc22da5,
+    type: 2}
   OnTouchUnlock: 0
   coinOutVel: 2
   numOfCoinsOut: 5

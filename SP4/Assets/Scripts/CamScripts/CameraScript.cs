@@ -43,6 +43,9 @@ public class CameraScript : MonoBehaviour {
     void ChangeTarget()
     {
         Debug.Log("Changing cam target");
+        if (Global.Instance.listOfPlayer == null)
+            return;
+
         GameObject[] playersList = Global.Instance.listOfPlayer;
         for(int i = 0; i < playersList.Length; ++i)
         {

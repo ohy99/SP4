@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 198181354123840740}
   - component: {fileID: 199891145286882852}
   - component: {fileID: 58603611107850522}
+  - component: {fileID: 114245433133095258}
+  - component: {fileID: 114340805374561242}
   m_Layer: 0
   m_Name: Coins
   m_TagString: Untagged
@@ -93,6 +95,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 1
   textPrefab: {fileID: 1077412237606678, guid: 2ab2f411d0fb9de4e8c6e0f263ca9ae5, type: 2}
+--- !u!114 &114245433133095258
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027863897882106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 226
+    i1: 120
+    i2: 33
+    i3: 139
+    i4: 162
+    i5: 145
+    i6: 98
+    i7: 100
+    i8: 8
+    i9: 131
+    i10: 252
+    i11: 145
+    i12: 157
+    i13: 173
+    i14: 83
+    i15: 233
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
+--- !u!114 &114340805374561242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027863897882106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!198 &198181354123840740
 ParticleSystem:
   m_ObjectHideFlags: 1
