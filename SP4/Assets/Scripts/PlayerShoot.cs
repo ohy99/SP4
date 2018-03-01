@@ -9,7 +9,7 @@ public class PlayerShoot : NetworkBehaviour
     //[SerializeField]
     //GameObject playerObj;
     [SerializeField]
-    Joystick joyStick;
+    public Joystick joyStick;
 
     [SerializeField]
     Dictionary<string, Sprite> weaponSprite = new Dictionary<string, Sprite>();

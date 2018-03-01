@@ -612,6 +612,7 @@ MonoBehaviour:
   panelToAttachButtonsTo: {fileID: 1741482901}
   controllerNavigationScript: {fileID: 880609230}
   backButton: {fileID: 2083228326}
+  ContNavForConfirmationPanel: {fileID: 0}
 --- !u!4 &219474918
 Transform:
   m_ObjectHideFlags: 0
@@ -1042,6 +1043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstSelectable: {fileID: 1727357718}
   backButton: {fileID: 31839254}
+  scrollPanel: {fileID: 0}
 --- !u!4 &316198975
 Transform:
   m_ObjectHideFlags: 0
@@ -1832,15 +1834,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnLeft: {fileID: 1247879011}
+    m_SelectOnRight: {fileID: 962354389}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0, g: 1, b: 0.6275861, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -2011,6 +2013,9 @@ MonoBehaviour:
   shopCanvas: {fileID: 1343375201}
   optionsCN: {fileID: 316198973}
   optionsPanel: {fileID: 1601652877}
+  confirmationPanel: {fileID: 774719410}
+  connectionnCN: {fileID: 730300437}
+  connectionPanel: {fileID: 389981491}
 --- !u!4 &630280379
 Transform:
   m_ObjectHideFlags: 0
@@ -2023,6 +2028,49 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &730300437
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 730300439}
+  - component: {fileID: 730300438}
+  m_Layer: 0
+  m_Name: ControllerNavForConnection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &730300438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 730300437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e724a86c461dc2e47b042a7049956aa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstSelectable: {fileID: 1247879011}
+  backButton: {fileID: 962354389}
+  scrollPanel: {fileID: 0}
+--- !u!4 &730300439
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 730300437}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5407412, y: -0.78896093, z: 1.0253906}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &744765220
 GameObject:
@@ -2666,6 +2714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstSelectable: {fileID: 0}
   backButton: {fileID: 2083228326}
+  scrollPanel: {fileID: 0}
 --- !u!4 &880609231
 Transform:
   m_ObjectHideFlags: 0
@@ -2866,15 +2915,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnLeft: {fileID: 594842930}
+    m_SelectOnRight: {fileID: 1247879011}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.44117647, b: 0.44117647, a: 1}
     m_PressedColor: {r: 0.75735295, g: 0.75735295, b: 0.75735295, a: 0.347}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -2918,7 +2967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.266}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3614,15 +3663,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnLeft: {fileID: 962354389}
+    m_SelectOnRight: {fileID: 594842930}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0, g: 1, b: 0.6275861, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -3968,6 +4017,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstSelectable: {fileID: 964126190}
   backButton: {fileID: 0}
+  scrollPanel: {fileID: 0}
 --- !u!4 &1549341898
 Transform:
   m_ObjectHideFlags: 0

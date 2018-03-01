@@ -10,6 +10,9 @@ public class ControllerNavigation : MonoBehaviour {
     [SerializeField]
     Selectable backButton;
 
+    [SerializeField]
+    GameObject scrollPanel;
+
     Selectable curr;
     bool hasChanged;
 
@@ -35,6 +38,18 @@ public class ControllerNavigation : MonoBehaviour {
                     slider.value -= 0.01f;
                 }
             }
+        }
+        if (scrollPanel)
+        {
+                if (Input.GetAxis("RightVertical") > 0.25f)
+                {
+                    scrollPanel.transform.position += new Vector3(0, -10, 0);//panel shift down
+                }
+                else if (Input.GetAxis("RightVertical") < -0.25f)
+                {
+                    scrollPanel.transform.position += new Vector3(0, 10, 0);//panel shift up
+                }
+            
         }
 
 
@@ -99,7 +114,7 @@ public class ControllerNavigation : MonoBehaviour {
             curr.Select();
             Debug.Log("CurrSelected: " + curr);
         }
-        Debug.Log(this.gameObject + " Update");
+        //Debug.Log(this.gameObject + " Update");
 
         if (Input.GetButtonDown("B"))
         {

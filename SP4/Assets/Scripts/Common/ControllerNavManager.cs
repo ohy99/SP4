@@ -17,6 +17,14 @@ public class ControllerNavManager : MonoBehaviour {
     [SerializeField]
     GameObject optionsPanel;
 
+    [SerializeField]
+    GameObject confirmationPanel;
+
+    [SerializeField]
+    GameObject connectionnCN;
+    [SerializeField]
+    GameObject connectionPanel;
+
     GameObject currActive;
 
 	// Use this for initialization
@@ -35,6 +43,17 @@ public class ControllerNavManager : MonoBehaviour {
                 currActive = shopCN;
                 currActive.SetActive(true);
             }
+            else
+            {
+                if (confirmationPanel.activeSelf)
+                {
+                    shopCN.SetActive(false);
+                }
+                else
+                {
+                    shopCN.SetActive(true);
+                }
+            }
         }
 
         else if (optionsPanel.activeSelf)
@@ -43,6 +62,15 @@ public class ControllerNavManager : MonoBehaviour {
             {
                 currActive.SetActive(false);
                 currActive = optionsCN;
+                currActive.SetActive(true);
+            }
+        }
+        else if (connectionPanel.activeSelf)
+        {
+            if (connectionnCN.activeSelf ==false)
+            {
+                currActive.SetActive(false);
+                currActive = connectionnCN;
                 currActive.SetActive(true);
             }
         }
@@ -57,6 +85,8 @@ public class ControllerNavManager : MonoBehaviour {
             }
 
         }
+
+
     }
 	
 }
