@@ -21,7 +21,10 @@ public class ShopLogic : MonoBehaviour
     public GameObject buttonPrefab;
     public GameObject panelToAttachButtonsTo;
 
-
+    [SerializeField]
+    ControllerNavigation controllerNavigationScript;
+    [SerializeField]
+    Button backButton;
 
     void Start ()
     {
@@ -37,6 +40,7 @@ public class ShopLogic : MonoBehaviour
         windowRect2 = new Rect(Screen.width * 0.5f - 100, Screen.height * 0.5f - 100, 200, 200);
         buttonList = new List<GameObject>();
 
+        Button prevButton = null;
         for (int i = 0; i < ItemManager.Instance.itemNames.Count; ++i)
         {
             //GUI pivot is at top left not in mid of the gui need offset by half of scaleX, scaleY 
@@ -48,7 +52,33 @@ public class ShopLogic : MonoBehaviour
             button.transform.GetChild(0).GetComponent<Text>().text = iName;
             button.transform.GetChild(1).GetComponent<Text>().text = ItemManager.Instance.items[iName].GetComponent<ItemBase>().itemDescription;
             button.transform.GetChild(2).GetComponent<Text>().text = ItemManager.Instance.items[iName].GetComponent<ItemBase>().cost.ToString();
+
+            Button buttonComponent = button.GetComponent<Button>();
+            if (prevButton)
+            {
+                Navigation nav = buttonComponent.navigation;
+                Navigation prevNav = prevButton.navigation;
+                prevNav.selectOnRight = buttonComponent;
+                prevButton.navigation = prevNav;
+
+                nav.selectOnLeft = prevButton;
+                buttonComponent.navigation = nav;
+            }
+            prevButton = buttonComponent;
             buttonList.Add(button);
+        }
+
+        if (controllerNavigationScript)
+        {
+            if (ItemManager.Instance.itemNames.Count > 0)
+                controllerNavigationScript.firstSelectable = buttonList[0].GetComponent<Button>();
+
+            Navigation nav = buttonList[buttonList.Count - 1].GetComponent<Button>().navigation;
+            nav.selectOnRight = backButton;
+            buttonList[buttonList.Count - 1].GetComponent<Button>().navigation = nav;
+            Navigation backnav = backButton.navigation;
+            backnav.selectOnLeft = buttonList[buttonList.Count - 1].GetComponent<Button>();
+            backButton.navigation = backnav;
         }
 
         //for (int i = 0; i < 20; ++i)
