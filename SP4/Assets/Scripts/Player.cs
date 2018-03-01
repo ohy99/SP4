@@ -13,6 +13,8 @@ public class Player : NetworkBehaviour
     private int maxExp;
     private int skillPoints;
     private int currentLevel;
+    public string playerInventory;
+
     //dont change player id = connection id
     public int playerId;
     bool onDeadTrigger = false;
@@ -238,6 +240,7 @@ public class Player : NetworkBehaviour
     public bool IsDead() { return hpScript.GetCurrHp() <= 0; }
     public void AddHealth(float value) { hpScript.ModifyHp(value); }
     public void AddScore(int scoreValue) { score += scoreValue; }
+    public void SetPlayerInventory(string _playerInventory) { playerInventory = _playerInventory; }
 }
 
 /*

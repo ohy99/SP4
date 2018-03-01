@@ -2,40 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PROJLAYER
+public class ExplosiveCollider : MonoBehaviour
 {
-    ENEMYPROJ = 9,
-    PLAYERPROJ = 11,
-}
 
-//public enum PROJECTILE_TYPE //last min stuff
-//{
-//    BULLET,
-//    BOMB,
-//}
-
-public class Projectile : MonoBehaviour {
-
-    public float projectileSpeed = 10;
+    [SerializeField]
+    float countDown = 0.25f;
     private float damage = 1;
-   // public PROJECTILE_TYPE pType;
+    private bool isAttacking = false;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-       // pType = PROJECTILE_TYPE.BULLET;
-        Destroy(gameObject, 5.0f);
+        Debug.Log("explosive collider start");
+        isAttacking = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.up * projectileSpeed * Time.deltaTime;
+        if (isAttacking)
+        {
+            Debug.Log("minusing: " + countDown);
+            countDown -= Time.deltaTime;
+            //transform.Rotate(Vector3.forward * -1.5f * Mathf.Rad2Deg * Time.deltaTime);
+            if (countDown <= 0)
+            {
+                Debug.Log("delete");
+                gameObject.SetActive(false);
+                Destroy(gameObject);
+            }
+
+        }
     }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        //Debug.Log(coll.gameObject.name);
+        Debug.Log("hit");
         if (!coll.gameObject.CompareTag(this.gameObject.tag))
         {
             //Enters when the tags are different
@@ -44,7 +46,7 @@ public class Projectile : MonoBehaviour {
             {
                 //hpScript
                 hpScript.ModifyHp(-damage);
-                //Debug.Log("Projectile: " + damage + " name: " + coll.gameObject.name + " maxhp: " + hpScript.GetMaxHp());
+                Debug.Log("Projectile: " + damage + " name: " + coll.gameObject.name + " maxhp: " + hpScript.GetMaxHp());
 
                 DamageFeedback.Instance.ShowDamage(damage, coll.gameObject.transform.position + coll.gameObject.transform.lossyScale);
                 switch (coll.gameObject.tag)
@@ -59,8 +61,29 @@ public class Projectile : MonoBehaviour {
 
             }
 
-            Destroy(gameObject);
         }
+
+        Destroy(gameObject);
+    }
+
+    public bool GetIsAttacking()
+    {
+        return isAttacking;
+    }
+
+    public void SetIsAttacking(bool _isAttacking)
+    {
+        isAttacking = _isAttacking;
+    }
+
+    public float GetCountDown()
+    {
+        return countDown;
+    }
+
+    public void SetCountDown(float _countDown)
+    {
+        countDown = _countDown;
     }
 
     public void SetDamage(float dmg) { damage = dmg; }

@@ -93,3 +93,9 @@ public class ActiveRoomMessage : MessageBase
     public int roomId;
     public bool isRoomCompleted;
 }
+
+public class ChangeItemMessage : MessageBase
+{
+    public int playerId;
+    public string itemName;
+}

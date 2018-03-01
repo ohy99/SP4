@@ -45,6 +45,9 @@ public class MessageHandler : Singleton<MessageHandler>
 
         public static short activeRoomMsgType_client = MsgType.Highest + 23;
         public static short activeRoomMsgType_server = MsgType.Highest + 24;
+
+        public static short itemChangedMsgType_client = MsgType.Highest + 25;
+        public static short itemChangedMsgType_server = MsgType.Highest + 26;
     };
 
     //variables
@@ -90,7 +93,10 @@ public class MessageHandler : Singleton<MessageHandler>
         NetworkServer.RegisterHandler(MyMsgType.itemCollectedMsgType_client, OnRecvItemCollected_Server);
 
         myClient.RegisterHandler(MyMsgType.activeRoomMsgType_server, OnRecvActiveRoom_Client);
-        NetworkServer.RegisterHandler(MyMsgType.activeRoomMsgType_client, OnRecvActiveRoom_Server); 
+        NetworkServer.RegisterHandler(MyMsgType.activeRoomMsgType_client, OnRecvActiveRoom_Server);
+
+        myClient.RegisterHandler(MyMsgType.itemChangedMsgType_server, OnRecvItemChanged_Client);
+        NetworkServer.RegisterHandler(MyMsgType.itemChangedMsgType_client, OnRecvItemChanged_Server);
 
         //myClient.RegisterHandler(MyMsgType.spawnRoomMsgType_server, OnRecvSpawnRoom_Client);
         //NetworkServer.RegisterHandler(MyMsgType.spawnRoomMsgType_client, OnRecvSpawnRoom_Server);
@@ -206,6 +212,16 @@ public class MessageHandler : Singleton<MessageHandler>
 
         if(NetworkServer.active)
             NetworkServer.SendToClient(msg.connectionId, MyMsgType.playerIdMsgType_server, msg);
+    }
+
+    public void SendItemChanged_S2C(int _playerId, string name)
+    {
+        ChangeItemMessage msg = new ChangeItemMessage();
+        msg.itemName = name;
+        msg.playerId = _playerId;
+        Debug.Log("SendItemChanged_S2C");
+
+        myClient.Send(MyMsgType.itemChangedMsgType_server, msg);
     }
 
     // ============================SENDING TO SERVER======================================
@@ -325,6 +341,15 @@ public class MessageHandler : Singleton<MessageHandler>
         myClient.Send(MyMsgType.activeRoomMsgType_client, msg);
     }
 
+    public void SendItemChanged_C2S(int _playerId, string name)
+    {
+        ChangeItemMessage msg = new ChangeItemMessage();
+        msg.itemName = name;
+        msg.playerId = _playerId;
+        Debug.Log("SendItemChanged_C2S");
+
+        myClient.Send(MyMsgType.itemChangedMsgType_client, msg);
+    }
     //-----------------------------------------------------------------------------
 
 
@@ -551,6 +576,12 @@ public class MessageHandler : Singleton<MessageHandler>
         Global.Instance.player.GetComponent<Player>().playerId = msg.playerId;
         index = msg.playerId;
 
+        Inventory temp = new Inventory();
+        temp.Init();
+        temp.AddCurrency(InventoryManager.Instance.GetInventory("player").GetCurrency());
+        InventoryManager.Instance.AddInventory("player" + index, temp);
+        Global.Instance.player.GetComponent<Player>().SetPlayerInventory("player" + index);
+
         SendRoom_C2S(); //sent to server/host to get mapinfo
     }
 
@@ -596,6 +627,27 @@ public class MessageHandler : Singleton<MessageHandler>
         Global.Instance.roomGen.GetRoomList()[msg.roomId].SetActive(true);
         Global.Instance.roomGen.GetRoomList()[msg.roomId].GetComponent<RoomScript>().SetIsComplete(msg.isRoomCompleted);
     }
+
+    public void OnRecvItemChanged_Server(NetworkMessage netMsg)
+    {
+        ChangeItemMessage msg = netMsg.ReadMessage<ChangeItemMessage>();
+        Debug.Log("Host/ServerRecv_ItemChanged_");
+
+        for(int i = 0; i < Global.Instance.listOfPlayer.Length; ++i)
+        {
+            if(Global.Instance.listOfPlayer[i].GetComponent<Player>().playerId == msg.playerId)
+            {
+                string iName = Global.Instance.listOfPlayer[i].GetComponent<Player>().playerInventory;
+                Global.Instance.listOfPlayer[i].GetComponent<PlayerShoot>().PlayerChangedWeapon(msg.itemName);
+            }
+        }
+    }
+
+    public void OnRecvItemChanged_Client(NetworkMessage netMsg)
+    {
+
+    }
+
 }
 
 

@@ -26,7 +26,7 @@ public class Spear : MeleeWeaponBase {
     // Attack with weapon (stab - long range)
     public override GameObject Attack(Vector3 pos, Quaternion rotation)
     {
-        Debug.Log("MeleeAttack");
+        //Debug.Log("MeleeAttack");
         // Spawn a aabb here if collision occur damage is done
         if (fireRate < timer)
         {

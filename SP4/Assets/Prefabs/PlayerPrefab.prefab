@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
+  coinPrefab: {fileID: 0}
 --- !u!114 &114300993720441814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -184,6 +185,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 0
+  scoreText: {fileID: 0}
+  currencyText: {fileID: 0}
 --- !u!114 &114535403005161664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -228,6 +231,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joyStick: {fileID: 0}
+  genericSpawner: {fileID: 1368807512881014, guid: 9a661cf7f8d77f9419b5242b4fc22da5,
+    type: 2}
 --- !u!212 &212070838500672770
 SpriteRenderer:
   m_ObjectHideFlags: 1

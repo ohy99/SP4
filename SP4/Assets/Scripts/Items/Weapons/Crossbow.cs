@@ -7,7 +7,7 @@ public class Crossbow : RangeWeaponBase
     // Use this for initialization
     public override void Start ()
     {
-        damage = 10;
+        damage = 1;
         damageOverTime = 0;
 
         totalRounds = 9999999;

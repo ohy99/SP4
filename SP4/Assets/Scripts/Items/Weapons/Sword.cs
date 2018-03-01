@@ -32,7 +32,7 @@ public class Sword : MeleeWeaponBase {
             meleeCollider.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             // Spawn a aabb here if collision occur damage is done
             GameObject go = Instantiate(meleeCollider, pos, rotation);
-            meleeCollider.SetActive(true);
+            go.SetActive(true);
             SoundManager.Instance.PlayOneShot(shootEffect);
             MeleeCollider meleeScript = go.GetComponent<MeleeCollider>();
             if (meleeScript)

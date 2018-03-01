@@ -13,7 +13,9 @@ public class PlayerShoot : NetworkBehaviour
 
     [SerializeField]
     Dictionary<string, Sprite> weaponSprite = new Dictionary<string, Sprite>();
-    
+    [SerializeField]
+    GameObject genericSpawner;
+
     private GameObject go;
     private GameObject playerWeapon;
     private Inventory playerGear;
@@ -96,8 +98,16 @@ public class PlayerShoot : NetworkBehaviour
             if (itemIndex >= playerGear.GetItemNameList().Count)
                 itemIndex = 0;
 
-            //string itemName = playerGear.GetItemName(itemIndex);
-            //Debug.Log("ItemChange" + itemIndex + " - " + itemName);
+            if (!isServer)
+                MessageHandler.Instance.SendItemChanged_C2S(Global.Instance.player.GetComponent<Player>().playerId,
+                   playerGear.GetItemName(itemIndex));
+
+            //for(int i = 0; i <  Global.Instance.listOfPlayer.Length; ++i)
+            //{
+            //    string itemName = playerGear.GetItemName(itemIndex);
+            //    Debug.Log("ItemChange" + itemIndex + " - " + itemName);
+            //}
+
             //go = playerGear.GetItem(itemName);
             //playerWeapon.GetComponent<SpriteRenderer>().sprite = weaponSprite[itemName];
         }
@@ -105,8 +115,16 @@ public class PlayerShoot : NetworkBehaviour
         if (Input.GetButton("Fire1"))
         {
             //Debug.Log("TotalRounds:" + go)
-            CmdFire(gameObject.tag);
+            //Debug.Log(go.GetComponent<ItemBase>().itemName);
 
+            if (go.GetComponent<RangeWeaponBase>())
+                CmdFire(gameObject.tag);
+            else if (go.GetComponent<MeleeWeaponBase>())
+            {
+                CmdMelee(gameObject.tag);
+            }
+
+           
             //if (go.GetComponent<RangeWeaponBase>())
             //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position + transform.up, transform.rotation);
             //else if (go.GetComponent<MeleeWeaponBase>())
@@ -169,8 +187,10 @@ public class PlayerShoot : NetworkBehaviour
             ////gameObject.transform.position += moveDir * moveSpeed * Time.deltaTime;
             //go.transform.up = shootDir;
 
-            CmdFire(gameObject.tag);
-
+            if (go.GetComponent<RangeWeaponBase>())
+                CmdFire(gameObject.tag);
+            else if (go.GetComponent<MeleeWeaponBase>())
+                CmdMelee(gameObject.tag);
            
             //if (go.GetComponent<RangeWeaponBase>())
             //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
@@ -206,7 +226,10 @@ public class PlayerShoot : NetworkBehaviour
             //Debug.Log(playerTransform.gameObject);
             playerTransform.up = shootDir;
 
-            CmdFire(gameObject.tag);
+            if (go.GetComponent<RangeWeaponBase>())
+                CmdFire(gameObject.tag);
+            else if (go.GetComponent<MeleeWeaponBase>())
+                CmdMelee(gameObject.tag);
 
             //if (go.GetComponent<RangeWeaponBase>())
             //    go.GetComponent<RangeWeaponBase>().Discharge(transform.position, transform.rotation);
@@ -225,10 +248,14 @@ public class PlayerShoot : NetworkBehaviour
     void CmdFire(string tag)
     {
         GameObject projectile = null;
+        Vector3 spawnLoc = new Vector3(0,0,0);
+
         if (go.GetComponent<RangeWeaponBase>())
-            projectile = go.GetComponent<RangeWeaponBase>().Discharge(transform.position + transform.up, transform.rotation);
-        else if (go.GetComponent<MeleeWeaponBase>())
-            projectile = go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up * go.GetComponent<MeleeWeaponBase>().GetRange(), transform.rotation);
+        {
+            //Debug.Log("is a range");
+            spawnLoc = transform.position + transform.up;
+            projectile = go.GetComponent<RangeWeaponBase>().Discharge(spawnLoc, transform.rotation);
+        }
 
         if (!projectile)
             return;
@@ -245,11 +272,52 @@ public class PlayerShoot : NetworkBehaviour
         }
         //Debug.Log(projectile.layer);
 
-        if(projectile)
-            NetworkServer.Spawn(projectile);
+        //if(projectile && isServer)
+        //    genericSpawner.GetComponent<GenericSpawner>().SpawnObject(projectile);
+
+        if (projectile)
+        {
+            var go = projectile;
+            NetworkServer.Spawn(go);
+        }
 
         Destroy(projectile, 3.0f);
     }
 
+    [Command]
+    void CmdMelee(string tag)
+    {
+        //Debug.Log("enter");
+        GameObject melee = null;
 
+        if (go.GetComponent<MeleeWeaponBase>())
+            melee = go.GetComponent<MeleeWeaponBase>().Attack(transform.position + transform.up * go.GetComponent<MeleeWeaponBase>().GetRange(), transform.rotation);
+
+        if (!melee)
+            return;
+
+        switch (tag)
+        {
+            case "Player":
+                melee.layer = (int)PROJLAYER.PLAYERPROJ;
+                break;
+            case "Enemy":
+                melee.layer = (int)PROJLAYER.ENEMYPROJ;
+                break;
+        }
+
+        if (melee)
+        {
+            var go = melee;
+            NetworkServer.Spawn(go);
+        }
+
+        Destroy(melee, 3.0f);
+    }
+
+    public void PlayerChangedWeapon(string _itemName)
+    {
+        go = playerGear.GetItem(_itemName);
+        playerWeapon.GetComponent<SpriteRenderer>().sprite = weaponSprite[_itemName];
+    }
 }

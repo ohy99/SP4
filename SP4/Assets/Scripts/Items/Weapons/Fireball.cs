@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Staff : RangeWeaponBase
+public class FireBall : RangeWeaponBase
 {
     // Use this for initialization
     public override void Start()
@@ -10,42 +10,42 @@ public class Staff : RangeWeaponBase
         damage = 10;
         damageOverTime = 0;
 
-        totalRounds = 80;
+        totalRounds = 9999999;
 
-        maxMagRounds = 5;
-        magRounds = 5;
+        maxMagRounds = 1;
+        magRounds = 1;
         timer = 0.0f;
-        fireRate = 0.05f;
+        fireRate = 1.0f;
     }
 
     // Update is called once per frame
     public override void Update()
     {
+        //Debug.Log("WEAPON_UPDATE");
+        timer += Time.deltaTime;
     }
 
     // Fire Weapon 
     public override GameObject Discharge(Vector3 pos, Quaternion rotation)
     {
-        // if (magRounds > 0)
-        //{
         if (fireRate < timer)
         {
             timer = 0.0f;
-            Debug.Log("Staff_Attack");
             SoundManager.Instance.PlayOneShot(shootEffect);
-            GameObject go = Instantiate(projectile, pos, rotation);
-            Projectile projScript = go.GetComponent<Projectile>();
+            GameObject projGO = Instantiate(projectile, pos, rotation);
+            Projectile projScript = projGO.GetComponent<Projectile>();
             if (projScript)
+            {
                 projScript.SetDamage(damage);
-            //--magRounds;
-            return go;
+                projScript.projectileSpeed = 5;
+            }
+            return projGO;
         }
-        //}
 
         return null;
     }
 
-    // Reload Weapon
+    // Reload Weapon (not using)
     public override void Reload()
     {
         // dont reload if mag is full or no more ammo
@@ -63,10 +63,5 @@ public class Staff : RangeWeaponBase
             totalRounds -= maxMagRounds;
             magRounds = maxMagRounds;
         }
-
-    }
-
-    public override void OnClick()
-    {
     }
 }

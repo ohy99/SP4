@@ -57,6 +57,18 @@ public class GenericSpawner : NetworkBehaviour
         return go;
     }
 
+    public GameObject SpawnObject(GameObject _go)
+    {
+        if (!NetworkServer.active)
+            Debug.Log("SERVER NOT ACTIVE");
+
+        var go = _go;
+
+        NetworkServer.Spawn(go);
+        return go;
+    }
+
+
     //special cases
     public void SpawnSpeedItem(Vector3 pos, GameObject _go,GameObject _parent, SpeedRoomItemSpawner script)
     {
