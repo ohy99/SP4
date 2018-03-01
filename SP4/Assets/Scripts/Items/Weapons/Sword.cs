@@ -9,7 +9,7 @@ public class Sword : MeleeWeaponBase {
     {
         damage = 10;
         damageOverTime = 0;
-        range = 1.0f;
+        range = 1.5f;
         isAttack = false;
         // meleeCollider.SetActive(false);
         timer = 0.0f;
@@ -29,6 +29,7 @@ public class Sword : MeleeWeaponBase {
         if (fireRate < timer)
         {
             timer = 0;
+            meleeCollider.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             // Spawn a aabb here if collision occur damage is done
             GameObject go = Instantiate(meleeCollider, pos, rotation);
             meleeCollider.SetActive(true);
@@ -36,6 +37,7 @@ public class Sword : MeleeWeaponBase {
             MeleeCollider meleeScript = go.GetComponent<MeleeCollider>();
             if (meleeScript)
                 meleeScript.SetDamage(damage);
+
 
             //Debug.Log(pos);
             //meleeCollider.GetComponent<BoxCollider2D>().offset = new Vector2(0, range);

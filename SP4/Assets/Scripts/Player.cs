@@ -169,6 +169,7 @@ public class Player : NetworkBehaviour
 
         if (Global.Instance.deathCounter >= Global.Instance.listOfPlayer.Length)
         {   //set scene to death scene
+            Debug.Log("GameOver");                      
             Global.Instance.victory = false;
             Global.Instance.ReInit();
             LoadScene.Instance.LoadSceneCall("GameOver");
